@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<demandeDeLivraisons>
+<entrepot adresse="117" heureDepart="8:0:0"/>
+<livraison adresse="505" debutPlage="10:0:0" duree="600" finPlage="12:0:0"/>
+<livraison adresse="240" duree="900"/>
+<livraison adresse="85" duree="600"/>
+<livraison adresse="385" debutPlage="12:0:0" duree="900" finPlage="14:0:0"/>
+<livraison adresse="458" debutPlage="11:0:0" duree="600" finPlage="13:0:0"/>
+<livraison adresse="597" duree="900"/>
+<livraison adresse="440" debutPlage="12:0:0" duree="900" finPlage="14:0:0"/>
+<livraison adresse="502" debutPlage="9:0:0" duree="600" finPlage="11:0:0"/>
+<livraison adresse="97" duree="900"/>
+<livraison adresse="366" duree="300"/>
+<livraison adresse="414" debutPlage="8:0:0" duree="300" finPlage="10:0:0"/>
+<livraison adresse="512" duree="600"/>
+<livraison adresse="336" duree="600"/>
+<livraison adresse="284" debutPlage="11:0:0" duree="600" finPlage="13:0:0"/>
+<livraison adresse="572" debutPlage="13:0:0" duree="600" finPlage="14:0:0"/>
+<livraison adresse="495" duree="900"/>
+<livraison adresse="555" duree="600"/>
+<livraison adresse="114" duree="900"/>
+<livraison adresse="313" duree="300"/>
+</demandeDeLivraisons>

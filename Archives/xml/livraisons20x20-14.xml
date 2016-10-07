@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<demandeDeLivraisons>
+<entrepot adresse="150" heureDepart="8:0:0"/>
+<livraison adresse="158" duree="600"/>
+<livraison adresse="199" duree="600"/>
+<livraison adresse="190" duree="300"/>
+<livraison adresse="304" duree="600"/>
+<livraison adresse="237" duree="300"/>
+<livraison adresse="133" duree="300"/>
+<livraison adresse="44" duree="600"/>
+<livraison adresse="347" duree="600"/>
+<livraison adresse="165" duree="300"/>
+<livraison adresse="394" duree="600"/>
+<livraison adresse="117" duree="900"/>
+<livraison adresse="235" duree="900"/>
+<livraison adresse="278" duree="300"/>
+<livraison adresse="391" duree="600"/>
+</demandeDeLivraisons>
