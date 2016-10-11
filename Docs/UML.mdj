@@ -17149,7 +17149,7 @@
 							"width": 401,
 							"height": 56,
 							"autoResize": false,
-							"text": "Modèle du domaine du projet PDL-Agile",
+							"text": "Modèle du domaine du projet PLD-Agile",
 							"wordWrap": true
 						},
 						{
@@ -22291,19 +22291,19 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 922,
-									"top": 503,
-									"width": 48,
+									"left": 782,
+									"top": 575,
+									"width": 114,
 									"height": 13,
 									"autoResize": false,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
+									"alpha": -0.4680017359662956,
+									"distance": 121.37956994486346,
 									"hostEdge": {
 										"$ref": "AAAAAAFXswUENuyeMCc="
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "+part de",
+									"text": "+part de (référence)",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -22704,9 +22704,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 973,
+									"left": 940,
 									"top": 744,
-									"width": 54,
+									"width": 120,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -22716,7 +22716,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "+contient",
+									"text": "+contient (référence)",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -24243,7 +24243,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXswUEOOz6naw="
 							},
-							"name": "part de",
+							"name": "part de (référence)",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFXswUEOOz00YA=",
@@ -24289,7 +24289,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXswUEOOz6naw="
 							},
-							"name": "contient",
+							"name": "contient (référence)",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFXswUEOOz39h4=",
