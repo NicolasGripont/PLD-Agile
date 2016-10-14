@@ -1,6 +1,8 @@
 # Mac OS X hidden files
 .DS_Store
 
+Sources/.metadata/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -10,12 +12,3 @@
 *.jar
 *.war
 *.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/Code/WASO-common/target/
-/Code/WASO-microCAS/target/
-/Code/WASO-IHM-Web/target/
-/Code/WASO-SMA/target/
-/Code/WASO-SOM-Client/target/
-/Code/WASO-SOM-Personne/target/
