@@ -89,7 +89,12 @@ public class ChoixPlanVilleVue implements Initializable{
 		FileChooser dialogue = new FileChooser();
 		FileChooser.ExtensionFilter extensionsFilter = new FileChooser.ExtensionFilter("Fichier XML","*.xml");
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
-		fichierChoisie = dialogue.showOpenDialog(controleur.getStage());
+		File tmp = dialogue.showOpenDialog(controleur.getStage());
+		if(tmp.getName().toLowerCase().endsWith(".xml")) {
+        	fichierChoisie = tmp;
+        } else {
+        	fichierChoisie = null;
+        }
 		if(fichierChoisie != null) {
 			labelError.setVisible(false);
 			textFieldLienFichier.setText(fichierChoisie.getPath());
