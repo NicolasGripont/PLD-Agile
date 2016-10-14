@@ -18,8 +18,8 @@ public class Controleur extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
-		stage = primaryStage;
 		try {
+			stage = primaryStage;
 			ShowChoixPlanVille(primaryStage);
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -3,7 +3,6 @@ package vue.choixPlanVille;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javax.swing.JFileChooser;
 import controleur.Controleur;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,8 +54,9 @@ public class ChoixPlanVilleVue implements Initializable{
 	public void choixFichierAction(MouseEvent event) {
 		System.out.println("Hello world!");
 		FileChooser dialogue = new FileChooser();
-		dialogue.showOpenDialog(controleur.getStage());
-		fichierChoisie = dialogue.getSelectedFile();
+		FileChooser.ExtensionFilter extensionsFilter = new FileChooser.ExtensionFilter("Fichier XML","*.xml");
+		dialogue.setSelectedExtensionFilter(extensionsFilter);
+		fichierChoisie = dialogue.showOpenDialog(null);
 	}
 	
 	@FXML
