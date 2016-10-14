@@ -12,8 +12,8 @@ import javafx.scene.Scene;
 
 
 public class Controleur extends Application{
-	private final ChoixDemandeLivraisonsVue choixDemandeLivraisonVue = new ChoixDemandeLivraisonsVue();
-	private final ChoixPlanVilleVue choixPlanVilleVue = new ChoixPlanVilleVue();
+	private ChoixDemandeLivraisonsVue choixDemandeLivraisonVue;
+	private ChoixPlanVilleVue choixPlanVilleVue;
 	private Stage stage;
 	
 	@Override
@@ -31,7 +31,10 @@ public class Controleur extends Application{
 	}
 	
 	public void ShowChoixPlanVille(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
+		Parent root = fxmlLoader.load();
+		choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
+		choixPlanVilleVue.setControleur(this);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Itine'GO");
 		primaryStage.setScene(scene);
