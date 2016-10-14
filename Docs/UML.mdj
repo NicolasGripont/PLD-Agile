@@ -9645,9 +9645,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 612,
+									"left": 621,
 									"top": 296,
-									"width": 374,
+									"width": 356,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5239555153048794,
@@ -9656,7 +9656,7 @@
 										"$ref": "AAAAAAFXsn9qwjoggM4="
 									},
 									"edgePosition": 1,
-									"text": "Cliquer sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
+									"text": "Clic sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -10146,9 +10146,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 580,
+									"left": 587,
 									"top": 494,
-									"width": 163,
+									"width": 149,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5820316708042506,
@@ -10157,7 +10157,7 @@
 										"$ref": "AAAAAAFXsoTRnDq73WQ="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton 'Valider'",
+									"text": "Clic sur le bouton 'Valider'",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -10647,18 +10647,18 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 615,
-									"top": 808,
-									"width": 374,
+									"left": 623,
+									"top": 804,
+									"width": 356,
 									"height": 13,
 									"autoResize": false,
-									"alpha": 0.07762150444238819,
-									"distance": 180.54362353736008,
+									"alpha": 0.10022174421833109,
+									"distance": 179.90275150758535,
 									"hostEdge": {
 										"$ref": "AAAAAAFXso2p2EvTAv4="
 									},
 									"edgePosition": 1,
-									"text": "Cliquer sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
+									"text": "Clic sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -11010,9 +11010,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 632,
+									"left": 639,
 									"top": 1004,
-									"width": 163,
+									"width": 149,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.60607547366076,
@@ -11021,7 +11021,7 @@
 										"$ref": "AAAAAAFXso+BjUwP5wU="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton 'Valider'",
+									"text": "Clic sur le bouton 'Valider'",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -11493,9 +11493,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 560,
+									"left": 567,
 									"top": 1384,
-									"width": 275,
+									"width": 261,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.6197081334506929,
@@ -11504,7 +11504,7 @@
 										"$ref": "AAAAAAFXspG3hUxXOCo="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton 'Calculer Itinétaire/Tournée'",
+									"text": "Clic sur le bouton 'Calculer Itinétaire/Tournée'",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -12045,9 +12045,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 156,
+									"left": 163,
 									"top": 1191,
-									"width": 152,
+									"width": 138,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.4592611288942963,
@@ -12056,7 +12056,7 @@
 										"$ref": "AAAAAAFXspl+lU0Cx14="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton retour",
+									"text": "Clic sur le bouton retour",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -12183,9 +12183,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 206,
+									"left": 213,
 									"top": 679,
-									"width": 152,
+									"width": 138,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.482972493310278,
@@ -12194,7 +12194,7 @@
 										"$ref": "AAAAAAFXspzR/E1g2FE="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton retour",
+									"text": "Clic sur le bouton retour",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -12820,9 +12820,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 752,
+									"left": 759,
 									"top": 888,
-									"width": 151,
+									"width": 137,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.7469903631035075,
@@ -12831,7 +12831,7 @@
 										"$ref": "AAAAAAFXsq2n8a5rEZk="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton home",
+									"text": "Clic sur le bouton home",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -12958,9 +12958,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 808,
+									"left": 815,
 									"top": 1296,
-									"width": 151,
+									"width": 137,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.469815575885571,
@@ -12969,7 +12969,7 @@
 										"$ref": "AAAAAAFXsq57eq5/lVg="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton home",
+									"text": "Clic sur le bouton home",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -13096,9 +13096,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 760,
+									"left": 767,
 									"top": 1516,
-									"width": 151,
+									"width": 137,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.4820575724191363,
@@ -13107,7 +13107,7 @@
 										"$ref": "AAAAAAFXsq7RiK69YBQ="
 									},
 									"edgePosition": 1,
-									"text": "Clique sur le bouton home",
+									"text": "Clic sur le bouton home",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -14128,7 +14128,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Cliquer sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
+							"name": "Clic sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
 							"source": {
 								"$ref": "AAAAAAFXsqCa6U2hRq0="
 							},
@@ -14160,7 +14160,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton 'Valider'",
+							"name": "Clic sur le bouton 'Valider'",
 							"source": {
 								"$ref": "AAAAAAFXsn4qmDnAoe4="
 							},
@@ -14192,7 +14192,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Cliquer sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
+							"name": "Clic sur le bouton 'Parcourir les fichiers'  pour choisir le fichier",
 							"source": {
 								"$ref": "AAAAAAFXsoPn2zqWd80="
 							},
@@ -14208,7 +14208,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton 'Valider'",
+							"name": "Clic sur le bouton 'Valider'",
 							"source": {
 								"$ref": "AAAAAAFXsozMU0uXX7E="
 							},
@@ -14224,7 +14224,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton 'Calculer Itinétaire/Tournée'",
+							"name": "Clic sur le bouton 'Calculer Itinétaire/Tournée'",
 							"source": {
 								"$ref": "AAAAAAFXso7MlEvr7B4="
 							},
@@ -14288,7 +14288,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton retour",
+							"name": "Clic sur le bouton retour",
 							"source": {
 								"$ref": "AAAAAAFXso7MlEvr7B4="
 							},
@@ -14304,7 +14304,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton retour",
+							"name": "Clic sur le bouton retour",
 							"source": {
 								"$ref": "AAAAAAFXsoPn2zqWd80="
 							},
@@ -14350,7 +14350,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton home",
+							"name": "Clic sur le bouton home",
 							"source": {
 								"$ref": "AAAAAAFXsozMU0uXX7E="
 							},
@@ -14366,7 +14366,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton home",
+							"name": "Clic sur le bouton home",
 							"source": {
 								"$ref": "AAAAAAFXso7MlEvr7B4="
 							},
@@ -14382,7 +14382,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFXsnaYqjlraqU="
 							},
-							"name": "Clique sur le bouton home",
+							"name": "Clic sur le bouton home",
 							"source": {
 								"$ref": "AAAAAAFXspBOrEwixP8="
 							},
