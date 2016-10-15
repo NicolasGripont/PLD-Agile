@@ -39,9 +39,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	private StackPane contentPane;
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+	public void initialize(URL location, ResourceBundle resources) {		
 		contentPane.setOnDragOver(new EventHandler<DragEvent>() {
             @Override
             public void handle(final DragEvent event) {
@@ -106,12 +104,17 @@ public class ChoixPlanVilleVue implements Initializable{
 	
 	@FXML
 	public void validerAction(MouseEvent event) {
-		if(controleur == null) {
+		/*if(controleur == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Controler is null, fatal error");
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Le fichier choisi est invalide");
+		} else {
+			
+		}*/
+		if(controleur.CreerPlanVille(fichierChoisie)) {
+			controleur.ShowChoixDemandeLivraison();
 		}
 	}
 	
