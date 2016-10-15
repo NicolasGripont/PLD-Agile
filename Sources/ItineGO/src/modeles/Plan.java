@@ -41,4 +41,20 @@ public class Plan {
 	public boolean CalculerTournee() {
 		return false;
 	}
+
+	public List<Noeud> getNoeuds() {
+		return noeuds;
+	}
+
+	public void setNoeuds(List<Noeud> noeuds) {
+		this.noeuds = noeuds;
+	}
+
+	public List<Troncon> getTroncons() {
+		return troncons;
+	}
+
+	public void setTroncons(List<Troncon> troncons) {
+		this.troncons = troncons;
+	}
 }
