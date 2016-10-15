@@ -7,7 +7,7 @@ public class Troncon {
 	private Noeud origine;
 	private Noeud destination;
 	
-	Troncon(String nomRue, int longueur, int vitesse, Noeud origine, Noeud destination) {
+	public Troncon(String nomRue, int longueur, int vitesse, Noeud origine, Noeud destination) {
 		this.setNomRue(nomRue);
 		this.setLongueur(longueur);
 		this.setVitesse(vitesse);
