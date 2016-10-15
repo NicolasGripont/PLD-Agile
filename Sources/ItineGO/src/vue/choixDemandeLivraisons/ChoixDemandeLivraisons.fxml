@@ -7,58 +7,83 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<BorderPane fx:controller="vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <VBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="623.0" text="Sélectionner Plan de ville (Fichier XML)" textAlignment="CENTER">
-               <font>
-                  <Font name="Helvetica" size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" disable="true" prefHeight="17.0" prefWidth="838.0" text="Error" textAlignment="CENTER" textFill="#fc0000" />
-         </children>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefWidth="600.0">
+            <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="414.0">
                <children>
-                  <TextField fx:id="textFieldLienFichier" prefHeight="27.0" prefWidth="290.0" />
-                  <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" text="Parcourir les fichiers">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
+                  <HBox prefHeight="37.0" prefWidth="382.0">
+                     <children>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Label alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="343.0" text="Error" textAlignment="CENTER" textFill="#fc0000" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" prefHeight="59.0" prefWidth="381.0" text="Sélectionner demande de livraisons." textAlignment="CENTER">
+                     <font>
+                        <Font name="Helvetica" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox alignment="CENTER" prefHeight="424.0" prefWidth="381.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefWidth="600.0">
+                           <children>
+                              <TextField fx:id="textFieldLienFichier" prefHeight="27.0" prefWidth="290.0" />
+                              <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" prefHeight="27.0" prefWidth="218.0" text="Parcourir les fichiers">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Pane prefHeight="196.0" prefWidth="465.0" style="-fx-background-color: #EEEEEE;">
+                           <opaqueInsets>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="30.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="197.0" prefWidth="282.0" text="Déposez votre fichier xml" />
+                           </children>
+                        </Pane>
+                        <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="301.0" text="Valider" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Pane prefHeight="196.0" prefWidth="465.0" style="-fx-background-color: #EEEEEE;">
-               <opaqueInsets>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="30.0" right="30.0" />
-               </VBox.margin>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="500.0" prefWidth="379.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="197.0" prefWidth="504.0" text="Déposez votre fichier xml" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="378.0" text="Plan de ville" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="planVilleVue" maxHeight="350.0" maxWidth="350.0" minHeight="350.0" minWidth="350.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #AAAAAA;">
+                     <VBox.margin>
+                        <Insets left="15.0" top="30.0" />
+                     </VBox.margin>
+                  </Pane>
                </children>
-            </Pane>
-            <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="301.0" text="Valider" />
+            </VBox>
          </children>
-         <opaqueInsets>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </center>
 </BorderPane>
