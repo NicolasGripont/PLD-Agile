@@ -20,7 +20,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Label alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="343.0" text="Error" textAlignment="CENTER" textFill="#fc0000" />
+                        <Label fx:id="labelError" alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="343.0" text="Error" textAlignment="CENTER" textFill="#fc0000" />
                      </children>
                   </HBox>
                   <Label alignment="CENTER" prefHeight="59.0" prefWidth="381.0" text="Sélectionner demande de livraisons." textAlignment="CENTER">
@@ -46,17 +46,14 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Pane prefHeight="196.0" prefWidth="465.0" style="-fx-background-color: #EEEEEE;">
-                           <opaqueInsets>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </opaqueInsets>
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" right="30.0" />
-                           </VBox.margin>
+                        <StackPane fx:id="contentPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="197.0" prefWidth="282.0" text="Déposez votre fichier xml" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="221.0" text="Déposez votre fichier xml" />
                            </children>
-                        </Pane>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="20.0" />
+                           </VBox.margin>
+                        </StackPane>
                         <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="301.0" text="Valider" />
                      </children>
                      <opaqueInsets>
@@ -76,7 +73,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="planVilleVue" maxHeight="350.0" maxWidth="350.0" minHeight="350.0" minWidth="350.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #AAAAAA;">
+                  <Pane fx:id="planVillePane" maxHeight="350.0" maxWidth="350.0" minHeight="350.0" minWidth="350.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #AAAAAA;">
                      <VBox.margin>
                         <Insets left="15.0" top="30.0" />
                      </VBox.margin>

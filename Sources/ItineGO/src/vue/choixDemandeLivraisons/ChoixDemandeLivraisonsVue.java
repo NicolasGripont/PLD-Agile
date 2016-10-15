@@ -3,12 +3,13 @@ package vue.choixDemandeLivraisons;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import controleur.Controleur;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,14 +17,15 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import modeles.Plan;
 import vue.PlanVilleVue.PlanVilleVue;
 
 public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Controleur controleur;
-	private Plan plan;
 	private File fichierChoisie = null;
 	
 	@FXML
@@ -42,6 +44,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	private StackPane contentPane;
 	
 	@FXML 
+	private Pane planVillePane;
+	
 	private PlanVilleVue planVilleVue;
 	
 	@Override
@@ -68,6 +72,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         });
         
         labelError.setVisible(false);
+        planVilleVue = new PlanVilleVue(planVillePane.getMinWidth(),planVillePane.getMinHeight());
+        planVillePane.getChildren().add(planVilleVue);
+	}
+	
+	public void dessinePlanVille(Plan plan) {
+		planVilleVue.dessinePlan(plan);
 	}
 	
 	public void afficherErreur(String erreur) {
@@ -168,14 +178,6 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		this.controleur = controleur;
 	}
 
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
-	
 	public File getFichierChoisi() {
 		return fichierChoisie;
 	}
