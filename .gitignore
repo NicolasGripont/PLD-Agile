@@ -13,3 +13,5 @@ Sources/.recommenders/
 *.jar
 *.war
 *.ear
+
+Sources/.recommenders/caches/identified-project-coordinates.json

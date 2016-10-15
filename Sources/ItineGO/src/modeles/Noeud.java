@@ -1,4 +1,4 @@
-package modele;
+package modeles;
 
 public class Noeud {
 	private int id;
