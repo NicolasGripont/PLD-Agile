@@ -6,7 +6,6 @@ import org.jdom2.*;
 import org.jdom2.filter.*;
 import org.jdom2.input.*;
 import modeles.Noeud;
-import modeles.Troncon;
 
 
 
@@ -16,7 +15,7 @@ public class ParseurPlan{
 
 	private static List listNoeudVille; //Liste des Noeuds
 //	static List listTronconVille; //Liste des Troncons
-	private static List<Noeud> listNoeudPlanVille;
+	private List<Noeud> listNoeudPlanVille;
 	
 	 public static void main(String[] args)
 	  {
@@ -47,18 +46,16 @@ public class ParseurPlan{
 //			 listTronconVille = racine.getChildren("troncon");
 			 
 			 //Afficher les attributs des noeuds
-//			 for (int i=0; i < listNoeudVille.size() ; i++)
-//			 {
-////				 Element noeud = (Element) listNoeudVille.get(i);
-//				 
-////				 Noeud unNoeud = new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y")));
-//				 Noeud n1 = new Noeud(1,20,20);
-//				 n1.toString();
-////				 listNoeudPlanVille.add(unNoeud);
-////				 System.out.println("ID : " + Integer.parseInt(noeud.getAttributeValue("id"))+ " X : " + Integer.parseInt(noeud.getAttributeValue("x")) + " Y : " + Integer.parseInt(noeud.getAttributeValue("y")));
-//			 }
-			 Noeud n1 = new Noeud(1,2,3);
-			 System.out.println(n1.toString());
+			 for (int i=0; i < listNoeudVille.size() ; i++)
+			 {
+//				 Element noeud = (Element) listNoeudVille.get(i);
+				 
+//				 Noeud unNoeud = new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y")));
+				 Noeud n1 = new Noeud(1,20,20);
+				 n1.toString();
+//				 listNoeudPlanVille.add(unNoeud);
+//				 System.out.println("ID : " + Integer.parseInt(noeud.getAttributeValue("id"))+ " X : " + Integer.parseInt(noeud.getAttributeValue("x")) + " Y : " + Integer.parseInt(noeud.getAttributeValue("y")));
+			 }
 			 System.out.println("Ajout Noeud Fini");
 			 
 //			 for (int i = 0; i<listNoeudPlanVille.size();i++)
