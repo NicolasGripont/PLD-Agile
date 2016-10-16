@@ -80,4 +80,8 @@ public class Plan {
 	public Entrepot getEntrepot() {
 		return entrepot;
 	}
+	
+	public void setEntrepot(Entrepot entrepot) {
+		this.entrepot = entrepot;
+	}
 }

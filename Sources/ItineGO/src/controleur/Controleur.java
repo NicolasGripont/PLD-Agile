@@ -5,12 +5,12 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import modeles.Noeud;
+import modeles.ParserLivraison;
 import modeles.ParserPlan;
 import modeles.Plan;
-import modeles.Troncon;
 import vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVille.ChoixPlanVilleVue;
+import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 public class Controleur extends Application{
 	private ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	private ChoixPlanVilleVue choixPlanVilleVue;
+	private GestionLivraisonsVue gestionLivraisonsVue;
 	private Stage stage;
 	private Plan plan = null;
 	
@@ -28,10 +29,10 @@ public class Controleur extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
-		ShowChoixPlanVille();
+		showChoixPlanVille();
 	}
 	
-	public void ShowChoixPlanVille() {
+	public void showChoixPlanVille() {
 		if(stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
@@ -50,14 +51,16 @@ public class Controleur extends Application{
 		}
 	}
 	
-	public void ShowChoixDemandeLivraison() {
+	public void showChoixDemandeLivraison() {
 		if(stage != null) {
 			try {
+				plan.setLivraisons(null);
+				plan.setEntrepot(null);
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisons/ChoixDemandeLivraisons.fxml"));
 				Parent root = fxmlLoader.load();
 				choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				choixDemandeLivraisonsVue.setControleur(this);
-				choixDemandeLivraisonsVue.dessinePlanVille(plan);
+				choixDemandeLivraisonsVue.setPlan(plan);
 				Scene scene = new Scene(root);
 				stage.setTitle("Itine'GO");
 				stage.setScene(scene);
@@ -69,25 +72,33 @@ public class Controleur extends Application{
 		}
 	}
 	
-	public boolean CreerPlanVille(File fichierPlanVilleXML) {
-		/*
-		 * Appel au parseur, si erreur le parseur doit renvoyer null
-		 * Pour l'instant création aléatoire d'un plan avec 3 noeuds et 3 troncons
-		 */
+	public void showGestionLivraisons() {
+		if(stage != null) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/GestionLivraisonsVue/GestionLivraisonsVue.fxml"));
+				Parent root = fxmlLoader.load();
+				gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
+				gestionLivraisonsVue.setControleur(this);
+				gestionLivraisonsVue.setPlan(plan);
+				Scene scene = new Scene(root);
+				stage.setTitle("Itine'GO");
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public boolean creerPlanVille(File fichierPlanVilleXML) {
 		plan = new Plan();
-		/*Noeud n1 = new Noeud(1,20,20);
-		Noeud n2 = new Noeud(2,100,100);
-		Noeud n3 = new Noeud(3,100,20);
-		plan.AjouterNoeud(n1);
-		plan.AjouterNoeud(n2);
-		plan.AjouterNoeud(n3);
-		Troncon t1 = new Troncon("rue 1-2", 10, 10, n1, n2);
-		Troncon t2 = new Troncon("rue 1-3", 10, 10, n1, n3);
-		Troncon t3 = new Troncon("rue 2-3", 10, 10, n2, n3);
-		plan.AjouterTroncon(t1);
-		plan.AjouterTroncon(t2);
-		plan.AjouterTroncon(t3);*/
 		ParserPlan.parserPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
+		return plan != null;
+	}
+	
+	public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
+		ParserLivraison.parserLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 

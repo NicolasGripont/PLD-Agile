@@ -1,4 +1,4 @@
-package vue.GlisserDeposerFichierVue;
+package vue.glisserDeposerFichierVue;
 
 import java.io.File;
 import java.util.ArrayList;

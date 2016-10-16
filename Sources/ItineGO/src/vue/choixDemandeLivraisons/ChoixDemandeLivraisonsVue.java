@@ -17,12 +17,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import modeles.Plan;
-import vue.GlisserDeposerFichierVue.GlisserDeposerFichierVue;
-import vue.PlanVilleVue.PlanVilleVue;
+import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
+import vue.planVilleVue.PlanVilleVue;
 
 public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Controleur controleur;
 	private File fichierChoisie = null;
+	private Plan plan;
 	
 	@FXML
 	private TextField textFieldLienFichier;
@@ -72,16 +73,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		});
         
         labelError.setVisible(false);
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
+        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         planVilleVue = new PlanVilleVue(planVillePane.getMinWidth(),planVillePane.getMinHeight());
         planVillePane.getChildren().add(planVilleVue);
 	}
-	
-	public void dessinePlanVille(Plan plan) {
-		planVilleVue.dessinePlan(plan);
-	}
-	
+
 	public void afficherErreur(String erreur) {
 		labelError.setDisable(false);
 		labelError.setText(erreur);
@@ -108,6 +105,10 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Aucun fichier choisi");
+		} else {	
+			if(controleur.creerDemandeLivraison(fichierChoisie)) {
+				controleur.showGestionLivraisons();
+			}
 		}
 	}
 	
@@ -147,6 +148,15 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void precedent(){
-		controleur.ShowChoixPlanVille();
+		controleur.showChoixPlanVille();
+	}
+
+	public Plan getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+        planVilleVue.dessinePlan(plan);
 	}
 }

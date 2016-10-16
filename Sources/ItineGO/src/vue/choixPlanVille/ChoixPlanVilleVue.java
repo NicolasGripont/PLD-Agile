@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import vue.GlisserDeposerFichierVue.GlisserDeposerFichierVue;
+import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 
 public class ChoixPlanVilleVue implements Initializable{
 	private Controleur controleur;
@@ -98,17 +98,16 @@ public class ChoixPlanVilleVue implements Initializable{
 	
 	@FXML
 	public void validerAction(MouseEvent event) {
-		/*if(controleur == null) {
+		if(controleur == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Controler is null, fatal error");
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Aucun fichier choisi");
-		} else {
-			
-		}*/
-		if(controleur.CreerPlanVille(fichierChoisie)) {
-			controleur.ShowChoixDemandeLivraison();
+		} else {	
+			if(controleur.creerPlanVille(fichierChoisie)) {
+				controleur.showChoixDemandeLivraison();
+			}
 		}
 	}
 	

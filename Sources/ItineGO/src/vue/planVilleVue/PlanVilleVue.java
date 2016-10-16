@@ -1,4 +1,4 @@
-package vue.PlanVilleVue;
+package vue.planVilleVue;
 
 import modeles.Entrepot;
 import modeles.Livraison;
@@ -27,7 +27,6 @@ public class PlanVilleVue extends Canvas {
 	public void dessinePlan(Plan plan) {
 		if(plan != null) {
 			calculerZoom(plan.getNoeuds());
-			System.out.println("Zoom : " + zoom);
 			if(plan.getNoeuds() != null) {
 				dessineNoeud(plan.getNoeuds());
 			}
