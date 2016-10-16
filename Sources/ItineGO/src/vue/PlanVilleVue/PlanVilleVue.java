@@ -15,9 +15,9 @@ import javafx.scene.paint.Color;
 
 public class PlanVilleVue extends Canvas {
 	private int RAYON_LIVRAISON = 5;
-	private int RAYON_NOEUD = 3;
+	private int RAYON_NOEUD = 0;
 	private int LARGEUR_TRONCON = 3;
-	private int zoom = 1;
+	private double zoom = 1;
 	
 	public PlanVilleVue(double width, double height) {
 		super(width, height);
@@ -26,18 +26,26 @@ public class PlanVilleVue extends Canvas {
 	
 	public void dessinePlan(Plan plan) {
 		if(plan != null) {
+			calculerZoom(plan.getNoeuds());
+			System.out.println("Zoom : " + zoom);
 			if(plan.getNoeuds() != null) {
 				dessineNoeud(plan.getNoeuds());
 			}
 			if(plan.getTroncons() != null) {
 				dessineTroncon(plan.getTroncons());
 			}
+			if(plan.getEntrepot() != null) {
+				dessineEntrepot(plan.getEntrepot());
+			}
+			if(plan.getLivraisons() != null) {
+				dessineLivraison(plan.getLivraisons());
+			}
 		} else {
 			System.err.println("plan is null");
 		}
 	}
 	
-	public void dessineNoeud(Map<Integer, Noeud> noeuds) {
+	private void dessineNoeud(Map<Integer, Noeud> noeuds) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.859,0.839,0.808,1));
         gc.setStroke(Color.WHITE);
@@ -48,7 +56,7 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	public void dessineTroncon(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
+	private void dessineTroncon(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.859,0.839,0.808,1));
         gc.setStroke(Color.WHITE);
@@ -61,13 +69,13 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	public void dessineLivraison(List<Livraison> livraisons) {
+	public void dessineLivraison(Map<Noeud, Livraison> livraisons) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.GREEN);
         gc.setStroke(Color.GREEN);
-        for(Livraison l : livraisons) {
-			if(l != null && l.getNoeud() != null) {
-				gc.fillOval(l.getNoeud().getX() * zoom, l.getNoeud().getY() * zoom, RAYON_LIVRAISON, RAYON_LIVRAISON);
+        for(Map.Entry<Noeud, Livraison> l : livraisons.entrySet()) {
+			if(l != null && l.getKey() != null) {
+				gc.fillOval(l.getKey().getX() * zoom, l.getKey().getY() * zoom, RAYON_LIVRAISON, RAYON_LIVRAISON);
 			}
 		}
 	}
@@ -81,15 +89,37 @@ public class PlanVilleVue extends Canvas {
         }
 	}
 	
-	public void dessineChemin(List<Troncon> chemins) {
+	private void dessineChemin(List<Troncon> chemins) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0,0.709,0.968,1));
         gc.setStroke(new Color(0,0.709,0.968,1));
 		gc.setLineWidth(LARGEUR_TRONCON);
 		for(Troncon t : chemins) {
 			if(t != null && t.getOrigine() != null && t.getDestination() != null) {
-				gc.strokeLine(t.getOrigine().getX() * zoom, t.getOrigine().getY() * zoom, t.getDestination().getX() * zoom, t.getDestination().getY() * zoom);
+				gc.strokeLine(t.getOrigine().getX() * zoom, t.getOrigine().getY() * zoom,
+						t.getDestination().getX() * zoom, t.getDestination().getY() * zoom);
 			}
+		}
+	}
+	
+	private void calculerZoom(Map<Integer, Noeud> noeuds) {
+		if(noeuds != null) {
+			int minX = Integer.MAX_VALUE;
+			int maxX = Integer.MIN_VALUE;
+			for(Map.Entry<Integer, Noeud> n : noeuds.entrySet()) {
+				if(n != null) {
+					if(n.getValue().getX() <= minX) {
+						minX = n.getValue().getX();
+					} else if(n.getValue().getX() >= maxX) {
+						maxX = n.getValue().getX();
+					}
+				}
+			}
+			double widthMap = maxX+minX;
+			double width = this.getWidth();
+			this.zoom = width/(widthMap) ;
+		} else {
+			this.zoom = 1;
 		}
 	}
 }
