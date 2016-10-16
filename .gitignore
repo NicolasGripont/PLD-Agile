@@ -12,5 +12,3 @@ Sources/.recommenders/
 # Package Files #
 *.war
 *.ear
-
-Sources/.recommenders/caches/identified-project-coordinates.json
