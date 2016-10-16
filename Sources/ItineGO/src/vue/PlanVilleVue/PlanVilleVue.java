@@ -15,8 +15,8 @@ import javafx.scene.paint.Color;
 
 public class PlanVilleVue extends Canvas {
 	private int RAYON_LIVRAISON = 5;
-	private int RAYON_NOEUD = 1;
-	private int LARGEUR_TRONCON = 1;
+	private int RAYON_NOEUD = 3;
+	private int LARGEUR_TRONCON = 3;
 	private int zoom = 1;
 	
 	public PlanVilleVue(double width, double height) {
@@ -39,8 +39,8 @@ public class PlanVilleVue extends Canvas {
 	
 	public void dessineNoeud(Map<Integer, Noeud> noeuds) {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(new Color(0.980,0.929,0.847,1));
-        gc.setStroke(new Color(0.980,0.929,0.847,1));
+		gc.setFill(new Color(0.859,0.839,0.808,1));
+        gc.setStroke(Color.WHITE);
 		for(Map.Entry<Integer, Noeud> n : noeuds.entrySet()) {
 			if(n != null) {
 				gc.fillOval(n.getValue().getX() * zoom, n.getValue().getY() * zoom, RAYON_NOEUD, RAYON_NOEUD);
@@ -50,7 +50,7 @@ public class PlanVilleVue extends Canvas {
 	
 	public void dessineTroncon(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(Color.WHITE);
+		gc.setFill(new Color(0.859,0.839,0.808,1));
         gc.setStroke(Color.WHITE);
 		gc.setLineWidth(LARGEUR_TRONCON);
 		for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : troncons.entrySet()) {
