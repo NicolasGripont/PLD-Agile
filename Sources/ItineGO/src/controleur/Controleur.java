@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import modeles.Noeud;
+import modeles.ParserPlan;
 import modeles.Plan;
 import modeles.Troncon;
 import vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue;
@@ -74,7 +75,7 @@ public class Controleur extends Application{
 		 * Pour l'instant création aléatoire d'un plan avec 3 noeuds et 3 troncons
 		 */
 		plan = new Plan();
-		Noeud n1 = new Noeud(1,20,20);
+		/*Noeud n1 = new Noeud(1,20,20);
 		Noeud n2 = new Noeud(2,100,100);
 		Noeud n3 = new Noeud(3,100,20);
 		plan.AjouterNoeud(n1);
@@ -85,7 +86,8 @@ public class Controleur extends Application{
 		Troncon t3 = new Troncon("rue 2-3", 10, 10, n2, n3);
 		plan.AjouterTroncon(t1);
 		plan.AjouterTroncon(t2);
-		plan.AjouterTroncon(t3);
+		plan.AjouterTroncon(t3);*/
+		ParserPlan.parserPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 
