@@ -77,6 +77,10 @@ public class Plan {
 		this.livraisons = livraisons;
 	}
 	
+	public void resetLivraisons() {
+		this.livraisons = new HashMap<Noeud, Livraison>();
+	}
+	
 	public Entrepot getEntrepot() {
 		return entrepot;
 	}

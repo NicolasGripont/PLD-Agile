@@ -54,7 +54,7 @@ public class Controleur extends Application{
 	public void showChoixDemandeLivraison() {
 		if(stage != null) {
 			try {
-				plan.setLivraisons(null);
+				plan.resetLivraisons();
 				plan.setEntrepot(null);
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisons/ChoixDemandeLivraisons.fxml"));
 				Parent root = fxmlLoader.load();
