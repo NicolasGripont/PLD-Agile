@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -16,7 +15,7 @@
                <children>
                   <HBox prefHeight="37.0" prefWidth="382.0">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#precedent" prefHeight="27.0" prefWidth="27.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -37,7 +36,7 @@
                         <HBox alignment="TOP_CENTER" prefWidth="600.0">
                            <children>
                               <TextField fx:id="textFieldLienFichier" prefHeight="27.0" prefWidth="290.0" />
-                              <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" prefHeight="27.0" prefWidth="218.0" text="Parcourir les fichiers">
+                              <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefHeight="27.0" prefWidth="218.0" text="Parcourir les fichiers">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -47,8 +46,11 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="200.0" prefWidth="200.0" />
-                        <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="301.0" text="Valider" />
+                        <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="200.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></AnchorPane>
+                        <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="301.0" text="Valider" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

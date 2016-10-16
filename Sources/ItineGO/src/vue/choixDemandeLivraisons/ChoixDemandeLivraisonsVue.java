@@ -144,4 +144,9 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		labelError.setVisible(true);
 		labelError.setText("Erreur : Le fichier choisi est invalide.");
 	}
+	
+	@FXML
+	public void precedent(){
+		controleur.ShowChoixPlanVille();
+	}
 }
