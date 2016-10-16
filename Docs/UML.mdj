@@ -40177,7 +40177,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-gestionnaire: Gestionnaire",
+											"text": "#gestionnaire: Gestionnaire",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -40455,7 +40455,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-setEtatCourant(etat: EtatDefaut)",
+											"text": "#setEtatCourant(etat: EtatDefaut)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -41103,9 +41103,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 708,
+									"left": 707,
 									"top": 652,
-									"width": 72.26171875,
+									"width": 75.16259765625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.590024409697747,
@@ -41115,7 +41115,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatCourant",
+									"text": "#etatCourant",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -44464,9 +44464,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 408,
+									"left": 406,
 									"top": 479,
-									"width": 119.95166015625,
+									"width": 122.8525390625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.9272954046683095,
@@ -44476,7 +44476,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatPlanVilleChoisie",
+									"text": "#etatPlanVilleChoisie",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -44877,9 +44877,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 984,
+									"left": 982,
 									"top": 505,
-									"width": 159.6689453125,
+									"width": 162.56982421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.3763036574455271,
@@ -44889,7 +44889,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatFichierLivraisonsChoisi",
+									"text": "#etatFichierLivraisonsChoisi",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -45290,9 +45290,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 220,
+									"left": 219,
 									"top": 651,
-									"width": 116.33984375,
+									"width": 119.24072265625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.22892163476541727,
@@ -45302,7 +45302,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatPlanVilleAffiche",
+									"text": "#etatPlanVilleAffiche",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -45703,9 +45703,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 176,
+									"left": 174,
 									"top": 898,
-									"width": 131.5107421875,
+									"width": 134.41162109375,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.2754470660430104,
@@ -45715,7 +45715,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatLivraisonAffichees",
+									"text": "#etatLivraisonAffichees",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -46116,9 +46116,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1187,
+									"left": 1185,
 									"top": 732,
-									"width": 147.4052734375,
+									"width": 150.30615234375,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.17290904308663096,
@@ -46128,7 +46128,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatApplicationDemarree",
+									"text": "#etatApplicationDemarree",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -46529,9 +46529,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1208,
+									"left": 1207,
 									"top": 917,
-									"width": 114.17529296875,
+									"width": 117.076171875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.22454333461081466,
@@ -46541,7 +46541,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "-etatTourneeAffiche",
+									"text": "#etatTourneeAffiche",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -47082,7 +47082,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47128,7 +47128,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47174,7 +47174,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47220,7 +47220,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47266,7 +47266,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47312,7 +47312,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						},
 						{
@@ -47358,7 +47358,7 @@
 								"isDerived": false,
 								"isID": false
 							},
-							"visibility": "private",
+							"visibility": "protected",
 							"isDerived": false
 						}
 					],
@@ -47371,7 +47371,7 @@
 								"$ref": "AAAAAAFXwiZeXEszNuw="
 							},
 							"name": "gestionnaire",
-							"visibility": "private",
+							"visibility": "protected",
 							"isStatic": false,
 							"isLeaf": false,
 							"type": {
@@ -47505,7 +47505,7 @@
 								"$ref": "AAAAAAFXwiZeXEszNuw="
 							},
 							"name": "setEtatCourant",
-							"visibility": "private",
+							"visibility": "protected",
 							"isStatic": false,
 							"isLeaf": false,
 							"parameters": [
