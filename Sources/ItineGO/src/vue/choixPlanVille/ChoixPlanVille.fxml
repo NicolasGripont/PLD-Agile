@@ -42,13 +42,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <StackPane fx:id="contentPane" prefHeight="202.0" prefWidth="504.0" style="-fx-background-color: EEEEEE;">
-               <children>
-                  <Label text="Glisser-Déposer le plan de ville" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin></StackPane>
+            <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="200.0" prefWidth="200.0" />
             <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="301.0" text="Valider">
                <VBox.margin>
                   <Insets top="20.0" />

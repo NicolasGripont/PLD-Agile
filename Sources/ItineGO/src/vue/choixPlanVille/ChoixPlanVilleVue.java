@@ -5,19 +5,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controleur.Controleur;
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import vue.GlisserDeposerFichierVue.GlisserDeposerFichierVue;
 
 public class ChoixPlanVilleVue implements Initializable{
 	private Controleur controleur;
@@ -35,32 +33,35 @@ public class ChoixPlanVilleVue implements Initializable{
 	@FXML
 	private Button boutonValider;
 	
-	@FXML
-	private StackPane contentPane;
+	@FXML 
+	private AnchorPane glisserDeposerFichierPane;
+	
+	private GlisserDeposerFichierVue glisserDeposerFichierVue;
+	
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {		
-		contentPane.setOnDragOver(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(final DragEvent event) {
-                mouseDragOver(event);
-            }
-        });
- 
-        contentPane.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(final DragEvent event) {
-                mouseDragDropped(event);
-            }
-        });
- 
-        contentPane.setOnDragExited(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(final DragEvent event) {
-                contentPane.setStyle("-fx-border-color: #C6C6C6;");
-            }
-        });
-        
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer le plan de ville.");
+		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
+		glisserDeposerFichierVue.addExtensionAcceptee(".xml");
+		
+		glisserDeposerFichierVue.setFichierAccepteAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				fichierGlisserDeposerAccepteAction();
+			}
+		});
+		
+		glisserDeposerFichierVue.setFichierRefuseAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				fichierGlisserDeposerRefuseAction();
+			}
+		});
+		
         labelError.setVisible(false);
 	}
 	 
@@ -88,18 +89,11 @@ public class ChoixPlanVilleVue implements Initializable{
 		FileChooser.ExtensionFilter extensionsFilter = new FileChooser.ExtensionFilter("Fichier XML","*.xml");
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
-		if(tmp.getName().toLowerCase().endsWith(".xml")) {
-        	fichierChoisie = tmp;
+		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
+        	fichierAccepte(tmp);
         } else {
-        	fichierChoisie = null;
+        	fichierRefuse();
         }
-		if(fichierChoisie != null) {
-			labelError.setVisible(false);
-			textFieldLienFichier.setText(fichierChoisie.getPath());
-		} else {
-			labelError.setVisible(true);
-			labelError.setText("Erreur : Le fichier choisi est invalide");
-		}
 	}
 	
 	@FXML
@@ -118,58 +112,25 @@ public class ChoixPlanVilleVue implements Initializable{
 		}
 	}
 	
-	private void mouseDragDropped(final DragEvent e) {
-        final Dragboard db = e.getDragboard();
-        boolean success = false;
-        if (db.hasFiles()) {
-            success = true;
-            // Only get the first file from the list
-            
-            if(db.getFiles().get(0).getName().toLowerCase().endsWith(".xml")) {
-            	fichierChoisie = db.getFiles().get(0);
-            } else {
-            	fichierChoisie = null;
-            }
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                	if(fichierChoisie != null) {
-                		labelError.setVisible(false);
-                		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
-                	} else {
-                		textFieldLienFichier.setText("");
-                		labelError.setVisible(true);
-            			labelError.setText("Erreur : Le fichier choisi est invalide");
-                	}
-                }
-            });
-        }
-        e.setDropCompleted(success);
-        e.consume();
-    }
- 
-    private  void mouseDragOver(final DragEvent e) {
-        final Dragboard db = e.getDragboard();
- 
-        final boolean isAccepted = db.getFiles().get(0).getName().toLowerCase().endsWith(".xml");
- 
-        if (db.hasFiles()) {
-            if (isAccepted) {
-                contentPane.setStyle("-fx-border-color: green;"
-              + "-fx-border-width: 5;"
-              + "-fx-background-color: #C6C6C6;"
-              + "-fx-border-style: solid;");
-                e.acceptTransferModes(TransferMode.COPY);
-            } else {
-                contentPane.setStyle("-fx-border-color: red;"
-              + "-fx-border-width: 5;"
-              + "-fx-background-color: #C6C6C6;"
-              + "-fx-border-style: solid;");
-                e.acceptTransferModes(TransferMode.COPY);
-            }
-        } else {
-        	e.consume();
-        }
-    }
+	public void fichierGlisserDeposerAccepteAction() {
+		fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
+	}
+	
+	public void fichierGlisserDeposerRefuseAction() {
+		fichierRefuse();
+	}
     
+	public void fichierAccepte(File fichier) {
+		labelError.setVisible(false);
+		fichierChoisie = fichier;
+		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
+	}
+	
+	public void fichierRefuse(){
+		labelError.setVisible(false);
+		fichierChoisie = null;
+		textFieldLienFichier.setText("");
+		labelError.setVisible(true);
+		labelError.setText("Erreur : Le fichier choisi est invalide.");
+	}
 }
