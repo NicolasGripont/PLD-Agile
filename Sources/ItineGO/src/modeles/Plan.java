@@ -1,21 +1,19 @@
 package modeles;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import utility.Pair;
 
 public class Plan {
 	private Map<Integer, Noeud> noeuds;
-	private Map<Pair<Integer, Integer>, Troncon> troncons;
+	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
 	//private List<Livraison> livraisons;
 	//private Entrepot entrepot;
 
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
-		troncons = new HashMap<Pair<Integer, Integer>, Troncon> ();
+		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
 	}
 	
 	public void AjouterNoeud(Noeud n) {
@@ -26,7 +24,7 @@ public class Plan {
 	
 	public void AjouterTroncon(Troncon t) {
 		if(t != null) {
-			troncons.put(Pair.create(t.getOrigine().getId(), t.getDestination().getId()) , t);
+			troncons.put(Pair.create(t.getOrigine(), t.getDestination()) , t);
 		}
 	}
 	
@@ -62,11 +60,11 @@ public class Plan {
 		this.noeuds = noeuds;
 	}
 
-	public Map<Pair<Integer, Integer>, Troncon> getTroncons() {
+	public Map<Pair<Noeud, Noeud>, Troncon> getTroncons() {
 		return troncons;
 	}
 
-	public void setTroncons(Map<Pair<Integer, Integer>, Troncon> troncons) {
+	public void setTroncons(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
 		this.troncons = troncons;
 	}
 }

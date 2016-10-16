@@ -7,19 +7,19 @@ import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
 
-public class Parser {
+public class ParserLivraison {
 	
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 parserPlanVille("./xml/plan10x10.xml", plan);
+		 parserLivraisonVille("./xml/plan10x10.xml", plan);
 		 System.out.println("Fin Main");
 	   }
 	 
 	 /**
 	 * @param nomFichier
 	 */
-	public static void parserPlanVille(String nomFichier, Plan plan)
+	public static void parserLivraisonVille(String nomFichier, Plan plan)
 	 {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();
