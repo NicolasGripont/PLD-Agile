@@ -3,7 +3,11 @@ package vue.PlanVilleVue;
 import modeles.Noeud;
 import modeles.Plan;
 import modeles.Troncon;
+import utility.Pair;
+
 import java.util.List;
+import java.util.Map;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -30,25 +34,25 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	public void dessineNoeud(List<Noeud> noeuds) {
+	public void dessineNoeud(Map<Integer, Noeud> noeuds) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
         gc.setStroke(Color.BLACK);
-		for(Noeud n : noeuds) {
+		for(Map.Entry<Integer, Noeud> n : noeuds.entrySet()) {
 			if(n != null) {
-				gc.fillOval(n.getX(), n.getY(), RAYON_NOEUD, RAYON_NOEUD);
+				gc.fillOval(n.getValue().getX(), n.getValue().getY(), RAYON_NOEUD, RAYON_NOEUD);
 			}
 		}
 	}
 	
-	public void dessineTroncon(List<Troncon> troncons) {
+	public void dessineTroncon(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
         gc.setStroke(Color.BLACK);
 		gc.setLineWidth(LARGEUR_TRONCON);
-		for(Troncon t : troncons) {
-			if(t != null && t.getOrigine() != null && t.getDestination() != null) {
-				gc.strokeLine(t.getOrigine().getX(), t.getOrigine().getY(), t.getDestination().getX(), t.getDestination().getY());
+		for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : troncons.entrySet()) {
+			if(t != null && t.getKey().first != null && t.getKey().second != null) {
+				gc.strokeLine(t.getKey().first.getX(), t.getKey().first.getY(), t.getKey().second.getX(), t.getKey().second.getY());
 			}
 		}
 	}
