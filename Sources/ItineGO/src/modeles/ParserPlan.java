@@ -13,7 +13,9 @@ public class ParserPlan {
 	   {
 		 Plan plan = new Plan();
 		 parserPlanVille("./xml/plan10x10.xml", plan);
-		 System.out.println("Fin Main");
+		 System.out.println(plan.getNoeuds().size());
+		 System.out.println(plan.getTroncons().size());
+		 System.out.println(plan.getNoeud(1).toString());
 	   }
 	 
 	 /**
@@ -66,10 +68,6 @@ public class ParserPlan {
 					  */
 				 }
 			 }
-			 
-			 System.out.println(plan.getNoeuds().size());
-			 System.out.println(plan.getTroncons().size());
-			 System.out.println(plan.getNoeud(1).toString());
 		 }
 		 catch(Exception e){System.out.println(e);}
 	 }

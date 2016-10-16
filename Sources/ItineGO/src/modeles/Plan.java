@@ -8,12 +8,13 @@ import utility.Pair;
 public class Plan {
 	private Map<Integer, Noeud> noeuds;
 	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
-	//private List<Livraison> livraisons;
-	//private Entrepot entrepot;
+	private Map<Noeud, Livraison> livraisons;
+	private Entrepot entrepot;
 
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
+		livraisons = new HashMap<Noeud, Livraison>();
 	}
 	
 	public void AjouterNoeud(Noeud n) {
@@ -28,17 +29,17 @@ public class Plan {
 		}
 	}
 	
-	/*public void AjouterLivraison(Livraison l) {
+	public void AjouterLivraison(Livraison l) {
 		if(l != null) {
-			livraisons.add(l);
+			livraisons.put(l.getNoeud(), l);
 		}
-	}*/
+	}
 	
-	/*public void AjouterEntrepot(Entrepot e) {
+	public void AjouterEntrepot(Entrepot e) {
 		if(e != null) {
 			entrepot = e;
 		}
-	}*/
+	}
 	
 	public boolean CalculerTournee() {
 		return false;
@@ -66,5 +67,17 @@ public class Plan {
 
 	public void setTroncons(Map<Pair<Noeud, Noeud>, Troncon> troncons) {
 		this.troncons = troncons;
+	}
+	
+	public Map<Noeud, Livraison> getLivraisons() {
+		return livraisons;
+	}
+
+	public void setLivraisons(Map<Noeud, Livraison> livraisons) {
+		this.livraisons = livraisons;
+	}
+	
+	public Entrepot getEntrepot() {
+		return entrepot;
 	}
 }

@@ -12,8 +12,10 @@ public class ParserLivraison {
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 parserLivraisonVille("./xml/plan10x10.xml", plan);
-		 System.out.println("Fin Main");
+		 ParserPlan.parserPlanVille("./xml/plan5x5.xml", plan);
+		 parserLivraisonVille("./xml/livraisons5x5-9.xml", plan);
+		 System.out.println(plan.getLivraisons().size());
+		 System.out.println(plan.getEntrepot().toString());
 	   }
 	 
 	 /**
@@ -24,8 +26,8 @@ public class ParserLivraison {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();
 		 File xmlFile = new File(nomFichier);
-		 List listNoeudVille; //Liste des Noeuds
-		 List listTronconVille; //Liste des Troncons
+		 List listLivraisonVille; //Liste des Noeuds
+		 List listEntrepotVille; //Liste des Troncons
 		 try
 		 {
 			 //Parse le fichier XML
@@ -33,46 +35,26 @@ public class ParserLivraison {
 			 
 			 //Attribut l'élément racine du fichier XML
 			 Element racine = planVille.getRootElement();
-			 listNoeudVille = racine.getChildren("noeud");
-			 listTronconVille = racine.getChildren("troncon");
-			 
+			 listLivraisonVille = racine.getChildren("livraison");
+			 listEntrepotVille = racine.getChildren("entrepot");
+
 			 //Parse les noeuds
-			 for (int i=0; i < listNoeudVille.size() ; i++)
+			 for (int i=0; i < listLivraisonVille.size() ; i++)
 			 {
-				 Element noeud = (Element) listNoeudVille.get(i);
-				 plan.AjouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
-				 //System.out.println("ID : " + noeud.getAttributeValue("id")+ " X : " + noeud.getAttributeValue("x") + " Y : " + noeud.getAttributeValue("y"));
+				 Element livraison = (Element) listLivraisonVille.get(i);
+				 plan.AjouterLivraison(new Livraison(
+						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
+						 Integer.parseInt(livraison.getAttributeValue("duree"))
+				 ));
 			 }
 			 
-			//Parse les troncons
-			 for (int i=0; i < listTronconVille.size() ; i++)
-			 {
-				 Element troncon = (Element) listTronconVille.get(i);
-				 if(plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("origine"))) != null && plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination"))) != null) {
-					 plan.AjouterTroncon(
-							 new Troncon(
-									 troncon.getAttributeValue("nomRue"),
-									 Integer.parseInt(troncon.getAttributeValue("longueur")),
-									 Integer.parseInt(troncon.getAttributeValue("vitesse")),
-									 plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("origine"))),
-									 plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination")))
-							 )
-					);
-					//System.out.println("destination : " + troncon.getAttributeValue("destination")+ " longueur : " + troncon.getAttributeValue("longueur") + " nomRue : " + troncon.getAttributeValue("nomRue"));
-				 }
-				 else {
-					 /*
-					  * MESSAGE ERREUR A CREER
-					  */
-				 }
-			 }
-			 
-			 System.out.println(plan.getNoeuds().size());
-			 System.out.println(plan.getTroncons().size());
-			 System.out.println(plan.getNoeud(1).toString());
-			 System.out.println(plan.getTroncon(0,1).toString());
+			 Element entrepot = (Element) listEntrepotVille.get(0);
+			 plan.AjouterEntrepot(new Entrepot(
+					 plan.getNoeud(Integer.parseInt(entrepot.getAttributeValue("adresse"))),
+					 entrepot.getAttributeValue("heureDepart")
+			 ));
 		 }
-		 catch(Exception e){System.out.println(e);}
+		 catch(Exception e){e.printStackTrace();}
 	 }
 
 }

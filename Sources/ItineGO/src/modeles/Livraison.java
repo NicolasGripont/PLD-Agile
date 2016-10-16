@@ -52,6 +52,11 @@ public class Livraison {
 		}
 	}
 
+	public Livraison(Noeud noeud, int duree) {
+		this.setNoeud(noeud);
+		setDuree(duree);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
