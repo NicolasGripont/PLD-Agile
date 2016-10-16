@@ -1,28 +1,32 @@
 package modeles;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import utility.Pair;
 
 public class Plan {
-	private List<Noeud> noeuds;
-	private List<Troncon> troncons;
+	private Map<Integer, Noeud> noeuds;
+	private Map<Pair<Integer, Integer>, Troncon> troncons;
 	//private List<Livraison> livraisons;
 	//private Entrepot entrepot;
-	
+
 	public Plan() {
-		noeuds = new ArrayList<Noeud>();
-		troncons = new ArrayList<Troncon>();
+		noeuds = new HashMap<Integer, Noeud>();
+		troncons = new HashMap<Pair<Integer, Integer>, Troncon> ();
 	}
 	
 	public void AjouterNoeud(Noeud n) {
 		if(n != null) {
-			noeuds.add(n);
+			noeuds.put(n.getId(), n);
 		}
 	}
 	
 	public void AjouterTroncon(Troncon t) {
 		if(t != null) {
-			troncons.add(t);
+			troncons.put(Pair.create(t.getOrigine().getId(), t.getDestination().getId()) , t);
 		}
 	}
 	
@@ -41,20 +45,28 @@ public class Plan {
 	public boolean CalculerTournee() {
 		return false;
 	}
+	
+	public Noeud getNoeud(Integer idNoeud) {
+		return noeuds.get(idNoeud);
+	}
+	
+	public Troncon getTroncon(Integer idOrigine, Integer idDestination) {
+		return troncons.get(Pair.create(idOrigine, idDestination));
+	}
 
-	public List<Noeud> getNoeuds() {
+	public Map<Integer, Noeud> getNoeuds() {
 		return noeuds;
 	}
 
-	public void setNoeuds(List<Noeud> noeuds) {
+	public void setNoeuds(Map<Integer, Noeud> noeuds) {
 		this.noeuds = noeuds;
 	}
 
-	public List<Troncon> getTroncons() {
+	public Map<Pair<Integer, Integer>, Troncon> getTroncons() {
 		return troncons;
 	}
 
-	public void setTroncons(List<Troncon> troncons) {
+	public void setTroncons(Map<Pair<Integer, Integer>, Troncon> troncons) {
 		this.troncons = troncons;
 	}
 }
