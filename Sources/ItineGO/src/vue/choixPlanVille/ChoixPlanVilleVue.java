@@ -42,7 +42,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer le plan de ville.");
+		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de livraisons.");
 		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
 		glisserDeposerFichierVue.addExtensionAcceptee(".xml");
 		
@@ -103,7 +103,7 @@ public class ChoixPlanVilleVue implements Initializable{
 			labelError.setText("Erreur : Controler is null, fatal error");
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
-			labelError.setText("Erreur : Le fichier choisi est invalide");
+			labelError.setText("Erreur : Aucun fichier choisi");
 		} else {
 			
 		}*/
