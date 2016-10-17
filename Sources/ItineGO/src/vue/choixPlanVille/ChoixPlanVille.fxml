@@ -28,11 +28,12 @@
          <children>
             <HBox alignment="TOP_CENTER" prefWidth="600.0">
                <children>
-                  <TextField fx:id="textFieldLienFichier" prefHeight="27.0" prefWidth="389.0">
+                  <TextField fx:id="textFieldLienFichier" prefHeight="27.0" prefWidth="340.0">
                      <HBox.margin>
-                        <Insets bottom="20.0" />
-                     </HBox.margin></TextField>
-                  <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" onMouseClicked="#choixFichierAction" text="Parcourir les fichiers">
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefWidth="150.0" text="Parcourir les fichiers">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -42,11 +43,12 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="301.0" text="Valider">
+            <AnchorPane fx:id="glisserDeposerFichierPane" maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" />
+            <Button fx:id="boutonValider" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="500.0" text="Valider">
                <VBox.margin>
                   <Insets top="20.0" />
-               </VBox.margin></Button>
+               </VBox.margin>
+            </Button>
          </children>
          <opaqueInsets>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
