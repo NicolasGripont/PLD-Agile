@@ -6,6 +6,7 @@
 package dijkstra;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -100,7 +101,7 @@ public class Plan {
 			}
 			
 			System.out.print( "\n noires: \n");
-			setnoires = AllPrevious.get(depart[p]).entrySet();
+			setnoires = AllNoires.get(depart[p]).entrySet();
 			it = setnoires.iterator();
 			while(it.hasNext())
 			{
@@ -129,6 +130,32 @@ public class Plan {
 		
 		
 		//Il faut maintenant reupéré le chemin optimal via les get
+		
+		//System.out.print("\n Orbre des noeud : \n");
+		
+		
+		List<Integer> futurTourne = new ArrayList<Integer>();
+		HashMap<Integer, Integer> previous;
+		Integer noeudCourant = depart[monTSP.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin à l'envers
+		System.out.print("depart : "+ noeudCourant+ "\n");
+		
+		for(int i = depart.length-1 ; i >=0 ; i--)
+		{
+		
+			
+			
+			previous = new HashMap<>(AllPrevious.get(depart[monTSP.getMeilleureSolution(i)]));
+			while(previous.get(noeudCourant)!=noeudCourant)
+			{
+				futurTourne.add(noeudCourant);
+			    noeudCourant=previous.get(noeudCourant);
+			}
+		}
+		futurTourne.add(depart[monTSP.getMeilleureSolution(0)]);
+	      Collections.reverse(futurTourne);
+	      System.out.print("\n tourne : \n");
+	      System.out.println(futurTourne);
+
 		//Puis retrouver les tronçons grace à la map previous
 		
     }
@@ -156,7 +183,7 @@ public class Plan {
     		Iterator<Entry<Integer, Integer>> it;
     		Entry<Integer, Integer> e;
         
-	        //Initialisation de la ma des blancs
+	        //Initialisation de la map des blancs
 	        for(Integer i = 0; i<matriceDuGraphe[1].length;i++)
 	        {
 	            if(i!=depart[itDepart])
