@@ -1,7 +1,13 @@
 package modeles;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import utility.Pair;
 
@@ -10,6 +16,7 @@ public class Plan {
 	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
 	private Map<Noeud, Livraison> livraisons;
 	private Entrepot entrepot;
+	private int tableauDesId[];
 
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
@@ -33,7 +40,7 @@ public class Plan {
     	
     	int nbDeLivraison = livraisons.size();
     	
-    	tableauDesId= new int [noeuds.size()];
+    	tableauDesId = new int [noeuds.size()];
     	
     	
     	//On remplie le tableau des id 
