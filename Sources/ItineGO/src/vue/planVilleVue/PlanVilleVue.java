@@ -27,6 +27,7 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	public void dessinePlan(Plan plan) {
+		dessineFond();
 		if(plan != null) {
 			calculerZoom(plan.getNoeuds());
 			if(plan.getNoeuds() != null) {
@@ -49,6 +50,13 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
+	private void dessineFond() {
+		GraphicsContext gc = this.getGraphicsContext2D();
+		gc.setFill(new Color(0.9375,0.9258,0.8945,1));
+        gc.setStroke(new Color(0.9375,0.9258,0.8945,1));
+		gc.fillRect(0, 0, getWidth(), getHeight());
+	}
+
 	private void dessineNoeud(Map<Integer, Noeud> noeuds) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.859,0.839,0.808,1));
@@ -128,4 +136,10 @@ public class PlanVilleVue extends Canvas {
 			this.zoom = 1;
 		}
 	}
+	
+	public void resize(double width, double height){
+        setWidth(width);
+		setHeight(height);
+	}
+	
 }

@@ -4,16 +4,18 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import controleur.Controleur;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import modeles.Plan;
@@ -41,7 +43,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	private StackPane contentPane;
 	
 	@FXML 
-	private Pane planVillePane;
+	private ScrollPane planVilleScrollPane;
 	
 	private PlanVilleVue planVilleVue;
 	
@@ -52,7 +54,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer le plan de ville.");
+		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de livraison.");
 		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
 		glisserDeposerFichierVue.addExtensionAcceptee(".xml");
 		
@@ -74,11 +76,28 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         
         labelError.setVisible(false);
         
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        planVilleVue = new PlanVilleVue(planVillePane.getMinWidth(),planVillePane.getMinHeight());
-        planVillePane.getChildren().add(planVilleVue);
+        planVilleScrollPane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
+        double size = Math.max(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20;
+        planVilleVue = new PlanVilleVue(size, size);
+        planVilleScrollPane.setContent(planVilleVue);
+        
+        
+		final ChangeListener<Number> listener = new ChangeListener<Number>()
+        {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				// TODO Auto-generated method stub
+		        double size = Math.max(planVilleScrollPane.getWidth(),planVilleScrollPane.getHeight()) - 20;
+		        if(size + 20 > Math.max(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20)
+		        planVilleVue.resize(size,size);
+				planVilleVue.dessinePlan(plan);
+			}
+          
+        };
+        planVilleScrollPane.widthProperty().addListener(listener);
 	}
 
+	
 	public void afficherErreur(String erreur) {
 		labelError.setDisable(false);
 		labelError.setText(erreur);
