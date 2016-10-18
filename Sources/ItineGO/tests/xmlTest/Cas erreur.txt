@@ -1,0 +1,7 @@
+-Sans erreur : plan5x5.xml
+-2 ID identique : plan5X5-2ID.xml
+-Tronçon avec point Origine qui existe pas: plan5X5-UknOrigine.xml
+-Tronçon avec point Destination qui existe pas: plan5x5-UknDestination.xml
+-Avec longeur et vitesse négative : plan5x5-VitLonNegative.xml
+-Au moins 1 Noeud: plan5x5-1Noeud.xml
+-Mauvais format plan: plan5x5-BadFormat.txt
