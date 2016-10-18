@@ -28,11 +28,6 @@ public class Livraison {
 		setFinPlage(new Horaire(finPlage));
 	}
 
-	public Livraison(Noeud noeud, int duree) {
-		this.setNoeud(noeud);
-		setDuree(duree);
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,7 +70,7 @@ public class Livraison {
 
 	@Override
 	public String toString() {
-		return "Livraison [duree=" + duree + ", noeud=" + noeud + ", debutPlage=" + debutPlage + ", finPlage="
+		return "Livraison [noeud=" + noeud + ", duree=" + duree + ", debutPlage=" + debutPlage + ", finPlage="
 				+ finPlage + "]";
 	}
 
@@ -96,7 +91,11 @@ public class Livraison {
 	}
 
 	public void setDebutPlage(Horaire debutPlage) {
-		this.debutPlage = debutPlage;
+		if(debutPlage != null) {
+			this.debutPlage = debutPlage;
+		} else {
+			this.debutPlage = new Horaire(0,0,0);
+		}
 	}
 
 	public Horaire getFinPlage() {
@@ -104,7 +103,11 @@ public class Livraison {
 	}
 
 	public void setFinPlage(Horaire finPlage) {
-		this.finPlage = finPlage;
+		if(finPlage != null) {
+			this.finPlage = finPlage;
+		} else {
+			this.finPlage = new Horaire(0,0,0);
+		}
 	}
 
 	public int getDuree() {
@@ -112,6 +115,10 @@ public class Livraison {
 	}
 
 	public void setDuree(int duree) {
-		this.duree = duree;
+		if(duree > 0) {
+			this.duree = duree;
+		} else {
+			this.duree = 0;
+		}
 	} 
 }
