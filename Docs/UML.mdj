@@ -53208,7 +53208,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFX18rf2Aqc7Mk="
 					},
-					"name": "ObjectDiagram1",
+					"name": "Diagramme de package",
 					"visible": true,
 					"defaultDiagram": false,
 					"ownedViews": [
