@@ -399,4 +399,10 @@ public class Plan {
 		// TODO Auto-generated method stub
 		return trajetPrevu;
 	}
+	
+	public boolean idExiste(int id)
+	{
+		if(noeuds.containsKey(id)){return true;}
+		else{return false;}
+	}
 }

@@ -12,7 +12,7 @@ public class ParserPlan {
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 parserPlanVille("./xml/plan10x10.xml", plan);
+		 parserPlanVille("./tests/xmlTest/plan5x5.xml", plan);
 		 System.out.println(plan.getNoeuds().size());
 		 System.out.println(plan.getTroncons().size());
 		 System.out.println(plan.getNoeud(1).toString());
@@ -42,10 +42,19 @@ public class ParserPlan {
 			 for (int i=0; i < listNoeudVille.size() ; i++)
 			 {
 				 Element noeud = (Element) listNoeudVille.get(i);
-				 plan.AjouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
-				 //System.out.println("ID : " + noeud.getAttributeValue("id")+ " X : " + noeud.getAttributeValue("x") + " Y : " + noeud.getAttributeValue("y"));
+				 if(plan.idExiste(Integer.parseInt(noeud.getAttributeValue("id")))==false)
+				 {
+					 plan.AjouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
+					 System.out.println("ID : " + noeud.getAttributeValue("id")+ " X : " + noeud.getAttributeValue("x") + " Y : " + noeud.getAttributeValue("y"));
+			 	 }
+				 else
+				 {
+					 /*
+					  * MESSAGE ERREUR A CREER
+					  */
+//					 System.out.println("Deux Identifiant");
+				 }
 			 }
-			 
 			//Parse les troncons
 			 for (int i=0; i < listTronconVille.size() ; i++)
 			 {
