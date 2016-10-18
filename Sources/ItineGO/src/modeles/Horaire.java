@@ -35,18 +35,18 @@ public class Horaire {
 
 	public void ajouterHeure(int heure) {
 		int h = this.heure + heure;
-		this.heure = h % 24;
+		this.heure = Math.abs(h % 24);
 	}
 	
 	public void ajouterMinute(int minute) {
 		int m = this.minute + minute;
-		this.minute = m % 60;
+		this.minute = Math.abs(m % 60);
 		ajouterHeure(m/60);
 	}
 	
 	public void ajouterSeconde(int seconde) {
 		int s = this.seconde + seconde;
-		this.seconde = s % 60;
+		this.seconde = Math.abs(s % 60);
 		ajouterMinute(s/60);
 	}
 	
@@ -62,6 +62,8 @@ public class Horaire {
 	public void setHeure(int heure) {
 		if(heure >= 0 && heure <= 23) {
 			this.heure = heure;
+		} else {
+			this.heure = 0;
 		}
 	}
 
@@ -72,6 +74,8 @@ public class Horaire {
 	public void setMinute(int minute) {
 		if(minute >= 0 && minute <= 59) {
 			this.minute = minute;
+		} else {
+			this.minute = 0;
 		}
 	}
 
@@ -82,6 +86,8 @@ public class Horaire {
 	public void setSeconde(int seconde) {
 		if(seconde >= 0 && seconde <= 59) {
 			this.seconde = seconde;
+		} else {
+			this.seconde = 0;
 		}
 	}
 
