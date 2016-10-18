@@ -36,7 +36,11 @@ public class Entrepot {
 	}
 
 	public void setNoeud(Noeud noeud) {
-		this.noeud = noeud;
+		if(noeud == null) {
+			this.noeud = new Noeud(-1,0,0);
+		} else {
+			this.noeud = noeud;
+		}
 	}
 
 	public Horaire getHoraireDepart() {

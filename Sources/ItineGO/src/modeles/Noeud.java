@@ -16,7 +16,11 @@ public class Noeud {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		if(id >= 0) {
+			this.id = id;
+		} else {
+			this.id = -1;
+		}
 	}
 
 	public int getX() {
