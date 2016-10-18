@@ -4,7 +4,7 @@ import java.io.File;
 
 import modeles.Gestionnaire;
 
-public abstract class EtatDefault {
+public abstract class EtatDefaut {
 	
 	public void undo()
 	{

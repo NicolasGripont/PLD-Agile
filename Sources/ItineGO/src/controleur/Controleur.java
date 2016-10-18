@@ -22,12 +22,17 @@ public class Controleur extends Application{
 	private ChoixPlanVilleVue choixPlanVilleVue;
 	private GestionLivraisonsVue gestionLivraisonsVue;
 	private Gestionnaire gestionnaire;
-	protected EtatDefault etatCourant;
+	protected EtatDefaut etatCourant;
 	private Stage stage;
 	private Plan plan = null;
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	protected void setEtatCourant(EtatDefaut etat)
+	{
+		etatCourant = etat;
 	}
 	
 	@Override
