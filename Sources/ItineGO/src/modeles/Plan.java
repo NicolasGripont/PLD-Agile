@@ -29,7 +29,7 @@ public class Plan {
 		return -1;
 	}
 	
-		public void CalculDeTournee() {
+	public void CalculDeTournee() {
     	
     	int nbDeLivraison = livraisons.size();
     	
