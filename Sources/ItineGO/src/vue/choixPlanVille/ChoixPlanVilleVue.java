@@ -90,8 +90,10 @@ public class ChoixPlanVilleVue implements Initializable{
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
 		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
+			//TODO : controleur.clicBoutonParcourir(true, tmp);
         	fichierAccepte(tmp);
         } else {
+    		//TODO : controleur.clicBoutonParcourir(false, null);
         	fichierRefuse();
         }
 	}
@@ -112,10 +114,12 @@ public class ChoixPlanVilleVue implements Initializable{
 	}
 	
 	public void fichierGlisserDeposerAccepteAction() {
+		//TODO : controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
 		fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
 	}
 	
 	public void fichierGlisserDeposerRefuseAction() {
+		//TODO : controleur.glisserDeposer(false, null);
 		fichierRefuse();
 	}
     

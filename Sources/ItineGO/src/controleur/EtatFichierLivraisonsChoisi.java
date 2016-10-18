@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatFichierLivraisonsChoisi {
+public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 
 }

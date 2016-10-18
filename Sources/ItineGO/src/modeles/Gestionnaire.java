@@ -42,4 +42,8 @@ public class Gestionnaire {
 	{
 		
 	}
+
+	public Plan getPlan() {
+		return plan;
+	}
 }

@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatPlanVilleAffiche {
+public class EtatPlanVilleAffiche extends EtatDefaut {
 
 }

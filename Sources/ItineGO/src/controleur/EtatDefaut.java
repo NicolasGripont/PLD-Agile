@@ -16,12 +16,12 @@ public abstract class EtatDefaut {
 		
 	}
 	
-	public void clicBoutonParcourir(Controleur controleur)
+	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
 	{
 		
 	}
 	
-	public void glisserDeposer(Controleur controleur)
+	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
 	{
 		
 	}
