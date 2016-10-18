@@ -42798,7 +42798,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+clicBoutonValider(gestionaire: Gestionnaire, controleur: Controleur)",
+											"text": "+clicBoutonValider(gestionnaire: Gestionnaire, controleur: Controleur)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -51726,7 +51726,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFXwms+nnHFYV8="
 									},
-									"name": "gestionaire",
+									"name": "gestionnaire",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
