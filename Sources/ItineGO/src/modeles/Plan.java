@@ -17,8 +17,8 @@ public class Plan {
 	private Map<Noeud, Livraison> livraisons;
 	private Entrepot entrepot;
 	private int tableauDesId[];
-
-	private List<Troncon> trajetPrevu = null;
+	
+	private Tournee tournee;
 	
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
@@ -116,14 +116,14 @@ public class Plan {
     	
     	//Imprime la matrice du graphe -> à elever une fois les teste unitaire fait sur données réelles
     
-    	System.out.print(" \n matrice du graph: \n");
+//    	System.out.print(" \n matrice du graph: \n");
     	for(int i = 0; i <matriceDuGraphe.length ;i++)
     	{
     		for(int j = 0 ; j < matriceDuGraphe.length ; j++)
     		{
-    			System.out.print(matriceDuGraphe[i][j] + " ");    
+//    			System.out.print(matriceDuGraphe[i][j] + " ");    
             }
-    		System.out.print("\n");
+//    		System.out.print("\n");
     	}
     	
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera également placé en paramètre
@@ -141,27 +141,27 @@ public class Plan {
 		
 		for(int p =0; p< depart.length; p++)
 		{	
-			System.out.print("\n depart: " + depart[p] + "\n" );
-			System.out.print( " previous: \n");
+//			System.out.print("\n depart: " + depart[p] + "\n" );
+//			System.out.print( " previous: \n");
 			setprevious = AllPrevious.get(depart[p]).entrySet();
 			it = setprevious.iterator();
 			while(it.hasNext())
 			{
 			    e = it.next();
-			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
+//			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
 			    
 			}
 			
-			System.out.print( "\n noires: \n");
+//			System.out.print( "\n noires: \n");
 			setnoires = AllNoires.get(depart[p]).entrySet();
 			it = setnoires.iterator();
 			while(it.hasNext())
 			{
 			    e = it.next();
-			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
+//			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
 			    
 			}
-			System.out.print("\n");
+//			System.out.print("\n");
 		}
 		
 		//Construction de la matrice de cout pour le TSP
@@ -172,12 +172,12 @@ public class Plan {
 			for(int v = 0;v<depart.length; v++)
 			{
 				cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
-				System.out.print(cout[u][v]+" ");
+//				System.out.print(cout[u][v]+" ");
 			}
-			System.out.print("\n");
+//			System.out.print("\n");
 		}
 		
-		tsp.TSP monTSP = new TSP2();
+		tsp.TSP monTSP = new tsp.TSP1();
 		monTSP.chercheSolution(100000, depart.length , cout, duree);  //le 100000 est le temps max toléré 
 		
 		
@@ -189,7 +189,7 @@ public class Plan {
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		Integer noeudCourant = depart[monTSP.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin à l'envers
-		System.out.print("depart : "+ noeudCourant+ "\n");
+//		System.out.print("depart : "+ noeudCourant+ "\n");
 		
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
@@ -205,19 +205,37 @@ public class Plan {
 		}
 		futurTourne.add(depart[monTSP.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
-	      System.out.print("\n tourne : \n");
-	      System.out.println(futurTourne);
+//	      System.out.print("\n tourne : \n");
+//	      System.out.println(futurTourne);
 
 		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
-	      //Puis on constrit tournee
-		trajetPrevu = new ArrayList<>();
-		for(Integer i=0; i < futurTourne.size()-1; i++) {
-			trajetPrevu.add(troncons.get(new Pair(noeuds.get(futurTourne.get(i)),noeuds.get(futurTourne.get(i+1)))));
-		}
-		System.out.println("troncons :");
-		for(Troncon t : trajetPrevu){
-			System.out.println(t);
-		}
+	    //Puis on constrit tournee
+	     
+	    //Checker si la tournee est valide
+//	    if(futurTourne.size() >= 3 && futurTourne.get(0) == futurTourne.get(futurTourne.size()-1)) {
+			// Construction de la Tournee
+			List<Trajet> trajetsPrevus = new ArrayList<>();
+			List<Troncon> tronconsTrajet = new ArrayList<>();
+
+			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
+				if (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null
+						|| entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) {
+					tronconsTrajet.add(troncons
+							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+					if (!tronconsTrajet.isEmpty()) {
+						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
+								tronconsTrajet.get(tronconsTrajet.size() - 1).getDestination(), tronconsTrajet));
+						tronconsTrajet = new ArrayList<>();
+					}
+				} else {
+					tronconsTrajet.add(
+							troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+				}
+			}
+			this.tournee = new Tournee(trajetsPrevus);
+//	    } else {
+//	    	this.tournee = null;
+//	    }
     }
     
     private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
@@ -395,8 +413,12 @@ public class Plan {
 		this.entrepot = entrepot;
 	}
 
-	public List<Troncon> getTrajetPrevu() {
+	public Tournee getTournee() {
 		// TODO Auto-generated method stub
-		return trajetPrevu;
+		return tournee;
+	}
+	
+	public void effacerTournee() {
+		this.tournee = null;
 	}
 }
