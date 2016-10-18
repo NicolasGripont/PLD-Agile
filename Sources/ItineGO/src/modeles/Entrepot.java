@@ -16,19 +16,7 @@ public class Entrepot {
 	
 	public Entrepot(Noeud noeud, String horaire) {
 		this.setNoeud(noeud);
-		String[] hor = horaire.split(":");
-		if(hor.length == 3) {
-			try {
-				int h = Integer.parseInt(hor[0]); 
-				int m = Integer.parseInt(hor[1]); 
-				int s = Integer.parseInt(hor[2]); 
-				this.setHoraireDepart(new Horaire(h, m, s));
-			} catch(Exception e) {
-				this.setHoraireDepart(new Horaire(0, 0, 0));
-			}
-		} else {
-			this.setHoraireDepart(new Horaire(0, 0, 0));
-		}
+		this.setHoraireDepart(new Horaire(horaire));
 	}
 
 	public Noeud getNoeud() {
@@ -36,7 +24,11 @@ public class Entrepot {
 	}
 
 	public void setNoeud(Noeud noeud) {
-		this.noeud = noeud;
+		if(noeud == null) {
+			this.noeud = new Noeud(-1,0,0);
+		} else {
+			this.noeud = noeud;
+		}
 	}
 
 	public Horaire getHoraireDepart() {
@@ -44,7 +36,11 @@ public class Entrepot {
 	}
 
 	public void setHoraireDepart(Horaire horaireDepart) {
-		this.horaireDepart = horaireDepart;
+		if(horaireDepart != null) {
+			this.horaireDepart = horaireDepart;
+		} else {
+			this.horaireDepart = new Horaire(0,0,0);
+		}
 	}
 
 	@Override

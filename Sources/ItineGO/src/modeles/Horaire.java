@@ -10,6 +10,28 @@ public class Horaire {
 		this.setMinute(minute);
 		this.setSeconde(seconde);
 	}
+	
+	public Horaire(String horaire) {
+		String[] hor = horaire.split(":");
+		if(hor.length == 3) {
+			try {
+				int h = Integer.parseInt(hor[0]); 
+				int m = Integer.parseInt(hor[1]); 
+				int s = Integer.parseInt(hor[2]); 
+				this.setHeure(h);
+				this.setMinute(m);
+				this.setSeconde(s);
+			} catch(Exception e) {
+				this.setHeure(0);
+				this.setMinute(0);
+				this.setSeconde(0);
+			}
+		} else {
+			this.setHeure(0);
+			this.setMinute(0);
+			this.setSeconde(0);
+		}
+	}
 
 	public void ajouterHeure(int heure) {
 		int h = this.heure + heure;
