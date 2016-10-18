@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatTourneeAffiche {
+public class EtatTourneeAffiche extends EtatDefaut {
 
 }

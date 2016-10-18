@@ -77,7 +77,7 @@ public class GestionLivraisonsVue implements Initializable{
 
 	public void setPlan(Plan plan) {
 		this.plan = plan;
-        planVilleVue.dessinePlan(plan);
+        planVilleVue.dessinerPlan(plan);
 	}
 	
 	@FXML
@@ -89,6 +89,6 @@ public class GestionLivraisonsVue implements Initializable{
 	@FXML
 	public void calculerLivraisonAction() {
 		plan.CalculDeTournee();
-		planVilleVue.dessinePlan(plan);
+		planVilleVue.dessinerPlan(plan);
 	}
 }

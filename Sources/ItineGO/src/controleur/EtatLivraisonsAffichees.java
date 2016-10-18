@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatLivraisonsAffichees {
+public class EtatLivraisonsAffichees extends EtatDefaut {
 
 }

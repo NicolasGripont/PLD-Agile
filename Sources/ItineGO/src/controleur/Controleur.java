@@ -18,12 +18,19 @@ import javafx.scene.Scene;
 
 
 public class Controleur extends Application{
-	private ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
-	private ChoixPlanVilleVue choixPlanVilleVue;
-	private GestionLivraisonsVue gestionLivraisonsVue;
+	
 	private Gestionnaire gestionnaire;
-	protected EtatDefaut etatCourant;
-	private Stage stage;
+	protected ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
+	protected ChoixPlanVilleVue choixPlanVilleVue;
+	protected GestionLivraisonsVue gestionLivraisonsVue;
+	protected EtatDefaut etatCourant = new EtatApplicationDemarree();
+	protected final EtatApplicationDemarree etatApplicationDemarree = new EtatApplicationDemarree();
+	protected final EtatFichierLivraisonsChoisi etatFichierLivraisonsChoisi = new EtatFichierLivraisonsChoisi();
+	protected final EtatLivraisonsAffichees etatLivraisonsAffichees = new EtatLivraisonsAffichees();
+	protected final EtatPlanVilleAffiche etatPlanVilleAffiche = new EtatPlanVilleAffiche();
+	protected final EtatPlanVilleChoisie etatPlanVilleChoisie = new EtatPlanVilleChoisie();
+	protected final EtatTourneeAffiche etatTourneeAffiche = new EtatTourneeAffiche();
+	protected Stage stage;
 	private Plan plan = null;
 	
 	public static void main(String[] args) {
@@ -109,6 +116,16 @@ public class Controleur extends Application{
 	public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
 		ParseurLivraison.parseurLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
 		return plan != null;
+	}
+	
+	public void glisserDeposer(boolean accepte,File fichier)
+	{
+		etatCourant.glisserDeposer(this,accepte,fichier);
+	}
+	
+	public void clicBoutonParcourir(boolean accepte,File fichier)
+	{
+		etatCourant.clicBoutonParcourir(this,accepte,fichier);
 	}
 
 	public Plan getPlan() {
