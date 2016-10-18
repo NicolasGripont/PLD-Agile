@@ -15,17 +15,22 @@ public class Livraison {
 	}
 	
 	public Livraison(Noeud noeud, int duree, Horaire debutPlage, Horaire finPlage) {
-		this.setNoeud(noeud);
+		setNoeud(noeud);
 		setDuree(duree);
 		setDebutPlage(debutPlage);
 		setFinPlage(finPlage);
 	}
 	
 	public Livraison(Noeud noeud, int duree, String debutPlage, String finPlage) {
-		this.setNoeud(noeud);
+		setNoeud(noeud);
 		setDuree(duree);
 		setDebutPlage(new Horaire(debutPlage));
 		setFinPlage(new Horaire(finPlage));
+	}
+	
+	public Livraison(Noeud noeud, int duree) {
+		setNoeud(noeud);
+		setDuree(duree);
 	}
 
 	@Override
