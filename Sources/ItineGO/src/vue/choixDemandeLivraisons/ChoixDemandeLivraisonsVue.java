@@ -90,7 +90,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		        double size = Math.max(planVilleScrollPane.getWidth(),planVilleScrollPane.getHeight()) - 20;
 		        if(size + 20 > Math.max(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20)
 		        planVilleVue.resize(size,size);
-				planVilleVue.dessinePlan(plan);
+				planVilleVue.dessinerPlan(plan);
 			}
           
         };

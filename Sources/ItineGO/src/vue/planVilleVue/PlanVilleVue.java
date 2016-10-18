@@ -23,8 +23,8 @@ public class PlanVilleVue extends Canvas {
 		this.setStyle("-fx-background-color: rgb(240,237,230);");
 	}
 	
-	public void dessinePlan(Plan plan) {
-		dessineFond();
+	public void dessinerPlan(Plan plan) {
+		dessinerFond();
 		if(plan != null) {
 			this.plan = plan;
 			calculerZoom();
@@ -49,7 +49,7 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 
-	private void dessineFond() {
+	private void dessinerFond() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.9375,0.9258,0.8945,1));
         gc.setStroke(new Color(0.9375,0.9258,0.8945,1));
