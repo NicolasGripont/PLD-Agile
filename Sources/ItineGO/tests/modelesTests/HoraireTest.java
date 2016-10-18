@@ -94,16 +94,12 @@ public class HoraireTest {
 	public void testAjouterSeconde() {
 		Horaire horaire = new Horaire("10:20:29");
 		horaire.ajouterSeconde(20);
-		System.out.println(horaire);
 		assertEquals("10:20:49", horaire.toString());
 		horaire.ajouterSeconde(-20);
-		System.out.println(horaire);
 		assertEquals("10:20:29", horaire.toString());
 		horaire.ajouterSeconde(121);
-		System.out.println(horaire);
 		assertEquals("10:22:30", horaire.toString());
 		horaire.ajouterSeconde(-119);
-		System.out.println(horaire);
 		assertEquals("10:21:29", horaire.toString());
 	}
 

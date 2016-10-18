@@ -64,7 +64,7 @@ public class Troncon {
 	}
 
 	public void setDestination(Noeud destination) {
-		if(destination == null) {
+		if(destination != null) {
 			this.destination = destination;
 		} else {
 			this.destination = new Noeud(-1,0,0);
