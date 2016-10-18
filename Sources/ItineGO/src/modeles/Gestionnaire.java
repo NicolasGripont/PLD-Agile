@@ -28,5 +28,18 @@ public class Gestionnaire {
 		return null;
 	}
 	
+	public void effacerNoeudsEtTroncons()
+	{
+		
+	}
 	
+	public void effacerLivraisonsEtEntrepot()
+	{
+		
+	}
+	
+	public void effacerTournee()
+	{
+		
+	}
 }
