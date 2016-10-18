@@ -76,8 +76,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         
         labelError.setVisible(false);
         
-        planVilleScrollPane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        double size = Math.max(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20;
+        planVilleScrollPane.setStyle("-fx-background: rgb(240,237,230);-fx-border-color: grey;");
+        double size = Math.min(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20;
         planVilleVue = new PlanVilleVue(size, size);
         planVilleScrollPane.setContent(planVilleVue);
         
@@ -87,10 +87,11 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-		        double size = Math.max(planVilleScrollPane.getWidth(),planVilleScrollPane.getHeight()) - 20;
-		        if(size + 20 > Math.max(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20)
-		        planVilleVue.resize(size,size);
-				planVilleVue.dessinerPlan(plan);
+		        double size = Math.min(planVilleScrollPane.getWidth(),planVilleScrollPane.getHeight()) - 20;
+		        if(size >  Math.min(planVilleScrollPane.getMinWidth(),planVilleScrollPane.getMinHeight()) - 20) {
+			        planVilleVue.resize(size,size);
+					planVilleVue.dessinerPlan(plan);
+		        }
 			}
           
         };

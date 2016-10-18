@@ -24,7 +24,8 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	public void dessinerPlan(Plan plan) {
-		dessinerFond();
+//		dessinerFond();
+		effacer();
 		if(plan != null) {
 			this.plan = plan;
 			calculerZoom();
@@ -48,7 +49,11 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-
+	private void effacer(){
+		GraphicsContext gc = this.getGraphicsContext2D();
+		gc.clearRect(0, 0, getWidth(), getHeight());
+	}
+	
 	private void dessinerFond() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.9375,0.9258,0.8945,1));
