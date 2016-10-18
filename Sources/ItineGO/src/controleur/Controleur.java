@@ -81,6 +81,7 @@ public class Controleur extends Application{
 				stage.setTitle("Itine'GO");
 				stage.setScene(scene);
 				stage.show();
+				choixDemandeLivraisonsVue.dessinePlan();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -100,6 +101,7 @@ public class Controleur extends Application{
 				stage.setTitle("Itine'GO");
 				stage.setScene(scene);
 				stage.show();
+				gestionLivraisonsVue.dessinePlan();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
