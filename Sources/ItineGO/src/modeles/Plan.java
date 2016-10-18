@@ -421,4 +421,10 @@ public class Plan {
 	public void effacerTournee() {
 		this.tournee = null;
 	}
+	
+	public boolean idExiste(int id)
+	{
+		if(noeuds.containsKey(id)){return true;}
+		else{return false;}
+	}
 }
