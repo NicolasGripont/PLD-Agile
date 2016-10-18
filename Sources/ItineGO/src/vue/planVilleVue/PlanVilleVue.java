@@ -1,10 +1,8 @@
 package vue.planVilleVue;
 
-import modeles.Entrepot;
 import modeles.Livraison;
 import modeles.Noeud;
 import modeles.Plan;
-import modeles.Tournee;
 import modeles.Trajet;
 import modeles.Troncon;
 import utility.Pair;
@@ -25,31 +23,31 @@ public class PlanVilleVue extends Canvas {
 		this.setStyle("-fx-background-color: rgb(240,237,230);");
 	}
 	
-	public void dessinePlan(Plan plan) {
+	public void dessinerPlan(Plan plan) {
 		if(plan != null) {
 			this.plan = plan;
 			calculerZoom();
 			if(plan.getNoeuds() != null) {
-				dessineNoeud();
+				dessinerNoeud();
 			}
 			if(plan.getTroncons() != null) {
-				dessineTroncon();
+				dessinerTroncon();
 			}
 			if(plan.getTournee() != null) {
-				dessineTournee();
+				dessinerTournee();
 			}
 			if(plan.getEntrepot() != null) {
-				dessineEntrepot();
+				dessinerEntrepot();
 			}
 			if(plan.getLivraisons() != null) {
-				dessineLivraison();
+				dessinerLivraison();
 			}
 		} else {
 			System.err.println("plan is null");
 		}
 	}
 	
-	private void dessineNoeud() {
+	private void dessinerNoeud() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.859,0.839,0.808,1));
         gc.setStroke(Color.WHITE);
@@ -60,7 +58,7 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	private void dessineTroncon() {
+	private void dessinerTroncon() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0.859,0.839,0.808,1));
         gc.setStroke(Color.WHITE);
@@ -73,7 +71,7 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	public void dessineLivraison() {
+	public void dessinerLivraison() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.GREEN);
         gc.setStroke(Color.GREEN);
@@ -84,7 +82,7 @@ public class PlanVilleVue extends Canvas {
 		}
 	}
 	
-	public void dessineEntrepot() {
+	public void dessinerEntrepot() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.RED);
         gc.setStroke(Color.RED);
@@ -93,7 +91,7 @@ public class PlanVilleVue extends Canvas {
         }
 	}
 	
-	private void dessineTournee() {
+	private void dessinerTournee() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0,0.709,0.968,1));
         gc.setStroke(new Color(0,0.709,0.968,1));

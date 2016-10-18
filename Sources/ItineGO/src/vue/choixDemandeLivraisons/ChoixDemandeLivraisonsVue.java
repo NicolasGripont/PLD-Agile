@@ -157,6 +157,6 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 
 	public void setPlan(Plan plan) {
 		this.plan = plan;
-        planVilleVue.dessinePlan(plan);
+        planVilleVue.dessinerPlan(plan);
 	}
 }

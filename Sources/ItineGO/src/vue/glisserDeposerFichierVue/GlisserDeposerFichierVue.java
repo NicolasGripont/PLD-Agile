@@ -81,13 +81,9 @@ public class GlisserDeposerFichierVue extends StackPane {
 		return fichierChoisie;
 	}
 
-
-
 	public void setFichierAccepteAction(EventHandler<ActionEvent> fichierAccepteAction) {
 		this.fichierAccepteAction = fichierAccepteAction;
 	}
-
-
 
 	public void setFichierRefuseAction(EventHandler<ActionEvent> fichierRefuseAction) {
 		this.fichierRefuseAction = fichierRefuseAction;
