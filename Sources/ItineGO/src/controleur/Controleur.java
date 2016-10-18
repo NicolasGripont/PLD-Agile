@@ -97,12 +97,12 @@ public class Controleur extends Application{
 	
 	public boolean creerPlanVille(File fichierPlanVilleXML) {
 		plan = new Plan();
-		ParseurPlan.parserPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
+		ParseurPlan.parseurPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 	
 	public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
-		ParseurLivraison.parserLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
+		ParseurLivraison.parseurLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 
