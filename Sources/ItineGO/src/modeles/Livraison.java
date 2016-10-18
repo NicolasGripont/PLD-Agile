@@ -24,32 +24,8 @@ public class Livraison {
 	public Livraison(Noeud noeud, int duree, String debutPlage, String finPlage) {
 		this.setNoeud(noeud);
 		setDuree(duree);
-		String[] horDebutPlage = debutPlage.split(":");
-		if(horDebutPlage.length == 3) {
-			try {
-				int h = Integer.parseInt(horDebutPlage[0]); 
-				int m = Integer.parseInt(horDebutPlage[1]); 
-				int s = Integer.parseInt(horDebutPlage[2]); 
-				this.setDebutPlage(new Horaire(h, m, s));
-			} catch(Exception e) {
-				this.setDebutPlage(new Horaire(0, 0, 0));
-			}
-		} else {
-			this.setDebutPlage(new Horaire(0, 0, 0));
-		}
-		String[] horFinPlage = finPlage.split(":");
-		if(horFinPlage.length == 3) {
-			try {
-				int h = Integer.parseInt(horFinPlage[0]); 
-				int m = Integer.parseInt(horFinPlage[1]); 
-				int s = Integer.parseInt(horFinPlage[2]); 
-				this.setFinPlage(new Horaire(h, m, s));
-			} catch(Exception e) {
-				this.setFinPlage(new Horaire(0, 0, 0));
-			}
-		} else {
-			this.setFinPlage(new Horaire(0, 0, 0));
-		}
+		setDebutPlage(new Horaire(debutPlage));
+		setFinPlage(new Horaire(finPlage));
 	}
 
 	public Livraison(Noeud noeud, int duree) {
