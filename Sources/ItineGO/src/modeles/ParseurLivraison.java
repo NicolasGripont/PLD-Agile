@@ -7,12 +7,12 @@ import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
 
-public class ParserLivraison {
+public class ParseurLivraison {
 	
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 ParserPlan.parserPlanVille("./xml/plan5x5.xml", plan);
+		 ParseurPlan.parserPlanVille("./xml/plan5x5.xml", plan);
 		 parserLivraisonVille("./xml/livraisons5x5-9.xml", plan);
 		 System.out.println(plan.getLivraisons().size());
 		 System.out.println(plan.getEntrepot().toString());
@@ -33,7 +33,7 @@ public class ParserLivraison {
 			 //Parse le fichier XML
 			 Document planVille = (Document) sxb.build(xmlFile);
 			 
-			 //Attribut l'élément racine du fichier XML
+			 //Attribut l'ï¿½lï¿½ment racine du fichier XML
 			 Element racine = planVille.getRootElement();
 			 listLivraisonVille = racine.getChildren("livraison");
 			 listEntrepotVille = racine.getChildren("entrepot");

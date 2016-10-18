@@ -2,11 +2,13 @@ package controleur;
 
 import java.io.File;
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import modeles.ParserLivraison;
-import modeles.ParserPlan;
+import modeles.Gestionnaire;
+import modeles.ParseurLivraison;
+import modeles.ParseurPlan;
 import modeles.Plan;
 import vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVille.ChoixPlanVilleVue;
@@ -19,6 +21,8 @@ public class Controleur extends Application{
 	private ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	private ChoixPlanVilleVue choixPlanVilleVue;
 	private GestionLivraisonsVue gestionLivraisonsVue;
+	private Gestionnaire gestionnaire;
+	protected EtatDefault etatCourant;
 	private Stage stage;
 	private Plan plan = null;
 	
@@ -93,12 +97,12 @@ public class Controleur extends Application{
 	
 	public boolean creerPlanVille(File fichierPlanVilleXML) {
 		plan = new Plan();
-		ParserPlan.parserPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
+		ParseurPlan.parserPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 	
 	public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
-		ParserLivraison.parserLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
+		ParseurLivraison.parserLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
 		return plan != null;
 	}
 

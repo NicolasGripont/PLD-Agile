@@ -7,7 +7,7 @@ import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
 
-public class ParserPlan {
+public class ParseurPlan {
 	
 	 public static void main(String[] args)
 	   {
@@ -33,7 +33,7 @@ public class ParserPlan {
 			 //Parse le fichier XML
 			 Document planVille = (Document) sxb.build(xmlFile);
 			 
-			 //Attribut l'élément racine du fichier XML
+			 //Attribut l'ï¿½lï¿½ment racine du fichier XML
 			 Element racine = planVille.getRootElement();
 			 listNoeudVille = racine.getChildren("noeud");
 			 listTronconVille = racine.getChildren("troncon");
