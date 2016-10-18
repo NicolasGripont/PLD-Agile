@@ -177,7 +177,7 @@ public class Plan {
 			System.out.print("\n");
 		}
 		
-		tsp.TSP monTSP = new tsp.TSP1();
+		tsp.TSP monTSP = new TSP2();
 		monTSP.chercheSolution(100000, depart.length , cout, duree);  //le 100000 est le temps max toléré 
 		
 		
