@@ -33,6 +33,9 @@ public class PlanVilleVue extends Canvas {
 			if(plan.getTroncons() != null) {
 				dessineTroncon(plan.getTroncons());
 			}
+			if(plan.getTrajetPrevu() != null) {
+				dessineChemin(plan.getTrajetPrevu());
+			}
 			if(plan.getEntrepot() != null) {
 				dessineEntrepot(plan.getEntrepot());
 			}

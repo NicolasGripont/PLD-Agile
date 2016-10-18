@@ -66,4 +66,10 @@ public class GestionLivraisonsVue implements Initializable{
 	public void precedent(){
 		controleur.showChoixDemandeLivraison();
 	}
+	
+	@FXML
+	public void calculerLivraisonAction() {
+		plan.CalculDeTournee();
+		planVilleVue.dessinePlan(plan);
+	}
 }

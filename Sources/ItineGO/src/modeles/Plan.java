@@ -18,6 +18,8 @@ public class Plan {
 	private Entrepot entrepot;
 	private int tableauDesId[];
 
+	private List<Troncon> trajetPrevu = null;
+	
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
@@ -208,7 +210,14 @@ public class Plan {
 
 		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
 	      //Puis on constrit tournee
-		
+		trajetPrevu = new ArrayList<>();
+		for(Integer i=0; i < futurTourne.size()-1; i++) {
+			trajetPrevu.add(troncons.get(new Pair(noeuds.get(futurTourne.get(i)),noeuds.get(futurTourne.get(i+1)))));
+		}
+		System.out.println("troncons :");
+		for(Troncon t : trajetPrevu){
+			System.out.println(t);
+		}
     }
     
     private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
@@ -384,5 +393,10 @@ public class Plan {
 	
 	public void setEntrepot(Entrepot entrepot) {
 		this.entrepot = entrepot;
+	}
+
+	public List<Troncon> getTrajetPrevu() {
+		// TODO Auto-generated method stub
+		return trajetPrevu;
 	}
 }
