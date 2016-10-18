@@ -159,4 +159,10 @@ public class HoraireTest {
 		assertEquals(horaire1, horaire2);
 		assertNotEquals(horaire1,horaire3);
 	}
+	
+	@Test
+	public void testGetHoraireEnMinute() {
+		Horaire horaire = new Horaire("10:20:29");
+		assertEquals(620, horaire.getHoraireEnMinutes());
+	}
 }

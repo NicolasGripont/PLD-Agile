@@ -32,6 +32,10 @@ public class Horaire {
 			this.setSeconde(0);
 		}
 	}
+	
+	public int getHoraireEnMinutes() {
+		return Math.round((heure * 60) + minute + (seconde / 60));
+	}
 
 	public void ajouterHeure(int heure) {
 		int h = this.heure + heure;
