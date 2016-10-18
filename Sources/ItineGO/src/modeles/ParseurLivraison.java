@@ -12,8 +12,8 @@ public class ParseurLivraison {
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 ParseurPlan.parserPlanVille("./xml/plan5x5.xml", plan);
-		 parserLivraisonVille("./xml/livraisons5x5-9.xml", plan);
+		 ParseurPlan.parseurPlanVille("./xml/plan5x5.xml", plan);
+		 parseurLivraisonVille("./xml/livraisons5x5-9.xml", plan);
 		 System.out.println(plan.getLivraisons().size());
 		 System.out.println(plan.getEntrepot().toString());
 	   }
@@ -21,7 +21,7 @@ public class ParseurLivraison {
 	 /**
 	 * @param nomFichier
 	 */
-	public static void parserLivraisonVille(String nomFichier, Plan plan)
+	public static void parseurLivraisonVille(String nomFichier, Plan plan)
 	 {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();

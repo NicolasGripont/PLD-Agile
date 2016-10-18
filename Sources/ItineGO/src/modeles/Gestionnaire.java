@@ -25,7 +25,7 @@ public class Gestionnaire {
 	
 	public Tournee calculerTournee()
 	{
-		
+		return null;
 	}
 	
 	

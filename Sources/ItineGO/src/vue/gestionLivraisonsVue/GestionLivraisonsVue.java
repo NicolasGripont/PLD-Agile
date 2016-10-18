@@ -64,6 +64,7 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void precedent(){
+		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
 		controleur.showChoixDemandeLivraison();
 	}
 	

@@ -28,7 +28,11 @@ public class Troncon {
 	}
 
 	public void setLongueur(int longueur) {
-		this.longueur = longueur;
+		if(longueur > 0) {
+			this.longueur = longueur;
+		} else {
+			this.longueur = 0;
+		}
 	}
 
 	public int getVitesse() {
@@ -36,7 +40,11 @@ public class Troncon {
 	}
 
 	public void setVitesse(int vitesse) {
-		this.vitesse = vitesse;
+		if(vitesse > 0) {
+			this.vitesse = vitesse;
+		} else {
+			vitesse = 0;
+		}
 	}
 
 	public Noeud getOrigine() {
@@ -44,7 +52,11 @@ public class Troncon {
 	}
 
 	public void setOrigine(Noeud origine) {
-		this.origine = origine;
+		if(origine != null) {
+			this.origine = origine;
+		} else {
+			this.origine = new Noeud(-1, 0, 0);
+		}
 	}
 
 	public Noeud getDestination() {
@@ -52,7 +64,11 @@ public class Troncon {
 	}
 
 	public void setDestination(Noeud destination) {
-		this.destination = destination;
+		if(destination != null) {
+			this.destination = destination;
+		} else {
+			this.destination = new Noeud(-1,0,0);
+		}
 	}
 
 	@Override

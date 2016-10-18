@@ -77,5 +77,4 @@ public class EntrepotTest {
 		assertEquals(entrepot1, entrepot2);
 		assertNotEquals(entrepot1, entrepot3);
 	}
-
 }

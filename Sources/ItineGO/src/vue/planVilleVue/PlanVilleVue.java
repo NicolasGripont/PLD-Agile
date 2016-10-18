@@ -4,6 +4,8 @@ import modeles.Entrepot;
 import modeles.Livraison;
 import modeles.Noeud;
 import modeles.Plan;
+import modeles.Tournee;
+import modeles.Trajet;
 import modeles.Troncon;
 import utility.Pair;
 
@@ -33,8 +35,8 @@ public class PlanVilleVue extends Canvas {
 			if(plan.getTroncons() != null) {
 				dessineTroncon(plan.getTroncons());
 			}
-			if(plan.getTrajetPrevu() != null) {
-				dessineChemin(plan.getTrajetPrevu());
+			if(plan.getTournee() != null) {
+				dessineTournee(plan.getTournee());
 			}
 			if(plan.getEntrepot() != null) {
 				dessineEntrepot(plan.getEntrepot());
@@ -91,15 +93,17 @@ public class PlanVilleVue extends Canvas {
         }
 	}
 	
-	private void dessineChemin(List<Troncon> chemins) {
+	private void dessineTournee(Tournee tournee) {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(new Color(0,0.709,0.968,1));
         gc.setStroke(new Color(0,0.709,0.968,1));
 		gc.setLineWidth(LARGEUR_TRONCON);
-		for(Troncon t : chemins) {
-			if(t != null && t.getOrigine() != null && t.getDestination() != null) {
-				gc.strokeLine(t.getOrigine().getX() * zoom, t.getOrigine().getY() * zoom,
-						t.getDestination().getX() * zoom, t.getDestination().getY() * zoom);
+		for(Trajet trajet : tournee.getTrajets()){
+			for(Troncon t : trajet.getTroncons()) {
+				if(t != null && t.getOrigine() != null && t.getDestination() != null) {
+					gc.strokeLine(t.getOrigine().getX() * zoom, t.getOrigine().getY() * zoom,
+							t.getDestination().getX() * zoom, t.getDestination().getY() * zoom);
+				}
 			}
 		}
 	}
