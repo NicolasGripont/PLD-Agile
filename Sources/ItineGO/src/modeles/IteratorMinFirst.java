@@ -12,7 +12,7 @@ import utility.MapUtil;
 
 public class IteratorMinFirst implements Iterator<Integer> {
 
-	private List<Integer> candidats;
+	private Integer[] candidats;
 	private int nbCandidats;
 
 	/**
@@ -33,7 +33,10 @@ public class IteratorMinFirst implements Iterator<Integer> {
 		//On trie
 		LinkedHashMap<Integer, Integer> coutCandidatsSorted = MapUtil.sortByValue(coutCandidats);
 		//On renvoie les sommets triés par cout croissant
-		this.candidats = new ArrayList<Integer>(coutCandidatsSorted.keySet());
+		int i = 0;
+		for(Integer sommet : coutCandidats.keySet()) {
+			this.candidats[i++] = sommet;
+		}
 	}
 	
 	@Override
@@ -43,7 +46,7 @@ public class IteratorMinFirst implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		return candidats.get(--nbCandidats);
+		return candidats[--nbCandidats];
 	}
 
 	@Override
