@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import modeles.Plan;
 import vue.planVilleVue.PlanVilleVue;
 
@@ -28,7 +29,7 @@ public class GestionLivraisonsVue implements Initializable{
 	private Button boutonCalculer;
 	
 	@FXML 
-	private ScrollPane planVilleScrollPane;
+	private StackPane planVillePane;
 	
 	private PlanVilleVue planVilleVue;
 	
@@ -36,28 +37,29 @@ public class GestionLivraisonsVue implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		labelError.setVisible(false);
+//		labelError.setVisible(false);
 		
-		planVilleScrollPane.setStyle("-fx-background: rgb(240,237,230);-fx-border-color: grey;");
-        double size = Math.min(planVilleScrollPane.getPrefWidth(),planVilleScrollPane.getPrefHeight()) - 20;
-        planVilleVue = new PlanVilleVue(size, size);
-        planVilleScrollPane.setContent(planVilleVue);
+        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
+        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
+        planVillePane.getChildren().add(planVilleVue);
         
-		final ChangeListener<Number> listener = new ChangeListener<Number>()
+        final ChangeListener<Number> listener = new ChangeListener<Number>()
         {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-		        double size = Math.min(planVilleScrollPane.getWidth(),planVilleScrollPane.getHeight()) - 20;
-		        if(size >  Math.min(planVilleScrollPane.getMinWidth(),planVilleScrollPane.getMinHeight()) - 20) {
-			        planVilleVue.resize(size,size);
-					planVilleVue.dessinerPlan(plan);
-		        }
+				dessinePlan();
 			}
           
         };
-        planVilleScrollPane.widthProperty().addListener(listener);
+        planVillePane.widthProperty().addListener(listener);
+	}
+
+	public void dessinePlan() {
+		planVilleVue.setWidth(planVillePane.getWidth());
+		planVilleVue.setHeight(planVillePane.getHeight());
+		planVilleVue.dessinerPlan(plan);
 	}
 	
 	public void afficherErreur(String erreur) {
