@@ -42259,7 +42259,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+clicBoutonValider()",
+											"text": "+clicBoutonValider(fichierXML: File)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -51517,6 +51517,24 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFX1y52gSwE2M0=",
+									"_parent": {
+										"$ref": "AAAAAAFXwotmhYkwxcc="
+									},
+									"name": "fichierXML",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "File",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								}
+							],
 							"concurrency": "sequential",
 							"isQuery": false,
 							"isAbstract": false
