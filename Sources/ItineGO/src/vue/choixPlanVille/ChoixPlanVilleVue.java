@@ -39,6 +39,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	private GlisserDeposerFichierVue glisserDeposerFichierVue;
 	
 	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

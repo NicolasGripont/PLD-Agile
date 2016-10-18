@@ -34,7 +34,7 @@ public class IteratorMinFirst implements Iterator<Integer> {
 		LinkedHashMap<Integer, Integer> coutCandidatsSorted = MapUtil.sortByValue(coutCandidats);
 		//On renvoie les sommets triés par cout croissant
 		int i = 0;
-		for(Integer sommet : coutCandidats.keySet()) {
+		for(Integer sommet : coutCandidatsSorted.keySet()) {
 			this.candidats[i++] = sommet;
 		}
 	}
