@@ -10,8 +10,8 @@ import modeles.Gestionnaire;
 import modeles.ParseurLivraison;
 import modeles.ParseurPlan;
 import modeles.Plan;
-import vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue;
-import vue.choixPlanVille.ChoixPlanVilleVue;
+import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
+import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -51,7 +51,7 @@ public class Controleur extends Application{
 	public void showChoixPlanVille() {
 		if(stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 				Parent root;
 				root = fxmlLoader.load();
 				choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
@@ -72,7 +72,7 @@ public class Controleur extends Application{
 			try {
 				plan.resetLivraisons();
 				plan.setEntrepot(null);
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisons/ChoixDemandeLivraisons.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisonsVue/ChoixDemandeLivraisons.fxml"));
 				Parent root = fxmlLoader.load();
 				choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				choixDemandeLivraisonsVue.setControleur(this);

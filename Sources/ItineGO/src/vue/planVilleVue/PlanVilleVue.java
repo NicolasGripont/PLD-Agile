@@ -16,6 +16,8 @@ public class PlanVilleVue extends Canvas {
 	private int RAYON_NOEUD = 0;
 	private int LARGEUR_TRONCON = 3;
 	private double zoom = 1;
+	private double offsetX = 0;
+	private double offsetY = 0;
 	private Plan plan;
 	
 	public PlanVilleVue(double width, double height) {
@@ -29,6 +31,7 @@ public class PlanVilleVue extends Canvas {
 		if(plan != null) {
 			this.plan = plan;
 			calculerZoom();
+			recentrerPlan();
 			if(plan.getNoeuds() != null) {
 				dessinerNoeud();
 			}
@@ -67,7 +70,7 @@ public class PlanVilleVue extends Canvas {
         gc.setStroke(Color.WHITE);
 		for(Map.Entry<Integer, Noeud> n : this.plan.getNoeuds().entrySet()) {
 			if(n != null) {
-				gc.fillOval(n.getValue().getX() * zoom, n.getValue().getY() * zoom, RAYON_NOEUD, RAYON_NOEUD);
+				gc.fillOval(n.getValue().getX() * zoom + offsetX, n.getValue().getY() * zoom + offsetY, RAYON_NOEUD, RAYON_NOEUD);
 			}
 		}
 	}
@@ -79,8 +82,8 @@ public class PlanVilleVue extends Canvas {
 		gc.setLineWidth(LARGEUR_TRONCON);
 		for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : this.plan.getTroncons().entrySet()) {
 			if(t != null && t.getKey().first != null && t.getKey().second != null) {
-				gc.strokeLine(t.getKey().first.getX() * zoom, t.getKey().first.getY() * zoom,
-						t.getKey().second.getX() * zoom, t.getKey().second.getY() * zoom);
+				gc.strokeLine(t.getKey().first.getX() * zoom + offsetX, t.getKey().first.getY() * zoom + offsetY,
+						t.getKey().second.getX() * zoom + offsetX, t.getKey().second.getY() * zoom + offsetY);
 			}
 		}
 	}
@@ -91,7 +94,7 @@ public class PlanVilleVue extends Canvas {
         gc.setStroke(Color.GREEN);
         for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 			if(l != null && l.getKey() != null) {
-				gc.fillOval(l.getKey().getX() * zoom, l.getKey().getY() * zoom, RAYON_LIVRAISON, RAYON_LIVRAISON);
+				gc.fillOval(l.getKey().getX() * zoom + offsetX, l.getKey().getY() * zoom + offsetY, RAYON_LIVRAISON, RAYON_LIVRAISON);
 			}
 		}
 	}
@@ -101,7 +104,7 @@ public class PlanVilleVue extends Canvas {
 		gc.setFill(Color.RED);
         gc.setStroke(Color.RED);
         if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-        	gc.fillOval(plan.getEntrepot().getNoeud().getX() * zoom, plan.getEntrepot().getNoeud().getY() * zoom, RAYON_LIVRAISON, RAYON_LIVRAISON);
+        	gc.fillOval(plan.getEntrepot().getNoeud().getX() * zoom + offsetX, plan.getEntrepot().getNoeud().getY() * zoom + offsetY, RAYON_LIVRAISON, RAYON_LIVRAISON);
         }
 	}
 	
@@ -113,8 +116,8 @@ public class PlanVilleVue extends Canvas {
 		for(Trajet trajet : plan.getTournee().getTrajets()){
 			for(Troncon t : trajet.getTroncons()) {
 				if(t != null && t.getOrigine() != null && t.getDestination() != null) {
-					gc.strokeLine(t.getOrigine().getX() * zoom, t.getOrigine().getY() * zoom,
-							t.getDestination().getX() * zoom, t.getDestination().getY() * zoom);
+					gc.strokeLine(t.getOrigine().getX() * zoom + offsetX, t.getOrigine().getY() * zoom + offsetY,
+							t.getDestination().getX() * zoom + offsetX, t.getDestination().getY() * zoom + offsetY);
 				}
 			}
 		}
@@ -122,22 +125,52 @@ public class PlanVilleVue extends Canvas {
 	
 	private void calculerZoom() {
 		if(plan.getNoeuds() != null) {
-			int minX = Integer.MAX_VALUE;
-			int maxX = Integer.MIN_VALUE;
-			for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
-				if(n != null) {
-					if(n.getValue().getX() <= minX) {
-						minX = n.getValue().getX();
-					} else if(n.getValue().getX() >= maxX) {
-						maxX = n.getValue().getX();
+			double width = this.getWidth();
+			double height = this.getHeight();
+			if(width == Math.min(width, height)) {
+				int minX = Integer.MAX_VALUE;
+				int maxX = Integer.MIN_VALUE;
+				for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
+					if(n != null) {
+						if(n.getValue().getX() <= minX) {
+							minX = n.getValue().getX();
+						} else if(n.getValue().getX() >= maxX) {
+							maxX = n.getValue().getX();
+						}
 					}
 				}
+				double widthMap = maxX+minX;
+				this.zoom = width/(widthMap) ;
+			} else {
+				int minY = Integer.MAX_VALUE;
+				int maxY = Integer.MIN_VALUE;
+				for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
+					if(n != null) {
+						if(n.getValue().getY() <= minY) {
+							minY = n.getValue().getY();
+						} else if(n.getValue().getY() >= maxY) {
+							maxY = n.getValue().getY();
+						}
+					}
+				}
+				double heightMap = maxY+minY;
+				this.zoom = height/(heightMap) ;
 			}
-			double widthMap = maxX+minX;
-			double width = this.getWidth();
-			this.zoom = width/(widthMap) ;
+			
 		} else {
 			this.zoom = 1;
+		}
+	}
+	
+	private void recentrerPlan() {
+		offsetY = 0;
+		offsetX = 0;
+		double width = this.getWidth();
+		double height = this.getHeight();
+		if(width == Math.min(width, height)) {
+			offsetY = (height - width) / 2;
+		} else {
+			offsetX = (width - height) / 2;
 		}
 	}
 	

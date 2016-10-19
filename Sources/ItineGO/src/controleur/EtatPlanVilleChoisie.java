@@ -6,14 +6,14 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import vue.choixDemandeLivraisons.ChoixDemandeLivraisonsVue;
 import modeles.Gestionnaire;
+import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 
 public class EtatPlanVilleChoisie extends EtatDefaut {
 
 	public void clicBoutonValider(Controleur controleur, Gestionnaire gestionnaire, File fichierXML)
 	{
-		//modification du modèle
+		//modification du modï¿½le
 		gestionnaire.chargerPlan(fichierXML);
 		//modification des vues
 		if(controleur.stage != null) {
@@ -27,7 +27,7 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				//changement d'état
+				//changement d'ï¿½tat
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

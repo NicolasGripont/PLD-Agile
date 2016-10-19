@@ -1,4 +1,4 @@
-package vue.choixPlanVille;
+package vue.choixPlanVilleVue;
 
 import java.io.File;
 import java.net.URL;

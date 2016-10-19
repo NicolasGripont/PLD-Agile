@@ -1,4 +1,4 @@
-package vue.choixDemandeLivraisons;
+package vue.choixDemandeLivraisonsVue;
 
 import java.io.File;
 import java.net.URL;
