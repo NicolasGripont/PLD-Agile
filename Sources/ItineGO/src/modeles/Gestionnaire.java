@@ -27,22 +27,24 @@ public class Gestionnaire {
 	
 	public void calculerTournee()
 	{
-		
+		plan.calculerTournee();
 	}
 	
 	public void effacerNoeudsEtTroncons()
 	{
-		
+		plan.effacerTroncons();
+		plan.effacerNoeuds();
 	}
 	
 	public void effacerLivraisonsEtEntrepot()
 	{
-		
+		plan.effacerEntrepot();
+		plan.effacerLivraisons();
 	}
 	
 	public void effacerTournee()
 	{
-		
+		plan.effacerTournee();
 	}
 
 	public Plan getPlan() {

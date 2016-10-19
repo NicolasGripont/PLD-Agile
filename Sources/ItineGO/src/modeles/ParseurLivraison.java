@@ -42,14 +42,14 @@ public class ParseurLivraison {
 			 for (int i=0; i < listLivraisonVille.size() ; i++)
 			 {
 				 Element livraison = (Element) listLivraisonVille.get(i);
-				 plan.AjouterLivraison(new Livraison(
+				 plan.ajouterLivraison(new Livraison(
 						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
 						 Integer.parseInt(livraison.getAttributeValue("duree"))
 				 ));
 			 }
 			 
 			 Element entrepot = (Element) listEntrepotVille.get(0);
-			 plan.AjouterEntrepot(new Entrepot(
+			 plan.ajouterEntrepot(new Entrepot(
 					 plan.getNoeud(Integer.parseInt(entrepot.getAttributeValue("adresse"))),
 					 entrepot.getAttributeValue("heureDepart")
 			 ));

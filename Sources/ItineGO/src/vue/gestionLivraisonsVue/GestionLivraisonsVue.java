@@ -160,7 +160,7 @@ public class GestionLivraisonsVue implements Initializable{
 	@FXML
 	public void calculerLivraisonAction() {
 		//TODO : controleur.clicBoutonCalculerTournee();
-		plan.CalculDeTournee();
+		plan.calculerTournee();
 		planVilleVue.dessinerPlan(plan);
 	}
 }

@@ -38,7 +38,7 @@ public class Plan {
 		return -1;
 	}
 	
-	public void CalculDeTournee() {
+	public void calculerTournee() {
     	
     	int nbDeLivraison = livraisons.size();
     	
@@ -341,32 +341,28 @@ public class Plan {
     }
 	
 	
-	public void AjouterNoeud(Noeud n) {
+	public void ajouterNoeud(Noeud n) {
 		if(n != null) {
 			noeuds.put(n.getId(), n);
 		}
 	}
 	
-	public void AjouterTroncon(Troncon t) {
+	public void ajouterTroncon(Troncon t) {
 		if(t != null) {
 			troncons.put(Pair.create(t.getOrigine(), t.getDestination()) , t);
 		}
 	}
 	
-	public void AjouterLivraison(Livraison l) {
+	public void ajouterLivraison(Livraison l) {
 		if(l != null) {
 			livraisons.put(l.getNoeud(), l);
 		}
 	}
 	
-	public void AjouterEntrepot(Entrepot e) {
+	public void ajouterEntrepot(Entrepot e) {
 		if(e != null) {
 			entrepot = e;
 		}
-	}
-	
-	public boolean CalculerTournee() {
-		return false;
 	}
 	
 	public Noeud getNoeud(Integer idNoeud) {
@@ -417,6 +413,27 @@ public class Plan {
 		// TODO Auto-generated method stub
 		return tournee;
 	}
+	
+	public void effacerNoeuds()
+	{
+		noeuds.clear();
+	}
+	
+	public void effacerLivraisons()
+	{
+		livraisons.clear();
+	}
+	
+	public void effacerTroncons()
+	{
+		troncons.clear();
+	}
+	
+	public void effacerEntrepot()
+	{
+		entrepot = null;
+	}
+	
 	
 	public void effacerTournee() {
 		this.tournee = null;
