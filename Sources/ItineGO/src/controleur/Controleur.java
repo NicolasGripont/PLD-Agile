@@ -130,6 +130,22 @@ public class Controleur extends Application{
 		etatCourant.clicBoutonParcourir(this,accepte,fichier);
 	}
 
+	public void clicBoutonRetour() {
+		etatCourant.clicBoutonRetour(this, gestionnaire);
+	}
+	
+	public void clicBoutonHome() {
+		etatCourant.clicBoutonHome(this, gestionnaire);
+	}
+
+	public void clicBoutonValider(File fichierChoisie) {
+		etatCourant.clicBoutonValider(gestionnaire, this, fichierChoisie);
+	}
+
+	public void clicBoutonCalculerTournee() {
+		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
+	}
+
 	public Plan getPlan() {
 		return plan;
 	}
@@ -145,4 +161,7 @@ public class Controleur extends Application{
 	public Stage getStage() {
 		return stage;
 	}
+
+
+
 }

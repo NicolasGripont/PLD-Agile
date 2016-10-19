@@ -23,9 +23,8 @@ public class Gestionnaire {
 		
 	}
 	
-	public Tournee calculerTournee()
+	public void calculerTournee()
 	{
-		return null;
 	}
 	
 	public void effacerNoeudsEtTroncons()

@@ -144,12 +144,14 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void precedent(){
+		//TODO : controleur.clicBoutonRetour();
 		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
 		controleur.showChoixDemandeLivraison();
 	}
 	
 	@FXML
 	public void calculerLivraisonAction() {
+		//TODO : controleur.clicBoutonCalculerTournee();
 		plan.CalculDeTournee();
 		planVilleVue.dessinerPlan(plan);
 	}

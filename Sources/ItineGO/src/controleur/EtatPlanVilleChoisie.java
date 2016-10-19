@@ -13,7 +13,7 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 
 	public void clicBoutonValider(Controleur controleur, Gestionnaire gestionnaire, File fichierXML)
 	{
-		//modification du modÃ¨le
+		//modification du modèle
 		gestionnaire.chargerPlan(fichierXML);
 		//modification des vues
 		if(controleur.stage != null) {
@@ -27,12 +27,13 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
+				//changement d'état
+				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		//changement d'Ã©tat
-		controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
+		
 	}
 }

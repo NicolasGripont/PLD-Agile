@@ -1,11 +1,29 @@
 package controleur;
 
+import java.io.File;
+
 public class EtatApplicationDemarree extends EtatDefaut {
 	
-	public void glisserDeposer(Controleur controleur)
+	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
 	{
-		//changement d'Ã©tat
-		controleur.setEtatCourant(controleur.etatPlanVilleChoisie);
+		if(accepte) {
+			controleur.choixPlanVilleVue.fichierAccepte(fichier);
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatPlanVilleChoisie);
+		} else {
+			controleur.choixPlanVilleVue.fichierRefuse();
+		}
+	}
+	
+	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
+	{
+		if(accepte) {
+			controleur.choixPlanVilleVue.fichierAccepte(fichier);
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatPlanVilleChoisie);
+		} else {
+			controleur.choixPlanVilleVue.fichierRefuse();
+		}
 	}
 
 }
