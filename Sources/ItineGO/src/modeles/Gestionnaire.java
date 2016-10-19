@@ -10,21 +10,24 @@ public class Gestionnaire {
 	
 	public Gestionnaire()
 	{
-		
+		parseurLivraison =  new ParseurLivraison();
+		parseurPlan =  new ParseurPlan();
+		plan = new Plan();
 	}
 	
 	public void chargerPlan(File fichierXML)
 	{
-		
+		parseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public void chargerLivraisons(File fichierXML)
 	{
-		
+		parseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public void calculerTournee()
 	{
+		
 	}
 	
 	public void effacerNoeudsEtTroncons()
