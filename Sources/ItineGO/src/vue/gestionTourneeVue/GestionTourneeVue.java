@@ -1,8 +1,9 @@
-package vue.gestionLivraisonsVue;
+package vue.gestionTourneeVue;
 
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -14,12 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-import modeles.Plan;
-import vue.planVilleVue.PlanVilleVue;
 import modeles.Livraison;
 import modeles.Noeud;
+import modeles.Plan;
+import vue.planVilleVue.PlanVilleVue;
 
-public class GestionLivraisonsVue implements Initializable{
+public class GestionTourneeVue implements Initializable{
 	private Controleur controleur;
 	private Plan plan;
 	
@@ -133,7 +134,7 @@ public class GestionLivraisonsVue implements Initializable{
 		if(this.plan.getEntrepot() != null && this.plan.getEntrepot().getNoeud() != null) {
 			labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
 		}
-		if(this.plan.getLivraisons() != null) {
+		if(this.plan.getTournee() != null) {
 			for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 				if(l != null && l.getKey() != null) {
 					livraisonTable.getItems().add(l.getValue());
@@ -154,12 +155,5 @@ public class GestionLivraisonsVue implements Initializable{
 		//TODO : controleur.clicBoutonRetour();
 		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
 		controleur.showChoixDemandeLivraison();
-	}
-	
-	@FXML
-	public void calculerLivraisonAction() {
-		//TODO : controleur.clicBoutonCalculerTournee();
-		plan.CalculDeTournee();
-		planVilleVue.dessinerPlan(plan);
 	}
 }

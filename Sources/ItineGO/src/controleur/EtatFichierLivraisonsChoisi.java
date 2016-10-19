@@ -7,14 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import modeles.Gestionnaire;
-import vue.choixPlanVille.ChoixPlanVilleVue;
+import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 
 public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)
 	{
-		//TODO : Voir pour les erreurs liées au parseur
+		//TODO : Voir pour les erreurs liï¿½es au parseur
 		gestionnaire.chargerLivraisons(fichierXML);
 		if(controleur.stage != null) {
 			try {

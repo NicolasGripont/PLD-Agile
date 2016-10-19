@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import modeles.Gestionnaire;
-import vue.choixPlanVille.ChoixPlanVilleVue;
+import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 
 public class EtatPlanVilleAffiche extends EtatDefaut {
 
@@ -15,7 +15,7 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'état
+			//changement d'ï¿½tat
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
@@ -26,7 +26,7 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'état
+			//changement d'ï¿½tat
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
