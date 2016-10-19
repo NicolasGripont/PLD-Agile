@@ -145,6 +145,7 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void home() {
+		//TODO : controleur.clicBoutonHome();
 		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
 		controleur.showChoixDemandeLivraison();
 	}
