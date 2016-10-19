@@ -102,6 +102,7 @@ public class GestionLivraisonsVue implements Initializable{
             return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
         }); 
         
+        labelError.setVisible(false);    
 	}
 
 	public void dessinePlan() {
