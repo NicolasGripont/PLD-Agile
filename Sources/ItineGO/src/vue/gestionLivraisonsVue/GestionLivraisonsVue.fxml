@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="800.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.gestionLivraisonsVue.GestionLivraisonsVue">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane minWidth="184.0" prefHeight="507.0" prefWidth="380.0" BorderPane.alignment="CENTER">
          <top>
             <Label text="Plan de ville" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
@@ -19,8 +19,14 @@
             </Label>
          </top>
          <center>
-            <StackPane fx:id="planVillePane" minHeight="370.0" minWidth="400.0" prefHeight="370.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+            <StackPane fx:id="planVillePane" minHeight="370.0" minWidth="211.0" prefHeight="434.0" prefWidth="277.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin></StackPane>
          </center>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
       </BorderPane>
    </center>
    <left>
@@ -65,17 +71,20 @@
             </Button>
          </bottom>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="personneTable" prefHeight="372.0" prefWidth="373.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="82.0" text="Adresse" />
-                <TableColumn prefWidth="121.0" text="Plage début" />
-                  <TableColumn prefWidth="104.0" text="Plage fin" />
-                  <TableColumn prefWidth="92.0" text="Durée" />
+                <TableColumn fx:id="adresseColonne" prefWidth="82.0" text="Adresse" />
+                <TableColumn fx:id="plageDebutColonne" prefWidth="121.0" text="Plage début" />
+                  <TableColumn fx:id="plageFinColonne" prefWidth="104.0" text="Plage fin" />
+                  <TableColumn fx:id="dureeColonne" prefWidth="92.0" text="Durée" />
               </columns>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
             </TableView>
-         </center></BorderPane>
+         </center>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </BorderPane.margin></BorderPane>
    </left>
 </BorderPane>
