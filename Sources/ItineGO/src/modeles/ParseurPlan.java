@@ -45,7 +45,6 @@ public class ParseurPlan {
 				 if(plan.idExiste(Integer.parseInt(noeud.getAttributeValue("id")))==false)
 				 {
 					 plan.ajouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
-					 System.out.println("ID : " + noeud.getAttributeValue("id")+ " X : " + noeud.getAttributeValue("x") + " Y : " + noeud.getAttributeValue("y"));
 			 	 }
 				 else
 				 {
