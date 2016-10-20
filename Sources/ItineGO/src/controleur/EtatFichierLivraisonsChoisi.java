@@ -22,12 +22,11 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
 				controleur.gestionLivraisonsVue.setControleur(controleur);
-				controleur.gestionLivraisonsVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.gestionLivraisonsVue.dessinePlan();
+				controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -56,6 +55,11 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

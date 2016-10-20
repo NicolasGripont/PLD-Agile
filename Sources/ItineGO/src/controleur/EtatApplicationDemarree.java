@@ -2,6 +2,8 @@ package controleur;
 
 import java.io.File;
 
+import modeles.Gestionnaire;
+
 public class EtatApplicationDemarree extends EtatDefaut {
 	
 	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)

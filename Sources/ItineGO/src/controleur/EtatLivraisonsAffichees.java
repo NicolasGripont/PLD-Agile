@@ -15,19 +15,17 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.calculerTournee();
-		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
 				controleur.gestionTourneeVue.setControleur(controleur);
-				controleur.gestionTourneeVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.gestionTourneeVue.dessinePlan();
+				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -68,12 +66,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-				controleur.choixDemandeLivraisonsVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.choixDemandeLivraisonsVue.dessinePlan();
+				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 				
 			} catch (IOException e) {
@@ -81,6 +78,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

@@ -59,4 +59,9 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	{
 		System.out.println("etat plan ville affiche");
 	}
+	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
+	}
 }

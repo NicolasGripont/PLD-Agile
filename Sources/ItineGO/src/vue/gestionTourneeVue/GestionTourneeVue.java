@@ -3,7 +3,6 @@ package vue.gestionTourneeVue;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -24,7 +23,6 @@ import vue.planVilleVue.PlanVilleVue;
 
 public class GestionTourneeVue implements Initializable{
 	private Controleur controleur;
-	private Plan plan;
 	
 	@FXML
     private TableView<Livraison> livraisonTable;
@@ -78,7 +76,7 @@ public class GestionTourneeVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				dessinePlan();
+				controleur.redessinerPlan();
 			}
           
         };
@@ -130,10 +128,23 @@ public class GestionTourneeVue implements Initializable{
         imageViewPrecedentExited();
 	}
 
-	public void dessinePlan() {
-		planVilleVue.setWidth(planVillePane.getWidth());
-		planVilleVue.setHeight(planVillePane.getHeight());
-		planVilleVue.dessinerPlan(plan);
+	public void dessinePlan(Plan plan) {
+		if(plan != null) {
+			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
+				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
+			}
+			livraisonTable.getItems().clear();
+			if(plan.getTournee() != null) {
+				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
+					if(l != null && l.getKey() != null) {
+						livraisonTable.getItems().add(l.getValue());
+					}
+				}
+			}
+			planVilleVue.setWidth(planVillePane.getWidth());
+			planVilleVue.setHeight(planVillePane.getHeight());
+			planVilleVue.dessinerPlan(plan);
+		}
 	}
 	
 	public void afficherErreur(String erreur) {
@@ -148,38 +159,15 @@ public class GestionTourneeVue implements Initializable{
 	public void setControleur(Controleur controleur) {
 		this.controleur = controleur;
 	}
-
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-		if(this.plan.getEntrepot() != null && this.plan.getEntrepot().getNoeud() != null) {
-			labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
-		}
-		if(this.plan.getTournee() != null) {
-			for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
-				if(l != null && l.getKey() != null) {
-					livraisonTable.getItems().add(l.getValue());
-				}
-			}
-		}
-        planVilleVue.dessinerPlan(plan);
-	}
 	
 	@FXML
 	public void home() {
 		controleur.clicBoutonHome();
-		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();*/
 	}
 	
 	@FXML
 	public void precedent(){
 		controleur.clicBoutonRetour();
-		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();*/
 	}
 	
 	@FXML
