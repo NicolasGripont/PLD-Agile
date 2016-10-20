@@ -8,14 +8,32 @@ import javafx.scene.Scene;
 import modeles.Gestionnaire;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
+import vue.gestionTourneeVue.GestionTourneeVue;
 
 public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.calculerTournee();
-		controleur.gestionLivraisonsVue.dessinePlan(/*TODO : gestionnaire.getPlan()*/);
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
+		if(controleur.stage != null) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
+				Parent root = fxmlLoader.load();
+				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
+				controleur.gestionTourneeVue.setControleur(controleur);
+				controleur.gestionTourneeVue.setPlan(gestionnaire.getPlan());
+				Scene scene = new Scene(root);
+				controleur.stage.setTitle("Itine'GO");
+				controleur.stage.setScene(scene);
+				controleur.stage.show();
+				controleur.gestionTourneeVue.dessinePlan();
+				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
@@ -43,7 +61,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.effacerLivraisonsEtEntrepot();
+		gestionnaire.effacerTournee();
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisonsVue/ChoixDemandeLivraisons.fxml"));
@@ -63,7 +81,6 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
-	
 	}
 	
 	public void getEtat()

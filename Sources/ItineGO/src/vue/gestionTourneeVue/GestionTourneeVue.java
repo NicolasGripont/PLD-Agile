@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -37,7 +38,10 @@ public class GestionTourneeVue implements Initializable{
     private TableColumn<Livraison, String> plageFinColonne;
     
     @FXML
-    private TableColumn<Livraison, String> dureeColonne;
+    private TableColumn<Livraison, String> arriveeColonne;
+    
+    @FXML
+    private TableColumn<Livraison, String> departColonne;
     
 	@FXML
 	private Label labelEntrepot;
@@ -45,13 +49,16 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	private Label labelError;
 	
-	@FXML
-	private Button boutonCalculer;
-	
 	@FXML 
 	private StackPane planVillePane;
 	
 	private PlanVilleVue planVilleVue;
+	
+	@FXML
+	private Button boutonAccueil;
+	
+	@FXML
+	private Button boutonPrecedent;
 	
 	
 	@Override
@@ -98,12 +105,28 @@ public class GestionTourneeVue implements Initializable{
 	    	}
         });
         
-        dureeColonne.setCellValueFactory(param -> { 
+        arriveeColonne.setCellValueFactory( param -> {
+        	return new SimpleStringProperty("-");
+        });
+        
+        departColonne.setCellValueFactory( param -> {
+        	return new SimpleStringProperty("-");
+        });
+        /*arriveeColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
             return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
         }); 
         
-        labelError.setVisible(false);    
+        departColonne.setCellValueFactory(param -> { 
+        	final Livraison livraison = param.getValue(); 
+            return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
+        }); */
+        
+        labelError.setVisible(false);   
+        
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
+        boutonAccueil.setGraphic(new ImageView(classLoader.getResource("accueil.png").toString()));
 	}
 
 	public void dessinePlan() {
