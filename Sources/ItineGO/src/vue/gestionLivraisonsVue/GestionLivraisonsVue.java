@@ -2,7 +2,6 @@ package vue.gestionLivraisonsVue;
 
 import java.net.URL;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
@@ -22,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import vue.planVilleVue.PlanVilleVue;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -170,34 +169,17 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		/*Alert alert = new Alert(AlertType.NONE);
-		ProgressIndicator progress = new ProgressIndicator();
+		Alert alert = new Alert(AlertType.NONE);
+		VBox vbox = new VBox();
+    	ProgressIndicator progress = new ProgressIndicator();
         progress.setStyle("-fx-margin-top: 10px");
-		ButtonType boutonStop = new ButtonType("Stopper le calcul");
+		Button boutonStop = new Button("Stopper le calcul");
 		alert.setTitle("Calcul de l'itinéraire");
-		alert.getDialogPane().setContent(progress);
-		alert.getButtonTypes().add(boutonStop);
-		final Task<Void> taskCalculer = new Task<Void>() {
-            @Override public Void call() {
-            	controleur.clicBoutonCalculerTournee();
-            	alert.close();
-                return null;
-            }
-        };;
-		
-		final Task<Void> taskAlert = new Task<Void>() {
-            @Override public Void call() {
-            	new Thread(taskCalculer).start();
-            	Optional<ButtonType> result = alert.showAndWait();
-            	if (result.get() == boutonStop){
-        			if(taskCalculer.isCancelled() == false)
-        				taskCalculer.cancel();
-        		}
-                return null;
-            }
-        };
-        new Thread(taskAlert).start();*/
-		controleur.clicBoutonCalculerTournee();
+		vbox.getChildren().add(progress);
+		vbox.getChildren().add(boutonStop);
+		alert.getDialogPane().setContent(vbox);
+		alert.show();
+		controleur.clicBoutonCalculerTournee(alert);
 	}
 	
 	@FXML
