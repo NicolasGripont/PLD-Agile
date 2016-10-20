@@ -15,7 +15,6 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.calculerTournee();
-		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
@@ -81,6 +80,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

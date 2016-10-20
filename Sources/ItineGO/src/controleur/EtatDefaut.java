@@ -46,6 +46,11 @@ public abstract class EtatDefaut {
 		
 	}
 	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat defaut");

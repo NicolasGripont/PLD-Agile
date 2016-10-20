@@ -58,6 +58,11 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 		}
 	}
 	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat fichier livraison choisi");
