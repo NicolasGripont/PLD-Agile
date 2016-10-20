@@ -2,17 +2,15 @@ package controleur;
 
 import java.io.File;
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import modeles.Gestionnaire;
-import modeles.ParseurLivraison;
-import modeles.ParseurPlan;
 import modeles.Plan;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
+import vue.gestionTourneeVue.GestionTourneeVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -23,6 +21,7 @@ public class Controleur extends Application{
 	protected ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	protected ChoixPlanVilleVue choixPlanVilleVue;
 	protected GestionLivraisonsVue gestionLivraisonsVue;
+	protected GestionTourneeVue gestionTourneeVue;
 	protected EtatDefaut etatCourant;
 	protected final EtatApplicationDemarree etatApplicationDemarree = new EtatApplicationDemarree();
 	protected final EtatFichierLivraisonsChoisi etatFichierLivraisonsChoisi = new EtatFichierLivraisonsChoisi();
@@ -170,19 +169,8 @@ public class Controleur extends Application{
 	public Plan getPlan() {
 		return plan;
 	}
-	
-	public ChoixDemandeLivraisonsVue getChoixDemandeLivraisonVue() {
-		return choixDemandeLivraisonsVue;
-	}
-
-	public ChoixPlanVilleVue getChoixPlanVilleVue() {
-		return choixPlanVilleVue;
-	}
 
 	public Stage getStage() {
 		return stage;
 	}
-
-
-
 }

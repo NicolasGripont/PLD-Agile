@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -46,151 +47,50 @@ public class Plan {
     	
     	
     	//On remplie le tableau des id 
-    	Set<Entry<Integer , Noeud>> setnoeuds;
-		Iterator<Entry<Integer , Noeud>> itnoeuds;
-		Entry<Integer , Noeud> enoeuds;
-    	int itid=0;
-    	setnoeuds = noeuds.entrySet();
-    	itnoeuds = setnoeuds.iterator();
-		while(itnoeuds.hasNext())
-		{
-			enoeuds = itnoeuds.next();
-			tableauDesId[itid] = (int)enoeuds.getKey();
-		    itid++;
-		}
+    	remplirTableauDesID(tableauDesId);
     	
     	
     	Integer depart[]; // numero dans tableau des id des livraisons
-		depart = new Integer[nbDeLivraison+1]; // ce sera à placer en paramettre de l'appel de fonction
+    	depart = new Integer[nbDeLivraison+1]; 
 		
 		int duree[];
 		duree = new int[nbDeLivraison+1];
 		
-		depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
-		duree[0]=0;
+		//On place les informations de l'entrepot et des livraisons dans les deux tableaux
+		remplirTableauDepEtDur(depart, duree);
 		
-		Set<Entry<Noeud, Livraison>> setlivraisons;
-		Iterator<Entry<Noeud, Livraison>> itlivraisons;
-		Entry<Noeud, Livraison> elivraisons;
-		
-		int idep=1;
-		setlivraisons = livraisons.entrySet();
-		itlivraisons = setlivraisons.iterator();
-		while(itlivraisons.hasNext())
-		{
-			elivraisons = itlivraisons.next();
-		    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
-		    duree[idep]=(elivraisons.getValue().getDuree());
-		    idep++;
-		}
 		
 		Integer matriceDuGraphe[][];
     	matriceDuGraphe= new Integer[noeuds.size()][noeuds.size()] ; 
     	
     	//On remplie la matrice qui modelise le graphe
-    	
-    	for(Integer i = 0 ; i <matriceDuGraphe.length ;i++)
-        {
-            for(Integer j = 0 ; j < matriceDuGraphe.length ; j++)
-            {
-                if(i!=j)
-                {
-                	Pair<Noeud, Noeud> key = new Pair<>(noeuds.get(tableauDesId[i]),noeuds.get(tableauDesId[j]));
-                	if(troncons.get(key) != null)
-                	{
-                	matriceDuGraphe[i][j]=(int)((troncons.get(key).getLongueur())/(troncons.get(key).getVitesse()));
-                	}
-                	else
-                	{
-                		matriceDuGraphe[i][j]=10000000; // a remplacer par un max
-                	}
-                	
-                }
-                else
-                {
-                    matriceDuGraphe[i][j]=0;
-                }
-            }
-    
-        }
-    	
-    	//Imprime la matrice du graphe -> à elever une fois les teste unitaire fait sur données réelles
-    
-//    	System.out.print(" \n matrice du graph: \n");
-    	for(int i = 0; i <matriceDuGraphe.length ;i++)
-    	{
-    		for(int j = 0 ; j < matriceDuGraphe.length ; j++)
-    		{
-//    			System.out.print(matriceDuGraphe[i][j] + " ");    
-            }
-//    		System.out.print("\n");
-    	}
+    	remplirMatriceDuGraphe(matriceDuGraphe);
     	
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera également placé en paramètre
         HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera également placé en paramètre
     	
     	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
-    
-    	
-    	Set<Entry<Integer, Integer>> setprevious;
-		Set<Entry<Integer, Integer>> setnoires;
-		Iterator<Entry<Integer, Integer>> it;
-		Entry<Integer, Integer> e;
-		
-    	//Verification de ce qui est sortie
-		
-		for(int p =0; p< depart.length; p++)
-		{	
-//			System.out.print("\n depart: " + depart[p] + "\n" );
-//			System.out.print( " previous: \n");
-			setprevious = AllPrevious.get(depart[p]).entrySet();
-			it = setprevious.iterator();
-			while(it.hasNext())
-			{
-			    e = it.next();
-//			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
-			    
-			}
-			
-//			System.out.print( "\n noires: \n");
-			setnoires = AllNoires.get(depart[p]).entrySet();
-			it = setnoires.iterator();
-			while(it.hasNext())
-			{
-			    e = it.next();
-//			    System.out.print("<"+e.getKey()+";"+e.getValue()+"> ");
-			    
-			}
-//			System.out.print("\n");
-		}
+   
 		
 		//Construction de la matrice de cout pour le TSP
 		
 		int cout[][]= new int [depart.length][depart.length];
-		for(int u = 0;u<depart.length; u++)
-		{
-			for(int v = 0;v<depart.length; v++)
-			{
-				cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
-//				System.out.print(cout[u][v]+" ");
-			}
-//			System.out.print("\n");
-		}
+		
+		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
+		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp.TSP monTSP = new tsp.TSP1();
-		monTSP.chercheSolution(100000, depart.length , cout, duree);  //le 100000 est le temps max toléré 
-		
+		monTSP.chercheSolution(Integer.MAX_VALUE, depart.length , cout, duree);  //le 100000 est le temps max toléré
 		
 		//Il faut maintenant reupéré le chemin optimal via les get
 		
-		//System.out.print("\n Orbre des noeud : \n");
 		
 		
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
-		Integer noeudCourant = depart[monTSP.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin à l'envers
-//		System.out.print("depart : "+ noeudCourant+ "\n");
 		
+		Integer noeudCourant = depart[monTSP.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
+		boolean first;
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
 		
@@ -205,14 +105,22 @@ public class Plan {
 		}
 		futurTourne.add(depart[monTSP.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
-//	      System.out.print("\n tourne : \n");
-//	      System.out.println(futurTourne);
-
+	      List<Integer> FT = new ArrayList<Integer>(futurTourne);
+	      futurTourne.clear();
+	      ListIterator<Integer> itFT = FT.listIterator();
+	      Integer lastAdded=-1;
+	      Integer myInt;
+	      while(itFT.hasNext()){
+	    	  myInt = itFT.next();
+		      if(!lastAdded.equals(myInt)) {
+		      futurTourne.add(myInt);
+		      }
+		      lastAdded=myInt;
+	      } 
+	      
 		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
 	    //Puis on constrit tournee
 	     
-	    //Checker si la tournee est valide
-//	    if(futurTourne.size() >= 3 && futurTourne.get(0) == futurTourne.get(futurTourne.size()-1)) {
 			// Construction de la Tournee
 			List<Trajet> trajetsPrevus = new ArrayList<>();
 			List<Troncon> tronconsTrajet = new ArrayList<>();
@@ -233,25 +141,90 @@ public class Plan {
 				}
 			}
 			this.tournee = new Tournee(trajetsPrevus);
-//	    } else {
-//	    	this.tournee = null;
-//	    }
     }
     
-    private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
+	 private void constructionMatTsp(int[][] cout, Integer[] depart,
+				HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
+	    	for(int u = 0;u<depart.length; u++)
+			{
+				for(int v = 0;v<depart.length; v++)
+				{
+					cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
+				}
+			}
+			
+		}
+
+		private void remplirTableauDesID(int[] tableauDesId2) {
+	    	Set<Entry<Integer , Noeud>> setnoeuds;
+			Iterator<Entry<Integer , Noeud>> itnoeuds;
+			Entry<Integer , Noeud> enoeuds;
+	    	int itid=0;
+	    	setnoeuds = noeuds.entrySet();
+	    	itnoeuds = setnoeuds.iterator();
+			while(itnoeuds.hasNext())
+			{
+				enoeuds = itnoeuds.next();
+				tableauDesId[itid] = (int)enoeuds.getKey();
+			    itid++;
+			}
+			
+		}
+
+		private void remplirMatriceDuGraphe(Integer[][] matriceDuGraphe) {
+	    	for(Integer i = 0 ; i <matriceDuGraphe.length ;i++)
+	        {
+	            for(Integer j = 0 ; j < matriceDuGraphe.length ; j++)
+	            {
+	                if(i!=j)
+	                {
+	                	Pair<Noeud, Noeud> key = new Pair<>(noeuds.get(tableauDesId[i]),noeuds.get(tableauDesId[j]));
+	                	if(troncons.get(key) != null)
+	                	{
+	                	matriceDuGraphe[i][j]=(int)((troncons.get(key).getLongueur())/(troncons.get(key).getVitesse()));
+	                	}
+	                	else
+	                	{
+	                		matriceDuGraphe[i][j]=-1; // a remplacer par un max
+	                	}
+	                	
+	                }
+	                else
+	                {
+	                    matriceDuGraphe[i][j]=0;
+	                }
+	            }
+	    
+	        }		
+		}
+
+		private void remplirTableauDepEtDur(Integer[] depart, int[] duree) {
+	    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
+			duree[0]=0;
+			
+			Set<Entry<Noeud, Livraison>> setlivraisons;
+			Iterator<Entry<Noeud, Livraison>> itlivraisons;
+			Entry<Noeud, Livraison> elivraisons;
+			
+			int idep=1;
+			setlivraisons = livraisons.entrySet();
+			itlivraisons = setlivraisons.iterator();
+			while(itlivraisons.hasNext())
+			{
+				elivraisons = itlivraisons.next();
+			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
+			    duree[idep]=(elivraisons.getValue().getDuree());
+			    idep++;
+			}
+		}
+
+		private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
     	
     	for(int itDepart = 0; itDepart<depart.length ; itDepart++)
     	{
     		Integer curentNoeud = depart[itDepart];
         
-    		
-
-    		Integer  distanceADep[] = new Integer[(int) matriceDuGraphe[1].length];
-    		for(Integer i = 0 ; i < distanceADep.length;i++)
-    		{
-    			distanceADep[i]=Integer.MAX_VALUE; //A remplacer par MAX_INT
-    		}
        
     		HashMap<Integer, Integer> blancs = new HashMap<>();
     		HashMap<Integer, Integer> noires = new HashMap<>();
@@ -264,15 +237,10 @@ public class Plan {
 	        //Initialisation de la map des blancs
 	        for(Integer i = 0; i<matriceDuGraphe[1].length;i++)
 	        {
-	            if(i!=depart[itDepart])
-	            {
-	            blancs.put(i,Integer.MAX_VALUE);
-	            }
-	            else
-	            {
-	            blancs.put(i,0);
-	            }
+	        	blancs.put(i,Integer.MAX_VALUE/100);
 	        }
+	        blancs.remove(depart[itDepart]);
+	        blancs.put(depart[itDepart], 0);
 	
 	        
 	       
@@ -321,7 +289,7 @@ public class Plan {
 	            {
 	            	
 	                e = it.next();
-	                if(e.getValue()> (min + matriceDuGraphe[curentNoeud][e.getKey()]))
+	                if((e.getValue()> (min + matriceDuGraphe[curentNoeud][e.getKey()]))&& (matriceDuGraphe[curentNoeud][e.getKey()] >0) )
 	                {
 	                	blancs.remove(e.getKey());
 	                    blancs.put(e.getKey(), (min + matriceDuGraphe[curentNoeud][e.getKey()]));
