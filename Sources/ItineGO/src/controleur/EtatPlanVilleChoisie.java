@@ -36,6 +36,7 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 			}
 		} else {
 			controleur.choixPlanVilleVue.afficherErreur("Erreur : impossible de parser le fichier");
+			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		}
 	}
 	

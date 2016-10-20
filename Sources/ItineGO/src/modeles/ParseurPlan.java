@@ -1,6 +1,7 @@
 package modeles;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Iterator;
 import org.jdom2.*;
 import org.jdom2.filter.*;
@@ -81,6 +82,13 @@ public class ParseurPlan {
 			 }
 		 }
 		 catch(Exception e){System.out.println(e);return false;}
+		 for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
+			if(n.getValue().getId() == -1) {
+				plan.effacerNoeuds();
+				plan.effacerTroncons();
+				return false;
+			}
+		}
 		 return true;
 	 }
 

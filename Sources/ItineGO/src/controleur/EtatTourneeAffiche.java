@@ -16,6 +16,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	{
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
+		gestionnaire.effacerTournee();
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));

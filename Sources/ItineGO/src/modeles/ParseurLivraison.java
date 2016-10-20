@@ -1,6 +1,7 @@
 package modeles;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Iterator;
 import org.jdom2.*;
 import org.jdom2.filter.*;
@@ -58,6 +59,18 @@ public class ParseurLivraison {
 			 ));
 		 }
 		 catch(Exception e){e.printStackTrace();return false;}
+		 if(plan.getEntrepot().getNoeud().getId() == -1) {
+				plan.effacerEntrepot();
+				plan.effacerLivraisons();
+				return false;
+			}
+		 for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
+				if(l.getValue().getNoeud().getId() == -1) {
+					plan.effacerEntrepot();
+					plan.effacerLivraisons();
+					return false;
+				}
+			}
 		 return true;
 	 }
 

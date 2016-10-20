@@ -60,7 +60,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.effacerTournee();
+		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisonsVue/ChoixDemandeLivraisons.fxml"));
@@ -72,8 +72,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
-				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
-				
+				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -36,6 +36,7 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 			}
 		} else {
 			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Impossible de parser le fichier");
+			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		}
 	}
 	
@@ -44,7 +45,7 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 		gestionnaire.effacerNoeudsEtTroncons();
 		if(controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 				Parent root;
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
