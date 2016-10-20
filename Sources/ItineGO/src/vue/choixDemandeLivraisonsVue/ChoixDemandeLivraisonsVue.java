@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -32,6 +33,9 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	@FXML
 	private Label labelError;
+	
+	@FXML 
+	private Button boutonPrecedent;
 	
 	@FXML
 	private Button boutonParcourirFichier;
@@ -88,6 +92,9 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
           
         };
         planVillePane.widthProperty().addListener(listener);
+        
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
 	}
 
 	public void dessinePlan() {
