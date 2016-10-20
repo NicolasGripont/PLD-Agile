@@ -37,7 +37,10 @@ public class GestionTourneeVue implements Initializable{
     private TableColumn<Livraison, String> plageFinColonne;
     
     @FXML
-    private TableColumn<Livraison, String> dureeColonne;
+    private TableColumn<Livraison, String> arriveeColonne;
+    
+    @FXML
+    private TableColumn<Livraison, String> departColonne;
     
 	@FXML
 	private Label labelEntrepot;
@@ -98,10 +101,22 @@ public class GestionTourneeVue implements Initializable{
 	    	}
         });
         
-        dureeColonne.setCellValueFactory(param -> { 
+        arriveeColonne.setCellValueFactory( param -> {
+        	return new SimpleStringProperty("-");
+        });
+        
+        departColonne.setCellValueFactory( param -> {
+        	return new SimpleStringProperty("-");
+        });
+        /*arriveeColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
             return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
         }); 
+        
+        departColonne.setCellValueFactory(param -> { 
+        	final Livraison livraison = param.getValue(); 
+            return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
+        }); */
         
         labelError.setVisible(false);    
 	}
