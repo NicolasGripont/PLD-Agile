@@ -43,13 +43,12 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionLivraisonsVue/GestionLivraisonsVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
-				controleur.gestionTourneeVue.setControleur(controleur);
-				controleur.gestionTourneeVue.setPlan(gestionnaire.getPlan());
+				controleur.gestionLivraisonsVue.setControleur(controleur);
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.gestionTourneeVue.dessinePlan();
+				controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

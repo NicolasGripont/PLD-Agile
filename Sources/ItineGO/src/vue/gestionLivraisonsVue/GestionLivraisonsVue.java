@@ -81,7 +81,7 @@ public class GestionLivraisonsVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				controleur.redessinnerPlan();
+				controleur.redessinerPlan();
 			}
           
         };
@@ -126,6 +126,7 @@ public class GestionLivraisonsVue implements Initializable{
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
 				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
 			}
+			livraisonTable.getItems().clear();
 			if(plan.getLivraisons() != null) {
 				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
 					if(l != null && l.getKey() != null) {
@@ -164,7 +165,7 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		Alert alert = new Alert(AlertType.NONE);
+		/*Alert alert = new Alert(AlertType.NONE);
 		ProgressIndicator progress = new ProgressIndicator();
         progress.setStyle("-fx-margin-top: 10px");
 		ButtonType boutonStop = new ButtonType("Stopper le calcul");
@@ -190,7 +191,8 @@ public class GestionLivraisonsVue implements Initializable{
                 return null;
             }
         };
-        new Thread(taskAlert).start();
+        new Thread(taskAlert).start();*/
+		controleur.clicBoutonCalculerTournee();
 	}
 	
 	@FXML

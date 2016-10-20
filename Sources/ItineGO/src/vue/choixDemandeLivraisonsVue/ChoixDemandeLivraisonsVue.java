@@ -88,7 +88,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				controleur.redessinnerPlan();
+				controleur.redessinerPlan();
 			}
           
         };
@@ -182,17 +182,6 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		controleur.clicBoutonRetour();
 		//controleur.showChoixPlanVille();
 	}
-<<<<<<< HEAD
-=======
-
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-        planVilleVue.dessinerPlan(plan);
-	}
 	
 	@FXML
 	private void imageViewPrecedentEntered() {
@@ -203,5 +192,4 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	private void imageViewPrecedentExited() {
         imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_noir.png").toString()));
 	}
->>>>>>> origin/master
 }

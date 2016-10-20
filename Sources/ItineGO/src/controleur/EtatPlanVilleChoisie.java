@@ -22,12 +22,11 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-				controleur.choixDemandeLivraisonsVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.choixDemandeLivraisonsVue.dessinePlan();
+				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				//changement d'état
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 			} catch (IOException e) {
@@ -39,7 +38,7 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 	
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		controleur.choixPlanVilleVue.dessinePlan(gestionnaire.getPlan());
+
 	}
 	
 	public void getEtat()

@@ -76,7 +76,7 @@ public class GestionTourneeVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				controleur.redessinner();
+				controleur.redessinerPlan();
 			}
           
         };
@@ -133,6 +133,7 @@ public class GestionTourneeVue implements Initializable{
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
 				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
 			}
+			livraisonTable.getItems().clear();
 			if(plan.getTournee() != null) {
 				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
 					if(l != null && l.getKey() != null) {

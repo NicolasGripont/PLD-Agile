@@ -21,12 +21,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
 				controleur.gestionTourneeVue.setControleur(controleur);
-				controleur.gestionTourneeVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.gestionTourneeVue.dessinePlan();
+				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -67,12 +66,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-				controleur.choixDemandeLivraisonsVue.setPlan(gestionnaire.getPlan());
 				Scene scene = new Scene(root);
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				controleur.choixDemandeLivraisonsVue.dessinePlan();
+				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 				
 			} catch (IOException e) {
