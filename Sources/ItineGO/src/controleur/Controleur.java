@@ -154,6 +154,7 @@ public class Controleur extends Application{
 	}
 	
 	public void clicBoutonHome() {
+		System.out.println("On clique sur home");
 		etatCourant.clicBoutonHome(this, gestionnaire);
 		etatCourant.getEtat();
 	}
