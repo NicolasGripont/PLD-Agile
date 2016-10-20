@@ -165,6 +165,10 @@ public class Controleur extends Application{
 		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
 		etatCourant.getEtat();
 	}
+	
+	public void redessinerPlan() {
+		etatCourant.redessinerPlan(this, gestionnaire);
+	}
 
 	public Plan getPlan() {
 		return plan;

@@ -35,7 +35,11 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
-		
+	}
+	
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.choixPlanVilleVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

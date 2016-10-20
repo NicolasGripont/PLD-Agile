@@ -30,12 +30,13 @@ public class IteratorMinFirst implements Iterator<Integer> {
 			coutCandidats.put(s, cout[sommetCrt][s]);
 			nbCandidats++;
 		}
+		this.candidats = new Integer[nbCandidats];
 		//On trie
-		LinkedHashMap<Integer, Integer> coutCandidatsSorted = MapUtil.sortByValue(coutCandidats);
+		Map<Integer, Integer> coutCandidatsSorted = MapUtil.sortByValue(coutCandidats);
 		//On renvoie les sommets triés par cout croissant
 		int i = 0;
 		for(Integer sommet : coutCandidatsSorted.keySet()) {
-			this.candidats[i++] = sommet;
+			candidats[i++] = sommet;
 		}
 	}
 	

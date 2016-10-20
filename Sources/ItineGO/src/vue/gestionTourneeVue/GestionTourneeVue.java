@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -46,14 +48,18 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	private Label labelError;
 	
-	@FXML
-	private Button boutonCalculer;
-	
 	@FXML 
 	private StackPane planVillePane;
 	
 	private PlanVilleVue planVilleVue;
 	
+	@FXML
+	private ImageView imageViewAccueil;
+	
+	@FXML
+	private ImageView imageViewPrecedent;
+	
+	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -116,7 +122,10 @@ public class GestionTourneeVue implements Initializable{
             return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
         }); */
         
-        labelError.setVisible(false);    
+        labelError.setVisible(false);   
+       
+        imageViewAcceuilExited();
+        imageViewPrecedentExited();
 	}
 
 	public void dessinePlan(Plan plan) {
@@ -158,5 +167,25 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	public void precedent(){
 		controleur.clicBoutonRetour();
+	}
+	
+	@FXML
+	private void imageViewPrecedentEntered() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewPrecedentExited() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAccueilEntered() {
+        imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAcceuilExited() {
+		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
 	}
 }

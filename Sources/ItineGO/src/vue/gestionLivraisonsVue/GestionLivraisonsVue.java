@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import vue.planVilleVue.PlanVilleVue;
@@ -59,11 +60,12 @@ public class GestionLivraisonsVue implements Initializable{
 	private PlanVilleVue planVilleVue;
 	
 	@FXML
-	private Button boutonAccueil;
+	private ImageView imageViewAccueil;
 	
 	@FXML
-	private Button boutonPrecedent;
+	private ImageView imageViewPrecedent;
 	
+	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -115,9 +117,8 @@ public class GestionLivraisonsVue implements Initializable{
         
         labelError.setVisible(false);  
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
-        boutonAccueil.setGraphic(new ImageView(classLoader.getResource("accueil.png").toString()));
+        imageViewAcceuilExited();
+        imageViewPrecedentExited();
 	}
 
 	public void dessinePlan(Plan plan) {
@@ -190,5 +191,25 @@ public class GestionLivraisonsVue implements Initializable{
             }
         };
         new Thread(taskAlert).start();
+	}
+	
+	@FXML
+	private void imageViewPrecedentEntered() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewPrecedentExited() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAccueilEntered() {
+		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAcceuilExited() {
+		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
 	}
 }

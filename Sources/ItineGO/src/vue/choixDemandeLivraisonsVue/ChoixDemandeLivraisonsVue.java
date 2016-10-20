@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +34,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Label labelError;
 	
 	@FXML 
-	private Button boutonPrecedent;
+	private ImageView imageViewPrecedent;
 	
 	@FXML
 	private Button boutonParcourirFichier;
@@ -50,6 +51,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	private AnchorPane glisserDeposerFichierPane;
 	
 	private GlisserDeposerFichierVue glisserDeposerFichierVue;
+	
+	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,8 +94,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         };
         planVillePane.widthProperty().addListener(listener);
         
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
+        imageViewPrecedentExited();
 	}
 
 	public void dessinePlan(Plan plan) {
@@ -180,4 +182,26 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		controleur.clicBoutonRetour();
 		//controleur.showChoixPlanVille();
 	}
+<<<<<<< HEAD
+=======
+
+	public Plan getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+        planVilleVue.dessinerPlan(plan);
+	}
+	
+	@FXML
+	private void imageViewPrecedentEntered() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewPrecedentExited() {
+        imageViewPrecedent.setImage(new Image(classLoader.getResource("precedent_noir.png").toString()));
+	}
+>>>>>>> origin/master
 }
