@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -48,13 +49,16 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	private Label labelError;
 	
-	@FXML
-	private Button boutonCalculer;
-	
 	@FXML 
 	private StackPane planVillePane;
 	
 	private PlanVilleVue planVilleVue;
+	
+	@FXML
+	private Button boutonAccueil;
+	
+	@FXML
+	private Button boutonPrecedent;
 	
 	
 	@Override
@@ -118,7 +122,11 @@ public class GestionTourneeVue implements Initializable{
             return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
         }); */
         
-        labelError.setVisible(false);    
+        labelError.setVisible(false);   
+        
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
+        boutonAccueil.setGraphic(new ImageView(classLoader.getResource("accueil.png").toString()));
 	}
 
 	public void dessinePlan() {

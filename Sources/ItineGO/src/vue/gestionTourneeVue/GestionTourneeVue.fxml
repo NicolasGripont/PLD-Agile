@@ -36,8 +36,8 @@
                <children>
                   <HBox maxWidth="400.0" minWidth="400.0" onMouseClicked="#home" prefHeight="27.0" prefWidth="400.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#home" prefHeight="27.0" prefWidth="27.0" text="H" />
-                        <Button mnemonicParsing="false" onMouseClicked="#precedent" prefHeight="27.0" prefWidth="27.0" text="&lt;">
+                        <Button fx:id="boutonAccueil" mnemonicParsing="false" onMouseClicked="#home" prefHeight="27.0" prefWidth="27.0" />
+                        <Button fx:id="boutonPrecedent" mnemonicParsing="false" onMouseClicked="#precedent" prefHeight="27.0" prefWidth="27.0">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
