@@ -121,7 +121,7 @@ public class GestionLivraisonsVue implements Initializable{
         imageViewPrecedentExited();
 	}
 
-	public void dessinePlan(Plan plan) {
+	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
 				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
@@ -134,6 +134,11 @@ public class GestionLivraisonsVue implements Initializable{
 					}
 				}
 			}
+		}
+	}
+	
+	public void dessinePlan(Plan plan) {
+		if(plan != null) {
 			planVilleVue.setWidth(planVillePane.getWidth());
 			planVilleVue.setHeight(planVillePane.getHeight());
 			planVilleVue.dessinerPlan(plan);

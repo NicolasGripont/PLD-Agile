@@ -1,6 +1,7 @@
 package vue.gestionTourneeVue;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,6 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import modeles.Livraison;
+import modeles.Noeud;
 import modeles.Plan;
 import vue.planVilleVue.PlanVilleVue;
 
@@ -125,19 +128,23 @@ public class GestionTourneeVue implements Initializable{
         imageViewPrecedentExited();
 	}
 
-	public void dessinePlan(Plan plan) {
+	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
 				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
 			}
-			livraisonTable.getItems().clear();
-			/*if(plan.getTournee() != null) {
+			/*livraisonTable.getItems().clear();
+			if(plan.getLivraisons() != null) {
 				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
 					if(l != null && l.getKey() != null) {
 						livraisonTable.getItems().add(l.getValue());
 					}
 				}
 			}*/
+		}
+	}
+	public void dessinePlan(Plan plan) {
+		if(plan != null) {
 			planVilleVue.setWidth(planVillePane.getWidth());
 			planVilleVue.setHeight(planVillePane.getHeight());
 			planVilleVue.dessinerPlan(plan);

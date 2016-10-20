@@ -27,6 +27,7 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
+				controleur.gestionLivraisonsVue.miseAJourTableau(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
