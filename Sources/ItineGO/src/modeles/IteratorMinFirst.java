@@ -1,11 +1,8 @@
 package modeles;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import utility.MapUtil;
@@ -21,7 +18,7 @@ public class IteratorMinFirst implements Iterator<Integer> {
 	 * @param sommetCrt
 	 */
 	public IteratorMinFirst(Collection<Integer> nonVus, int sommetCrt, int[][] cout){
-		//nombre de sommets pouvant être atteints
+		//nombre de sommets pouvant ï¿½tre atteints
 		nbCandidats = 0;
 		//strtucture pour stocker chaque sommet avec son cout
 		Map<Integer, Integer> coutCandidats = new HashMap<Integer, Integer>();
@@ -33,7 +30,7 @@ public class IteratorMinFirst implements Iterator<Integer> {
 		this.candidats = new Integer[nbCandidats];
 		//On trie
 		Map<Integer, Integer> coutCandidatsSorted = MapUtil.sortByValue(coutCandidats);
-		//On renvoie les sommets triés par cout croissant
+		//On renvoie les sommets triï¿½s par cout croissant
 		int i = 0;
 		for(Integer sommet : coutCandidatsSorted.keySet()) {
 			candidats[i++] = sommet;
