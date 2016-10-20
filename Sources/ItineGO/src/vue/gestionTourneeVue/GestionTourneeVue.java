@@ -1,7 +1,6 @@
 package vue.gestionTourneeVue;
 
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,15 +8,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import modeles.Livraison;
-import modeles.Noeud;
 import modeles.Plan;
 import vue.planVilleVue.PlanVilleVue;
 
@@ -25,22 +21,22 @@ public class GestionTourneeVue implements Initializable{
 	private Controleur controleur;
 	
 	@FXML
-    private TableView<Livraison> livraisonTable;
+    private TableView<LivraisonTournee> livraisonTable;
     
 	@FXML
-    private TableColumn<Livraison, String> adresseColonne;
+    private TableColumn<LivraisonTournee, String> adresseColonne;
     
     @FXML
-    private TableColumn<Livraison, String> plageDebutColonne;
+    private TableColumn<LivraisonTournee, String> plageDebutColonne;
     
     @FXML
-    private TableColumn<Livraison, String> plageFinColonne;
+    private TableColumn<LivraisonTournee, String> plageFinColonne;
     
     @FXML
-    private TableColumn<Livraison, String> arriveeColonne;
+    private TableColumn<LivraisonTournee, String> arriveeColonne;
     
     @FXML
-    private TableColumn<Livraison, String> departColonne;
+    private TableColumn<LivraisonTournee, String> departColonne;
     
 	@FXML
 	private Label labelEntrepot;
@@ -83,23 +79,23 @@ public class GestionTourneeVue implements Initializable{
         planVillePane.widthProperty().addListener(listener);
         
         adresseColonne.setCellValueFactory(param -> { 
-        	final Livraison livraison = param.getValue(); 
-            return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId())); 
+        	final LivraisonTournee livraison = param.getValue(); 
+            return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getNoeud().getId())); 
         }); 
         
         plageDebutColonne.setCellValueFactory(param -> { 
-        	final Livraison livraison = param.getValue(); 
-        	if(livraison.getDebutPlage() != null) {
-        		return new SimpleStringProperty(livraison.getDebutPlage().toString()); 
+        	final LivraisonTournee livraison = param.getValue(); 
+        	if(livraison.getLivraison().getDebutPlage() != null) {
+        		return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().toString()); 
         	} else {
         		return new SimpleStringProperty("-");
         	}
         }); 
         
         plageFinColonne.setCellValueFactory( param -> {
-        	final Livraison livraison = param.getValue(); 
-        	if(livraison.getFinPlage() != null) {
-	        	return new SimpleStringProperty(livraison.getFinPlage().toString());
+        	final LivraisonTournee livraison = param.getValue(); 
+        	if(livraison.getLivraison().getFinPlage() != null) {
+	        	return new SimpleStringProperty(livraison.getLivraison().getFinPlage().toString());
 	        } else {
 	    		return new SimpleStringProperty("-");
 	    	}
@@ -112,15 +108,16 @@ public class GestionTourneeVue implements Initializable{
         departColonne.setCellValueFactory( param -> {
         	return new SimpleStringProperty("-");
         });
-        /*arriveeColonne.setCellValueFactory(param -> { 
-        	final Livraison livraison = param.getValue(); 
-            return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
+        
+        arriveeColonne.setCellValueFactory(param -> { 
+        	final LivraisonTournee livraison = param.getValue(); 
+            return new SimpleStringProperty(livraison.getHeureArrive().toString()); 
         }); 
         
         departColonne.setCellValueFactory(param -> { 
-        	final Livraison livraison = param.getValue(); 
-            return new SimpleStringProperty(String.valueOf(livraison.getDuree())); 
-        }); */
+        	final LivraisonTournee livraison = param.getValue(); 
+            return new SimpleStringProperty(livraison.getHeureDepart().toString()); 
+        });
         
         labelError.setVisible(false);   
        
@@ -134,13 +131,13 @@ public class GestionTourneeVue implements Initializable{
 				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
 			}
 			livraisonTable.getItems().clear();
-			if(plan.getTournee() != null) {
+			/*if(plan.getTournee() != null) {
 				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
 					if(l != null && l.getKey() != null) {
 						livraisonTable.getItems().add(l.getValue());
 					}
 				}
-			}
+			}*/
 			planVilleVue.setWidth(planVillePane.getWidth());
 			planVilleVue.setHeight(planVillePane.getHeight());
 			planVilleVue.dessinerPlan(plan);
