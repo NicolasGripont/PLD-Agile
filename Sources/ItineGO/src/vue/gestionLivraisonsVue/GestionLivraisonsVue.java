@@ -147,7 +147,11 @@ public class GestionLivraisonsVue implements Initializable{
 	public void home() {
 		//TODO : controleur.clicBoutonHome();
 		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();
+		controleur.getChoixDemandeLivraisonVue().getPlan().effacerEntrepot();
+		controleur.getChoixDemandeLivraisonVue().getPlan().effacerLivraisons();
+		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTroncons();
+		controleur.getChoixDemandeLivraisonVue().getPlan().effacerNoeuds();
+		controleur.showChoixPlanVille();
 	}
 	
 	@FXML

@@ -36,7 +36,7 @@
                <children>
                   <HBox maxWidth="400.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
                      <children>
-                        <Button fx:id="boutonParcourirFichier" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" text="&lt;">
+                        <Button mnemonicParsing="false" onMouseClicked="#precedent" prefHeight="27.0" prefWidth="27.0" text="&lt;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></Button>
@@ -61,19 +61,19 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button maxHeight="27.0" maxWidth="148.0" minHeight="27.0" minWidth="145.0" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefHeight="27.0" prefWidth="148.0" text="Parcourir les fichiers">
+                        <Button fx:id="boutonParcourirFichier" maxHeight="27.0" maxWidth="148.0" minHeight="27.0" minWidth="145.0" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefHeight="27.0" prefWidth="148.0" text="Parcourir les fichiers">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="372.0" prefWidth="395.0">
                      <VBox.margin>
                         <Insets bottom="10.0" right="5.0" top="10.0" />
                      </VBox.margin>
                   </AnchorPane>
-                  <Button fx:id="boutonValider" maxHeight="27.0" maxWidth="390.0" minHeight="27.0" minWidth="360.0" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="360.0" text="Valider">
+                  <Button fx:id="boutonValider" maxHeight="27.0" maxWidth="400.0" minHeight="27.0" minWidth="360.0" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="360.0" text="Valider">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></Button>
