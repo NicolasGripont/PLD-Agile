@@ -35,7 +35,7 @@
          <top>
             <VBox maxWidth="400.0" minWidth="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox maxWidth="400.0" minWidth="400.0" onMouseClicked="#home" prefHeight="27.0" prefWidth="400.0">
+                  <HBox maxWidth="400.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
                      <children>
                         <ImageView fx:id="imageViewAccueil" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#home" onMouseEntered="#imageViewAccueilEntered" onMouseExited="#imageViewAcceuilExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
