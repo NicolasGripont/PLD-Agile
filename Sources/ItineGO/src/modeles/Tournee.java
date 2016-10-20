@@ -44,6 +44,4 @@ public class Tournee {
 			return false;
 		return true;
 	} 
-	
-	
 }

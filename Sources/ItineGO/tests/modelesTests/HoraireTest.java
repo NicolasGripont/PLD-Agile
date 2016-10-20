@@ -102,6 +102,13 @@ public class HoraireTest {
 		horaire.ajouterSeconde(-119);
 		assertEquals("10:21:29", horaire.toString());
 	}
+	
+	@Test
+	public void testAjouterSeconde2() {
+		Horaire horaire = new Horaire("8:24:3");
+		horaire.ajouterSeconde(900);
+		assertEquals("8:39:3", horaire.toString());
+	}
 
 	@Test
 	public void testSetHeure() {

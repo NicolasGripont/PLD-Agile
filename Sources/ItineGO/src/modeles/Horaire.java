@@ -5,6 +5,12 @@ public class Horaire {
 	private int minute = 0;
 	private int seconde = 0;
 	
+	public Horaire(Horaire horaire) {
+		this.setHeure(horaire.heure);
+		this.setMinute(horaire.minute);
+		this.setSeconde(horaire.seconde);
+	}
+	
 	public Horaire(int heure, int minute, int seconde) {
 		this.setHeure(heure);
 		this.setMinute(minute);

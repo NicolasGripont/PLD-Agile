@@ -1,7 +1,4 @@
-package vue.gestionTourneeVue;
-
-import modeles.Horaire;
-import modeles.Livraison;
+package modeles;
 
 public class LivraisonTournee {
 	private Livraison livraison;

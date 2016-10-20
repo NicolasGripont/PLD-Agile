@@ -1,7 +1,7 @@
 package vue.gestionTourneeVue;
 
 import java.net.URL;
-import java.util.Map;
+import java.util.List;
 import java.util.ResourceBundle;
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,8 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import modeles.Livraison;
-import modeles.Noeud;
+import modeles.Horaire;
+import modeles.LivraisonTournee;
 import modeles.Plan;
 import vue.planVilleVue.PlanVilleVue;
 
@@ -128,21 +128,15 @@ public class GestionTourneeVue implements Initializable{
         imageViewPrecedentExited();
 	}
 
-	public void miseAJourTableau(Plan plan) {
-		if(plan != null) {
-			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
+	public void miseAJourTableau(List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
+		labelEntrepot.setText("Début de la tournee : " + horaireDebut.toString() + " - Fin de la tournée : " + horaireFin.toString());
+		if(list != null && list.size() > 0) {
+			for(LivraisonTournee l : list) {
+				livraisonTable.getItems().add(l);
 			}
-			/*livraisonTable.getItems().clear();
-			if(plan.getLivraisons() != null) {
-				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
-					if(l != null && l.getKey() != null) {
-						livraisonTable.getItems().add(l.getValue());
-					}
-				}
-			}*/
 		}
 	}
+	
 	public void dessinePlan(Plan plan) {
 		if(plan != null) {
 			planVilleVue.setWidth(planVillePane.getWidth());

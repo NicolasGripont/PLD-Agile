@@ -54,17 +54,41 @@ public class Gestionnaire {
 	}
 	
 	//Precondition: les trajets de la tournée sont triés par ordre de passage
-	public List<Livraison> listeLivraisonsParOrdreDePassage() {
+	public List<LivraisonTournee> listeLivraisonsParOrdreDePassage() {
 		if(plan.getTournee() == null){
 			return null;
 		}
-		List<Livraison> livraisons = new ArrayList<>();
+		List<LivraisonTournee> livraisons = new ArrayList<>();
+		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
 		//Depart de l'entrepot, on ajoute juste l'arrivé de chaque trajet 
 		//(qui correspond au départ du suivant). Sauf le dernier, car le 
 		//dernier trajet correspond au retour à l'entrepôt ( '< size-1' )
 		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
-			livraisons.add(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()));
+			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());
+			Horaire horaireDepart = new Horaire(horaire);
+			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
+					horaire, horaireDepart);
+			livraisons.add(l);
+			horaire = new Horaire(horaireDepart);
 		}
 		return livraisons;
+	}
+	
+	public Horaire getHoraireDebutTournee() {
+		return plan.getEntrepot().getHoraireDepart();
+	}
+	
+	public Horaire getHoraireFinTournee() {
+		if(plan.getTournee() == null){
+			return null;
+		}
+		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
+		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
+			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());
+			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+		}
+		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
+		return horaire;
 	}
 }

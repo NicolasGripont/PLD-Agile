@@ -26,7 +26,8 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan());
+				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
+						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

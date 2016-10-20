@@ -71,5 +71,12 @@ public class Trajet {
 		return true;
 	}
 		
+	public int getTemps() {
+		int temps = 0;
+		for(Troncon t : troncons) {
+			temps += t.getLongueur()/t.getVitesse();
+		}
+		return temps;
+	}
 	
 }
