@@ -1,6 +1,8 @@
 package modeles;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gestionnaire {
 
@@ -49,5 +51,20 @@ public class Gestionnaire {
 
 	public Plan getPlan() {
 		return plan;
+	}
+	
+	//Precondition: les trajets de la tournée sont triés par ordre de passage
+	public List<Livraison> listeLivraisonsParOrdreDePassage() {
+		if(plan.getTournee() == null){
+			return null;
+		}
+		List<Livraison> livraisons = new ArrayList<>();
+		//Depart de l'entrepot, on ajoute juste l'arrivé de chaque trajet 
+		//(qui correspond au départ du suivant). Sauf le dernier, car le 
+		//dernier trajet correspond au retour à l'entrepôt ( '< size-1' )
+		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
+			livraisons.add(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()));
+		}
+		return livraisons;
 	}
 }
