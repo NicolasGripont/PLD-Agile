@@ -40,6 +40,28 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 		}
 	}
 	
+	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
+	{
+		if(accepte) {
+			controleur.choixPlanVilleVue.fichierAccepte(fichier);
+		} else {
+			controleur.choixPlanVilleVue.fichierRefuse();
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatApplicationDemarree);
+		}
+	}
+	
+	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
+	{
+		if(accepte) {
+			controleur.choixPlanVilleVue.fichierAccepte(fichier);
+		} else {
+			controleur.choixPlanVilleVue.fichierRefuse();
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatApplicationDemarree);
+		}
+	}
+	
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 

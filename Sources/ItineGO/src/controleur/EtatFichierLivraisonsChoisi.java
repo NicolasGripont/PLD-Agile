@@ -40,6 +40,28 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 		}
 	}
 	
+	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
+	{
+		if(accepte) {
+			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
+		} else {
+			controleur.choixDemandeLivraisonsVue.fichierRefuse();
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
+		}
+	}
+	
+	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
+	{
+		if(accepte) {
+			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
+		} else {
+			controleur.choixDemandeLivraisonsVue.fichierRefuse();
+			//changement d'état
+			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
+		}
+	}
+	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerNoeudsEtTroncons();
