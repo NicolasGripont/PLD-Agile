@@ -168,7 +168,7 @@ public class Controleur extends Application{
 		alert.close();
 		etatCourant.getEtat();
 	}
-	
+		
 	public void redessinerPlan() {
 		etatCourant.redessinerPlan(this, gestionnaire);
 	}

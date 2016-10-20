@@ -170,7 +170,7 @@ public class GestionLivraisonsVue implements Initializable{
 	@FXML
 	public void calculerLivraisonAction() {
 		Alert alert = new Alert(AlertType.NONE);
-		VBox vbox = new VBox();
+		/*VBox vbox = new VBox();
     	ProgressIndicator progress = new ProgressIndicator();
         progress.setStyle("-fx-margin-top: 10px");
 		Button boutonStop = new Button("Stopper le calcul");
@@ -178,8 +178,16 @@ public class GestionLivraisonsVue implements Initializable{
 		vbox.getChildren().add(progress);
 		vbox.getChildren().add(boutonStop);
 		alert.getDialogPane().setContent(vbox);
-		alert.show();
-		controleur.clicBoutonCalculerTournee(alert);
+
+		Task task = new Task() {
+			@Override protected Integer call() {
+				alert.show();
+				return null;
+	         }
+		};
+		new Thread(task).start();
+		while(alert.isShowing() == false){};*/
+		controleur.clicBoutonCalculerTournee(alert);	
 	}
 	
 	@FXML

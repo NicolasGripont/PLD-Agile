@@ -34,7 +34,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 			}
 		}
 	}
-	
+
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerLivraisonsEtEntrepot();
