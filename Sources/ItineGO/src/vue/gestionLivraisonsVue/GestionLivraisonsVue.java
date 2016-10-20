@@ -2,27 +2,32 @@ package vue.gestionLivraisonsVue;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import modeles.Plan;
 import vue.planVilleVue.PlanVilleVue;
 import modeles.Livraison;
 import modeles.Noeud;
+import modeles.Plan;
 
 public class GestionLivraisonsVue implements Initializable{
 	private Controleur controleur;
-	private Plan plan;
 	
 	@FXML
     private TableView<Livraison> livraisonTable;
@@ -63,8 +68,7 @@ public class GestionLivraisonsVue implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-//		labelError.setVisible(false);
-		
+
         planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
@@ -75,7 +79,7 @@ public class GestionLivraisonsVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				dessinePlan();
+				controleur.redessinnerPlan();
 			}
           
         };
@@ -116,10 +120,22 @@ public class GestionLivraisonsVue implements Initializable{
         boutonAccueil.setGraphic(new ImageView(classLoader.getResource("accueil.png").toString()));
 	}
 
-	public void dessinePlan() {
-		planVilleVue.setWidth(planVillePane.getWidth());
-		planVilleVue.setHeight(planVillePane.getHeight());
-		planVilleVue.dessinerPlan(plan);
+	public void dessinePlan(Plan plan) {
+		if(plan != null) {
+			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
+				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
+			}
+			if(plan.getLivraisons() != null) {
+				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
+					if(l != null && l.getKey() != null) {
+						livraisonTable.getItems().add(l.getValue());
+					}
+				}
+			}
+			planVilleVue.setWidth(planVillePane.getWidth());
+			planVilleVue.setHeight(planVillePane.getHeight());
+			planVilleVue.dessinerPlan(plan);
+		}
 	}
 	
 	public void afficherErreur(String erreur) {
@@ -134,45 +150,45 @@ public class GestionLivraisonsVue implements Initializable{
 	public void setControleur(Controleur controleur) {
 		this.controleur = controleur;
 	}
-
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-		if(this.plan.getEntrepot() != null && this.plan.getEntrepot().getNoeud() != null) {
-			labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
-		}
-		if(this.plan.getLivraisons() != null) {
-			for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
-				if(l != null && l.getKey() != null) {
-					livraisonTable.getItems().add(l.getValue());
-				}
-			}
-		}
-        planVilleVue.dessinerPlan(plan);
-	}
 	
 	@FXML
 	public void home() {
-		controleur.clicBoutonHome();
-		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();*/
-		
+		controleur.clicBoutonHome();	
 	}
 	
 	@FXML
 	public void precedent(){
 		controleur.clicBoutonRetour();
-		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();*/
 	}
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		controleur.clicBoutonCalculerTournee();
-		/*plan.calculerTournee();
-		planVilleVue.dessinerPlan(plan);*/
+		Alert alert = new Alert(AlertType.NONE);
+		ProgressIndicator progress = new ProgressIndicator();
+        progress.setStyle("-fx-margin-top: 10px");
+		ButtonType boutonStop = new ButtonType("Stopper le calcul");
+		alert.setTitle("Calcul de l'itinéraire");
+		alert.getDialogPane().setContent(progress);
+		alert.getButtonTypes().add(boutonStop);
+		final Task<Void> taskCalculer = new Task<Void>() {
+            @Override public Void call() {
+            	controleur.clicBoutonCalculerTournee();
+            	alert.close();
+                return null;
+            }
+        };;
+		
+		final Task<Void> taskAlert = new Task<Void>() {
+            @Override public Void call() {
+            	new Thread(taskCalculer).start();
+            	Optional<ButtonType> result = alert.showAndWait();
+            	if (result.get() == boutonStop){
+        			if(taskCalculer.isCancelled() == false)
+        				taskCalculer.cancel();
+        		}
+                return null;
+            }
+        };
+        new Thread(taskAlert).start();
 	}
 }

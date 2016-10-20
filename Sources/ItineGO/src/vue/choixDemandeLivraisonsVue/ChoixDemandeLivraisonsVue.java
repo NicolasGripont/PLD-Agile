@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +25,6 @@ import vue.planVilleVue.PlanVilleVue;
 public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Controleur controleur;
 	private File fichierChoisie = null;
-	private Plan plan;
 	
 	@FXML
 	private TextField textFieldLienFichier;
@@ -87,7 +85,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				dessinePlan();
+				controleur.redessinnerPlan();
 			}
           
         };
@@ -97,10 +95,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         boutonPrecedent.setGraphic(new ImageView(classLoader.getResource("precedent.png").toString()));
 	}
 
-	public void dessinePlan() {
-		planVilleVue.setWidth(planVillePane.getWidth());
-		planVilleVue.setHeight(planVillePane.getHeight());
-		planVilleVue.dessinerPlan(plan);
+	public void dessinePlan(Plan plan) {
+		if(plan != null) {
+			planVilleVue.setWidth(planVillePane.getWidth());
+			planVilleVue.setHeight(planVillePane.getHeight());
+			planVilleVue.dessinerPlan(plan);
+		}
 	}
 	
 	public void afficherErreur(String erreur) {
@@ -179,14 +179,5 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	public void precedent(){
 		controleur.clicBoutonRetour();
 		//controleur.showChoixPlanVille();
-	}
-
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-        planVilleVue.dessinerPlan(plan);
 	}
 }
