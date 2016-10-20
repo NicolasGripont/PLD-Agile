@@ -108,11 +108,11 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
 		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
-			//TODO : controleur.clicBoutonParcourir(true, tmp);
-        	fichierAccepte(tmp);
+			controleur.clicBoutonParcourir(true, tmp);
+        	//fichierAccepte(tmp);
         } else {
-        	//TODO : controleur.clicBoutonParcourir(false, null);
-        	fichierRefuse();
+        	controleur.clicBoutonParcourir(false, null);
+        	//fichierRefuse();
         }
 	}
 	
@@ -125,10 +125,10 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Aucun fichier choisi");
 		} else {
-			//TODO : controleur.clicBoutonValider(fichierChoisie);
-			if(controleur.creerDemandeLivraison(fichierChoisie)) {
+			controleur.clicBoutonValider(fichierChoisie);
+			/*if(controleur.creerDemandeLivraison(fichierChoisie)) {
 				controleur.showGestionLivraisons();
-			}
+			}*/
 		}
 	}
 	
@@ -145,13 +145,13 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	}
 	
 	public void fichierGlisserDeposerAccepteAction() {
-		//TODO : controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
-		fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
+		controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
+		//fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
 	}
 	
 	public void fichierGlisserDeposerRefuseAction() {
-		//TODO : controleur.glisserDeposer(false, null);
-		fichierRefuse();
+		controleur.glisserDeposer(false, null);
+		//fichierRefuse();
 	}
     
 	public void fichierAccepte(File fichier) {
@@ -170,8 +170,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void precedent(){
-		//TODO : controleur.clicBoutonRetour();
-		controleur.showChoixPlanVille();
+		controleur.clicBoutonRetour();
+		//controleur.showChoixPlanVille();
 	}
 
 	public Plan getPlan() {

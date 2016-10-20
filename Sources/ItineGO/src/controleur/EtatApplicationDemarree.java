@@ -8,7 +8,7 @@ public class EtatApplicationDemarree extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixPlanVilleVue.fichierAccepte(fichier);
-			//changement d'�tat
+			//changement d'état
 			controleur.setEtatCourant(controleur.etatPlanVilleChoisie);
 		} else {
 			controleur.choixPlanVilleVue.fichierRefuse();
@@ -19,11 +19,16 @@ public class EtatApplicationDemarree extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixPlanVilleVue.fichierAccepte(fichier);
-			//changement d'�tat
+			//changement d'état
 			controleur.setEtatCourant(controleur.etatPlanVilleChoisie);
 		} else {
 			controleur.choixPlanVilleVue.fichierRefuse();
 		}
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat Application démarrée");
 	}
 
 }

@@ -14,7 +14,7 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)
 	{
-		//TODO : Voir pour les erreurs li�es au parseur
+		//TODO : Voir pour les erreurs liées au parseur
 		gestionnaire.chargerLivraisons(fichierXML);
 		if(controleur.stage != null) {
 			try {
@@ -56,6 +56,11 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat fichier livraison choisi");
 	}
 	
 }

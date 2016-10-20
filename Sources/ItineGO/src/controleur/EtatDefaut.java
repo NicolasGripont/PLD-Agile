@@ -45,4 +45,9 @@ public abstract class EtatDefaut {
 	{
 		
 	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat defaut");
+	}
 }

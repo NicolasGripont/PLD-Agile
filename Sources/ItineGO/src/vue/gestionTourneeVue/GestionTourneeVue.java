@@ -146,15 +146,15 @@ public class GestionTourneeVue implements Initializable{
 	
 	@FXML
 	public void home() {
-		//TODO : controleur.clicBoutonHome();
-		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();
+		controleur.clicBoutonHome();
+		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
+		controleur.showChoixDemandeLivraison();*/
 	}
 	
 	@FXML
 	public void precedent(){
-		//TODO : controleur.clicBoutonRetour();
-		controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
-		controleur.showChoixDemandeLivraison();
+		controleur.clicBoutonRetour();
+		/*controleur.getChoixDemandeLivraisonVue().getPlan().effacerTournee();
+		controleur.showChoixDemandeLivraison();*/
 	}
 }

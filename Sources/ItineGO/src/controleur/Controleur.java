@@ -19,11 +19,11 @@ import javafx.scene.Scene;
 
 public class Controleur extends Application{
 	
-	private Gestionnaire gestionnaire;
+	private Gestionnaire gestionnaire = new Gestionnaire();
 	protected ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	protected ChoixPlanVilleVue choixPlanVilleVue;
 	protected GestionLivraisonsVue gestionLivraisonsVue;
-	protected EtatDefaut etatCourant = new EtatApplicationDemarree();
+	protected EtatDefaut etatCourant;
 	protected final EtatApplicationDemarree etatApplicationDemarree = new EtatApplicationDemarree();
 	protected final EtatFichierLivraisonsChoisi etatFichierLivraisonsChoisi = new EtatFichierLivraisonsChoisi();
 	protected final EtatLivraisonsAffichees etatLivraisonsAffichees = new EtatLivraisonsAffichees();
@@ -44,11 +44,26 @@ public class Controleur extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
+		setEtatCourant(etatApplicationDemarree);
 		stage = primaryStage;
-		showChoixPlanVille();
+		//showChoixPlanVille();
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
+			Parent root;
+			root = fxmlLoader.load();
+			choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
+			choixPlanVilleVue.setControleur(this);
+			Scene scene = new Scene(root);
+			stage.setTitle("Itine'GO");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void showChoixPlanVille() {
+	/*public void showChoixPlanVille() {
 		if(stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
@@ -65,9 +80,9 @@ public class Controleur extends Application{
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 	
-	public void showChoixDemandeLivraison() {
+	/*public void showChoixDemandeLivraison() {
 		if(stage != null) {
 			try {
 				plan.resetLivraisons();
@@ -87,9 +102,9 @@ public class Controleur extends Application{
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 	
-	public void showGestionLivraisons() {
+	/*public void showGestionLivraisons() {
 		if(stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/GestionLivraisonsVue/GestionLivraisonsVue.fxml"));
@@ -107,43 +122,49 @@ public class Controleur extends Application{
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 	
-	public boolean creerPlanVille(File fichierPlanVilleXML) {
+	/*public boolean creerPlanVille(File fichierPlanVilleXML) {
 		plan = new Plan();
 		ParseurPlan.parseurPlanVille(fichierPlanVilleXML.getAbsolutePath(), plan);
 		return plan != null;
-	}
+	}*/
 	
-	public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
+	/*public boolean creerDemandeLivraison(File fichierDemandeLivraisonXML) {
 		ParseurLivraison.parseurLivraisonVille(fichierDemandeLivraisonXML.getAbsolutePath(), plan);
 		return plan != null;
-	}
+	}*/
 	
 	public void glisserDeposer(boolean accepte,File fichier)
 	{
 		etatCourant.glisserDeposer(this,accepte,fichier);
+		etatCourant.getEtat();
 	}
 	
 	public void clicBoutonParcourir(boolean accepte,File fichier)
 	{
 		etatCourant.clicBoutonParcourir(this,accepte,fichier);
+		etatCourant.getEtat();
 	}
 
 	public void clicBoutonRetour() {
 		etatCourant.clicBoutonRetour(this, gestionnaire);
+		etatCourant.getEtat();
 	}
 	
 	public void clicBoutonHome() {
 		etatCourant.clicBoutonHome(this, gestionnaire);
+		etatCourant.getEtat();
 	}
 
 	public void clicBoutonValider(File fichierChoisie) {
 		etatCourant.clicBoutonValider(gestionnaire, this, fichierChoisie);
+		etatCourant.getEtat();
 	}
 
 	public void clicBoutonCalculerTournee() {
 		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
+		etatCourant.getEtat();
 	}
 
 	public Plan getPlan() {

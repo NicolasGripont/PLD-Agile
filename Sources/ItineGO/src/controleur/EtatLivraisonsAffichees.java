@@ -24,7 +24,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		gestionnaire.effacerNoeudsEtTroncons();
 		if(controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVille/ChoixPlanVille.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 				Parent root;
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
@@ -46,7 +46,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisons/ChoixDemandeLivraisons.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisonsVue/ChoixDemandeLivraisons.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
@@ -64,6 +64,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 			}
 		}
 	
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat livraisons affichées");
 	}
 	
 	

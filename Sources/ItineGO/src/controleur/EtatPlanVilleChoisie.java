@@ -11,14 +11,14 @@ import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 
 public class EtatPlanVilleChoisie extends EtatDefaut {
 
-	public void clicBoutonValider(Controleur controleur, Gestionnaire gestionnaire, File fichierXML)
+	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)
 	{
-		//modification du mod�le
+		//modification du modèle
 		gestionnaire.chargerPlan(fichierXML);
 		//modification des vues
 		if(controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisons/ChoixDemandeLivraisons.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/ChoixDemandeLivraisonsVue/ChoixDemandeLivraisons.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
@@ -27,7 +27,8 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				//changement d'�tat
+				controleur.choixDemandeLivraisonsVue.dessinePlan();
+				//changement d'état
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -35,5 +36,10 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 			}
 		}
 		
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat PlanVilleChoisie");
 	}
 }

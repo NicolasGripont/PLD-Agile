@@ -15,7 +15,7 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'�tat
+			//changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
@@ -26,7 +26,7 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	{
 		if(accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'�tat
+			//changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
@@ -53,5 +53,10 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat plan ville affiche");
 	}
 }

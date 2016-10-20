@@ -17,12 +17,12 @@ public class Gestionnaire {
 	
 	public void chargerPlan(File fichierXML)
 	{
-		parseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
+		ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public void chargerLivraisons(File fichierXML)
 	{
-		parseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
+		ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public void calculerTournee()

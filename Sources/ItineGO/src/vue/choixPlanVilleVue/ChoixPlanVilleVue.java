@@ -43,7 +43,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de livraisons.");
+		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de plan.");
 		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
 		glisserDeposerFichierVue.addExtensionAcceptee(".xml");
 		
@@ -91,11 +91,11 @@ public class ChoixPlanVilleVue implements Initializable{
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
 		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
-			//TODO : controleur.clicBoutonParcourir(true, tmp);
-        	fichierAccepte(tmp);
+			controleur.clicBoutonParcourir(true, tmp);
+        	//fichierAccepte(tmp);
         } else {
-    		//TODO : controleur.clicBoutonParcourir(false, null);
-        	fichierRefuse();
+    		controleur.clicBoutonParcourir(false, null);
+        	//fichierRefuse();
         }
 	}
 	
@@ -107,21 +107,22 @@ public class ChoixPlanVilleVue implements Initializable{
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
 			labelError.setText("Erreur : Aucun fichier choisi");
-		} else {	
-			if(controleur.creerPlanVille(fichierChoisie)) {
+		} else {
+			controleur.clicBoutonValider(fichierChoisie);
+			/*if(controleur.creerPlanVille(fichierChoisie)) {
 				controleur.showChoixDemandeLivraison();
-			}
+			}*/
 		}
 	}
 	
 	public void fichierGlisserDeposerAccepteAction() {
-		//TODO : controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
-		fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
+		controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
+		//fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
 	}
 	
 	public void fichierGlisserDeposerRefuseAction() {
-		//TODO : controleur.glisserDeposer(false, null);
-		fichierRefuse();
+		controleur.glisserDeposer(false, null);
+		//fichierRefuse();
 	}
     
 	public void fichierAccepte(File fichier) {
