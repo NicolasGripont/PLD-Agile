@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MapUtil
 {
-    public static <K, V extends Comparable<? super V>> LinkedHashMap<K, V> 
+    public static <K, V extends Comparable<? super V>> Map<K, V> 
         sortByValue( Map<K, V> map )
     {
         List<Map.Entry<K, V>> list =
@@ -22,7 +22,12 @@ public class MapUtil
             }
         } );
 
-        return new LinkedHashMap<K, V>();
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        for (Map.Entry<K, V> entry : list)
+        {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
         
     }
 }
