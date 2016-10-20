@@ -15,14 +15,14 @@ public class Gestionnaire {
 		plan = new Plan();
 	}
 	
-	public void chargerPlan(File fichierXML)
+	public boolean chargerPlan(File fichierXML)
 	{
-		ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
+		return ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
-	public void chargerLivraisons(File fichierXML)
+	public boolean chargerLivraisons(File fichierXML)
 	{
-		ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
+		return ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public void calculerTournee()

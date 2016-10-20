@@ -80,7 +80,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	}
 	
 	public void afficherErreur(String erreur) {
-		labelError.setDisable(false);
+		labelError.setVisible(true);
 		labelError.setText(erreur);
 	}
 	

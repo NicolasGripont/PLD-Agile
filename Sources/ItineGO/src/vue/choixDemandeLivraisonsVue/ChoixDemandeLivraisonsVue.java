@@ -106,7 +106,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	}
 	
 	public void afficherErreur(String erreur) {
-		labelError.setDisable(false);
+		labelError.setVisible(true);
 		labelError.setText(erreur);
 	}
 	
@@ -118,10 +118,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
 		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
 			controleur.clicBoutonParcourir(true, tmp);
-        	//fichierAccepte(tmp);
         } else {
         	controleur.clicBoutonParcourir(false, null);
-        	//fichierRefuse();
         }
 	}
 	
@@ -135,9 +133,6 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 			labelError.setText("Erreur : Aucun fichier choisi");
 		} else {
 			controleur.clicBoutonValider(fichierChoisie);
-			/*if(controleur.creerDemandeLivraison(fichierChoisie)) {
-				controleur.showGestionLivraisons();
-			}*/
 		}
 	}
 	
@@ -155,12 +150,10 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	public void fichierGlisserDeposerAccepteAction() {
 		controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
-		//fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
 	}
 	
 	public void fichierGlisserDeposerRefuseAction() {
 		controleur.glisserDeposer(false, null);
-		//fichierRefuse();
 	}
     
 	public void fichierAccepte(File fichier) {
@@ -180,7 +173,6 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	@FXML
 	public void precedent(){
 		controleur.clicBoutonRetour();
-		//controleur.showChoixPlanVille();
 	}
 	
 	@FXML

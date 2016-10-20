@@ -21,7 +21,7 @@ public class ParseurLivraison {
 	 /**
 	 * @param nomFichier
 	 */
-	public static void parseurLivraisonVille(String nomFichier, Plan plan)
+	public static boolean parseurLivraisonVille(String nomFichier, Plan plan)
 	 {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();
@@ -38,6 +38,9 @@ public class ParseurLivraison {
 			 listLivraisonVille = racine.getChildren("livraison");
 			 listEntrepotVille = racine.getChildren("entrepot");
 
+			 if(listEntrepotVille.size() == 0 || listLivraisonVille.size() == 0) {
+				 return false;
+		 	 }
 			 //Parse les noeuds
 			 for (int i=0; i < listLivraisonVille.size() ; i++)
 			 {
@@ -54,7 +57,8 @@ public class ParseurLivraison {
 					 entrepot.getAttributeValue("heureDepart")
 			 ));
 		 }
-		 catch(Exception e){e.printStackTrace();}
+		 catch(Exception e){e.printStackTrace();return false;}
+		 return true;
 	 }
 
 }

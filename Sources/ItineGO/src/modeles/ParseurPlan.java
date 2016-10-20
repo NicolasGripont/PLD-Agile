@@ -21,7 +21,7 @@ public class ParseurPlan {
 	 /**
 	 * @param nomFichier
 	 */
-	public static void parseurPlanVille(String nomFichier, Plan plan)
+	public static boolean parseurPlanVille(String nomFichier, Plan plan)
 	 {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();
@@ -38,6 +38,9 @@ public class ParseurPlan {
 			 listNoeudVille = racine.getChildren("noeud");
 			 listTronconVille = racine.getChildren("troncon");
 			 
+			 if(listNoeudVille.size() == 0 || listTronconVille.size() == 0) {
+				 return false;
+		 	 }
 			 //Parse les noeuds
 			 for (int i=0; i < listNoeudVille.size() ; i++)
 			 {
@@ -77,7 +80,8 @@ public class ParseurPlan {
 				 }
 			 }
 		 }
-		 catch(Exception e){System.out.println(e);}
+		 catch(Exception e){System.out.println(e);return false;}
+		 return true;
 	 }
 
 }
