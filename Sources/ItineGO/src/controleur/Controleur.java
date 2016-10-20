@@ -13,6 +13,7 @@ import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 import vue.gestionTourneeVue.GestionTourneeVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 
 public class Controleur extends Application{
@@ -147,6 +148,7 @@ public class Controleur extends Application{
 	}
 
 	public void clicBoutonRetour() {
+		System.out.println("On clique sur precedent");
 		etatCourant.clicBoutonRetour(this, gestionnaire);
 		etatCourant.getEtat();
 	}
@@ -161,8 +163,9 @@ public class Controleur extends Application{
 		etatCourant.getEtat();
 	}
 
-	public void clicBoutonCalculerTournee() {
+	public void clicBoutonCalculerTournee(Alert alert) {
 		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
+		alert.close();
 		etatCourant.getEtat();
 	}
 	
