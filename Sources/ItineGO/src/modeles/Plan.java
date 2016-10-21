@@ -293,6 +293,7 @@ public class Plan {
 	                e = it.next();
 	                if((e.getValue()> (min + matriceDuGraphe[curentNoeud][e.getKey()]))&& (matriceDuGraphe[curentNoeud][e.getKey()] >0) )
 	                {
+	                	//TODO supprimer appel a remove (inutile) car put remplace la vielle valeur
 	                	blancs.remove(e.getKey());
 	                    blancs.put(e.getKey(), (min + matriceDuGraphe[curentNoeud][e.getKey()]));
 	                    previous.remove(e.getKey());
