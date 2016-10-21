@@ -27,9 +27,9 @@ public class Gestionnaire {
 		return ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
-	public void calculerTournee()
+	public boolean calculerTournee()
 	{
-		plan.calculerTournee();
+		return plan.calculerTournee();
 	}
 	
 	public void effacerNoeudsEtTroncons()

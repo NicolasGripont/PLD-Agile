@@ -39,7 +39,7 @@ public class Plan {
 		return -1;
 	}
 	
-	public void calculerTournee() {
+	public boolean calculerTournee() {
     	
     	int nbDeLivraison = livraisons.size();
     	
@@ -80,8 +80,9 @@ public class Plan {
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp.TSP monTSP = new tsp.TSP1();
-		monTSP.chercheSolution(Integer.MAX_VALUE, depart.length , cout, duree);  //le 100000 est le temps max toléré
-		
+		monTSP.chercheSolution(20000, depart.length , cout, duree);  //le 100000 est le temps max toléré
+		if(monTSP.getTempsLimiteAtteint())
+			return false;
 		//Il faut maintenant reupéré le chemin optimal via les get
 		
 		
@@ -141,6 +142,7 @@ public class Plan {
 				}
 			}
 			this.tournee = new Tournee(trajetsPrevus);
+			return true;
     }
     
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
