@@ -38,6 +38,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
 		if(controleur.stage != null) {
@@ -61,6 +62,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {
 			try {
