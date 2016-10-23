@@ -94,7 +94,7 @@ public class GestionLivraisonsVue implements Initializable{
         plageDebutColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
         	if(livraison.getDebutPlage() != null) {
-        		return new SimpleStringProperty(livraison.getDebutPlage().toString()); 
+        		return new SimpleStringProperty(livraison.getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
         	}
@@ -103,7 +103,7 @@ public class GestionLivraisonsVue implements Initializable{
         plageFinColonne.setCellValueFactory( param -> {
         	final Livraison livraison = param.getValue(); 
         	if(livraison.getFinPlage() != null) {
-	        	return new SimpleStringProperty(livraison.getFinPlage().toString());
+	        	return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");
 	    	}

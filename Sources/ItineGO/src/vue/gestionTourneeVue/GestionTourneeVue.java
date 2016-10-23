@@ -114,12 +114,12 @@ public class GestionTourneeVue implements Initializable{
         
         arriveeColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
-            return new SimpleStringProperty(livraison.getHeureArrive().toString()); 
+            return new SimpleStringProperty(livraison.getHeureArrive().getHoraire()); 
         }); 
         
         departColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
-            return new SimpleStringProperty(livraison.getHeureDepart().toString()); 
+            return new SimpleStringProperty(livraison.getHeureDepart().getHoraire()); 
         });
         
         labelError.setVisible(false);   
@@ -129,7 +129,7 @@ public class GestionTourneeVue implements Initializable{
 	}
 
 	public void miseAJourTableau(List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
-		labelEntrepot.setText("Début de la tournee : " + horaireDebut.toString() + " - Fin de la tournée : " + horaireFin.toString());
+		labelEntrepot.setText("Début de la tournee : " + horaireDebut.getHoraire() + " - Fin de la tournée : " + horaireFin.getHoraire());
 		if(list != null && list.size() > 0) {
 			for(LivraisonTournee l : list) {
 				livraisonTable.getItems().add(l);

@@ -60,6 +60,10 @@ public class Horaire {
 		ajouterMinute(s/60);
 	}
 	
+	public String getHoraire() {
+		return  heure + ":" + minute;
+	}
+	
 	@Override
 	public String toString() {
 		return  heure + ":" + minute + ":" + seconde;
