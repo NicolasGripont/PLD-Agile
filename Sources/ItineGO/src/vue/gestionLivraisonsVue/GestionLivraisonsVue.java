@@ -68,10 +68,6 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
-        //planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
         planVillePane.getChildren().add(planVilleVue);
         
@@ -124,7 +120,8 @@ public class GestionLivraisonsVue implements Initializable{
 	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()));
+				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()) + " - Début Livraison à " + 
+						plan.getEntrepot().getHoraireDepart().getHoraire());
 			}
 			livraisonTable.getItems().clear();
 			if(plan.getLivraisons() != null) {

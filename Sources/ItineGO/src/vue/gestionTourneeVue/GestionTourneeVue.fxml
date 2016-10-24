@@ -94,7 +94,7 @@
                         <TableColumn fx:id="arriveeColonne" editable="false" prefWidth="63.0" sortable="false" text="Arrivée" />
                         <TableColumn fx:id="departColonne" editable="false" prefWidth="67.0" sortable="false" text="Départ" />
                      </columns></TableColumn>
-                  <TableColumn prefWidth="85.0" sortable="false" text="Durée" />
+                  <TableColumn fx:id="dureeColonne" prefWidth="85.0" sortable="false" text="Durée" />
               </columns>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />

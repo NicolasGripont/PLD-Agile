@@ -138,7 +138,7 @@ public class GestionTourneeVue implements Initializable{
 	}
 
 	public void miseAJourTableau(List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
-		labelEntrepot.setText("Début de la tournee : " + horaireDebut.getHoraire() + " - Fin de la tournée : " + horaireFin.getHoraire());
+		labelEntrepot.setText("Début de la tournée : " + horaireDebut.getHoraire() + " - Fin de la tournée : " + horaireFin.getHoraire());
 		if(list != null && list.size() > 0) {
 			for(LivraisonTournee l : list) {
 				livraisonTable.getItems().add(l);

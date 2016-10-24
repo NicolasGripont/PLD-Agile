@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="800.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="800.0" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
@@ -22,7 +22,7 @@
          <center>
             <StackPane fx:id="planVillePane" minHeight="370.0" minWidth="335.0" prefHeight="431.0" prefWidth="335.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </BorderPane.margin></StackPane>
          </center>
          <BorderPane.margin>
@@ -73,7 +73,7 @@
                   </AnchorPane>
                   <Button fx:id="boutonValider" maxHeight="27.0" maxWidth="400.0" minHeight="27.0" minWidth="360.0" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="360.0" text="Valider">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin></Button>
                </children>
                <BorderPane.margin>
