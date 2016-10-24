@@ -7,8 +7,11 @@ import modeles.Trajet;
 import modeles.Troncon;
 import utility.Pair;
 import java.util.Map;
+
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class PlanVilleVue extends Canvas {
@@ -18,11 +21,146 @@ public class PlanVilleVue extends Canvas {
 	private double zoom = 1;
 	private double offsetX = 0;
 	private double offsetY = 0;
+	private double pointerMargin = 10;
+	private Noeud noeudSelectionned = null;
+	
 	private Plan plan;
 	
 	public PlanVilleVue(double width, double height) {
 		super(width, height);
 		this.setStyle("-fx-background-color: rgb(240,237,230);");
+		this.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	evenementSourisClick(mouseEvent.getX(), mouseEvent.getY());
+		    }
+		});
+		this.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	evenementSourisMove(mouseEvent.getX(), mouseEvent.getY());
+		    }
+		});
+		
+	}
+
+	public void evenementSourisClick(double x, double y) {
+		noeudSelectionned = null;
+		if(plan != null) {
+			dessinerPlan(plan);
+			/* NE PAS SUPPRIMER, PERMET DE DESSINER LE POINTEUR
+			GraphicsContext gc = this.getGraphicsContext2D();
+			gc.setFill(new Color(0,1,0,1));
+			gc.fillOval(x - pointerMargin/2,y - pointerMargin/2,pointerMargin,pointerMargin);
+			*/
+			//Recherche d'une livraison
+			// Not yet
+			//Recherche d'un entrepot
+			// Not yet
+			//Recherche d'un noeud
+			if(plan.getNoeuds() != null) {
+				for(Map.Entry<Integer, Noeud> n : this.plan.getNoeuds().entrySet()) {
+					if(n != null) {
+						double NoeudX = n.getValue().getX() * zoom + offsetX - RAYON_NOEUD /2;
+						double NoeudY = n.getValue().getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double XCenter = x - pointerMargin /2;
+						double YCenter = y - pointerMargin /2;
+						if(Math.abs(NoeudX - XCenter) <= pointerMargin && Math.abs(NoeudY - YCenter) <= pointerMargin) {
+							noeudIsClicked(n.getValue());
+							return;
+						}
+					}
+				}
+			}
+			//Recherche d'un troncon
+			if(plan.getNoeuds() != null) {
+				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : this.plan.getTroncons().entrySet()) {
+					if(t != null) {
+						
+					}
+				}
+			}
+		}
+	}
+	
+	public void evenementSourisMove(double x, double y) {
+		if(plan != null) {
+			dessinerPlan(plan);
+			/* NE PAS SUPPRIMER, PERMET DE DESSINER LE POINTEUR
+			GraphicsContext gc = this.getGraphicsContext2D();
+			gc.setFill(new Color(0,1,0,1));
+			gc.fillOval(x - pointerMargin/2,y - pointerMargin/2,pointerMargin,pointerMargin);
+			*/
+			//Recherche d'une livraison
+			// Not yet
+			//Recherche d'un entrepot
+			// Not yet
+			//Recherche d'un noeud
+			if(plan.getNoeuds() != null) {
+				for(Map.Entry<Integer, Noeud> n : this.plan.getNoeuds().entrySet()) {
+					if(n != null) {
+						double NoeudX = n.getValue().getX() * zoom + offsetX - RAYON_NOEUD /2;
+						double NoeudY = n.getValue().getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double XCenter = x - pointerMargin /2;
+						double YCenter = y - pointerMargin /2;
+						if(Math.abs(NoeudX - XCenter) <= pointerMargin && Math.abs(NoeudY - YCenter) <= pointerMargin) {
+							noeudIsFocused(n.getValue());
+							return;
+						}
+					}
+				}
+			}
+			//Recherche d'un troncon
+			if(plan.getNoeuds() != null) {
+				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : this.plan.getTroncons().entrySet()) {
+					if(t != null) {
+						
+					}
+				}
+			}
+		}
+	}
+	
+	private void noeudIsClicked(Noeud noeud) {
+		noeudSelectionned = noeud;
+		double x = noeud.getX() * zoom + offsetX - RAYON_NOEUD /2;
+		double y = noeud.getY() * zoom + offsetY - RAYON_NOEUD /2;
+		GraphicsContext gc = this.getGraphicsContext2D();
+		//Affichage du noeud exterieur
+		gc.setFill(new Color(0.859,0.839,0.808,1));
+		gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
+		//Affichage du noeud interieur
+		gc.setFill(new Color(0,0.4921,0.9609,1));
+		gc.fillOval(noeud.getX() * zoom + offsetX - (RAYON_NOEUD-4)/2, noeud.getY() * zoom + offsetY - (RAYON_NOEUD - 4) /2
+				, RAYON_NOEUD - 4, RAYON_NOEUD - 4);
+		//Affichage zone de texte
+		int l = String.valueOf(noeud.getId()).length();
+		gc.setFill(new Color(0,0,0,0.5));
+		gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+		//Affichage texte
+		gc.setFill(new Color(1,1,1,1));
+		gc.fillText(String.valueOf(noeud.getId()), x + 15 + 5, y);
+		/*if(tableau) {
+			
+		}*/
+	}
+	
+	private void noeudIsFocused(Noeud noeud) {
+		if(noeud != noeudSelectionned) {
+			double x = noeud.getX() * zoom + offsetX - RAYON_NOEUD /2;
+			double y = noeud.getY() * zoom + offsetY - RAYON_NOEUD /2;
+			GraphicsContext gc = this.getGraphicsContext2D();
+			//Affichage du noeud exterieur
+			gc.setFill(new Color(0.6836,0.8438,0.9805,1));
+			gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
+			//Affichage zone de texte
+			int l = String.valueOf(noeud.getId()).length();
+			gc.setFill(new Color(0,0,0,0.5));
+			gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+			//Affichage texte
+			gc.setFill(new Color(1,1,1,1));
+			gc.fillText(String.valueOf(noeud.getId()), x + 15 + 5, y);
+		}
 	}
 	
 	public void dessinerPlan(Plan plan) {
@@ -46,6 +184,9 @@ public class PlanVilleVue extends Canvas {
 			}
 			if(plan.getLivraisons() != null) {
 				dessinerLivraison();
+			}
+			if(noeudSelectionned != null) {
+				noeudIsClicked(noeudSelectionned);
 			}
 		} else {
 			System.err.println("plan is null");
