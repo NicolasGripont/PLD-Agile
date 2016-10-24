@@ -12,8 +12,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class PlanVilleVue extends Canvas {
-	private int RAYON_LIVRAISON = 5;
-	private int RAYON_NOEUD = 0;
+	private int RAYON_LIVRAISON = 10;
+	private int RAYON_NOEUD = 10;
 	private int LARGEUR_TRONCON = 3;
 	private double zoom = 1;
 	private double offsetX = 0;
@@ -26,17 +26,17 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	public void dessinerPlan(Plan plan) {
-//		dessinerFond();
 		effacer();
 		if(plan != null) {
 			this.plan = plan;
+			dessinerFond();
 			calculerZoom();
-			recentrerPlan();
-			if(plan.getNoeuds() != null) {
-				dessinerNoeud();
-			}
+			recentrerPlan();			
 			if(plan.getTroncons() != null) {
 				dessinerTroncon();
+			}
+			if(plan.getNoeuds() != null) {
+				dessinerNoeud();
 			}
 			if(plan.getTournee() != null) {
 				dessinerTournee();
@@ -59,18 +59,20 @@ public class PlanVilleVue extends Canvas {
 	
 	private void dessinerFond() {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(new Color(0.9375,0.9258,0.8945,1));
-        gc.setStroke(new Color(0.9375,0.9258,0.8945,1));
+		gc.setFill(new Color(0.250,0.250,0.250,1));
 		gc.fillRect(0, 0, getWidth(), getHeight());
 	}
 
 	private void dessinerNoeud() {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(new Color(0.859,0.839,0.808,1));
-        gc.setStroke(Color.WHITE);
 		for(Map.Entry<Integer, Noeud> n : this.plan.getNoeuds().entrySet()) {
 			if(n != null) {
-				gc.fillOval(n.getValue().getX() * zoom + offsetX, n.getValue().getY() * zoom + offsetY, RAYON_NOEUD, RAYON_NOEUD);
+				gc.setFill(new Color(0.859,0.839,0.808,1));
+				gc.fillOval(n.getValue().getX() * zoom + offsetX - RAYON_NOEUD /2, n.getValue().getY() * zoom + offsetY - RAYON_NOEUD /2,
+						RAYON_NOEUD, RAYON_NOEUD);
+				gc.setFill(new Color(0.250,0.250,0.250,1));
+				gc.fillOval(n.getValue().getX() * zoom + offsetX - (RAYON_NOEUD-4)/2, n.getValue().getY() * zoom + offsetY - (RAYON_NOEUD - 4) /2
+						, RAYON_NOEUD - 4, RAYON_NOEUD - 4);
 			}
 		}
 	}
@@ -94,7 +96,8 @@ public class PlanVilleVue extends Canvas {
         gc.setStroke(Color.GREEN);
         for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 			if(l != null && l.getKey() != null) {
-				gc.fillOval(l.getKey().getX() * zoom + offsetX, l.getKey().getY() * zoom + offsetY, RAYON_LIVRAISON, RAYON_LIVRAISON);
+				gc.fillOval(l.getKey().getX() * zoom + offsetX - RAYON_LIVRAISON/2, l.getKey().getY() * zoom + offsetY - RAYON_LIVRAISON/2
+						, RAYON_LIVRAISON, RAYON_LIVRAISON);
 			}
 		}
 	}
@@ -104,7 +107,8 @@ public class PlanVilleVue extends Canvas {
 		gc.setFill(Color.RED);
         gc.setStroke(Color.RED);
         if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-        	gc.fillOval(plan.getEntrepot().getNoeud().getX() * zoom + offsetX, plan.getEntrepot().getNoeud().getY() * zoom + offsetY, RAYON_LIVRAISON, RAYON_LIVRAISON);
+        	gc.fillOval(plan.getEntrepot().getNoeud().getX() * zoom + offsetX - RAYON_LIVRAISON/2,
+        			plan.getEntrepot().getNoeud().getY() * zoom + offsetY - RAYON_LIVRAISON/2, RAYON_LIVRAISON, RAYON_LIVRAISON);
         }
 	}
 	

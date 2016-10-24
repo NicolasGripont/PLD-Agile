@@ -70,7 +70,7 @@ public class GestionLivraisonsVue implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
+        //planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
         planVillePane.getChildren().add(planVilleVue);

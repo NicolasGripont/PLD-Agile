@@ -21,7 +21,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 					Parent root = fxmlLoader.load();
 					controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
 					controleur.gestionTourneeVue.setControleur(controleur);
-					Scene scene = new Scene(root);
+					Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
 					controleur.stage.setTitle("Itine'GO");
 					controleur.stage.setScene(scene);
 					controleur.stage.show();
@@ -52,7 +52,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root);
+				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
