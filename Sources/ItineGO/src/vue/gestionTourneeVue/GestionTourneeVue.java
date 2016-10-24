@@ -41,6 +41,9 @@ public class GestionTourneeVue implements Initializable{
     @FXML
     private TableColumn<LivraisonTournee, String> departColonne;
     
+    @FXML
+    private TableColumn<LivraisonTournee, String> dureeColonne;
+    
 	@FXML
 	private Label labelEntrepot;
 	
@@ -120,6 +123,11 @@ public class GestionTourneeVue implements Initializable{
         departColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
             return new SimpleStringProperty(livraison.getHeureDepart().getHoraire()); 
+        });
+        
+        dureeColonne.setCellValueFactory(param -> { 
+        	final LivraisonTournee livraison = param.getValue(); 
+            return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getDuree())); 
         });
         
         labelError.setVisible(false);   
