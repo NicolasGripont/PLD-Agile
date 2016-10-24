@@ -23,7 +23,7 @@ public class PlanVilleVue extends Canvas {
 	private double offsetY = 0;
 	private double pointerMargin = 10;
 	private Noeud noeudSelectionned = null;
-	
+	private Troncon tronconSelectionned = null;
 	private Plan plan;
 	
 	public PlanVilleVue(double width, double height) {
@@ -46,13 +46,14 @@ public class PlanVilleVue extends Canvas {
 
 	public void evenementSourisClick(double x, double y) {
 		noeudSelectionned = null;
+		tronconSelectionned = null;
 		if(plan != null) {
 			dessinerPlan(plan);
-			/* NE PAS SUPPRIMER, PERMET DE DESSINER LE POINTEUR
+			/* NE PAS SUPPRIMER, PERMET DE DESSINER LE POINTEUR*/
 			GraphicsContext gc = this.getGraphicsContext2D();
 			gc.setFill(new Color(0,1,0,1));
 			gc.fillOval(x - pointerMargin/2,y - pointerMargin/2,pointerMargin,pointerMargin);
-			*/
+			
 			//Recherche d'une livraison
 			// Not yet
 			//Recherche d'un entrepot
@@ -73,10 +74,36 @@ public class PlanVilleVue extends Canvas {
 				}
 			}
 			//Recherche d'un troncon
-			if(plan.getNoeuds() != null) {
-				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : this.plan.getTroncons().entrySet()) {
-					if(t != null) {
-						
+			if(plan.getTroncons() != null) {
+				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> troncon : this.plan.getTroncons().entrySet()) {
+					if(troncon != null) {
+						double XCenter = x - pointerMargin /2;
+						double YCenter = y - pointerMargin /2;
+						double Ax = troncon.getKey().first.getX()  * zoom + offsetX - RAYON_NOEUD /2;
+						double Ay = troncon.getKey().first.getY()  * zoom + offsetY - RAYON_NOEUD /2;
+						double Bx = troncon.getKey().second.getX()  * zoom + offsetX - RAYON_NOEUD /2;
+						double By = troncon.getKey().second.getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double Ux = Bx - Ax;
+						double Uy = By - Ay;
+						double ACx = XCenter - Ax;
+						double ACy = YCenter - Ay;
+						double numerateur = Ux*ACy - Uy*ACx;
+						if (numerateur <0)
+							numerateur = -numerateur ;
+						double denominateur = Math.sqrt(Ux*Ux + Uy*Uy);
+						double CI = numerateur / denominateur;
+						if (CI<=pointerMargin) {
+							double ABx = Bx - Ax;
+							double ABy = By - Ay;
+							double BCx = XCenter - Bx;
+							double BCy = YCenter - By;
+							double pscal1 = ABx*ACx + ABy*ACy;
+							double pscal2 = (-ABx)*BCx + (-ABy)*BCy;
+							if(pscal1>=0 && pscal2>=0) {
+								tronconIsClicked(troncon.getValue());
+								return;
+							}
+						}
 					}
 				}
 			}
@@ -111,14 +138,75 @@ public class PlanVilleVue extends Canvas {
 				}
 			}
 			//Recherche d'un troncon
-			if(plan.getNoeuds() != null) {
-				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> t : this.plan.getTroncons().entrySet()) {
-					if(t != null) {
-						
+			if(plan.getTroncons() != null) {
+				for(Map.Entry<Pair<Noeud, Noeud>, Troncon> troncon : this.plan.getTroncons().entrySet()) {
+					if(troncon != null) {
+						double XCenter = x - pointerMargin /2;
+						double YCenter = y - pointerMargin /2;
+						double Ax = troncon.getKey().first.getX()  * zoom + offsetX - RAYON_NOEUD /2;
+						double Ay = troncon.getKey().first.getY()  * zoom + offsetY - RAYON_NOEUD /2;
+						double Bx = troncon.getKey().second.getX()  * zoom + offsetX - RAYON_NOEUD /2;
+						double By = troncon.getKey().second.getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double Ux = Bx - Ax;
+						double Uy = By - Ay;
+						double ACx = XCenter - Ax;
+						double ACy = YCenter - Ay;
+						double numerateur = Ux*ACy - Uy*ACx;
+						if (numerateur <0)
+							numerateur = -numerateur ;
+						double denominateur = Math.sqrt(Ux*Ux + Uy*Uy);
+						double CI = numerateur / denominateur;
+						if (CI<=pointerMargin) {
+							double ABx = Bx - Ax;
+							double ABy = By - Ay;
+							double BCx = XCenter - Bx;
+							double BCy = YCenter - By;
+							double pscal1 = ABx*ACx + ABy*ACy;
+							double pscal2 = (-ABx)*BCx + (-ABy)*BCy;
+							if(pscal1>=0 && pscal2>=0) {
+								tronconIsFocused(troncon.getValue());
+								return;
+							}
+						}
 					}
 				}
 			}
 		}
+	}
+	
+	private void tronconIsClicked(Troncon troncon) {
+		tronconSelectionned = troncon;
+		GraphicsContext gc = this.getGraphicsContext2D();
+		double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
+		double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+		//Affichage du troncon
+		gc.setStroke(new Color(0,0.4921,0.9609,1));
+		gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
+				troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
+		//Affichage zone de texte
+		int l = troncon.getNomRue().length();
+		gc.setFill(new Color(0,0,0,0.5));
+		gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+		//Affichage texte
+		gc.setFill(new Color(1,1,1,1));
+		gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
+	}
+	
+	private void tronconIsFocused(Troncon troncon) {
+		GraphicsContext gc = this.getGraphicsContext2D();
+		double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
+		double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+		//Affichage du troncon
+		gc.setStroke(new Color(0.6836,0.8438,0.9805,1));
+		gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
+				troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
+		//Affichage zone de texte
+		int l = troncon.getNomRue().length();
+		gc.setFill(new Color(0,0,0,0.5));
+		gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+		//Affichage texte
+		gc.setFill(new Color(1,1,1,1));
+		gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
 	}
 	
 	private void noeudIsClicked(Noeud noeud) {
@@ -155,7 +243,7 @@ public class PlanVilleVue extends Canvas {
 			gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
 			//Affichage zone de texte
 			int l = String.valueOf(noeud.getId()).length();
-			gc.setFill(new Color(0,0,0,0.5));
+			gc.setFill(new Color(0,0,0,0.8));
 			gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
 			//Affichage texte
 			gc.setFill(new Color(1,1,1,1));
@@ -187,6 +275,9 @@ public class PlanVilleVue extends Canvas {
 			}
 			if(noeudSelectionned != null) {
 				noeudIsClicked(noeudSelectionned);
+			}
+			if(tronconSelectionned != null) {
+				tronconIsClicked(tronconSelectionned);
 			}
 		} else {
 			System.err.println("plan is null");
