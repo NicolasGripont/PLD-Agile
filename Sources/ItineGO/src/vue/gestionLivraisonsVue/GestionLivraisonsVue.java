@@ -85,6 +85,7 @@ public class GestionLivraisonsVue implements Initializable{
           
         };
         planVillePane.widthProperty().addListener(listener);
+        planVillePane.heightProperty().addListener(listener);
         
         adresseColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 

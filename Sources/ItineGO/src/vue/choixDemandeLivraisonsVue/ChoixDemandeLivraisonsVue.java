@@ -93,6 +93,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
           
         };
         planVillePane.widthProperty().addListener(listener);
+        planVillePane.heightProperty().addListener(listener);
         
         imageViewPrecedentExited();
 	}
