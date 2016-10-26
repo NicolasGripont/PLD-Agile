@@ -68,7 +68,7 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
+        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), livraisonTable);
         planVillePane.getChildren().add(planVilleVue);
         
         final ChangeListener<Number> listener = new ChangeListener<Number>()
@@ -115,6 +115,15 @@ public class GestionLivraisonsVue implements Initializable{
 
         imageViewAcceuilExited();
         imageViewPrecedentExited();
+        
+        livraisonTable.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				// TODO Auto-generated method stub
+				Livraison livraison = (Livraison) newValue;
+				planVilleVue.livraisonSelected(livraison);
+			}
+          });
 	}
 
 	public void miseAJourTableau(Plan plan) {
