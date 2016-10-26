@@ -3,6 +3,8 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 
+import exceptions.BadXmlFile;
+import exceptions.BadXmlPlan;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,7 +16,8 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)
 	{
 		//modification du modèle
-		if(gestionnaire.chargerPlan(fichierXML)) {
+		try {
+			gestionnaire.chargerPlan(fichierXML);
 			//modification des vues
 			if(controleur.stage != null) {
 				try {
@@ -34,8 +37,11 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 					e.printStackTrace();
 				}
 			}
-		} else {
-			controleur.choixPlanVilleVue.afficherErreur("Erreur : impossible de parser le fichier");
+		} catch(BadXmlFile exception) {
+			controleur.choixPlanVilleVue.afficherErreur("Erreur : Fichier XML mal formé");
+			controleur.setEtatCourant(controleur.etatApplicationDemarree);
+		} catch(BadXmlPlan exception) {
+			controleur.choixPlanVilleVue.afficherErreur("Erreur : Impossible de parser le plan");
 			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		}
 	}

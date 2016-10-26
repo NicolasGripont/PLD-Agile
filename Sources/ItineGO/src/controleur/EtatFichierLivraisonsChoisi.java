@@ -2,7 +2,8 @@ package controleur;
 
 import java.io.File;
 import java.io.IOException;
-
+import exceptions.BadXmlFile;
+import exceptions.BadXmlLivraison;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,8 +15,8 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)
 	{
-		//TODO : Voir pour les erreurs liées au parseur
-		if(gestionnaire.chargerLivraisons(fichierXML)) {
+		try {
+			gestionnaire.chargerLivraisons(fichierXML);
 			if(controleur.stage != null) {
 				try {
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/GestionLivraisonsVue/GestionLivraisonsVue.fxml"));
@@ -30,12 +31,14 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 					controleur.gestionLivraisonsVue.miseAJourTableau(gestionnaire.getPlan());
 					controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		} else {
-			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Impossible de parser le fichier");
+		} catch(BadXmlFile exception) {
+			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Fichier XML mal formé");
+			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
+		} catch(BadXmlLivraison exception) {
+			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Impossible de parser les livraisons");
 			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		}
 	}
