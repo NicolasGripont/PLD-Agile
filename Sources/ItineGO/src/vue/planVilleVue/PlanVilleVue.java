@@ -62,7 +62,14 @@ public class PlanVilleVue extends Canvas {
 		    	evenementSourisMove(mouseEvent.getX(), mouseEvent.getY());
 		    }
 		});
-		
+		this.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	noeudSelectionned = null;
+				tronconSelectionned = null;
+				dessinerPlan(plan);
+		    }
+		});
 	}
 
 	public void livraisonSelected(Livraison livraison) {
