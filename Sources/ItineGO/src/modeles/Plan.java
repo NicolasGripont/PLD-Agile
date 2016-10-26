@@ -1,5 +1,8 @@
 package modeles;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -94,9 +97,6 @@ public class Plan {
 		boolean first;
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
-		
-			
-			
 			previous = new HashMap<>(AllPrevious.get(depart[monTSP.getMeilleureSolution(i)]));
 			while(previous.get(noeudCourant)!=noeudCourant)
 			{
@@ -142,6 +142,8 @@ public class Plan {
 				}
 			}
 			this.tournee = new Tournee(trajetsPrevus);
+			
+			genererFeuilleDeRoute();
 			return true;
     }
     
@@ -414,5 +416,67 @@ public class Plan {
 	{
 		if(noeuds.containsKey(id)){return true;}
 		else{return false;}
+	}
+	
+	public void genererFeuilleDeRoute() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter("feuille_de_route.txt", false);
+			BufferedWriter output = new BufferedWriter(fw);
+			output.write("FEUILLE DE ROUTE\n");
+			
+			//Heure de début
+			Horaire heureCourante = entrepot.getHoraireDepart();
+			//Liste des trajets de la tournée
+			List<Trajet> trajets = tournee.getTrajets();
+			//On parcourt les trajets, on s'arrête à size()-1 pour gérer le trajet jusqu'à l'entrepôt manuellement			
+			for(int i = 0; i < trajets.size()-1; ++i) {
+				output.write("\nDepart "+ heureCourante.getHoraire() +" du noeud " + trajets.get(i).getDepart().getId());
+				//On parcourt les tronçons
+				for(Troncon tron : trajets.get(i).getTroncons()) {
+					//Affichage pour la longueur du tronçon
+					String longueurStr;
+					if(tron.getLongueur() > 999){
+						longueurStr = tron.getLongueur()/1000 + "km";
+					}
+					else {
+						longueurStr = tron.getLongueur() + "m";
+					}
+					output.write("\n\tPrendre : " + tron.getNomRue() + " pendant " + longueurStr);
+					//On incrémente l'heure
+					heureCourante.ajouterSeconde(tron.getLongueur()/tron.getVitesse());
+				}
+				//La livraison à faire
+				Livraison l = livraisons.get(trajets.get(i).getArrive());
+				output.write("\nArrivée "+ heureCourante.getHoraire() +" au noeud " + l.getNoeud().getId());
+				//Affichage pour la durée estimée de la livraison
+				Horaire horaireTemp = new Horaire(0,0,0);
+				horaireTemp.ajouterSeconde(l.getDuree());
+				output.write("\n\tDurée de livraison estimée : " + horaireTemp.toString());
+				//On incrémente l'heure
+				heureCourante.ajouterSeconde(l.getDuree());
+				
+				output.flush();
+			}
+			
+			//Trajet de la dernière livraison à l'entrepot
+			output.write("\nRetour à l'entrepot, départ " + heureCourante.getHoraire() +" du noeud " + trajets.get(trajets.size()-1).getArrive().getId());
+			for(Troncon tron : trajets.get(trajets.size()-1).getTroncons()) {
+				String longueurStr;
+				if(tron.getLongueur() > 999){
+					longueurStr = tron.getLongueur()/1000 + "km";
+				}
+				else {
+					longueurStr = tron.getLongueur() + "m";
+				}
+				output.write("\n\tPrendre : " + tron.getNomRue() + " pendant " + longueurStr);
+				heureCourante.ajouterSeconde(tron.getLongueur()/tron.getVitesse());
+			}
+			output.write("\nArrivée à l'entrepot : " + heureCourante.getHoraire());
+			
+			output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

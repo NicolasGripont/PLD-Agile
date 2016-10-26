@@ -98,4 +98,8 @@ public class Gestionnaire {
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
 		return horaire;
 	}
+	
+	public void genererFeuilleDeRoute() {
+		plan.genererFeuilleDeRoute();
+	}
 }

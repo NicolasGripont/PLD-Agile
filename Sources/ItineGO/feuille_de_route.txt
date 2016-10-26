@@ -1,0 +1,45 @@
+FEUILLE DE ROUTE
+Depart 8:0 du noeud 35
+	Prendre : v3 pendant 9km
+	Prendre : h4 pendant 6km
+	Prendre : h4 pendant 10km
+	Prendre : h4 pendant 5km
+Arrivée 8:11 au noeud 4
+	Durée de livraison estimée : 0:15:0
+Depart 8:26 du noeud 4
+	Prendre : h4 pendant 5km
+	Prendre : v1 pendant 5km
+	Prendre : h5 pendant 4km
+	Prendre : v2 pendant 7km
+	Prendre : v2 pendant 5km
+Arrivée 8:38 au noeud 27
+	Durée de livraison estimée : 0:10:0
+Depart 8:48 du noeud 27
+	Prendre : v2 pendant 4km
+	Prendre : v2 pendant 5km
+	Prendre : h9 pendant 5km
+	Prendre : h9 pendant 1km
+	Prendre : h9 pendant 9km
+	Prendre : v5 pendant 2km
+	Prendre : h8 pendant 2km
+	Prendre : v6 pendant 6km
+	Prendre : h7 pendant 4km
+	Prendre : v7 pendant 4km
+	Prendre : h8 pendant 5km
+	Prendre : v8 pendant 5km
+Arrivée 9:11 au noeud 89
+	Durée de livraison estimée : 0:15:0
+Depart 9:26 du noeud 89
+	Prendre : v8 pendant 5km
+	Prendre : h8 pendant 5km
+	Prendre : v7 pendant 4km
+	Prendre : h7 pendant 4km
+	Prendre : h7 pendant 7km
+	Prendre : h7 pendant 9km
+	Prendre : v4 pendant 4km
+Arrivée 9:42 au noeud 46
+	Durée de livraison estimée : 0:5:0
+Retour à l'entrepot, départ 9:47 du noeud 35
+	Prendre : v4 pendant 8km
+	Prendre : h5 pendant 7km
+Arrivée à l'entrepot : 9:53
