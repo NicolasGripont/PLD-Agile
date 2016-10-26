@@ -7,13 +7,21 @@ import org.jdom2.*;
 import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
+import exceptions.BadXmlFile;
+import exceptions.BadXmlPlan;
+
 
 public class ParseurPlan {
 	
 	 public static void main(String[] args)
 	   {
 		 Plan plan = new Plan();
-		 parseurPlanVille("./tests/xmlTest/plan5x5.xml", plan);
+		 try {
+			 parseurPlanVille("./tests/xmlTest/plan5x5.xml", plan);
+		 }
+		 catch(Exception e){
+			 System.err.println(e);;
+		 }
 		 System.out.println(plan.getNoeuds().size());
 		 System.out.println(plan.getTroncons().size());
 		 System.out.println(plan.getNoeud(1).toString());
@@ -21,26 +29,34 @@ public class ParseurPlan {
 	 
 	 /**
 	 * @param nomFichier
+	 * @throws BadXmlFile 
+	 * @throws BadXmlPlan 
 	 */
-	public static boolean parseurPlanVille(String nomFichier, Plan plan)
+	public static void parseurPlanVille(String nomFichier, Plan plan) throws BadXmlFile, BadXmlPlan
 	 {
 		//Permet de parser le fichier XML
 		 SAXBuilder sxb = new SAXBuilder();
 		 File xmlFile = new File(nomFichier);
 		 List listNoeudVille; //Liste des Noeuds
 		 List listTronconVille; //Liste des Troncons
+		 Document planVille;
+		 
 		 try
 		 {
 			 //Parse le fichier XML
-			 Document planVille = (Document) sxb.build(xmlFile);
+			 planVille = (Document) sxb.build(xmlFile);
 			 
+		 }
+		 catch(Exception e){
+			 throw new BadXmlFile();
+		 }
 			 //Attribut l'�l�ment racine du fichier XML
 			 Element racine = planVille.getRootElement();
 			 listNoeudVille = racine.getChildren("noeud");
 			 listTronconVille = racine.getChildren("troncon");
 			 
 			 if(listNoeudVille.size() == 0 || listTronconVille.size() == 0) {
-				 return false;
+				 throw new BadXmlPlan();
 		 	 }
 			 //Parse les noeuds
 			 for (int i=0; i < listNoeudVille.size() ; i++)
@@ -52,10 +68,7 @@ public class ParseurPlan {
 			 	 }
 				 else
 				 {
-					 /*
-					  * MESSAGE ERREUR A CREER
-					  */
-//					 System.out.println("Deux Identifiant");
+					 throw new BadXmlPlan("Deux identifiants de noeud identiques");
 				 }
 			 }
 			//Parse les troncons
@@ -75,21 +88,17 @@ public class ParseurPlan {
 					//System.out.println("destination : " + troncon.getAttributeValue("destination")+ " longueur : " + troncon.getAttributeValue("longueur") + " nomRue : " + troncon.getAttributeValue("nomRue"));
 				 }
 				 else {
-					 /*
-					  * MESSAGE ERREUR A CREER
-					  */
+					 throw new BadXmlPlan();
 				 }
 			 }
-		 }
-		 catch(Exception e){System.out.println(e);return false;}
+		 
 		 for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
 			if(n.getValue().getId() == -1) {
 				plan.effacerNoeuds();
 				plan.effacerTroncons();
-				return false;
+				throw new BadXmlPlan();
 			}
 		}
-		 return true;
 	 }
 
 }

@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.BadXmlFile;
+import exceptions.BadXmlLivraison;
+import exceptions.BadXmlPlan;
+
 public class Gestionnaire {
 
 	private ParseurLivraison parseurLivraison;
@@ -17,14 +21,14 @@ public class Gestionnaire {
 		plan = new Plan();
 	}
 	
-	public boolean chargerPlan(File fichierXML)
+	public void chargerPlan(File fichierXML) throws BadXmlFile, BadXmlPlan
 	{
-		return ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
+		ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
-	public boolean chargerLivraisons(File fichierXML)
+	public void chargerLivraisons(File fichierXML) throws BadXmlLivraison, BadXmlFile
 	{
-		return ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
+		ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
 	public boolean calculerTournee()
