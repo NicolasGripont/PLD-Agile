@@ -143,7 +143,6 @@ public class Plan {
 			}
 			this.tournee = new Tournee(trajetsPrevus);
 			
-			genererFeuilleDeRoute();
 			return true;
     }
     
@@ -418,10 +417,10 @@ public class Plan {
 		else{return false;}
 	}
 	
-	public void genererFeuilleDeRoute() {
+	public void genererFeuilleDeRoute(String link) {
 		FileWriter fw;
 		try {
-			fw = new FileWriter("feuille_de_route.txt", false);
+			fw = new FileWriter(link, false);
 			BufferedWriter output = new BufferedWriter(fw);
 			output.write("FEUILLE DE ROUTE\n");
 			

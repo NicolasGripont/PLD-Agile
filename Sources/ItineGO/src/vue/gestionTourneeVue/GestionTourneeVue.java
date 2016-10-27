@@ -1,5 +1,6 @@
 package vue.gestionTourneeVue;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import modeles.Horaire;
 import modeles.LivraisonTournee;
 import modeles.Plan;
@@ -66,7 +68,6 @@ public class GestionTourneeVue implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-//		labelError.setVisible(false);
 		
         planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
@@ -195,5 +196,15 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	private void imageViewAcceuilExited() {
 		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
+	}
+	
+	@FXML
+	private void genererFeuilleDeRoute() {
+		FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Générer feuille de route");
+        File file = fileChooser.showSaveDialog(controleur.getStage());
+        if (file != null) {
+            controleur.clicBoutonGenererFeuilleDeRoute(file.getAbsolutePath());
+        }
 	}
 }

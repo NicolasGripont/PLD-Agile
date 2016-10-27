@@ -51,6 +51,11 @@ public abstract class EtatDefaut {
 		
 	}
 	
+	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link) 
+	{
+		
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat defaut");

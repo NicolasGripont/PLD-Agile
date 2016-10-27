@@ -176,7 +176,6 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		Alert alert = new Alert(AlertType.NONE);
 		/*VBox vbox = new VBox();
     	ProgressIndicator progress = new ProgressIndicator();
         progress.setStyle("-fx-margin-top: 10px");
@@ -194,7 +193,7 @@ public class GestionLivraisonsVue implements Initializable{
 		};
 		new Thread(task).start();
 		while(alert.isShowing() == false){};*/
-		controleur.clicBoutonCalculerTournee(alert);	
+		controleur.clicBoutonCalculerTournee();	
 	}
 	
 	@FXML

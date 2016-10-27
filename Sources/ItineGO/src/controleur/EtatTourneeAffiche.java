@@ -59,6 +59,11 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 	
+	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link)
+	{
+		gestionnaire.genererFeuilleDeRoute(link);
+	}
+	
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

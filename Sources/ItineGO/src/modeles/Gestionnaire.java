@@ -99,7 +99,7 @@ public class Gestionnaire {
 		return horaire;
 	}
 	
-	public void genererFeuilleDeRoute() {
-		plan.genererFeuilleDeRoute();
+	public void genererFeuilleDeRoute(String link) {
+		plan.genererFeuilleDeRoute(link);
 	}
 }

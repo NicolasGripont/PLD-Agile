@@ -13,7 +13,6 @@ import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 import vue.gestionTourneeVue.GestionTourneeVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 
 
 public class Controleur extends Application{
@@ -90,9 +89,13 @@ public class Controleur extends Application{
 		etatCourant.getEtat();
 	}
 
-	public void clicBoutonCalculerTournee(Alert alert) {
+	public void clicBoutonCalculerTournee() {
 		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
-		alert.close();
+		etatCourant.getEtat();
+	}
+	
+	public void clicBoutonGenererFeuilleDeRoute(String link) {
+		etatCourant.clicBoutonGenererFeuilleDeRoute(this, gestionnaire, link);
 		etatCourant.getEtat();
 	}
 		
