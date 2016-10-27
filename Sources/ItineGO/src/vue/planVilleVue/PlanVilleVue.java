@@ -235,7 +235,7 @@ public class PlanVilleVue extends Canvas {
 			double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
 			double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
 			//Affichage du troncon
-			gc.setStroke(new Color(0.6836,0.8438,0.9805,1));
+			gc.setStroke(new Color(0,0.4921,0.9609,0.7));
 			gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
 					troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
 			//Affichage zone de texte
@@ -360,7 +360,7 @@ public class PlanVilleVue extends Canvas {
 		double y = noeud.getY() * zoom + offsetY - RAYON_NOEUD /2;
 		GraphicsContext gc = this.getGraphicsContext2D();
 		//Affichage du noeud exterieur
-		gc.setFill(new Color(0.6836,0.8438,0.9805,1));
+		gc.setFill(new Color(0,0.4921,0.9609,0.7));
 		gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
 	}
 	
