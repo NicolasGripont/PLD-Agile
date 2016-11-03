@@ -56,6 +56,16 @@ public abstract class EtatDefaut {
 		
 	}
 	
+	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) 
+	{
+		
+	}
+	
+	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat defaut");

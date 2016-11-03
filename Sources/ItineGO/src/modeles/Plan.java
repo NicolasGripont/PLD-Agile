@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javafx.application.Platform;
 import tsp.TSP;
 import utility.Pair;
 
@@ -25,8 +26,17 @@ public class Plan {
 	private int tableauDesId[];
 	private TSP tsp;
 	private Tournee tournee;
+	private Thread threadCalcul;
+	private Gestionnaire gestionnaire;
 	
 	public Plan() {
+		noeuds = new HashMap<Integer, Noeud>();
+		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
+		livraisons = new HashMap<Noeud, Livraison>();
+	}
+	
+	public Plan(Gestionnaire gestionnaire) {
+		this.gestionnaire = gestionnaire;
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
 		livraisons = new HashMap<Noeud, Livraison>();
@@ -37,7 +47,10 @@ public class Plan {
 	}
 	
 	public void stopperCalculTournee() {
-		
+		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
+			threadCalcul.interrupt();
+			System.out.println("Calcul stoppé");
+		}
 	}
 	
 	public int numDansTableau(int id)
@@ -52,8 +65,7 @@ public class Plan {
 		return -1;
 	}
 	
-	public boolean calculerTournee() {
-    	
+	public void calculerTournee() {
     	int nbDeLivraison = livraisons.size();
     	
     	tableauDesId = new int [noeuds.size()];
@@ -93,18 +105,28 @@ public class Plan {
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new tsp.TSP1();
-		tsp.chercheSolution(20000, depart.length , cout, duree);  //le 100000 est le temps max toléré
-		if(tsp.getTempsLimiteAtteint())
-			return false;
+		/*
+		 * Le thread va venir ici
+		 */
+		threadCalcul = new Thread() {
+			public void run() {
+				tsp.chercheSolution(20000, depart.length , cout, duree);//le 100000 est le temps max toléré
+				constructionTournee(depart, AllNoires, AllPrevious);
+				if(gestionnaire != null) {
+					Platform.runLater(() -> gestionnaire.tourneeCalculer());
+				}
+			}
+		};
+		threadCalcul.setDaemon(true);
+		threadCalcul.start();
+    }
+	
+	private void constructionTournee(Integer depart[], HashMap< Integer, HashMap<Integer, Integer>> AllNoires, HashMap< Integer, HashMap<Integer, Integer>> AllPrevious) {
 		//Il faut maintenant reupéré le chemin optimal via les get
-		
-		
-		
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		
 		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
-		boolean first;
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
 			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
@@ -157,9 +179,7 @@ public class Plan {
 				}
 			}
 			this.tournee = new Tournee(trajetsPrevus);
-			
-			return true;
-    }
+	}
     
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
 			HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
