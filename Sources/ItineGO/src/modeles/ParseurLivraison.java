@@ -63,9 +63,25 @@ public class ParseurLivraison {
 			 for (int i=0; i < listLivraisonVille.size() ; i++)
 			 {
 				 Element livraison = (Element) listLivraisonVille.get(i);
+				 Horaire plageDebut = null;
+				 Horaire plageFin = null;
+				 if(livraison.getAttributeValue("DebutPlage") != null) {
+					 plageDebut = new Horaire(livraison.getAttributeValue("DebutPlage"));
+				 }
+				 else {
+					 plageFin = new Horaire(Integer.MIN_VALUE, 0, 0);
+				 }
+				 if(livraison.getAttributeValue("finPlage") != null) {
+					 plageDebut = new Horaire(livraison.getAttributeValue("finPlage"));
+				 }
+				 else {
+					 plageFin = new Horaire(Integer.MAX_VALUE, 0, 0);
+				 }
 				 plan.ajouterLivraison(new Livraison(
 						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
-						 Integer.parseInt(livraison.getAttributeValue("duree"))
+						 Integer.parseInt(livraison.getAttributeValue("duree")),
+						 plageDebut,
+						 plageFin
 				 ));
 			 }
 			 
