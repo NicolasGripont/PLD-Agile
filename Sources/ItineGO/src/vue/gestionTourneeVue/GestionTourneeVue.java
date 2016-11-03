@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,11 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import modeles.Horaire;
+import modeles.Livraison;
 import modeles.LivraisonTournee;
+import modeles.Noeud;
 import modeles.Plan;
+import vue.gestionVue.GestionVue;
 import vue.planVilleVue.PlanVilleVue;
 
-public class GestionTourneeVue implements Initializable{
+public class GestionTourneeVue extends GestionVue{
 	private Controleur controleur;
 	
 	@FXML
@@ -52,6 +54,9 @@ public class GestionTourneeVue implements Initializable{
 	@FXML
 	private Label labelError;
 	
+	@FXML
+	private Label labelInstruction;
+	
 	@FXML 
 	private StackPane planVillePane;
 	
@@ -71,7 +76,7 @@ public class GestionTourneeVue implements Initializable{
 		
         planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
         
-        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
+        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
         planVillePane.getChildren().add(planVilleVue);
         
         final ChangeListener<Number> listener = new ChangeListener<Number>()
@@ -133,9 +138,27 @@ public class GestionTourneeVue implements Initializable{
         });
         
         labelError.setVisible(false);   
-       
+        labelInstruction.setVisible(false);
+        
         imageViewAcceuilExited();
         imageViewPrecedentExited();
+        
+        livraisonTable.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				// TODO Auto-generated method stub
+				LivraisonTournee livraison = (LivraisonTournee) newValue;
+				planVilleVue.livraisonSelected(livraison.getLivraison());
+			}
+          });
+	}
+	
+	public void selectionneNoeud(Noeud noeud) {
+		for(LivraisonTournee t : livraisonTable.getItems()) {
+			if(t.getLivraison().getNoeud().equals(noeud)) {
+				livraisonTable.getSelectionModel().select(t);
+			}
+		}
 	}
 
 	public void miseAJourTableau(List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {

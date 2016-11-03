@@ -29,7 +29,7 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="378.0" text="Instructions" textFill="#4466a1" />
+                  <Label fx:id="labelInstruction" alignment="CENTER" prefHeight="17.0" prefWidth="378.0" text="Instructions" textFill="#4466a1" />
                </children>
             </VBox>
          </top>

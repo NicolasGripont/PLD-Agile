@@ -14,19 +14,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import vue.gestionVue.GestionVue;
 import vue.planVilleVue.PlanVilleVue;
 import modeles.Livraison;
+import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;
 
-public class GestionLivraisonsVue implements Initializable{
+public class GestionLivraisonsVue extends GestionVue {
 	private Controleur controleur;
 	
 	@FXML
@@ -53,6 +57,15 @@ public class GestionLivraisonsVue implements Initializable{
 	@FXML
 	private Button boutonCalculer;
 	
+	@FXML
+	private Button boutonStopCalculer;
+	
+	@FXML
+	private ProgressBar barreChargement;
+	
+	@FXML
+	private Label labelTempsRestant;
+	
 	@FXML 
 	private StackPane planVillePane;
 	
@@ -62,13 +75,20 @@ public class GestionLivraisonsVue implements Initializable{
 	private ImageView imageViewAccueil;
 	
 	@FXML
+	private HBox boxStopperCalcule;
+	
+	@FXML
 	private ImageView imageViewPrecedent;
 	
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
+	private Thread threadCalcul;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-        planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), livraisonTable);
+		boxStopperCalcule.setVisible(false);
+		
+		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
         planVillePane.getChildren().add(planVilleVue);
         
         final ChangeListener<Number> listener = new ChangeListener<Number>()
@@ -125,6 +145,14 @@ public class GestionLivraisonsVue implements Initializable{
 			}
           });
 	}
+	
+	public void selectionneNoeud(Noeud noeud) {
+		for(Livraison l : livraisonTable.getItems()) {
+			if(l.getNoeud().equals(noeud)) {
+				livraisonTable.getSelectionModel().select(l);
+			}
+		}
+	}
 
 	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
@@ -176,6 +204,16 @@ public class GestionLivraisonsVue implements Initializable{
 	
 	@FXML
 	public void calculerLivraisonAction() {
+		/*String tps = "Temps restant : ";
+		boutonCalculer.setVisible(false);
+		boxStopperCalcule.setVisible(true);
+		barreChargement.setProgress(0);
+		threadCalcul = new Thread() {
+			public void run() {
+				controleur.getGestionnaire().calculerTournee();
+			}
+		};
+		threadCalcul.start();
 		/*VBox vbox = new VBox();
     	ProgressIndicator progress = new ProgressIndicator();
         progress.setStyle("-fx-margin-top: 10px");
@@ -193,7 +231,15 @@ public class GestionLivraisonsVue implements Initializable{
 		};
 		new Thread(task).start();
 		while(alert.isShowing() == false){};*/
+		
 		controleur.clicBoutonCalculerTournee();	
+	}
+	
+	@FXML
+	private void stopperCalculLivraisonAction() {
+		boutonCalculer.setVisible(true);
+		boxStopperCalcule.setVisible(false);
+		//controleur.clicBoutonStopperTournee();
 	}
 	
 	@FXML

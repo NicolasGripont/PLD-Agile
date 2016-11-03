@@ -7,6 +7,7 @@ import modeles.Plan;
 import modeles.Trajet;
 import modeles.Troncon;
 import utility.Pair;
+import vue.gestionVue.GestionVue;
 import java.util.Map;
 
 import javafx.event.EventHandler;
@@ -27,7 +28,7 @@ public class PlanVilleVue extends Canvas {
 	private Noeud noeudSelectionned = null;
 	private Troncon tronconSelectionned = null;
 	private Plan plan;
-	private TableView<Livraison> table;
+	private GestionVue vue;
 	
 	public PlanVilleVue(double width, double height) {
 		super(width, height);
@@ -46,9 +47,9 @@ public class PlanVilleVue extends Canvas {
 		});
 	}
 	
-	public PlanVilleVue(double width, double height, TableView<Livraison> table) {
+	public PlanVilleVue(double width, double height, GestionVue vue) {
 		super(width, height);
-		this.setTable(table);
+		this.setVue(vue);
 		this.setStyle("-fx-background-color: rgb(240,237,230);");
 		this.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 		    @Override
@@ -71,6 +72,7 @@ public class PlanVilleVue extends Canvas {
 		    }
 		});
 	}
+	
 
 	public void livraisonSelected(Livraison livraison) {
 		noeudSelectionned = null;
@@ -260,8 +262,8 @@ public class PlanVilleVue extends Canvas {
 		//Affichage texte
 		gc.setFill(new Color(1,1,1,1));
 		gc.fillText(String.valueOf(livraison.getNoeud().getId()), x + 15 + 5, y);
-		if(table != null) {
-			table.getSelectionModel().select(livraison);
+		if(vue != null) {
+			vue.selectionneNoeud(livraison.getNoeud());
 		}
 	}
 	
@@ -528,11 +530,11 @@ public class PlanVilleVue extends Canvas {
 		setHeight(height);
 	}
 
-	public TableView<Livraison> getTable() {
-		return table;
+	public GestionVue getVue() {
+		return vue;
 	}
 
-	public void setTable(TableView<Livraison> table) {
-		this.table = table;
+	public void setVue(GestionVue vue) {
+		this.vue = vue;
 	}
 }

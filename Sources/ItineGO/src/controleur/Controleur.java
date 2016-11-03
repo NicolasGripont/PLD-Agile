@@ -110,4 +110,8 @@ public class Controleur extends Application{
 	public Stage getStage() {
 		return stage;
 	}
+	
+	public Gestionnaire getGestionnaire() {
+		return gestionnaire;
+	}
 }

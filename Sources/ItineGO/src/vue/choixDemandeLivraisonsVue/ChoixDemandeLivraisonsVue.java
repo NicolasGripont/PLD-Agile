@@ -107,6 +107,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	}
 	
 	public void afficherErreur(String erreur) {
+		labelError.setStyle("-fx-text-fill : red;");
 		labelError.setVisible(true);
 		labelError.setText(erreur);
 	}
@@ -128,9 +129,11 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	public void validerAction(MouseEvent event) {
 		if(controleur == null) {
 			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : red;");
 			labelError.setText("Erreur : Controler is null, fatal error");
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : red;");
 			labelError.setText("Erreur : Aucun fichier choisi");
 		} else {
 			controleur.clicBoutonValider(fichierChoisie);
@@ -162,7 +165,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		fichierChoisie = fichier;
 		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
 		labelError.setVisible(true);
-		labelError.setText("Le fichier a bien pris en compte.");
+		labelError.setStyle("-fx-text-fill : green;");
+		labelError.setText("Votre fichier a été pris en compte.");
 		glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de livraisons.");
 	}
 	
@@ -170,6 +174,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		labelError.setVisible(false);
 		fichierChoisie = null;
 		textFieldLienFichier.setText("");
+		labelError.setStyle("-fx-text-fill : red;");
 		labelError.setVisible(true);
 		labelError.setText("Erreur : Le fichier choisi est invalide.");
 	}
