@@ -3,22 +3,20 @@ package modeles;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import controleur.Controleur;
 import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
 public class Gestionnaire {
 
-	private ParseurLivraison parseurLivraison;
-	private ParseurPlan parseurPlan;
 	private Plan plan;
+	private Controleur controleur;
 	
-	public Gestionnaire()
+	public Gestionnaire(Controleur controleur)
 	{
-		parseurLivraison =  new ParseurLivraison();
-		parseurPlan =  new ParseurPlan();
-		plan = new Plan();
+		this.controleur = controleur;
+		plan = new Plan(this);
 	}
 	
 	public void chargerPlan(File fichierXML) throws BadXmlFile, BadXmlPlan
@@ -31,9 +29,17 @@ public class Gestionnaire {
 		ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
-	public boolean calculerTournee()
+	public void calculerTournee()
 	{
-		return plan.calculerTournee();
+		plan.calculerTournee();
+	}
+	
+	public void tourneeCalculer() {
+		controleur.getEtatCourant().afficherTournee(controleur, this, plan.estSolutionOptimale());
+	}
+	
+	public void stopperCalculTournee() {
+		plan.stopperCalculTournee();
 	}
 	
 	public void effacerNoeudsEtTroncons()
@@ -55,6 +61,10 @@ public class Gestionnaire {
 
 	public Plan getPlan() {
 		return plan;
+	}
+	
+	public Controleur getControleur() {
+		return controleur;
 	}
 	
 	//Precondition: les trajets de la tournée sont triés par ordre de passage

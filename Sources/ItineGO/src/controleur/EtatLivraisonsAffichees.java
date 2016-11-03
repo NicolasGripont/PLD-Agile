@@ -14,29 +14,37 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		if(gestionnaire.calculerTournee()) {
-			if(controleur.stage != null) {
-				try {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
-					Parent root = fxmlLoader.load();
-					controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
-					controleur.gestionTourneeVue.setControleur(controleur);
-					Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
-					controleur.stage.setTitle("Itine'GO");
-					controleur.stage.setScene(scene);
-					controleur.stage.show();
-					controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-					controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
-							gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
-					controleur.setEtatCourant(controleur.etatTourneeAffiche);	
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		gestionnaire.calculerTournee();
+	}
+	
+	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		gestionnaire.stopperCalculTournee();
+		afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+	}
+	
+	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
+		if(controleur.stage != null) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
+				Parent root = fxmlLoader.load();
+				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
+				controleur.gestionTourneeVue.setControleur(controleur);
+				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				controleur.stage.setTitle("Itine'GO");
+				controleur.stage.setScene(scene);
+				controleur.stage.show();
+				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
+						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+				if(solutionOptimale) {
+					controleur.gestionTourneeVue.solutionOptimale();
 				}
+				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
-		else {
-			controleur.gestionLivraisonsVue.afficherErreur("Erreur : Temps limite atteint !");
 		}
 	}
 

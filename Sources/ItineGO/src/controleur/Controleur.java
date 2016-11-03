@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import modeles.Gestionnaire;
-import modeles.Plan;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
@@ -17,7 +16,7 @@ import javafx.scene.Scene;
 
 public class Controleur extends Application{
 	
-	private Gestionnaire gestionnaire = new Gestionnaire();
+	private Gestionnaire gestionnaire = new Gestionnaire(this);
 	protected ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	protected ChoixPlanVilleVue choixPlanVilleVue;
 	protected GestionLivraisonsVue gestionLivraisonsVue;
@@ -30,7 +29,6 @@ public class Controleur extends Application{
 	protected final EtatPlanVilleChoisie etatPlanVilleChoisie = new EtatPlanVilleChoisie();
 	protected final EtatTourneeAffiche etatTourneeAffiche = new EtatTourneeAffiche();
 	protected Stage stage;
-	private Plan plan = null;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -39,6 +37,11 @@ public class Controleur extends Application{
 	protected void setEtatCourant(EtatDefaut etat)
 	{
 		etatCourant = etat;
+	}
+	
+	public EtatDefaut getEtatCourant()
+	{
+		return etatCourant;
 	}
 	
 	@Override
@@ -101,10 +104,6 @@ public class Controleur extends Application{
 		
 	public void redessinerPlan() {
 		etatCourant.redessinerPlan(this, gestionnaire);
-	}
-
-	public Plan getPlan() {
-		return plan;
 	}
 
 	public Stage getStage() {

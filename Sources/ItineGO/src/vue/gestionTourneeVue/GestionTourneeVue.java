@@ -9,6 +9,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -151,6 +153,14 @@ public class GestionTourneeVue extends GestionVue{
 				planVilleVue.livraisonSelected(livraison.getLivraison());
 			}
           });
+	}
+	
+	public void solutionOptimale() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Solution optimale");
+		alert.setHeaderText(null);
+		alert.setContentText("La solution trouvée est la solution optimale pour effectuer votre tournée.");
+		alert.showAndWait();
 	}
 	
 	public void selectionneNoeud(Noeud noeud) {

@@ -56,6 +56,11 @@ public abstract class EtatDefaut {
 		
 	}
 	
+	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) 
+	{
+		
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat defaut");
