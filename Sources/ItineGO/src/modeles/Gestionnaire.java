@@ -42,6 +42,10 @@ public class Gestionnaire {
 		plan.stopperCalculTournee();
 	}
 	
+	public boolean solutionTrouvee() {
+		return (plan.getTournee() != null) && (plan.getTournee().getTrajets().size() != 0);
+	}
+	
 	public void effacerNoeudsEtTroncons()
 	{
 		plan.effacerTroncons();

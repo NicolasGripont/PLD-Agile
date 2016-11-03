@@ -19,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import modeles.Horaire;
-import modeles.Livraison;
 import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;

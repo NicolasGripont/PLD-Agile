@@ -47,8 +47,9 @@ public class Plan {
 	}
 	
 	public void stopperCalculTournee() {
-		if(threadCalcul.isAlive() || threadCalcul.isDaemon()) {
+		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
 			threadCalcul.interrupt();
+			System.out.println("Calcul stoppé");
 		}
 	}
 	
@@ -111,14 +112,12 @@ public class Plan {
 			public void run() {
 				tsp.chercheSolution(20000, depart.length , cout, duree);//le 100000 est le temps max toléré
 				constructionTournee(depart, AllNoires, AllPrevious);
-				/*
-				 * On dit au gestionnaire qu'on a fini de calculer
-				 */
 				if(gestionnaire != null) {
 					Platform.runLater(() -> gestionnaire.tourneeCalculer());
 				}
 			}
 		};
+		threadCalcul.setDaemon(true);
 		threadCalcul.start();
     }
 	

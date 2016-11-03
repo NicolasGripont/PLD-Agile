@@ -204,34 +204,16 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		/*String tps = "Temps restant : ";
+		String tps = "Temps restant : ";
 		boutonCalculer.setVisible(false);
 		boxStopperCalcule.setVisible(true);
 		barreChargement.setProgress(0);
-		threadCalcul = new Thread() {
+		/*threadCalcul = new Thread() {
 			public void run() {
 				controleur.getGestionnaire().calculerTournee();
 			}
 		};
-		threadCalcul.start();
-		/*VBox vbox = new VBox();
-    	ProgressIndicator progress = new ProgressIndicator();
-        progress.setStyle("-fx-margin-top: 10px");
-		Button boutonStop = new Button("Stopper le calcul");
-		alert.setTitle("Calcul de l'itinéraire");
-		vbox.getChildren().add(progress);
-		vbox.getChildren().add(boutonStop);
-		alert.getDialogPane().setContent(vbox);
-
-		Task task = new Task() {
-			@Override protected Integer call() {
-				alert.show();
-				return null;
-	         }
-		};
-		new Thread(task).start();
-		while(alert.isShowing() == false){};*/
-		
+		threadCalcul.start();*/
 		controleur.clicBoutonCalculerTournee();	
 	}
 	
@@ -239,7 +221,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	private void stopperCalculLivraisonAction() {
 		boutonCalculer.setVisible(true);
 		boxStopperCalcule.setVisible(false);
-		//controleur.clicBoutonStopperTournee();
+		controleur.clicBoutonsStopperCalculeTournee();
 	}
 	
 	@FXML

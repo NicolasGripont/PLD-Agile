@@ -65,6 +65,12 @@ public class Controleur extends Application{
 		}
 	}
 	
+	@Override
+	public void stop() throws Exception {
+		super.stop();
+		gestionnaire.stopperCalculTournee();
+	}
+	
 	public void glisserDeposer(boolean accepte,File fichier)
 	{
 		etatCourant.glisserDeposer(this,accepte,fichier);
@@ -102,6 +108,10 @@ public class Controleur extends Application{
 		etatCourant.getEtat();
 	}
 		
+	public void clicBoutonsStopperCalculeTournee() {
+		etatCourant.clicBoutonStopperTournee(this, gestionnaire);
+		etatCourant.getEtat();
+	}
 	public void redessinerPlan() {
 		etatCourant.redessinerPlan(this, gestionnaire);
 	}

@@ -20,7 +20,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.stopperCalculTournee();
-		afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+		if(gestionnaire.solutionTrouvee()) {
+			afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+		} else {
+			controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
+		}
 	}
 	
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {

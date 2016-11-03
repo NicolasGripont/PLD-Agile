@@ -61,6 +61,11 @@ public abstract class EtatDefaut {
 		
 	}
 	
+	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		
+	}
+	
 	public void getEtat()
 	{
 		System.out.println("etat defaut");
