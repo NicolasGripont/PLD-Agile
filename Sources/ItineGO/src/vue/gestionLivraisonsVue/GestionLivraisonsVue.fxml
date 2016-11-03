@@ -64,15 +64,8 @@
                   <Insets left="5.0" right="5.0" />
                </BorderPane.margin></VBox>
          </top>
-         <bottom>
-            <Button fx:id="boutonCalculer" maxHeight="27.0" maxWidth="400.0" minHeight="27.0" minWidth="400.0" mnemonicParsing="false" onMouseClicked="#calculerLivraisonAction" prefHeight="27.0" prefWidth="400.0" text="Calculer tournée" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
-               </BorderPane.margin>
-            </Button>
-         </bottom>
          <center>
-            <TableView fx:id="livraisonTable" prefHeight="372.0" prefWidth="373.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="livraisonTable" prefHeight="295.0" prefWidth="400.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="adresseColonne" prefWidth="106.0" text="Adresse" />
                 <TableColumn prefWidth="155.0" text="Plages">
@@ -89,6 +82,27 @@
          </center>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" top="10.0" />
-         </BorderPane.margin></BorderPane>
+         </BorderPane.margin>
+         <bottom>
+            <VBox prefHeight="63.0" prefWidth="410.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="boutonCalculer" maxHeight="27.0" maxWidth="413.0" minHeight="27.0" minWidth="400.0" mnemonicParsing="false" onMouseClicked="#calculerLivraisonAction" prefHeight="27.0" prefWidth="413.0" text="Calculer tournée" />
+                  <HBox fx:id="boxStopperCalcule" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ProgressBar fx:id="barreChargement" prefHeight="20.0" prefWidth="185.0" progress="0.0" />
+                        <Label fx:id="labelTempsRestant" text="Temps restant : 1000 sec">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="boutonStopCalculer" mnemonicParsing="false" onMouseClicked="#stopperCalculLivraisonAction" prefHeight="27.0" prefWidth="58.0" text="Stop" />
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+            </VBox>
+         </bottom></BorderPane>
    </left>
 </BorderPane>

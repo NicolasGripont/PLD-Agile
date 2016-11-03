@@ -80,6 +80,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	}
 	
 	public void afficherErreur(String erreur) {
+		labelError.setStyle("-fx-text-fill : red;");
 		labelError.setVisible(true);
 		labelError.setText(erreur);
 	}
@@ -92,10 +93,8 @@ public class ChoixPlanVilleVue implements Initializable{
 		File tmp = dialogue.showOpenDialog(controleur.getStage());
 		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
 			controleur.clicBoutonParcourir(true, tmp);
-        	//fichierAccepte(tmp);
         } else {
     		controleur.clicBoutonParcourir(false, null);
-        	//fichierRefuse();
         }
 	}
 	
@@ -103,26 +102,23 @@ public class ChoixPlanVilleVue implements Initializable{
 	public void validerAction(MouseEvent event) {
 		if(controleur == null) {
 			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : red;");
 			labelError.setText("Erreur : Controler is null, fatal error");
 		} else if(fichierChoisie == null) {
 			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : red;");
 			labelError.setText("Erreur : Aucun fichier choisi");
 		} else {
 			controleur.clicBoutonValider(fichierChoisie);
-			/*if(controleur.creerPlanVille(fichierChoisie)) {
-				controleur.showChoixDemandeLivraison();
-			}*/
 		}
 	}
 	
 	public void fichierGlisserDeposerAccepteAction() {
 		controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
-		//fichierAccepte(glisserDeposerFichierVue.getFichierChoisie());
 	}
 	
 	public void fichierGlisserDeposerRefuseAction() {
 		controleur.glisserDeposer(false, null);
-		//fichierRefuse();
 	}
     
 	public void fichierAccepte(File fichier) {
@@ -130,7 +126,8 @@ public class ChoixPlanVilleVue implements Initializable{
 		fichierChoisie = fichier;
 		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
 		labelError.setVisible(true);
-		labelError.setText("Le fichier a bien pris en compte.");
+		labelError.setStyle("-fx-text-fill : green;");
+		labelError.setText("Votre fichier a été pris en compte.");
 		glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de plan.");
 	}
 	
@@ -139,6 +136,7 @@ public class ChoixPlanVilleVue implements Initializable{
 		fichierChoisie = null;
 		textFieldLienFichier.setText("");
 		labelError.setVisible(true);
+		labelError.setStyle("-fx-text-fill : red;");
 		labelError.setText("Erreur : Le fichier choisi est invalide.");
 	}
 }
