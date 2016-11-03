@@ -228,6 +228,9 @@ public class GestionTourneeVue extends GestionVue{
         File file = fileChooser.showSaveDialog(controleur.getStage());
         if (file != null) {
             controleur.clicBoutonGenererFeuilleDeRoute(file.getAbsolutePath());
+            labelError.setVisible(true);
+            labelError.setStyle("-fx-text-fill : green;");
+            labelError.setText("Feuille de route générée");
         }
 	}
 }
