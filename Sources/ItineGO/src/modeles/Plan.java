@@ -162,81 +162,81 @@ public class Plan {
     }
     
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
-				HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
-	    	for(int u = 0;u<depart.length; u++)
+			HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
+    	for(int u = 0;u<depart.length; u++)
+		{
+			for(int v = 0;v<depart.length; v++)
 			{
-				for(int v = 0;v<depart.length; v++)
-				{
-					cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
-				}
-			}
-			
-		}
-
-		private void remplirTableauDesID(int[] tableauDesId2) {
-	    	Set<Entry<Integer , Noeud>> setnoeuds;
-			Iterator<Entry<Integer , Noeud>> itnoeuds;
-			Entry<Integer , Noeud> enoeuds;
-	    	int itid=0;
-	    	setnoeuds = noeuds.entrySet();
-	    	itnoeuds = setnoeuds.iterator();
-			while(itnoeuds.hasNext())
-			{
-				enoeuds = itnoeuds.next();
-				tableauDesId[itid] = (int)enoeuds.getKey();
-			    itid++;
-			}
-			
-		}
-
-		private void remplirMatriceDuGraphe(Integer[][] matriceDuGraphe) {
-	    	for(Integer i = 0 ; i <matriceDuGraphe.length ;i++)
-	        {
-	            for(Integer j = 0 ; j < matriceDuGraphe.length ; j++)
-	            {
-	                if(i!=j)
-	                {
-	                	Pair<Noeud, Noeud> key = new Pair<>(noeuds.get(tableauDesId[i]),noeuds.get(tableauDesId[j]));
-	                	if(troncons.get(key) != null)
-	                	{
-	                	matriceDuGraphe[i][j]=(int)((troncons.get(key).getLongueur())/(troncons.get(key).getVitesse()));
-	                	}
-	                	else
-	                	{
-	                		matriceDuGraphe[i][j]=-1; // a remplacer par un max
-	                	}
-	                	
-	                }
-	                else
-	                {
-	                    matriceDuGraphe[i][j]=0;
-	                }
-	            }
-	    
-	        }		
-		}
-
-		private void remplirTableauDepEtDur(Integer[] depart, int[] duree) {
-	    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
-			duree[0]=0;
-			
-			Set<Entry<Noeud, Livraison>> setlivraisons;
-			Iterator<Entry<Noeud, Livraison>> itlivraisons;
-			Entry<Noeud, Livraison> elivraisons;
-			
-			int idep=1;
-			setlivraisons = livraisons.entrySet();
-			itlivraisons = setlivraisons.iterator();
-			while(itlivraisons.hasNext())
-			{
-				elivraisons = itlivraisons.next();
-			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
-			    duree[idep]=(elivraisons.getValue().getDuree());
-			    idep++;
+				cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
 			}
 		}
+		
+	}
 
-		private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
+	 private void remplirTableauDesID(int[] tableauDesId2) {
+    	Set<Entry<Integer , Noeud>> setnoeuds;
+		Iterator<Entry<Integer , Noeud>> itnoeuds;
+		Entry<Integer , Noeud> enoeuds;
+    	int itid=0;
+    	setnoeuds = noeuds.entrySet();
+    	itnoeuds = setnoeuds.iterator();
+		while(itnoeuds.hasNext())
+		{
+			enoeuds = itnoeuds.next();
+			tableauDesId[itid] = (int)enoeuds.getKey();
+		    itid++;
+		}
+		
+	}
+
+	 private void remplirMatriceDuGraphe(Integer[][] matriceDuGraphe) {
+    	for(Integer i = 0 ; i <matriceDuGraphe.length ;i++)
+        {
+            for(Integer j = 0 ; j < matriceDuGraphe.length ; j++)
+            {
+                if(i!=j)
+                {
+                	Pair<Noeud, Noeud> key = new Pair<>(noeuds.get(tableauDesId[i]),noeuds.get(tableauDesId[j]));
+                	if(troncons.get(key) != null)
+                	{
+                	matriceDuGraphe[i][j]=(int)((troncons.get(key).getLongueur())/(troncons.get(key).getVitesse()));
+                	}
+                	else
+                	{
+                		matriceDuGraphe[i][j]=-1; // a remplacer par un max
+                	}
+                	
+                }
+                else
+                {
+                    matriceDuGraphe[i][j]=0;
+                }
+            }
+    
+        }		
+	}
+
+	private void remplirTableauDepEtDur(Integer[] depart, int[] duree) {
+    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
+		duree[0]=0;
+		
+		Set<Entry<Noeud, Livraison>> setlivraisons;
+		Iterator<Entry<Noeud, Livraison>> itlivraisons;
+		Entry<Noeud, Livraison> elivraisons;
+		
+		int idep=1;
+		setlivraisons = livraisons.entrySet();
+		itlivraisons = setlivraisons.iterator();
+		while(itlivraisons.hasNext())
+		{
+			elivraisons = itlivraisons.next();
+		    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
+		    duree[idep]=(elivraisons.getValue().getDuree());
+		    idep++;
+		}
+	}
+
+	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
     	
     	for(int itDepart = 0; itDepart<depart.length ; itDepart++)
@@ -326,7 +326,6 @@ public class Plan {
 			
        }
     }
-	
 	
 	public void ajouterNoeud(Noeud n) {
 		if(n != null) {
@@ -420,8 +419,7 @@ public class Plan {
 	{
 		entrepot = null;
 	}
-	
-	
+		
 	public void effacerTournee() {
 		this.tournee = null;
 	}
