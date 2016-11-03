@@ -68,14 +68,8 @@ public class ParseurLivraison {
 				 if(livraison.getAttributeValue("DebutPlage") != null) {
 					 plageDebut = new Horaire(livraison.getAttributeValue("DebutPlage"));
 				 }
-				 else {
-					 plageFin = new Horaire(Integer.MIN_VALUE, 0, 0);
-				 }
 				 if(livraison.getAttributeValue("finPlage") != null) {
 					 plageDebut = new Horaire(livraison.getAttributeValue("finPlage"));
-				 }
-				 else {
-					 plageFin = new Horaire(Integer.MAX_VALUE, 0, 0);
 				 }
 				 plan.ajouterLivraison(new Livraison(
 						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
