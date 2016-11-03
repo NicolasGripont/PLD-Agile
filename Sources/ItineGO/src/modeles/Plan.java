@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import tsp.TSP;
 import utility.Pair;
 
 public class Plan {
@@ -22,13 +23,21 @@ public class Plan {
 	private Map<Noeud, Livraison> livraisons;
 	private Entrepot entrepot;
 	private int tableauDesId[];
-	
+	private TSP tsp;
 	private Tournee tournee;
 	
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
 		livraisons = new HashMap<Noeud, Livraison>();
+	}
+	
+	public boolean estSolutionOptimale() {
+		return !tsp.getTempsLimiteAtteint();
+	}
+	
+	public void stopperCalculTournee() {
+		
 	}
 	
 	public int numDansTableau(int id)
@@ -83,9 +92,9 @@ public class Plan {
 		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
-		tsp.TSP monTSP = new tsp.TSP1();
-		monTSP.chercheSolution(20000, depart.length , cout, duree);  //le 100000 est le temps max toléré
-		if(monTSP.getTempsLimiteAtteint())
+		tsp = new tsp.TSP1();
+		tsp.chercheSolution(20000, depart.length , cout, duree);  //le 100000 est le temps max toléré
+		if(tsp.getTempsLimiteAtteint())
 			return false;
 		//Il faut maintenant reupéré le chemin optimal via les get
 		
@@ -94,18 +103,18 @@ public class Plan {
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		
-		Integer noeudCourant = depart[monTSP.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
+		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
 		boolean first;
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
-			previous = new HashMap<>(AllPrevious.get(depart[monTSP.getMeilleureSolution(i)]));
+			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
 			while(previous.get(noeudCourant)!=noeudCourant)
 			{
 				futurTourne.add(noeudCourant);
 			    noeudCourant=previous.get(noeudCourant);
 			}
 		}
-		futurTourne.add(depart[monTSP.getMeilleureSolution(0)]);
+		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
 	      List<Integer> FT = new ArrayList<Integer>(futurTourne);
 	      futurTourne.clear();
