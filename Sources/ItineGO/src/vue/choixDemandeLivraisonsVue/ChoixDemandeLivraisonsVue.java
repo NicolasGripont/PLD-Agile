@@ -161,6 +161,9 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		labelError.setVisible(false);
 		fichierChoisie = fichier;
 		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
+		labelError.setVisible(true);
+		labelError.setText("Le fichier a bien pris en compte.");
+		glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de livraisons.");
 	}
 	
 	public void fichierRefuse(){

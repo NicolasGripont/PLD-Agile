@@ -40,13 +40,15 @@ public class GlisserDeposerFichierVue extends StackPane {
 	 */
 	private EventHandler<ActionEvent> fichierRefuseAction;
 	
+	private Label label;
+	
 	public GlisserDeposerFichierVue(String message) {
 		AnchorPane.setBottomAnchor(this, 0.0);
 		AnchorPane.setTopAnchor(this, 0.0);
 		AnchorPane.setRightAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
 		
-		Label label= new Label(message);
+		label= new Label(message);
 		this.getChildren().add(label);
 		
 		this.setStyle("-fx-background-color: #EEEEEE;"
@@ -76,7 +78,11 @@ public class GlisserDeposerFichierVue extends StackPane {
         });
 		
 	}
-	
+
+	public Label getLabel() {
+		return label;
+	}
+
 	public File getFichierChoisie() {
 		return fichierChoisie;
 	}

@@ -49,6 +49,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
+				System.out.println(controleur.stage.getHeight());
 				controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.gestionLivraisonsVue.miseAJourTableau(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
