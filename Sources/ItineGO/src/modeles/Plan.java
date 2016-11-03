@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -123,18 +124,23 @@ public class Plan {
 	    //Puis on constrit tournee
 	     
 			// Construction de la Tournee
+	      	Set<Livraison> dejaVisites = new HashSet<>();
 			List<Trajet> trajetsPrevus = new ArrayList<>();
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
-				if (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null
-						|| entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) {
+				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée)  
+				//OU si le noeud suivant est l'entrepot
+				if ((livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
+						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
+						|| entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1))))) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
 								tronconsTrajet.get(tronconsTrajet.size() - 1).getDestination(), tronconsTrajet));
 						tronconsTrajet = new ArrayList<>();
+						dejaVisites.add(livraisons.get(noeuds.get(futurTourne.get(i + 1))));
 					}
 				} else {
 					tronconsTrajet.add(
@@ -287,7 +293,7 @@ public class Plan {
 	            blancsiteration= new HashMap<Integer, Integer>(blancs);
 	            setblancs = blancsiteration.entrySet();
 	            it = setblancs.iterator();
-	          
+	         
 	            while(it.hasNext())
 	            {
 	            	
