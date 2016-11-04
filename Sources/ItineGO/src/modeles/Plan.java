@@ -28,6 +28,7 @@ public class Plan {
 	private Tournee tournee;
 	private Thread threadCalcul;
 	private Gestionnaire gestionnaire;
+	private int tempsMax = 20000;
 	
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
@@ -115,7 +116,7 @@ public class Plan {
 		 */
 		threadCalcul = new Thread() {
 			public void run() {
-				tsp.chercheSolution(20000, depart.length , cout, duree);//le 100000 est le temps max toléré
+				tsp.chercheSolution(tempsMax, depart.length , cout, duree);//le 100000 est le temps max toléré
 				constructionTournee(depart, AllNoires, AllPrevious);
 				if(gestionnaire != null) {
 					Platform.runLater(() -> gestionnaire.tourneeCalculer());
@@ -166,10 +167,10 @@ public class Plan {
 
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée)  
-				//OU si le noeud suivant est l'entrepot
+				//OU (si le noeud suivant est l'entrepot && que l'on visite le dernier noeud)
 				if ((livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						|| entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1))))) {
+						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i == (futurTourne.size() -1))) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 					if (!tronconsTrajet.isEmpty()) {
@@ -469,6 +470,10 @@ public class Plan {
 	{
 		if(noeuds.containsKey(id)){return true;}
 		else{return false;}
+	}
+	
+	public int getTempsMax() {
+		return tempsMax;
 	}
 	
 	public void genererFeuilleDeRoute(String link) {

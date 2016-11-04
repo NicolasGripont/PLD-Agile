@@ -84,12 +84,10 @@ public class Gestionnaire {
 		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
 			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());
 			Horaire horaireDepart = new Horaire(horaire);
-			//if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null) {
-				horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
-				LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
-						horaire, horaireDepart);
-				livraisons.add(l);
-			//}
+			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
+					horaire, horaireDepart);
+			livraisons.add(l);
 			horaire = new Horaire(horaireDepart);
 		}
 		return livraisons;
@@ -99,6 +97,10 @@ public class Gestionnaire {
 		return plan.getEntrepot().getHoraireDepart();
 	}
 	
+	public int getTempsMaxDeCalcul() {
+		return plan.getTempsMax();
+	}
+	
 	public Horaire getHoraireFinTournee() {
 		if(plan.getTournee() == null){
 			return null;
@@ -106,8 +108,7 @@ public class Gestionnaire {
 		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
 		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
 			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());
-			//if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null)
-				horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
 		}
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
 		return horaire;

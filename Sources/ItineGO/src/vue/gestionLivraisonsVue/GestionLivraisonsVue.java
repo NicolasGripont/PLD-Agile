@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 import controleur.Controleur;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -204,17 +205,33 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		String tps = "Temps restant : ";
 		boutonCalculer.setVisible(false);
 		boxStopperCalcule.setVisible(true);
 		barreChargement.setProgress(0);
-		/*threadCalcul = new Thread() {
+		threadCalcul = new Thread() {
 			public void run() {
-				controleur.getGestionnaire().calculerTournee();
+				int tpsMax = controleur.getGestionnaire().getTempsMaxDeCalcul();
+				int tps = 0;
+				while(tps <= tpsMax) {
+					Platform.runLater(() -> updateChrono(tps, tpsMax));
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		};
-		threadCalcul.start();*/
+		threadCalcul.start();
 		controleur.clicBoutonCalculerTournee();	
+	}
+	
+	private void updateChrono(int tps, int tpsMax) {
+		String tpsStr = "Temps restant : ";
+		tps += 1;
+		barreChargement.setProgress(new Double(tps) / new Double(tpsMax));
+		tpsStr += (tpsMax-tps) + "s";
+		labelTempsRestant.setText(tpsStr);
 	}
 	
 	@FXML

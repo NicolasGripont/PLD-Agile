@@ -61,7 +61,15 @@ public class Horaire {
 	}
 	
 	public String getHoraire() {
-		return  heure + ":" + minute;
+		String horaire = "";
+		if(heure < 10)
+			horaire += "0";
+		horaire += heure;
+		horaire += ":";
+		if(minute < 10) 
+			horaire += "0";
+		horaire += minute;
+		return horaire;
 	}
 	
 	@Override
