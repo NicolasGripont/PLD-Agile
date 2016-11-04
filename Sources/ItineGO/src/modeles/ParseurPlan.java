@@ -17,14 +17,14 @@ public class ParseurPlan {
 	   {
 		 Plan plan = new Plan();
 		 try {
-			 parseurPlanVille("./tests/xmlTest/plan5x5.xml", plan);
+			 parseurPlanVille("./tests/assetsForTests/plan5x5.xml", plan);
 		 }
 		 catch(Exception e){
-			 System.err.println(e);;
+			 System.err.println(e);
 		 }
-		 System.out.println(plan.getNoeuds().size());
-		 System.out.println(plan.getTroncons().size());
-		 System.out.println(plan.getNoeud(1).toString());
+//		 System.out.println(plan.getNoeuds().size());
+//		 System.out.println(plan.getTroncons().size());
+//		 System.out.println(plan.getNoeud(1).toString());
 	   }
 	 
 	 /**
