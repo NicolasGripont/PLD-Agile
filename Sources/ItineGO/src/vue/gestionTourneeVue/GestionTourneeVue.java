@@ -99,7 +99,7 @@ public class GestionTourneeVue extends GestionVue{
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getDebutPlage() != null) {
+        	if(livraison.getLivraison().getDebutPlage() != null && !livraison.getLivraison().getDebutPlage().toString().equals("0:0:0")) {
         		return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().toString()); 
         	} else {
         		return new SimpleStringProperty("-");
@@ -108,7 +108,7 @@ public class GestionTourneeVue extends GestionVue{
         
         plageFinColonne.setCellValueFactory( param -> {
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getFinPlage() != null) {
+        	if(livraison.getLivraison().getFinPlage() != null && !livraison.getLivraison().getFinPlage().toString().equals("0:0:0")) {
 	        	return new SimpleStringProperty(livraison.getLivraison().getFinPlage().toString());
 	        } else {
 	    		return new SimpleStringProperty("-");

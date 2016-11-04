@@ -110,7 +110,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getDebutPlage() != null) {
+        	if(livraison.getDebutPlage() != null && !livraison.getDebutPlage().toString().equals("0:0:0")) {
         		return new SimpleStringProperty(livraison.getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
@@ -119,7 +119,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageFinColonne.setCellValueFactory( param -> {
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getFinPlage() != null) {
+        	if(livraison.getFinPlage() != null && !livraison.getFinPlage().toString().equals("0:0:0")) {
 	        	return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");

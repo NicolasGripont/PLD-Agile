@@ -66,8 +66,10 @@ public class Plan {
 	}
 	
 	public void calculerTournee() {
-    	int nbDeLivraison = livraisons.size();
+		int nbDeLivraison = livraisons.size();
     	
+    	
+    	//On utilisera TSP4 qui recup les plages horaires
     	tableauDesId = new int [noeuds.size()];
     	
     	
@@ -79,10 +81,13 @@ public class Plan {
     	depart = new Integer[nbDeLivraison+1]; 
 		
 		int duree[];
+		int[][] plages_horaire;
 		duree = new int[nbDeLivraison+1];
 		
-		//On place les informations de l'entrepot et des livraisons dans les deux tableaux
-		remplirTableauDepEtDur(depart, duree);
+		plages_horaire = new int[2][nbDeLivraison+1];
+		
+		//On place les informations de l'entrepot et des livraisons dans les trois tableaux
+		remplirTableauDepEtDur(depart, duree, plages_horaire);
 		
 		
 		Integer matriceDuGraphe[][];
@@ -91,8 +96,8 @@ public class Plan {
     	//On remplie la matrice qui modelise le graphe
     	remplirMatriceDuGraphe(matriceDuGraphe);
     	
-    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera également placé en paramètre
-        HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera également placé en paramètre
+    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+        HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	
     	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
    
@@ -101,7 +106,7 @@ public class Plan {
 		
 		int cout[][]= new int [depart.length][depart.length];
 		
-		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
+		//On construti la matrice utilisÃ© par la TSP a partir des Calcul de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new tsp.TSP1();
@@ -122,11 +127,11 @@ public class Plan {
     }
 	
 	private void constructionTournee(Integer depart[], HashMap< Integer, HashMap<Integer, Integer>> AllNoires, HashMap< Integer, HashMap<Integer, Integer>> AllPrevious) {
-		//Il faut maintenant reupéré le chemin optimal via les get
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		
-		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
+		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin ÃƒÂ  l'envers
+		boolean first;
 		for(int i = depart.length-1 ; i >=0 ; i--)
 		{
 			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
@@ -151,7 +156,7 @@ public class Plan {
 		      lastAdded=myInt;
 	      } 
 	      
-		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
+	    //Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
 	    //Puis on constrit tournee
 	     
 			// Construction de la Tournee
@@ -236,25 +241,41 @@ public class Plan {
         }		
 	}
 
-	private void remplirTableauDepEtDur(Integer[] depart, int[] duree) {
-    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
-		duree[0]=0;
-		
-		Set<Entry<Noeud, Livraison>> setlivraisons;
-		Iterator<Entry<Noeud, Livraison>> itlivraisons;
-		Entry<Noeud, Livraison> elivraisons;
-		
-		int idep=1;
-		setlivraisons = livraisons.entrySet();
-		itlivraisons = setlivraisons.iterator();
-		while(itlivraisons.hasNext())
-		{
-			elivraisons = itlivraisons.next();
-		    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
-		    duree[idep]=(elivraisons.getValue().getDuree());
-		    idep++;
+	 private void remplirTableauDepEtDur(Integer[] depart, int[] duree, int[][] plages_horaire) {
+	    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
+			duree[0]=0;
+			plages_horaire[0][0]=0;
+			plages_horaire[1][0]=Integer.MAX_VALUE;
+			
+			Set<Entry<Noeud, Livraison>> setlivraisons;
+			Iterator<Entry<Noeud, Livraison>> itlivraisons;
+			Entry<Noeud, Livraison> elivraisons;
+			
+			int idep=1;
+			setlivraisons = livraisons.entrySet();
+			itlivraisons = setlivraisons.iterator();
+			while(itlivraisons.hasNext())
+			{
+				elivraisons = itlivraisons.next();
+			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
+			    duree[idep]=(elivraisons.getValue().getDuree());
+			    
+			    if(!elivraisons.getValue().getDebutPlage().equals(null)){
+			    	plages_horaire[0][idep]=elivraisons.getValue().getDebutPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    }
+			    else {
+			    	plages_horaire[0][idep]=0;
+			    }
+			    
+			    if(!elivraisons.getValue().getFinPlage().equals(null)){
+			    	plages_horaire[1][idep]=elivraisons.getValue().getFinPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    }
+			    else {
+			    	plages_horaire[1][idep]=Integer.MAX_VALUE;
+			    }
+			    idep++;
+			}
 		}
-	}
 
 	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
