@@ -1,5 +1,9 @@
 package modeles;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class TSP3 extends TSP2 {
 	
 	/*
@@ -18,7 +22,7 @@ public class TSP3 extends TSP2 {
 			i++;
 		}
 		tri_bulles(coutNoeudCourent, TabNonVus);
-		ArrayList<Integer> CopieNonVus = new ArrayList<Integer>();
+		List<Integer> CopieNonVus = new ArrayList<Integer>();
 		for(i=0; i < TabNonVus.length; i++){
 			CopieNonVus.add(TabNonVus[i]);
 		}
