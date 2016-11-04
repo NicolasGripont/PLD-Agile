@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Plan {
 	private Map<Noeud, Livraison> livraisons;
 	private Entrepot entrepot;
 	private int tableauDesId[];
-	private TSP tsp;
+	private TSP4 tsp;
 	private Tournee tournee;
 	private Thread threadCalcul;
 	private Gestionnaire gestionnaire;
@@ -80,8 +81,11 @@ public class Plan {
 		int duree[];
 		duree = new int[nbDeLivraison+1];
 		
+		int[][] plages_horaire;
+		plages_horaire = new int[2][nbDeLivraison+1];
+		
 		//On place les informations de l'entrepot et des livraisons dans les deux tableaux
-		remplirTableauDepEtDur(depart, duree);
+		remplirTableauDepEtDur(depart, duree, plages_horaire);
 		
 		
 		Integer matriceDuGraphe[][];
@@ -103,13 +107,13 @@ public class Plan {
 		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
-		tsp = new TSP1();
+		tsp = new TSP4();
 		/*
 		 * Le thread va venir ici
 		 */
 		threadCalcul = new Thread() {
 			public void run() {
-				tsp.chercheSolution(20000, depart.length , cout, duree);//le 100000 est le temps max toléré
+				tsp.chercheSolution(20000, depart.length , cout, duree, plages_horaire);//le 100000 est le temps max toléré
 				constructionTournee(depart, AllNoires, AllPrevious);
 				if(gestionnaire != null) {
 					Platform.runLater(() -> gestionnaire.tourneeCalculer());
@@ -126,15 +130,22 @@ public class Plan {
 		HashMap<Integer, Integer> previous;
 		
 		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
-		for(int i = depart.length-1 ; i >=0 ; i--)
-		{
+		for(int i = depart.length-1 ; i >=0 ; i--) {
 			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
-			while(previous.get(noeudCourant)!=noeudCourant)
-			{
+			while(previous.get(noeudCourant)!=noeudCourant) {
 				futurTourne.add(noeudCourant);
 			    noeudCourant=previous.get(noeudCourant);
 			}
 		}
+		
+		LinkedList<Integer> ordreTourneID = new LinkedList<Integer>();
+		
+		for(int j = 0 ; j< depart.length ; j++ ) {
+			ordreTourneID.add(tableauDesId[tsp.getMeilleureSolution(j)]);
+		}
+		//ordreTourneID.add(ordreTourneID.getFirst());
+		ordreTourneID.removeFirst();
+		
 		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
 	      List<Integer> FT = new ArrayList<Integer>(futurTourne);
@@ -161,11 +172,13 @@ public class Plan {
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée)  
 				//OU si le noeud suivant est l'entrepot
-				if ((livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
+				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						|| entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1))))) {
+								 /* TODO && livraisons.get(noeuds.get(ordreTourneID.getFirst())).equals(livraisons.get(noeuds.get(futurTourne.get(i + 1))) )
+						*/|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2)) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+					//ordreTourneID.removeFirst();
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
 								tronconsTrajet.get(tronconsTrajet.size() - 1).getDestination(), tronconsTrajet));
@@ -235,25 +248,56 @@ public class Plan {
         }		
 	}
 
-	private void remplirTableauDepEtDur(Integer[] depart, int[] duree) {
-    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
-		duree[0]=0;
-		
-		Set<Entry<Noeud, Livraison>> setlivraisons;
-		Iterator<Entry<Noeud, Livraison>> itlivraisons;
-		Entry<Noeud, Livraison> elivraisons;
-		
-		int idep=1;
-		setlivraisons = livraisons.entrySet();
-		itlivraisons = setlivraisons.iterator();
-		while(itlivraisons.hasNext())
-		{
-			elivraisons = itlivraisons.next();
-		    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
-		    duree[idep]=(elivraisons.getValue().getDuree());
-		    idep++;
+	 private void remplirTableauDepEtDur(Integer[] depart, int[] duree, int[][] plages_horaire) {
+	    	depart[0]=(Integer)(numDansTableau(entrepot.getNoeud().getId())); //le depart 0 sera l'entrepot
+			duree[0]=0;
+			plages_horaire[0][0]=0;
+			plages_horaire[1][0]=Integer.MAX_VALUE;
+			
+			Set<Entry<Noeud, Livraison>> setlivraisons;
+			Iterator<Entry<Noeud, Livraison>> itlivraisons;
+			Entry<Noeud, Livraison> elivraisons;
+			
+			int idep=1;
+			setlivraisons = livraisons.entrySet();
+			itlivraisons = setlivraisons.iterator();
+			while(itlivraisons.hasNext())
+			{
+				elivraisons = itlivraisons.next();
+			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
+			    duree[idep]=(elivraisons.getValue().getDuree());
+			   
+			    //System.err.println(elivraisons.getValue().getDebutPlage()==null?"null":elivraisons.getValue().getDebutPlage().toString());
+			    if(!elivraisons.getValue().getDebutPlage().equals(new Horaire(0,0,0))){
+			    	plages_horaire[0][idep]=elivraisons.getValue().getDebutPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    	//System.out.println(plages_horaire[0][idep]);
+			    }
+			    else {
+			    	plages_horaire[0][idep]=0;
+			    	//System.out.println(plages_horaire[0][idep]);
+			    }
+			    plages_horaire[0][idep]*=60;
+			    if(!elivraisons.getValue().getFinPlage().equals(new Horaire(0,0,0))){
+			    	plages_horaire[1][idep]=elivraisons.getValue().getFinPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    	//System.out.println("NON NULL");
+			    	plages_horaire[1][idep]*=60;
+			    }
+			    else {
+			    	plages_horaire[1][idep]=Integer.MAX_VALUE;
+			    	//System.out.println(plages_horaire[1][idep]);
+
+			    }
+			    
+
+			    idep++;
+			}
+			
+			for(int i =0; i < plages_horaire[0].length; i++)
+			{
+				System.out.println(plages_horaire[0][i]+ " : "+ plages_horaire[1][i]);
+			}
 		}
-	}
+
 
 	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
