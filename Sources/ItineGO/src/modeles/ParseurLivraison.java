@@ -71,7 +71,12 @@ public class ParseurLivraison {
 				 if(livraison.getAttributeValue("finPlage") != null) {
 					 plageFin = new Horaire(livraison.getAttributeValue("finPlage"));
 				 }
-
+				 if(plan.idExiste(Integer.parseInt(livraison.getAttributeValue("adresse"))) == false) {
+					 plan.effacerEntrepot();
+					 plan.effacerLivraisons();
+					 throw new BadXmlLivraison();
+				 }
+					 
 				 plan.ajouterLivraison(new Livraison(
 						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
 						 Integer.parseInt(livraison.getAttributeValue("duree")),

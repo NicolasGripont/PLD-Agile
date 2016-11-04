@@ -34,14 +34,14 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlFile: Erreur : Fichier XML mal formé";
+		String res1 = "Erreur : Fichier XML mal formé";
 
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 //			System.err.println(resTest);
 		}
 		
@@ -56,14 +56,14 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-2ID.xml";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlPlan: Erreur : Deux identifiants de noeud identiques";
+		String res1 = "Erreur : Deux identifiants de noeud identiques";
 		
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 		}
 		assertEquals(res1,resTest);
 		
@@ -78,14 +78,14 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-UknOrigine.xml";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlPlan: Erreur : Fichier plan non valide";
+		String res1 = "Erreur : Fichier plan non valide";
 		
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 		}
 		assertEquals(res1,resTest);
 		
@@ -103,14 +103,14 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-UknDestination.xml";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlPlan: Erreur : Fichier plan non valide";
+		String res1 = "Erreur : Fichier plan non valide";
 		
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 		}
 		assertEquals(res1,resTest);
 		
@@ -128,14 +128,14 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-ID-1.xml";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlPlan: Erreur : Fichier plan non valide";
+		String res1 = "Erreur : Fichier plan non valide";
 		
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 		}
 		assertEquals(res1,resTest);
 		
@@ -153,13 +153,13 @@ public class ParseurPlanTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-1Noeud.xml";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlPlan: Erreur : Fichier plan non valide";
+		String res1 = "Erreur : Fichier plan non valide";
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
+			resTest = e.getMessage();
 		}
 		assertEquals(res1,resTest);
 	}
