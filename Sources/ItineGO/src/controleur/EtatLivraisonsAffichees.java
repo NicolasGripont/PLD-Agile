@@ -30,6 +30,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
 			try {
+				gestionnaire.stopperCalculTournee();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();

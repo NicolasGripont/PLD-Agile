@@ -83,7 +83,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
-	private Thread threadCalcul;
+	private Task<Void> taskCalcul;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -111,7 +111,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getDebutPlage() != null && !livraison.getDebutPlage().toString().equals("0:0:0")) {
+        	if(livraison.getDebutPlage() != null && !livraison.getDebutPlage().getHoraire().equals("00:00")) {
         		return new SimpleStringProperty(livraison.getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
@@ -120,7 +120,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageFinColonne.setCellValueFactory( param -> {
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getFinPlage() != null && !livraison.getFinPlage().toString().equals("0:0:0")) {
+        	if(livraison.getFinPlage() != null && !livraison.getFinPlage().getHoraire().equals("00:00")) {
 	        	return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");
@@ -207,31 +207,46 @@ public class GestionLivraisonsVue extends GestionVue {
 	public void calculerLivraisonAction() {
 		boutonCalculer.setVisible(false);
 		boxStopperCalcule.setVisible(true);
+		barreChargement.progressProperty().unbind();
 		barreChargement.setProgress(0);
-		threadCalcul = new Thread() {
-			public void run() {
-				int tpsMax = controleur.getGestionnaire().getTempsMaxDeCalcul();
-				int tps = 0;
-				while(tps <= tpsMax) {
-					Platform.runLater(() -> updateChrono(tps, tpsMax));
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+		//Thread calcul temps de calcule d'un tournee
+		taskCalcul = new Task<Void>() {
+	         @Override protected Void call() {
+	        	 int tpsMax = controleur.getGestionnaire().getTempsMaxDeCalcul();
+					int tps = 0;
+					tpsMax /= 1000;
+					for(tps=0;tps<=tpsMax;tps++) {
+						String tpsStr = "Temps restant : ";
+						tpsStr += (tpsMax-tps) + "s";
+						updateProgress(tps, tpsMax);
+						if(tps%2 == 1) {
+							tpsStr += "P";
+						}
+						updateMessage(tpsStr);
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-				}
-			}
-		};
-		threadCalcul.start();
-		controleur.clicBoutonCalculerTournee();	
-	}
-	
-	private void updateChrono(int tps, int tpsMax) {
-		String tpsStr = "Temps restant : ";
-		tps += 1;
-		barreChargement.setProgress(new Double(tps) / new Double(tpsMax));
-		tpsStr += (tpsMax-tps) + "s";
-		labelTempsRestant.setText(tpsStr);
+	             return null;
+	         }
+	     };
+	     taskCalcul.messageProperty().addListener(new ChangeListener<String>() {
+             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	 if(newValue.endsWith("P")) {
+            		 dessinePlan(controleur.getGestionnaire().getPlan());
+            		 newValue = newValue.substring(0, newValue.length()-2);
+            	 }
+                 labelTempsRestant.setText(newValue);
+             }
+         });
+	     barreChargement.progressProperty().bind(taskCalcul.progressProperty());
+	     controleur.clicBoutonCalculerTournee();
+	     Thread th = new Thread(taskCalcul);
+	     th.setDaemon(true);
+	     th.start();
 	}
 	
 	@FXML

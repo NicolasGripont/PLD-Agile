@@ -73,10 +73,7 @@ public class GestionTourneeVue extends GestionVue{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        
+		// TODO Auto-generated method stub        
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
         planVillePane.getChildren().add(planVilleVue);
         
@@ -99,7 +96,7 @@ public class GestionTourneeVue extends GestionVue{
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getDebutPlage() != null && !livraison.getLivraison().getDebutPlage().toString().equals("0:0:0")) {
+        	if(livraison.getLivraison().getDebutPlage() != null && !livraison.getLivraison().getDebutPlage().getHoraire().equals("00:00")) {
         		return new SimpleStringProperty(livraison.getLivraison().getFinPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
@@ -108,7 +105,7 @@ public class GestionTourneeVue extends GestionVue{
         
         plageFinColonne.setCellValueFactory( param -> {
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getFinPlage() != null && !livraison.getLivraison().getFinPlage().toString().equals("0:0:0")) {
+        	if(livraison.getLivraison().getFinPlage() != null && !livraison.getLivraison().getFinPlage().getHoraire().equals("00:00")) {
 	        	return new SimpleStringProperty(livraison.getLivraison().getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");

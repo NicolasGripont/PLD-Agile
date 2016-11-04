@@ -27,6 +27,7 @@ public class Plan {
 	private TSP tsp;
 	private Tournee tournee;
 	private Thread threadCalcul;
+	private Thread threadConstructionTournee;
 	private Gestionnaire gestionnaire;
 	private int tempsMax = 20000;
 	
@@ -51,6 +52,10 @@ public class Plan {
 		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
 			threadCalcul.interrupt();
 			System.out.println("Calcul stoppé");
+		}
+		if(threadConstructionTournee != null && threadConstructionTournee.isAlive() && threadConstructionTournee.isInterrupted() == false) {
+			threadConstructionTournee.interrupt();
+			System.out.println("Construction stoppée");
 		}
 	}
 	
@@ -125,6 +130,22 @@ public class Plan {
 		};
 		threadCalcul.setDaemon(true);
 		threadCalcul.start();
+		threadConstructionTournee = new Thread() {
+			public void run() {
+				while(threadCalcul.isInterrupted() == false) {
+					try {
+						System.out.println("Construction solution");
+						///ISOLATION !!!
+						Thread.sleep(3000);
+						constructionTournee(depart, AllNoires, AllPrevious);
+					} catch (InterruptedException e) {
+						return;
+					}
+				}
+			}
+		};
+		threadConstructionTournee.setDaemon(true);
+		threadConstructionTournee.start();
     }
 	
 	private void constructionTournee(Integer depart[], HashMap< Integer, HashMap<Integer, Integer>> AllNoires, HashMap< Integer, HashMap<Integer, Integer>> AllPrevious) {
@@ -170,7 +191,7 @@ public class Plan {
 				//OU (si le noeud suivant est l'entrepot && que l'on visite le dernier noeud)
 				if ((livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i == (futurTourne.size() -1))) {
+						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i == (futurTourne.size() - 2))) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 					if (!tronconsTrajet.isEmpty()) {
