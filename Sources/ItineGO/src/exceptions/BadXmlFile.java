@@ -11,6 +11,6 @@ public class BadXmlFile extends Exception {
 	}
 	
 	public BadXmlFile() {
-		super("Fichier XML non valide");
+		super("Erreur : Fichier XML mal formé");
 	}
 }

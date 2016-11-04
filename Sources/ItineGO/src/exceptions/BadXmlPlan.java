@@ -11,6 +11,6 @@ public class BadXmlPlan  extends Exception {
 	}
 	
 	public BadXmlPlan() {
-		super("Fichier plan non valide");
+		super("Erreur : Fichier plan non valide");
 	}
 }

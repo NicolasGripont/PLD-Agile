@@ -38,10 +38,10 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 				}
 			}
 		} catch(BadXmlFile exception) {
-			controleur.choixPlanVilleVue.afficherErreur("Erreur : Fichier XML mal formé");
+			controleur.choixPlanVilleVue.afficherErreur(exception.getMessage());
 			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		} catch(BadXmlPlan exception) {
-			controleur.choixPlanVilleVue.afficherErreur("Erreur : Impossible de parser le plan");
+			controleur.choixPlanVilleVue.afficherErreur(exception.getMessage());
 			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		}
 	}
