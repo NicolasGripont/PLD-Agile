@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import exceptions.BadXmlFile;
-import exceptions.BadXmlPlan;
 import modeles.ParseurPlan;
 import modeles.Plan;
 
