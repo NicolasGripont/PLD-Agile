@@ -15,7 +15,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javafx.application.Platform;
-import tsp.TSP;
 import utility.Pair;
 
 public class Plan {
@@ -104,7 +103,7 @@ public class Plan {
 		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
-		tsp = new tsp.TSP1();
+		tsp = new TSP1();
 		/*
 		 * Le thread va venir ici
 		 */
