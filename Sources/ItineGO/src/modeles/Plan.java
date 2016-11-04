@@ -463,10 +463,10 @@ public class Plan {
 			List<Trajet> trajets = tournee.getTrajets();
 			for(int i = 0; i < trajets.size(); ++i) {
 				if(i == trajets.size()-1) {
-					output.write("\nRetour à l'entrepot, départ " + heureCourante.getHoraire() +" du noeud " + trajets.get(trajets.size()-1).getArrive().getId());
+					output.write("\n\nRetour à l'entrepot, départ " + heureCourante.getHoraire() +" du noeud " + trajets.get(trajets.size()-1).getArrive().getId());
 				}
 				else {
-					output.write("\nDepart "+ heureCourante.getHoraire() +" du noeud " + trajets.get(i).getDepart().getId());
+					output.write("\n\nDepart "+ heureCourante.getHoraire() +" du noeud " + trajets.get(i).getDepart().getId());
 				}
 				
 				//On parcourt les tronçons
@@ -509,7 +509,7 @@ public class Plan {
 					//Affichage pour la durée estimée de la livraison
 					Horaire horaireTemp = new Horaire(0,0,0);
 					horaireTemp.ajouterSeconde(l.getDuree());
-					output.write("\n\tDurée de livraison estimée : " + horaireTemp.toString());
+					output.write("\n\tDurée de livraison estimée : " + horaireTemp.getHoraireEnMinutes() + "min");
 					//On incrémente l'heure
 					heureCourante.ajouterSeconde(l.getDuree());
 				}

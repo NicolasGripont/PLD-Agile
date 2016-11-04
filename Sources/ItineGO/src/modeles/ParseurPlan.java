@@ -68,7 +68,8 @@ public class ParseurPlan {
 			 	 }
 				 else
 				 {
-					 throw new BadXmlPlan("Deux identifiants de noeud identiques");
+					 plan.effacerNoeuds();
+					 throw new BadXmlPlan("Erreur : Deux identifiants de noeud identiques");
 				 }
 			 }
 			//Parse les troncons
@@ -85,9 +86,10 @@ public class ParseurPlan {
 									 plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination")))
 							 )
 					);
-					//System.out.println("destination : " + troncon.getAttributeValue("destination")+ " longueur : " + troncon.getAttributeValue("longueur") + " nomRue : " + troncon.getAttributeValue("nomRue"));
 				 }
 				 else {
+					 plan.effacerNoeuds();
+					 plan.effacerTroncons();
 					 throw new BadXmlPlan();
 				 }
 			 }

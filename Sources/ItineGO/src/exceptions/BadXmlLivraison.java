@@ -11,6 +11,6 @@ public class BadXmlLivraison extends Exception {
 	}
 	
 	public BadXmlLivraison() {
-		super("Fichier livraison non valide");
+		super("Erreur : Fichier livraison non valide");
 	}
 }

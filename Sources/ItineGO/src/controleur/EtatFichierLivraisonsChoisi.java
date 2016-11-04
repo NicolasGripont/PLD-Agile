@@ -35,10 +35,10 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 				}
 			}
 		} catch(BadXmlFile exception) {
-			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Fichier XML mal formé");
+			controleur.choixDemandeLivraisonsVue.afficherErreur(exception.getMessage());
 			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		} catch(BadXmlLivraison exception) {
-			controleur.choixDemandeLivraisonsVue.afficherErreur("Erreur : Impossible de parser les livraisons");
+			controleur.choixDemandeLivraisonsVue.afficherErreur(exception.getMessage());
 			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		}
 	}
