@@ -18,17 +18,50 @@ import java.util.Set;
 import javafx.application.Platform;
 import utility.Pair;
 
+/**
+ * Classe modélisant le plan
+ */
 public class Plan {
+	/**
+	 * Map représentant l'ensemble des noeuds du plan
+	 * Le noeud est accessible par son id
+	 */
 	private Map<Integer, Noeud> noeuds;
+	/**
+	 * Map représentant l'ensemble des tronçons du plan
+	 * Le tronc est accessible par son noeud de départ et d'arrivée
+	 */
 	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
+	/**
+	 * Map représentant l'ensemble des livraisons de la tournée à effectuer
+	 * La livraison est accessible par le noeud modélisant sa position
+	 */
 	private Map<Noeud, Livraison> livraisons;
+	/**
+	 * Entrepot de départ de la tournée à effectuer
+	 */
 	private Entrepot entrepot;
 	private int tableauDesId[];
+	/**
+	 * TSP utilisé dans l'application
+	 */
 	private TSP4 tsp;
+	/**
+	 * Modélise la tournée effectuée
+	 */
 	private Tournee tournee;
+	/**
+	 * Thread utilisé pour calculer la tournée
+	 */
 	private Thread threadCalcul;
+	/**
+	 * Thread utilisé pour la répresentation graphique de la solution calculée
+	 */
 	private Thread threadConstructionTournee;
 	private Gestionnaire gestionnaire;
+	/**
+	 * Temps maximum durant lequel l'application va tourner en millisecondes
+	 */
 	private int tempsMax = 20000;
 	
 	public Plan() {
@@ -44,10 +77,16 @@ public class Plan {
 		livraisons = new HashMap<Noeud, Livraison>();
 	}
 	
+	/**
+	 * Permet de savoir si la solution trouvée est optimale (toutes les possibilités ont été essayées), ou non (fin du temps)
+	 */
 	public boolean estSolutionOptimale() {
 		return !tsp.getTempsLimiteAtteint();
 	}
 	
+	/**
+	 * Stop le calcul de la tournée et la construction de la solution
+	 */
 	public void stopperCalculTournee() {
 		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
 			threadCalcul.interrupt();
@@ -71,6 +110,9 @@ public class Plan {
 		return -1;
 	}
 	
+	/**
+	 * Calcule la tournée
+	 */
 	public void calculerTournee() {
 		int nbDeLivraison = livraisons.size();
     	
@@ -147,6 +189,9 @@ public class Plan {
 		threadConstructionTournee.start();
     }
 	
+	/**
+	 * Construit l'objet Tournée modélisant la solution pour la tournée à effectuer
+	 */
 	private void constructionTournee(Integer depart[], HashMap< Integer, HashMap<Integer, Integer>> AllNoires, HashMap< Integer, HashMap<Integer, Integer>> AllPrevious) {
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
@@ -216,6 +261,9 @@ public class Plan {
 			this.tournee = new Tournee(trajetsPrevus);
 	}
     
+	/**
+	 * Construit la matrice des coûts pour le TSP
+	 */
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
 			HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
     	for(int u = 0;u<depart.length; u++)
@@ -431,24 +479,36 @@ public class Plan {
        }
     }
 	
+	/**
+	 * Ajoute un noeud au plan
+	 */
 	public void ajouterNoeud(Noeud n) {
 		if(n != null) {
 			noeuds.put(n.getId(), n);
 		}
 	}
 	
+	/**
+	 * Ajoute un tronçon au plan
+	 */
 	public void ajouterTroncon(Troncon t) {
 		if(t != null) {
 			troncons.put(Pair.create(t.getOrigine(), t.getDestination()) , t);
 		}
 	}
 	
+	/**
+	 * Ajoute une livraison au plan
+	 */
 	public void ajouterLivraison(Livraison l) {
 		if(l != null) {
 			livraisons.put(l.getNoeud(), l);
 		}
 	}
 	
+	/**
+	 * Ajoute l'entrepot au plan
+	 */
 	public void ajouterEntrepot(Entrepot e) {
 		if(e != null) {
 			entrepot = e;
@@ -538,6 +598,11 @@ public class Plan {
 		return tempsMax;
 	}
 	
+	/**
+	 * Génère la feuille de route de la tournée à effectuer
+	 * @param link
+	 * 		Le nom du fichier qui sera écrit
+	 */
 	public void genererFeuilleDeRoute(String link) {
 		FileWriter fw;
 		try {

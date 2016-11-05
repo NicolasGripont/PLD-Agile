@@ -1,6 +1,6 @@
 package modeles;
 
-/*
+/**
  * Classe permettant de mieux gérer les horaires à traiter dans l'application
  */
 public class Horaire {
@@ -8,7 +8,7 @@ public class Horaire {
 	private int minute = 0;
 	private int seconde = 0;
 	
-	/*
+	/**
 	 * Constructeur par recopie de la classe
 	 */
 	public Horaire(Horaire horaire) {
@@ -17,7 +17,7 @@ public class Horaire {
 		this.setSeconde(horaire.seconde);
 	}
 	
-	/*
+	/**
 	 * Constructeur de la classe
 	 */
 	public Horaire(int heure, int minute, int seconde) {
@@ -26,7 +26,7 @@ public class Horaire {
 		this.setSeconde(seconde);
 	}
 	
-	/*
+	/**
 	 * Constructeur de la classe
 	 * La string horaire est analysée pour remplir les attributs de la classe
 	 * @param horaire
@@ -54,7 +54,7 @@ public class Horaire {
 		}
 	}
 	
-	/*
+	/**
 	 * Renvoie l'horaire sous forme d'une durée en secondes depuis 00:00:00
 	 * @return
 	 * 		Equivalent de l'horaire en secondes depuis 00:00:00
@@ -63,7 +63,7 @@ public class Horaire {
 		return Math.round((heure * 60) + minute + (seconde / 60));
 	}
 
-	/*
+	/**
 	 * Ajoute le nombre d'heures spécifiées à l'horaire
 	 */
 	public void ajouterHeure(int heure) {
@@ -71,7 +71,7 @@ public class Horaire {
 		this.heure = Math.abs(h % 24);
 	}
 	
-	/*
+	/**
 	 * Ajoute le nombre de minutes spécifiées à l'horaire
 	 */
 	public void ajouterMinute(int minute) {
@@ -80,7 +80,7 @@ public class Horaire {
 		ajouterHeure(m/60);
 	}
 	
-	/*
+	/**
 	 * Ajoute le nombre de secondes spécifiées à l'horaire
 	 */
 	public void ajouterSeconde(int seconde) {
@@ -89,7 +89,7 @@ public class Horaire {
 		ajouterMinute(s/60);
 	}
 	
-	/*
+	/**
 	 * Renvoie l'horaire sous forme de string
 	 */
 	public String getHoraire() {

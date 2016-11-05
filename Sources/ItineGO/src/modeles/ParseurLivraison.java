@@ -11,26 +11,21 @@ import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
-
+/**
+ * Classe permettant de parser un fichier xml de livraison
+ */
 public class ParseurLivraison {
-	
-	 public static void main(String[] args)
-	   {
-		 Plan plan = new Plan();
-		 try {
-			ParseurPlan.parseurPlanVille("./xml/plan5x5.xml", plan);
-			parseurLivraisonVille("./xml/livraisons5x5-9.xml", plan);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		 System.out.println(plan.getLivraisons().size());
-		 System.out.println(plan.getEntrepot().toString());
-	   }
 	 
 	 /**
+	 * Parse le fichier xml. Cela ajoute au plan passé en paramètre l'entrepot et les livraisons
 	 * @param nomFichier
-	 * @throws BadXmlLivraison 
+	 * 		Nom du fichier xml à utiliser
+	 * @param plan
+	 * 		Le plan de la tournée
+	 * @throws BadXmlLivraison
+	 * 		Si le fichier livraison a des incohérences 
 	 * @throws BadXmlFile 
+	 * 		Si le fichier est malformé
 	 */
 	public static void parseurLivraisonVille(String nomFichier, Plan plan) throws BadXmlLivraison, BadXmlFile
 	 {

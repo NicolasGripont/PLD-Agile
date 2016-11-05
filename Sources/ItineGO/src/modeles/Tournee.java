@@ -2,10 +2,19 @@ package modeles;
 
 import java.util.List;
 
+/**
+ * Classe modélisant la tournée à effectuer, une fois calculée
+ */
 public class Tournee {
 
+	/**
+	 * Liste de trajets à faire
+	 */
 	private List<Trajet> trajets;
 
+	/**
+	 * Constructeur de la classe
+	 */
 	public Tournee(List<Trajet> trajets) {
 		super();
 		this.trajets = trajets;
