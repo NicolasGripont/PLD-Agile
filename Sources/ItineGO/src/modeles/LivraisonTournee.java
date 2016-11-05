@@ -1,10 +1,25 @@
 package modeles;
 
+/*
+ * Classe modélisant, le passage effectué à une livraison
+ */
 public class LivraisonTournee {
+	/*
+	 * Livraison effectuée
+	 */
 	private Livraison livraison;
+	/*
+	 * Heure effective d'arrivée à la livraison
+	 */
 	private Horaire heureArrive;
+	/*
+	 * Heure effective de départ de la livraison
+	 */
 	private Horaire heureDepart;
 	
+	/*
+	 * Constructeur de la classe
+	 */
 	public LivraisonTournee(Livraison livraison, Horaire heureArrive, Horaire heureDepart) {
 		setLivraison(livraison);
 		setHeureArrive(heureArrive);
