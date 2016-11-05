@@ -170,6 +170,7 @@ public class Plan {
 		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
 
+		//LinkedList<Integer> ordreT = new LinkedList<Integer>()
 
 		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
@@ -194,15 +195,15 @@ public class Plan {
 			List<Trajet> trajetsPrevus = new ArrayList<>();
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
+				tronconsTrajet.add(
+						troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
 				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						&& (livraisons.get(noeuds.get(futurTourne.get(i + 1)))== livraisons.get(noeuds.get(ordreTourneID.getFirst()))) )
+						&& livraisons.get(noeuds.get(futurTourne.get(i + 1))) == livraisons.get(noeuds.get(ordreTourneID.getFirst())) )
 						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2) {
-					tronconsTrajet.add(troncons
-							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 					ordreTourneID.removeFirst();
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
@@ -210,10 +211,7 @@ public class Plan {
 						tronconsTrajet = new ArrayList<>();
 						dejaVisites.add(livraisons.get(noeuds.get(futurTourne.get(i + 1))));
 					}
-				} else {
-					tronconsTrajet.add(
-							troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
-				}
+				} 
 			}
 			this.tournee = new Tournee(trajetsPrevus);
 	}
@@ -336,10 +334,10 @@ public class Plan {
 			    idep++;
 			}
 			
-			for(int i =0; i < plages_horaire[0].length; i++)
+			/*for(int i =0; i < plages_horaire[0].length; i++)
 			{
 				System.out.println(plages_horaire[0][i]+ " : "+ plages_horaire[1][i]);
-			}
+			}*/
 		}
 
 	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
