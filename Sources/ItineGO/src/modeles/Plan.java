@@ -141,7 +141,7 @@ public class Plan {
 		LinkedList<Integer> ordreTourneID = new LinkedList<Integer>();
 		
 		for(int j = 0 ; j< depart.length ; j++ ) {
-			ordreTourneID.add(tableauDesId[tsp.getMeilleureSolution(j)]);
+			ordreTourneID.add(depart[tsp.getMeilleureSolution(j)]);
 		}
 		//on ajoute l'entrepot a la fin de la tournee
 		ordreTourneID.add(ordreTourneID.getFirst());
@@ -177,7 +177,7 @@ public class Plan {
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
 				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						&& true )
+						&& (livraisons.get(noeuds.get(futurTourne.get(i + 1)))== livraisons.get(noeuds.get(ordreTourneID.getFirst()))) )
 						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
