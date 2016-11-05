@@ -7,7 +7,7 @@ public class TSP4 extends TSP3 {
 
 	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int[][] plages_horaire){//@overwrite chercher sol pour int[nbSomet][2] plage
-		System.out.println("TSP4 utilisé");
+		//System.out.println("TSP4 utilisé");
 		tempsLimiteAtteint=false;
 		coutMeilleureSolution=Integer.MAX_VALUE;
 		meilleureSolution=new Integer[nbSommets];
@@ -41,12 +41,12 @@ public class TSP4 extends TSP3 {
 		    		if(coutVus2 < plage_horaire[0][this.getMeilleureSolution(i+1)])
 		    			coutVus2=plage_horaire[0][this.getMeilleureSolution(i+1)];
 		    		/*(coutVus2/3600) +":"+ ((coutVus2/60)%60)*/
-		    		System.out.println("A : " + (8+(coutVus2/3600)) +":"+ ((coutVus2/60)%60) + " DEB " + plage_horaire[0][this.getMeilleureSolution(i+1)]+ " FIN " + plage_horaire[1][this.getMeilleureSolution(i+1)]);
+		    		//System.out.println("A : " + (8+(coutVus2/3600)) +":"+ ((coutVus2/60)%60) + " DEB " + plage_horaire[0][this.getMeilleureSolution(i+1)]+ " FIN " + plage_horaire[1][this.getMeilleureSolution(i+1)]);
 		    		coutVus2+=duree[this.getMeilleureSolution(i+1)];
 		    	}
 		    	coutVus2+=cout[this.getMeilleureSolution(cout[0].length-1)][this.getMeilleureSolution(0)];
-	    		System.out.println("A : "+ (8+(coutVus2/3600)) +":"+ ((coutVus2/60)%60));
-		    	System.out.println("Cout vus : " + coutVus);
+	    		//System.out.println("A : "+ (8+(coutVus2/3600)) +":"+ ((coutVus2/60)%60));
+		    	//System.out.println("Cout vus : " + coutVus);
 	    	}
 	    } else{
 	    	if ((coutVus + bound(sommetCrt, nonVus, cout, duree) < getCoutMeilleureSolution())&& (coutVus < plage_horaire[1][sommetCrt])){//On v�rifie qu'on arrive pas trop tard

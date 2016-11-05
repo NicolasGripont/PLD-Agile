@@ -296,10 +296,10 @@ public class Plan {
 			    idep++;
 			}
 			
-			for(int i =0; i < plages_horaire[0].length; i++)
+			/*for(int i =0; i < plages_horaire[0].length; i++)
 			{
 				System.out.println(plages_horaire[0][i]+ " : "+ plages_horaire[1][i]);
-			}
+			}*/
 		}
 
 
