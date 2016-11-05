@@ -148,6 +148,7 @@ public class Plan {
 		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
 
+		//LinkedList<Integer> ordreT = new LinkedList<Integer>()
 
 		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);

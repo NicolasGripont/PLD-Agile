@@ -45,7 +45,7 @@ public class TSP4 extends TSP3 {
 		    		coutVus2+=duree[this.getMeilleureSolution(i+1)];
 		    	}
 		    	coutVus2+=cout[this.getMeilleureSolution(cout[0].length-1)][this.getMeilleureSolution(0)];
-	    		System.out.println("A : "+coutVus2);
+	    		System.out.println("A : "+ (8+(coutVus2/3600)) +":"+ ((coutVus2/60)%60));
 		    	System.out.println("Cout vus : " + coutVus);
 	    	}
 	    } else{
