@@ -21,7 +21,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	{
 		gestionnaire.stopperCalculTournee();
 		if(gestionnaire.solutionTrouvee()) {
-			afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+			afficherTournee(controleur, gestionnaire, false);
 		} else {
 			controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
 		}
@@ -53,6 +53,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
@@ -78,6 +79,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {

@@ -65,12 +65,18 @@ public class ParseurLivraison {
 				 Element livraison = (Element) listLivraisonVille.get(i);
 				 Horaire plageDebut = null;
 				 Horaire plageFin = null;
-				 if(livraison.getAttributeValue("DebutPlage") != null) {
-					 plageDebut = new Horaire(livraison.getAttributeValue("DebutPlage"));
+				 if(livraison.getAttributeValue("debutPlage") != null) {
+					 plageDebut = new Horaire(livraison.getAttributeValue("debutPlage"));
 				 }
 				 if(livraison.getAttributeValue("finPlage") != null) {
-					 plageDebut = new Horaire(livraison.getAttributeValue("finPlage"));
+					 plageFin = new Horaire(livraison.getAttributeValue("finPlage"));
 				 }
+				 if(plan.idExiste(Integer.parseInt(livraison.getAttributeValue("adresse"))) == false) {
+					 plan.effacerEntrepot();
+					 plan.effacerLivraisons();
+					 throw new BadXmlLivraison();
+				 }
+					 
 				 plan.ajouterLivraison(new Livraison(
 						 plan.getNoeud(Integer.parseInt(livraison.getAttributeValue("adresse"))),
 						 Integer.parseInt(livraison.getAttributeValue("duree")),

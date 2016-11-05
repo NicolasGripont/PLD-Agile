@@ -97,7 +97,7 @@ public class GestionTourneeVue extends GestionVue{
         plageDebutColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
         	if(livraison.getLivraison().getDebutPlage() != null && !livraison.getLivraison().getDebutPlage().getHoraire().equals("00:00")) {
-        		return new SimpleStringProperty(livraison.getLivraison().getFinPlage().getHoraire()); 
+        		return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
         	}

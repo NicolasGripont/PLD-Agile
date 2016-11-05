@@ -17,14 +17,14 @@ public class ParseurPlan {
 	   {
 		 Plan plan = new Plan();
 		 try {
-			 parseurPlanVille("./tests/xmlTest/plan5x5.xml", plan);
+			 parseurPlanVille("./tests/assetsForTests/plan5x5.xml", plan);
 		 }
 		 catch(Exception e){
-			 System.err.println(e);;
+			 System.err.println(e);
 		 }
-		 System.out.println(plan.getNoeuds().size());
-		 System.out.println(plan.getTroncons().size());
-		 System.out.println(plan.getNoeud(1).toString());
+//		 System.out.println(plan.getNoeuds().size());
+//		 System.out.println(plan.getTroncons().size());
+//		 System.out.println(plan.getNoeud(1).toString());
 	   }
 	 
 	 /**
@@ -68,7 +68,8 @@ public class ParseurPlan {
 			 	 }
 				 else
 				 {
-					 throw new BadXmlPlan("Deux identifiants de noeud identiques");
+					 plan.effacerNoeuds();
+					 throw new BadXmlPlan("Erreur : Deux identifiants de noeud identiques");
 				 }
 			 }
 			//Parse les troncons
@@ -85,9 +86,10 @@ public class ParseurPlan {
 									 plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination")))
 							 )
 					);
-					//System.out.println("destination : " + troncon.getAttributeValue("destination")+ " longueur : " + troncon.getAttributeValue("longueur") + " nomRue : " + troncon.getAttributeValue("nomRue"));
 				 }
 				 else {
+					 plan.effacerNoeuds();
+					 plan.effacerTroncons();
 					 throw new BadXmlPlan();
 				 }
 			 }

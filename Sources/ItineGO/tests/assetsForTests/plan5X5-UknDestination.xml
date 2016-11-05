@@ -26,11 +26,11 @@
 <noeud id="23" x="705" y="536"/>
 <noeud id="24" x="652" y="684"/>
 <troncon destination="25" longueur="9234" nomRue="v0" origine="0" vitesse="41"/>
-<troncon destination="5" longueur="13666" nomRue="h0" origine="0" vitesse="47"/>
-<troncon destination="0" longueur="9234" nomRue="v0" origine="1" vitesse="46"/>
-<troncon destination="2" longueur="11218" nomRue="v0" origine="1" vitesse="39"/>
-<troncon destination="6" longueur="4076" nomRue="h1" origine="1" vitesse="40"/>
-<troncon destination="1" longueur="11218" nomRue="v0" origine="2" vitesse="38"/>
+<troncon destination="50000" longueur="13666" nomRue="h0" origine="0" vitesse="47"/>
+<troncon destination="0134" longueur="9234" nomRue="v0" origine="1" vitesse="46"/>
+<troncon destination="21048" longueur="11218" nomRue="v0" origine="1" vitesse="39"/>
+<troncon destination="611111" longueur="4076" nomRue="h1" origine="1" vitesse="40"/>
+<troncon destination="1345" longueur="11218" nomRue="v0" origine="2" vitesse="38"/>
 <troncon destination="3" longueur="4050" nomRue="v0" origine="2" vitesse="40"/>
 <troncon destination="7" longueur="10257" nomRue="h2" origine="2" vitesse="38"/>
 <troncon destination="2" longueur="4050" nomRue="v0" origine="3" vitesse="40"/>
