@@ -90,12 +90,10 @@ public class Gestionnaire {
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
 
 			Horaire horaireDepart = new Horaire(horaire);
-			if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null) {
-				horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
-				LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
-						horaire, horaireDepart);
-				livraisons.add(l);
-			}
+			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
+					horaire, horaireDepart);
+			livraisons.add(l);
 			horaire = new Horaire(horaireDepart);
 		}
 		return livraisons;
@@ -103,6 +101,10 @@ public class Gestionnaire {
 	
 	public Horaire getHoraireDebutTournee() {
 		return plan.getEntrepot().getHoraireDepart();
+	}
+	
+	public int getTempsMaxDeCalcul() {
+		return plan.getTempsMax();
 	}
 	
 	public Horaire getHoraireFinTournee() {
@@ -119,9 +121,7 @@ public class Gestionnaire {
 				//System.out.println(" ARPRES : H1 "+ horaire.getHoraireEnMinutes()+ "-- DP "+ plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes());
 
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
-			
-			if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null)
-				horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
 		}
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
 		return horaire;

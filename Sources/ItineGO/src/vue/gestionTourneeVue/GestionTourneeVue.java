@@ -73,10 +73,7 @@ public class GestionTourneeVue extends GestionVue{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        
+		// TODO Auto-generated method stub        
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
         planVillePane.getChildren().add(planVilleVue);
         
@@ -99,8 +96,8 @@ public class GestionTourneeVue extends GestionVue{
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getDebutPlage() != null) {
-        		return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().toString()); 
+        	if(livraison.getLivraison().getDebutPlage() != null && !livraison.getLivraison().getDebutPlage().getHoraire().equals("00:00")) {
+        		return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
         	}
@@ -108,19 +105,11 @@ public class GestionTourneeVue extends GestionVue{
         
         plageFinColonne.setCellValueFactory( param -> {
         	final LivraisonTournee livraison = param.getValue(); 
-        	if(livraison.getLivraison().getFinPlage() != null) {
-	        	return new SimpleStringProperty(livraison.getLivraison().getFinPlage().toString());
+        	if(livraison.getLivraison().getFinPlage() != null && !livraison.getLivraison().getFinPlage().getHoraire().equals("00:00")) {
+	        	return new SimpleStringProperty(livraison.getLivraison().getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");
 	    	}
-        });
-        
-        arriveeColonne.setCellValueFactory( param -> {
-        	return new SimpleStringProperty("-");
-        });
-        
-        departColonne.setCellValueFactory( param -> {
-        	return new SimpleStringProperty("-");
         });
         
         arriveeColonne.setCellValueFactory(param -> { 
@@ -154,12 +143,16 @@ public class GestionTourneeVue extends GestionVue{
           });
 	}
 	
-	public void solutionOptimale() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Solution optimale");
-		alert.setHeaderText(null);
-		alert.setContentText("La solution trouvée est la solution optimale pour effectuer votre tournée.");
-		alert.showAndWait();
+	public void solutionOptimale(boolean optimale) {
+		if(optimale) {
+			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : green;");
+			labelError.setText("La solution est optimale");
+		} else {
+			labelError.setVisible(true);
+			labelError.setStyle("-fx-text-fill : blue;");
+			labelError.setText("La solution n'est pas optimale");
+		}
 	}
 	
 	public void selectionneNoeud(Noeud noeud) {

@@ -77,9 +77,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		});
         
         labelError.setVisible(false);
-        
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        
+                
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
         planVillePane.getChildren().add(planVilleVue);
         

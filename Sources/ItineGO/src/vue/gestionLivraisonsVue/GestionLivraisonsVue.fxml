@@ -90,7 +90,7 @@
                   <HBox fx:id="boxStopperCalcule" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ProgressBar fx:id="barreChargement" prefHeight="20.0" prefWidth="185.0" progress="0.0" />
-                        <Label fx:id="labelTempsRestant" text="Temps restant : 1000 sec">
+                        <Label fx:id="labelTempsRestant" maxWidth="156.0" minWidth="156.0" prefWidth="156.0" text="Temps restant : 1000 sec">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>

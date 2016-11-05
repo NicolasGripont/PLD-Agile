@@ -21,7 +21,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	{
 		gestionnaire.stopperCalculTournee();
 		if(gestionnaire.solutionTrouvee()) {
-			afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+			afficherTournee(controleur, gestionnaire, false);
 		} else {
 			controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
 		}
@@ -30,6 +30,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
 			try {
+				gestionnaire.stopperCalculTournee();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
@@ -41,9 +42,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
 						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
-				if(solutionOptimale) {
-					controleur.gestionTourneeVue.solutionOptimale();
-				}
+				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -54,6 +53,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
@@ -79,6 +79,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {

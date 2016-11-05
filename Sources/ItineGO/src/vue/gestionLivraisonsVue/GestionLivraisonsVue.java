@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 import controleur.Controleur;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -82,7 +83,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
-	private Thread threadCalcul;
+	private Task<Void> taskCalcul;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -110,7 +111,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageDebutColonne.setCellValueFactory(param -> { 
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getDebutPlage() != null) {
+        	if(livraison.getDebutPlage() != null && !livraison.getDebutPlage().getHoraire().equals("00:00")) {
         		return new SimpleStringProperty(livraison.getDebutPlage().getHoraire()); 
         	} else {
         		return new SimpleStringProperty("-");
@@ -119,7 +120,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         plageFinColonne.setCellValueFactory( param -> {
         	final Livraison livraison = param.getValue(); 
-        	if(livraison.getFinPlage() != null) {
+        	if(livraison.getFinPlage() != null && !livraison.getFinPlage().getHoraire().equals("00:00")) {
 	        	return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
 	        } else {
 	    		return new SimpleStringProperty("-");
@@ -204,17 +205,48 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	@FXML
 	public void calculerLivraisonAction() {
-		String tps = "Temps restant : ";
 		boutonCalculer.setVisible(false);
 		boxStopperCalcule.setVisible(true);
+		barreChargement.progressProperty().unbind();
 		barreChargement.setProgress(0);
-		/*threadCalcul = new Thread() {
-			public void run() {
-				controleur.getGestionnaire().calculerTournee();
-			}
-		};
-		threadCalcul.start();*/
-		controleur.clicBoutonCalculerTournee();	
+		//Thread calcul temps de calcule d'un tournee
+		taskCalcul = new Task<Void>() {
+	         @Override protected Void call() {
+	        	 int tpsMax = controleur.getGestionnaire().getTempsMaxDeCalcul();
+					int tps = 0;
+					tpsMax /= 1000;
+					for(tps=0;tps<=tpsMax;tps++) {
+						String tpsStr = "Temps restant : ";
+						tpsStr += (tpsMax-tps) + "s";
+						updateProgress(tps, tpsMax);
+						if(tps%2 == 1) {
+							tpsStr += "P";
+						}
+						updateMessage(tpsStr);
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+	             return null;
+	         }
+	     };
+	     taskCalcul.messageProperty().addListener(new ChangeListener<String>() {
+             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	 if(newValue.endsWith("P")) {
+            		 dessinePlan(controleur.getGestionnaire().getPlan());
+            		 newValue = newValue.substring(0, newValue.length()-2);
+            	 }
+                 labelTempsRestant.setText(newValue);
+             }
+         });
+	     barreChargement.progressProperty().bind(taskCalcul.progressProperty());
+	     controleur.clicBoutonCalculerTournee();
+	     Thread th = new Thread(taskCalcul);
+	     th.setDaemon(true);
+	     th.start();
 	}
 	
 	@FXML
