@@ -35,7 +35,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
 				controleur.gestionTourneeVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -64,7 +64,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				System.out.println("testedibzr");
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
@@ -88,7 +88,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();

@@ -25,7 +25,7 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 					Parent root = fxmlLoader.load();
 					controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 					controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-					Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+					Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 					controleur.stage.setTitle("Itine'GO");
 					controleur.stage.setScene(scene);
 					controleur.stage.show();

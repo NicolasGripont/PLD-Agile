@@ -24,7 +24,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -45,7 +45,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
 				controleur.gestionLivraisonsVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
