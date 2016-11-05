@@ -145,6 +145,9 @@ public class GestionLivraisonsVue extends GestionVue {
 				planVilleVue.livraisonSelected(livraison);
 			}
           });
+        
+        livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 	}
 	
 	public void selectionneNoeud(Noeud noeud) {

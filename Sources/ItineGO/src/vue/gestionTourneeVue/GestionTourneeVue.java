@@ -141,6 +141,8 @@ public class GestionTourneeVue extends GestionVue{
 				planVilleVue.livraisonSelected(livraison.getLivraison());
 			}
           });
+        
+        livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 	public void solutionOptimale(boolean optimale) {
