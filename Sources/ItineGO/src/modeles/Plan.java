@@ -143,9 +143,12 @@ public class Plan {
 		for(int j = 0 ; j< depart.length ; j++ ) {
 			ordreTourneID.add(tableauDesId[tsp.getMeilleureSolution(j)]);
 		}
-		//ordreTourneID.add(ordreTourneID.getFirst());
+		//on ajoute l'entrepot a la fin de la tournee
+		ordreTourneID.add(ordreTourneID.getFirst());
+		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
-		
+
+
 		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
 	      Collections.reverse(futurTourne);
 	      List<Integer> FT = new ArrayList<Integer>(futurTourne);
@@ -162,23 +165,23 @@ public class Plan {
 	      } 
 	      
 		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
-	    //Puis on constrit tournee
+	    //Puis on construit la tournee
 	     
 			// Construction de la Tournee
 	      	Set<Livraison> dejaVisites = new HashSet<>();
 			List<Trajet> trajetsPrevus = new ArrayList<>();
 			List<Troncon> tronconsTrajet = new ArrayList<>();
-
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
-				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée)  
-				//OU si le noeud suivant est l'entrepot
+				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
+				//OU
+				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
 				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-								 /* TODO && livraisons.get(noeuds.get(ordreTourneID.getFirst())).equals(livraisons.get(noeuds.get(futurTourne.get(i + 1))) )
-						*/|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2)) {
+						&& true )
+						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2) {
 					tronconsTrajet.add(troncons
 							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
-					//ordreTourneID.removeFirst();
+					ordreTourneID.removeFirst();
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
 								tronconsTrajet.get(tronconsTrajet.size() - 1).getDestination(), tronconsTrajet));
