@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import controleur.Controleur;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -55,7 +58,7 @@ public class GestionTourneeVue extends GestionVue {
 	private TableColumn<LivraisonTournee, String> dureeColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, LivraisonTournee> supprimerColonne;
+	private TableColumn<LivraisonTournee, Boolean> supprimerColonne;
 
 	@FXML
 	private Label labelEntrepot;
@@ -311,17 +314,20 @@ public class GestionTourneeVue extends GestionVue {
 	@FXML
 	private void imageViewModifierClicked() {
 		System.out.println("imageViewModifierClicked");
-		// livraisonTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 		supprimerColonne.setCellFactory(
-				new Callback<TableColumn<LivraisonTournee, LivraisonTournee>, TableCell<LivraisonTournee, LivraisonTournee>>() {
+				new Callback<TableColumn<LivraisonTournee, Boolean>, TableCell<LivraisonTournee, Boolean>>() {
 					@Override
-					public TableCell<LivraisonTournee, LivraisonTournee> call(
-							TableColumn<LivraisonTournee, LivraisonTournee> personBooleanTableColumn) {
-						return new SupprimerLivraisonCell();
+					public TableCell<LivraisonTournee, Boolean> call(
+							TableColumn<LivraisonTournee, Boolean> supprimerColonne) {
+						
+						return new SupprimerLivraisonCell(self());
 					}
 				});
 
-		
+	}
+	
+	private GestionTourneeVue self() {
+		return this;
 	}
 
 	@FXML
@@ -355,6 +361,10 @@ public class GestionTourneeVue extends GestionVue {
 			labelError.setStyle("-fx-text-fill : green;");
 			labelError.setText("Feuille de route générée");
 		}
+	}
+	
+	public void supprimerLivraison(int indexRow) {
+		System.out.println("Supprimer la ligne " + indexRow);
 	}
 
 }

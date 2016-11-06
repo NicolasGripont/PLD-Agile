@@ -4,13 +4,14 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import modeles.LivraisonTournee;
 
-public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, LivraisonTournee> {
+public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean> {
 
 	final ImageView imageViewMoins = new ImageView();
 
@@ -18,10 +19,11 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Livraiso
 	final StackPane paddedButton = new StackPane();
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	
+	private GestionTourneeVue gestionTourneeVue;
 
-	private LivraisonTournee livraisonTournee;
-
-	public SupprimerLivraisonCell() {
+	public SupprimerLivraisonCell(GestionTourneeVue gestionTourneeVue) {
+		this.gestionTourneeVue = gestionTourneeVue;
 		paddedButton.setPadding(new Insets(3));
 		paddedButton.getChildren().add(imageViewMoins);
 
@@ -31,7 +33,7 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Livraiso
 		imageViewMoins.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				System.out.println("*supprimer*");
+				gestionTourneeVue.supprimerLivraison(getIndex());
 			}
 		});
 
@@ -53,12 +55,11 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Livraiso
 	}
 
 	@Override
-	protected void updateItem(LivraisonTournee item, boolean empty) {
+	protected void updateItem(Boolean item, boolean empty) {
 		super.updateItem(item, empty);
 		if (!empty) {
 			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 			setGraphic(paddedButton);
-			System.out.println(item);
 		} else {
 			setGraphic(null);
 		}
