@@ -44,6 +44,10 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean>
 
 		imageViewMoinsExited();
 	}
+	
+	public ImageView getImageViewMoins() {
+		return imageViewMoins;
+	}
 
 	@Override
 	protected void updateItem(Boolean item, boolean empty) {
