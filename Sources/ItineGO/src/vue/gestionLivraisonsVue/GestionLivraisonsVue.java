@@ -140,7 +140,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         labelError.setVisible(false);  
 
-        imageViewAcceuilExited();
+        imageViewAccueilExited();
         imageViewPrecedentExited();
         
         livraisonTable.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
@@ -282,7 +282,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	}
 	
 	@FXML
-	private void imageViewAcceuilExited() {
+	private void imageViewAccueilExited() {
 		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
 	}
 }
