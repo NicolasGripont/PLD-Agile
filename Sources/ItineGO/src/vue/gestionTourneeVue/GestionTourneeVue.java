@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -165,16 +166,21 @@ public class GestionTourneeVue extends GestionVue {
 		});
 		
 		supprimerColonne.setCellFactory(param -> {
-				return new SupprimerLivraisonCell(self());
+			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
+			cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					int row = cell.getIndex();			
+					System.out.println(controleur.getGestionnaire().listeLivraisonsParOrdreDePassage().size());
+					LivraisonTournee lt = controleur.getGestionnaire().listeLivraisonsParOrdreDePassage().get(row);
+					System.out.println(lt.getLivraison());
+					/*
+					 *	On supprime ici 
+					 * 
+					 */
+				}; 
+			});
+			return cell;
 		});
-				/*new Callback<TableColumn<LivraisonTournee, Boolean>, TableCell<LivraisonTournee, Boolean>>() {
-					@Override
-					public TableCell<LivraisonTournee, Boolean> call(
-							TableColumn<LivraisonTournee, Boolean> supprimerColonne) {
-						
-						return new 
-					}
-				});*/
 
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);

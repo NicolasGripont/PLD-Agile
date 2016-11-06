@@ -20,22 +20,13 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean>
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
-	private GestionTourneeVue gestionTourneeVue;
 	
-	public SupprimerLivraisonCell(GestionTourneeVue gestionTourneeVue) {
-		this.gestionTourneeVue = gestionTourneeVue;
+	public SupprimerLivraisonCell() {
 		paddedButton.setPadding(new Insets(3));
 		paddedButton.getChildren().add(imageViewMoins);
 
 		imageViewMoins.setFitHeight(20);
 		imageViewMoins.setFitWidth(20);
-
-		imageViewMoins.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				gestionTourneeVue.supprimerLivraison(getIndex());
-			}
-		});
 
 		imageViewMoins.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
