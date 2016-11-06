@@ -56,6 +56,9 @@ public class GestionLivraisonsVue extends GestionVue {
 	private Label labelEntrepot;
 	
 	@FXML
+	private Label labelHorraires;
+	
+	@FXML
 	private Label labelError;
 	
 	@FXML
@@ -137,7 +140,7 @@ public class GestionLivraisonsVue extends GestionVue {
         
         labelError.setVisible(false);  
 
-        imageViewAcceuilExited();
+        imageViewAccueilExited();
         imageViewPrecedentExited();
         
         livraisonTable.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
@@ -164,7 +167,8 @@ public class GestionLivraisonsVue extends GestionVue {
 	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()) + " - Début Livraison à " + 
+				labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
+				labelHorraires.setText("Début Livraison à " + 
 						plan.getEntrepot().getHoraireDepart().getHoraire());
 			}
 			livraisonTable.getItems().clear();
@@ -278,7 +282,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	}
 	
 	@FXML
-	private void imageViewAcceuilExited() {
+	private void imageViewAccueilExited() {
 		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
 	}
 }

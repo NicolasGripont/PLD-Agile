@@ -42,7 +42,7 @@
                <children>
                   <HBox fx:id="hBoxBoutons" maxWidth="400.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
                      <children>
-                        <ImageView fx:id="imageViewAccueil" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#home" onMouseEntered="#imageViewAccueilEntered" onMouseExited="#imageViewAcceuilExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewAccueil" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#home" onMouseEntered="#imageViewAccueilEntered" onMouseExited="#imageViewAccueilExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -52,38 +52,43 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fx:id="imageViewModifier" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewModifierEntered" onMouseExited="#imageViewModifierExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewModifier" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewModifierClicked" onMouseEntered="#imageViewModifierEntered" onMouseExited="#imageViewModifierExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewUndo" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewUndoEntered" onMouseExited="#imageViewUndoExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewUndo" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewUndoClicked" onMouseEntered="#imageViewUndoEntered" onMouseExited="#imageViewUndoExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewRedo" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewRedoEntered" onMouseExited="#imageViewRedoExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewRedo" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewRedoClicked" onMouseEntered="#imageViewRedoEntered" onMouseExited="#imageViewRedoExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewValiderModifications" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewValiderModificationsEntered" onMouseExited="#imageViewValiderModificationsExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewValiderModifications" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewValiderModificationsClicked" onMouseEntered="#imageViewValiderModificationsEntered" onMouseExited="#imageViewValiderModificationsExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewAnnulerModifications" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewAnnulerModificationsEntered" onMouseExited="#imageViewAnnulerModificationsExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewAnnulerModifications" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewAnnulerModificationsClicked" onMouseEntered="#imageViewAnnulerModificationsEntered" onMouseExited="#imageViewAnnulerModificationsExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <Label fx:id="labelError" alignment="CENTER" prefHeight="27.0" prefWidth="341.0" text="Error" textAlignment="CENTER" textFill="RED" />
+                        <ImageView fx:id="imageViewAjouterLivraison" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewAjouterLivraisonClicked" onMouseEntered="#imageViewAjouterLivraisonEntered" onMouseExited="#imageViewAjouterLivraisonExited" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="labelError" alignment="CENTER" prefHeight="27.0" prefWidth="341.0" text="Error" textFill="RED" wrapText="true" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <Label maxWidth="400.0" minWidth="400.0" prefWidth="400.0" text="Adresse de l'entrepôt :">
+                  <Label fx:id="labelEntrepot" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" text="Adresse de l'entrepôt :">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="labelEntrepot" text="adresse">
+                  <Label fx:id="labelHorraires" text="adresse">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -101,20 +106,21 @@
             </Button>
          </bottom>
          <center>
-            <TableView fx:id="livraisonTable" prefHeight="372.0" prefWidth="373.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="livraisonTable" prefHeight="347.0" prefWidth="477.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="adresseColonne" editable="false" prefWidth="82.0" sortable="false" text="Adresse" />
-                <TableColumn prefWidth="113.0" sortable="false" text="Plages">
+                <TableColumn fx:id="adresseColonne" editable="false" prefWidth="64.0" sortable="false" text="Adresse" />
+                <TableColumn prefWidth="97.0" sortable="false" text="Plages">
                      <columns>
-                        <TableColumn fx:id="plageDebutColonne" prefWidth="58.0" sortable="false" text="Début" />
-                        <TableColumn fx:id="plageFinColonne" prefWidth="51.0" sortable="false" text="Fin" />
+                        <TableColumn fx:id="plageDebutColonne" prefWidth="48.0" sortable="false" text="Début" />
+                        <TableColumn fx:id="plageFinColonne" prefWidth="38.0" sortable="false" text="Fin" />
                      </columns></TableColumn>
-                  <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Horaires">
+                  <TableColumn editable="false" prefWidth="142.0" sortable="false" text="Horaires">
                      <columns>
-                        <TableColumn fx:id="arriveeColonne" editable="false" prefWidth="63.0" sortable="false" text="Arrivée" />
-                        <TableColumn fx:id="departColonne" editable="false" prefWidth="67.0" sortable="false" text="Départ" />
+                        <TableColumn fx:id="arriveeColonne" editable="false" prefWidth="56.0" sortable="false" text="Arrivée" />
+                        <TableColumn fx:id="departColonne" editable="false" prefWidth="63.0" sortable="false" text="Départ" />
                      </columns></TableColumn>
-                  <TableColumn fx:id="dureeColonne" prefWidth="85.0" sortable="false" text="Durée" />
+                  <TableColumn fx:id="dureeColonne" prefWidth="56.0" sortable="false" text="Durée" />
+                  <TableColumn fx:id="supprimerColonne" prefWidth="40.0" />
               </columns>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
