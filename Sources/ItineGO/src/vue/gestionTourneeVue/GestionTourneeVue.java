@@ -108,6 +108,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		supprimerColonne.setVisible(false);
 		// TODO Auto-generated method stub
 		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
 		planVillePane.getChildren().add(planVilleVue);
@@ -162,6 +163,18 @@ public class GestionTourneeVue extends GestionVue {
 			final LivraisonTournee livraison = param.getValue();
 			return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getDuree()));
 		});
+		
+		supprimerColonne.setCellFactory(param -> {
+				return new SupprimerLivraisonCell(self());
+		});
+				/*new Callback<TableColumn<LivraisonTournee, Boolean>, TableCell<LivraisonTournee, Boolean>>() {
+					@Override
+					public TableCell<LivraisonTournee, Boolean> call(
+							TableColumn<LivraisonTournee, Boolean> supprimerColonne) {
+						
+						return new 
+					}
+				});*/
 
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);
@@ -331,17 +344,8 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewModifierClicked() {
+		supprimerColonne.setVisible(true);
 		System.out.println("imageViewModifierClicked");
-		supprimerColonne.setCellFactory(
-				new Callback<TableColumn<LivraisonTournee, Boolean>, TableCell<LivraisonTournee, Boolean>>() {
-					@Override
-					public TableCell<LivraisonTournee, Boolean> call(
-							TableColumn<LivraisonTournee, Boolean> supprimerColonne) {
-						
-						return new SupprimerLivraisonCell(self());
-					}
-				});
-
 	}
 	
 	private GestionTourneeVue self() {
