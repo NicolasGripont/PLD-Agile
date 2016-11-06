@@ -4,6 +4,9 @@ import java.io.File;
 
 import modeles.Gestionnaire;
 
+/**
+ * Classe abstraite présentant toutes les méthodes que les différents états devront implémenter
+ */
 public abstract class EtatDefaut {
 	
 	public void undo()

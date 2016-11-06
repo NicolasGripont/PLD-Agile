@@ -3,6 +3,9 @@ package modeles;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Quatrième version du TSP, implémente l'utilisation des plages horaires
+ */
 public class TSP4 extends TSP3 {
 
 	

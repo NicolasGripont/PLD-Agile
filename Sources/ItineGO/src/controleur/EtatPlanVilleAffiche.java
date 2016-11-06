@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import modeles.Gestionnaire;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 
+/**
+ * Etat d'affichage du plan de la ville, une fois que le fichier a été choisi
+ */
 public class EtatPlanVilleAffiche extends EtatDefaut {
 
 	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)

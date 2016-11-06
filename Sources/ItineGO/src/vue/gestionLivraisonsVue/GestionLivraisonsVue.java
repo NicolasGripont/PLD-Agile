@@ -31,6 +31,9 @@ import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;
 
+/**
+ * Vue affichant les solutions trouvées pour la tournée à effectuer en temps réel
+ */
 public class GestionLivraisonsVue extends GestionVue {
 	private Controleur controleur;
 	

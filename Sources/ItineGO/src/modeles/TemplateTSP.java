@@ -4,6 +4,10 @@ package modeles;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Classe abstraite implémentant les méthodes de base du TSP, mais laissant les méthodes bound et iterator à définir
+ * Ces deux méthodes joueront dans l'efficacité de l'algorithme
+ */
 public abstract class TemplateTSP implements TSP {
 	
 	protected Integer[] meilleureSolution;

@@ -16,9 +16,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  * Cette classe définit un StackPane permettant de glisser-déposer un fichier.
- * On peut définir des extensions accpetés (par défaut toutes).
- * @author Nico
- *
+ * On peut définir des extensions de fichier acceptées (par défaut toutes).
  */
 public class GlisserDeposerFichierVue extends StackPane {
 	
@@ -31,12 +29,12 @@ public class GlisserDeposerFichierVue extends StackPane {
 	private final List<String> extensionsAcceptees = new ArrayList<>();
 	
 	/**
-	 * Handler déclanché si le fichier glissé-déposé est accepté.
+	 * Handler déclenché si le fichier glissé-déposé est accepté.
 	 */
 	private EventHandler<ActionEvent> fichierAccepteAction;
 	
 	/**
-	 * Handler déclanché si le fichier glissé-déposé est refusé.
+	 * Handler déclenché si le fichier glissé-déposé est refusé.
 	 */
 	private EventHandler<ActionEvent> fichierRefuseAction;
 	
@@ -97,7 +95,7 @@ public class GlisserDeposerFichierVue extends StackPane {
 
 	/**
 	 * Ajoute extension à la liste des extensions acceptées
-	 * @param extension : extension à ajouter à la liste des extensions acceptées. L'extension doit commener par un point (ex: '.xml')
+	 * @param extension : extension à ajouter à la liste des extensions acceptées. L'extension doit commencer par un point (ex: '.xml')
 	 */
 	public void addExtensionAcceptee(String extension) {
 		extensionsAcceptees.add(extension);

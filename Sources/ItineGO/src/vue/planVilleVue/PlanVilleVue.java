@@ -17,6 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * Classe permettant d'afficher le plan de la ville et toutes les informations qu'il contient
+ * 		Noeuds, tronçons, livraisons, entrepôt, tournée calculée...
+ */
 public class PlanVilleVue extends Canvas {
 	private int RAYON_LIVRAISON = 15;
 	private int RAYON_NOEUD = 10;

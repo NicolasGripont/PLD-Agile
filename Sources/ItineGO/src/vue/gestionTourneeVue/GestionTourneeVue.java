@@ -25,6 +25,9 @@ import modeles.Plan;
 import vue.gestionVue.GestionVue;
 import vue.planVilleVue.PlanVilleVue;
 
+/**
+ * Vue affichant la tournée à effectuer après la fin du calcul
+ */
 public class GestionTourneeVue extends GestionVue{
 	private Controleur controleur;
 	

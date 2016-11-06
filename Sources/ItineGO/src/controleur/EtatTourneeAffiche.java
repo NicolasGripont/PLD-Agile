@@ -9,6 +9,9 @@ import modeles.Gestionnaire;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 
+/**
+ * Etat d'affichage de la tournée, une fois le calcul effectué
+ */
 public class EtatTourneeAffiche extends EtatDefaut {
 
 	

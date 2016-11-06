@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Troisième version du TSP, améliore l'itérateur à utiliser
+ */
 public class TSP3 extends TSP2 {
 	
 	/*

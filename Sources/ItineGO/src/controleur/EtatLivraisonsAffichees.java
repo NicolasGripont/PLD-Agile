@@ -10,6 +10,9 @@ import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionTourneeVue.GestionTourneeVue;
 
+/**
+ * Etat d'affichage de l'entrepot et des livraisons à effectuer avant calcul de la tournée
+ */
 public class EtatLivraisonsAffichees extends EtatDefaut {
 
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)

@@ -11,6 +11,9 @@ import modeles.Gestionnaire;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 
+/**
+ * Etat après choix du fichier de livraison
+ */
 public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)

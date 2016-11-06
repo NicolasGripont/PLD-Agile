@@ -8,6 +8,9 @@ import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
+/**
+ * Classe servant de lien entre le modèle et le contrôleur
+ */
 public class Gestionnaire {
 
 	private Plan plan;

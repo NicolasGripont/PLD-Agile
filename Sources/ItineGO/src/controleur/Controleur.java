@@ -13,7 +13,9 @@ import vue.gestionTourneeVue.GestionTourneeVue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-
+/**
+ * Controleur de l'application
+ */
 public class Controleur extends Application{
 	
 	private Gestionnaire gestionnaire = new Gestionnaire(this);

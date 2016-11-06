@@ -23,6 +23,10 @@ import modeles.Plan;
 import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 import vue.planVilleVue.PlanVilleVue;
 
+/**
+ * Vue du choix du fichier de livraison
+ * Le plan de la ville est affiché
+ */
 public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Controleur controleur;
 	private File fichierChoisie = null;

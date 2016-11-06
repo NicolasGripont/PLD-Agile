@@ -11,6 +11,9 @@ import javafx.scene.Scene;
 import modeles.Gestionnaire;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 
+/**
+ * Etat après choix du fichier plan de la ville
+ */
 public class EtatPlanVilleChoisie extends EtatDefaut {
 
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML)

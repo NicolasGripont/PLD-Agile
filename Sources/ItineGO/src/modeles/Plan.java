@@ -153,13 +153,11 @@ public class Plan {
 		
 		int cout[][]= new int [depart.length][depart.length];
 		
-		//On construti la matrice utilisÃ© par la TSP a partir des Calcul de Dijkstra
+		//On construit la matrice utilisÃ© par la TSP a partir des calculs de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new TSP4();
-		/*
-		 * Le thread va venir ici
-		 */
+
 		threadCalcul = new Thread() {
 			public void run() {
 				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
@@ -196,7 +194,7 @@ public class Plan {
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		
-		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
+		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travaille avec des arbres de couvrance minimum on fait le chemin Ã  l'envers
 		for(int i = depart.length-1 ; i >=0 ; i--) {
 			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
 			while(previous.get(noeudCourant)!=noeudCourant) {
@@ -210,7 +208,7 @@ public class Plan {
 		for(int j = 0 ; j< depart.length ; j++ ) {
 			ordreTourneID.add(depart[tsp.getMeilleureSolution(j)]);
 		}
-		//on ajoute l'entrepot a la fin de la tournee
+		//on ajoute l'entrepot à la fin de la tournee
 		ordreTourneID.add(ordreTourneID.getFirst());
 		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();

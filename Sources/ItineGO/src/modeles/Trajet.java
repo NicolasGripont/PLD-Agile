@@ -21,6 +21,9 @@ public class Trajet {
 	 */
 	private Noeud arrive;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Trajet(Noeud depart, Noeud arrive, List<Troncon> troncons) {
 		super();
 		this.depart = depart;
