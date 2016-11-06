@@ -52,23 +52,23 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fx:id="imageViewModifier" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewModifierEntered" onMouseExited="#imageViewModifierExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewModifier" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewModifierClicked" onMouseEntered="#imageViewModifierEntered" onMouseExited="#imageViewModifierExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewUndo" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewUndoEntered" onMouseExited="#imageViewUndoExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewUndo" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewUndoClicked" onMouseEntered="#imageViewUndoEntered" onMouseExited="#imageViewUndoExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewRedo" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewRedoEntered" onMouseExited="#imageViewRedoExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewRedo" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewRedoClicked" onMouseEntered="#imageViewRedoEntered" onMouseExited="#imageViewRedoExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewValiderModifications" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewValiderModificationsEntered" onMouseExited="#imageViewValiderModificationsExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewValiderModifications" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewValiderModificationsClicked" onMouseEntered="#imageViewValiderModificationsEntered" onMouseExited="#imageViewValiderModificationsExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
-                        <ImageView fx:id="imageViewAnnulerModifications" fitHeight="32.0" fitWidth="32.0" onMouseEntered="#imageViewAnnulerModificationsEntered" onMouseExited="#imageViewAnnulerModificationsExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewAnnulerModifications" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#imageViewAnnulerModificationsClicked" onMouseEntered="#imageViewAnnulerModificationsEntered" onMouseExited="#imageViewAnnulerModificationsExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></ImageView>
@@ -101,20 +101,21 @@
             </Button>
          </bottom>
          <center>
-            <TableView fx:id="livraisonTable" prefHeight="372.0" prefWidth="373.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="livraisonTable" prefHeight="347.0" prefWidth="477.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="adresseColonne" editable="false" prefWidth="82.0" sortable="false" text="Adresse" />
-                <TableColumn prefWidth="113.0" sortable="false" text="Plages">
+                <TableColumn fx:id="adresseColonne" editable="false" prefWidth="64.0" sortable="false" text="Adresse" />
+                <TableColumn prefWidth="97.0" sortable="false" text="Plages">
                      <columns>
-                        <TableColumn fx:id="plageDebutColonne" prefWidth="58.0" sortable="false" text="Début" />
-                        <TableColumn fx:id="plageFinColonne" prefWidth="51.0" sortable="false" text="Fin" />
+                        <TableColumn fx:id="plageDebutColonne" prefWidth="48.0" sortable="false" text="Début" />
+                        <TableColumn fx:id="plageFinColonne" prefWidth="38.0" sortable="false" text="Fin" />
                      </columns></TableColumn>
-                  <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Horaires">
+                  <TableColumn editable="false" prefWidth="142.0" sortable="false" text="Horaires">
                      <columns>
-                        <TableColumn fx:id="arriveeColonne" editable="false" prefWidth="63.0" sortable="false" text="Arrivée" />
-                        <TableColumn fx:id="departColonne" editable="false" prefWidth="67.0" sortable="false" text="Départ" />
+                        <TableColumn fx:id="arriveeColonne" editable="false" prefWidth="56.0" sortable="false" text="Arrivée" />
+                        <TableColumn fx:id="departColonne" editable="false" prefWidth="63.0" sortable="false" text="Départ" />
                      </columns></TableColumn>
-                  <TableColumn fx:id="dureeColonne" prefWidth="85.0" sortable="false" text="Durée" />
+                  <TableColumn fx:id="dureeColonne" prefWidth="56.0" sortable="false" text="Durée" />
+                  <TableColumn fx:id="supprimerColonne" prefWidth="40.0" />
               </columns>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
