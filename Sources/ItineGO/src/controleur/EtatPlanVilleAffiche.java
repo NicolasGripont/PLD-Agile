@@ -14,6 +14,14 @@ import vue.choixPlanVilleVue.ChoixPlanVilleVue;
  */
 public class EtatPlanVilleAffiche extends EtatDefaut {
 
+	/**
+	 * Permet de faire un glisser deposer d'un fichier, si le fichier est accepté on passe a l'état EtatFichierLivraisonsChoisi sinon on reste en l'état. 
+	 * On va indiquer à la vue si le fichier est accepté ou non et celle-ci affichera un message correspondant.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param accepte : Indique si le fichier a été accepté ou non.
+	 * @param fichier : Fichier pris en compte.
+	 */
 	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
 	{
 		if(accepte) {
@@ -25,6 +33,14 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet choisir un fichier, si le fichier est accepté on passe a l'état EtatFichierLivraisonsChoisi sinon on reste en l'état. 
+	 * On va indiquer à la vue si le fichier est accepté ou non et celle-ci affichera un message correspondant.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param accepte : Indique si le fichier a été accepté ou non.
+	 * @param fichier : Fichier pris en compte.
+	 */
 	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
 	{
 		if(accepte) {
@@ -36,6 +52,12 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de retourner à la vue précédente ChoixPlanVilleVue et à l'état EtatApplicationDemarree.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerNoeudsEtTroncons();
@@ -63,6 +85,12 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 		System.out.println("etat plan ville affiche");
 	}
 	
+	/**
+	 * Permet de redessiner le plan dans la vue.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());

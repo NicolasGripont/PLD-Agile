@@ -15,11 +15,24 @@ import vue.gestionTourneeVue.GestionTourneeVue;
  */
 public class EtatLivraisonsAffichees extends EtatDefaut {
 
+	/**
+	 * Permet de calculer la tournée a effectué.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.calculerTournee();
 	}
 	
+	/**
+	 * Permet de stopper le calcul de la tournée.
+	 * Si une solution a été trouvée on l'affiche, sinon on affiche un message d'erreur.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.stopperCalculTournee();
@@ -30,6 +43,13 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet d'afficher la tournée que l'on a calculé. On indique si la solution trouvée est optimale ou non.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param solutionOptimale : Indique si la solution est optimale ou non.
+	 */
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
 			try {
@@ -54,6 +74,13 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 
+	
+	/**
+	 * Permet de retourner à l'état initial de l'application.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.stopperCalculTournee();
@@ -80,6 +107,12 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de retourner à la vue précédente ChoixDemandeLivraisonsVue et à l'état EtatPlanVilleAffiche.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.stopperCalculTournee();
@@ -104,6 +137,12 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de redessiner le plan dans la vue.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());

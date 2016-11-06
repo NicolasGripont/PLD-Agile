@@ -14,7 +14,12 @@ import vue.gestionLivraisonsVue.GestionLivraisonsVue;
  */
 public class EtatTourneeAffiche extends EtatDefaut {
 
-	
+	/**
+	 * Permet de retourner à l'état initial de l'application.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerTournee();
@@ -39,6 +44,12 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de retourner à la vue précédente où on affiche les livraisons a effectuées et à l'état EtatLivraisonsAffichees.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerTournee();
@@ -63,11 +74,24 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de générer une feuille de route de la tournée calculée.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param link : Chemin du fichier que l'on va créer.
+	 */
 	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link)
 	{
 		gestionnaire.genererFeuilleDeRoute(link);
 	}
 	
+	/**
+	 * Permet de redessiner le plan dans la vue correspondante.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
