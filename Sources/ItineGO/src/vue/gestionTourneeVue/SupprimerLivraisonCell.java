@@ -66,10 +66,10 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean>
 	}
 
 	private void imageViewMoinsEntered() {
-		imageViewMoins.setImage(new Image(classLoader.getResource("moins_bleu.png").toString()));
+		imageViewMoins.setImage(new Image(classLoader.getResource("moins2_bleu.png").toString()));
 	}
 
 	private void imageViewMoinsExited() {
-		imageViewMoins.setImage(new Image(classLoader.getResource("moins_noir.png").toString()));
+		imageViewMoins.setImage(new Image(classLoader.getResource("moins2_noir.png").toString()));
 	}
 }
