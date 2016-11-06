@@ -63,7 +63,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
+				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(),
 						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	

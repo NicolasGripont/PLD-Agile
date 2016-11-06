@@ -21,7 +21,7 @@ public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean>
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
 	private GestionTourneeVue gestionTourneeVue;
-
+	
 	public SupprimerLivraisonCell(GestionTourneeVue gestionTourneeVue) {
 		this.gestionTourneeVue = gestionTourneeVue;
 		paddedButton.setPadding(new Insets(3));

@@ -62,6 +62,9 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private Label labelEntrepot;
+	
+	@FXML
+	private Label labelHorraires;
 
 	@FXML
 	private Label labelError;
@@ -204,8 +207,9 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
-	public void miseAJourTableau(List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
-		labelEntrepot.setText("Début de la tournée : " + horaireDebut.getHoraire() + " - Fin de la tournée : "
+	public void miseAJourTableau(Plan plan, List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
+		labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
+		labelHorraires.setText("Début de la tournée : " + horaireDebut.getHoraire() + " - Fin de la tournée : "
 				+ horaireFin.getHoraire());
 		if (list != null && list.size() > 0) {
 			for (LivraisonTournee l : list) {

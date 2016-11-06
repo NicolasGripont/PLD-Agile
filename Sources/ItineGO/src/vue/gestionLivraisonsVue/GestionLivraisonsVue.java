@@ -56,6 +56,9 @@ public class GestionLivraisonsVue extends GestionVue {
 	private Label labelEntrepot;
 	
 	@FXML
+	private Label labelHorraires;
+	
+	@FXML
 	private Label labelError;
 	
 	@FXML
@@ -164,7 +167,8 @@ public class GestionLivraisonsVue extends GestionVue {
 	public void miseAJourTableau(Plan plan) {
 		if(plan != null) {
 			if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud() != null) {
-				labelEntrepot.setText(String.valueOf(plan.getEntrepot().getNoeud().getId()) + " - Début Livraison à " + 
+				labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
+				labelHorraires.setText("Début Livraison à " + 
 						plan.getEntrepot().getHoraireDepart().getHoraire());
 			}
 			livraisonTable.getItems().clear();

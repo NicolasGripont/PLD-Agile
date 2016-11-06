@@ -49,12 +49,12 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <Label maxWidth="400.0" minWidth="400.0" prefWidth="400.0" text="Adresse de l'entrepôt :">
+                  <Label fx:id="labelEntrepot" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" text="Adresse de l'entrepôt :">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="labelEntrepot" text="adresse">
+                  <Label fx:id="labelHorraires" text="adresse">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
