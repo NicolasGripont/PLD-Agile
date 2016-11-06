@@ -42,7 +42,7 @@
                <children>
                   <HBox fx:id="hBoxBoutons" maxWidth="400.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
                      <children>
-                        <ImageView fx:id="imageViewAccueil" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#home" onMouseEntered="#imageViewAccueilEntered" onMouseExited="#imageViewAcceuilExited" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewAccueil" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#home" onMouseEntered="#imageViewAccueilEntered" onMouseExited="#imageViewAccueilExited" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -77,7 +77,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="labelError" prefHeight="27.0" prefWidth="341.0" text="Error" textFill="RED" wrapText="true" />
+                        <Label fx:id="labelError" alignment="CENTER" prefHeight="27.0" prefWidth="341.0" text="Error" textFill="RED" wrapText="true" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />

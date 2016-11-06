@@ -63,7 +63,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private Label labelEntrepot;
-	
+
 	@FXML
 	private Label labelHorraires;
 
@@ -98,7 +98,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private ImageView imageViewAnnulerModifications;
-	
+
 	@FXML
 	private ImageView imageViewAjouterLivraison;
 
@@ -164,7 +164,7 @@ public class GestionTourneeVue extends GestionVue {
 			final LivraisonTournee livraison = param.getValue();
 			return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getDuree()));
 		});
-		
+
 		supprimerColonne.setCellFactory(param -> {
 			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
 			cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -185,7 +185,7 @@ public class GestionTourneeVue extends GestionVue {
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);
 
-		imageViewAcceuilExited();
+		imageViewAccueilExited();
 		imageViewPrecedentExited();
 		imageViewModifierExited();
 		imageViewUndoExited();
@@ -193,6 +193,8 @@ public class GestionTourneeVue extends GestionVue {
 		imageViewValiderModificationsExited();
 		imageViewAnnulerModificationsExited();
 		imageViewAjouterLivraisonExited();
+		
+		setVisibiliteBoutons(false);
 
 		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
@@ -284,7 +286,7 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	@FXML
-	private void imageViewAcceuilExited() {
+	private void imageViewAccueilExited() {
 		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
 	}
 
@@ -337,7 +339,7 @@ public class GestionTourneeVue extends GestionVue {
 	private void imageViewAnnulerModificationsExited() {
 		imageViewAnnulerModifications.setImage(new Image(classLoader.getResource("annuler_noir.png").toString()));
 	}
-	
+
 	@FXML
 	private void imageViewAjouterLivraisonEntered() {
 		imageViewAjouterLivraison.setImage(new Image(classLoader.getResource("plus2_bleu.png").toString()));
@@ -350,34 +352,41 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewModifierClicked() {
+		//TODO appeler controleur{
+		setVisibiliteBoutons(true);
 		supprimerColonne.setVisible(true);
 		System.out.println("imageViewModifierClicked");
 	}
-	
-	private GestionTourneeVue self() {
-		return this;
-	}
+
 
 	@FXML
 	private void imageViewUndoClicked() {
+		//TODO appeler controleur
 		System.out.println("imageViewUndoClicked");
 	}
 
 	@FXML
 	private void imageViewRedoClicked() {
+		//TODO appeler controleur
 		System.out.println("imageViewRedoClicked");
 	}
 
 	@FXML
 	private void imageViewValiderModificationsClicked() {
+		//TODO appeler controleur
+		setVisibiliteBoutons(false);
+		supprimerColonne.setVisible(false);
 		System.out.println("imageViewValiderModificationsClicked");
 	}
 
 	@FXML
 	private void imageViewAnnulerModificationsClicked() {
+		//TODO appeler controleur
+		setVisibiliteBoutons(false);
+		supprimerColonne.setVisible(false);
 		System.out.println("imageViewAnnulerModificationsClicked");
 	}
-	
+
 	@FXML
 	private void imageViewAjouterLivraisonClicked() {
 		System.out.println("imageViewAjouterLivraison");
@@ -395,9 +404,32 @@ public class GestionTourneeVue extends GestionVue {
 			labelError.setText("Feuille de route générée");
 		}
 	}
-	
+
 	public void supprimerLivraison(int indexRow) {
-		System.out.println("Supprimer la ligne " + indexRow);
+		controleur.clicBoutonSupprimer(indexRow);
+		System.err.println("Supprimer la ligne " + indexRow);
+		
 	}
+
+	public void setVisibiliteBoutons(Boolean modeModification) {
+		hBoxBoutons.getChildren().clear();		
+		if(modeModification) {
+			hBoxBoutons.getChildren().add(imageViewValiderModifications);
+			hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
+			hBoxBoutons.getChildren().add(imageViewAjouterLivraison);
+		} else {
+			hBoxBoutons.getChildren().add(imageViewAccueil);
+			hBoxBoutons.getChildren().add(imageViewPrecedent);
+			hBoxBoutons.getChildren().add(imageViewModifier);
+			hBoxBoutons.getChildren().add(imageViewUndo);
+			hBoxBoutons.getChildren().add(imageViewRedo);
+		}
+		hBoxBoutons.getChildren().add(labelError);
+	}
+	
+	private GestionTourneeVue self() {
+		return this;
+	}
+
 
 }
