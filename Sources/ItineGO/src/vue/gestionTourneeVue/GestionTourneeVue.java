@@ -167,16 +167,11 @@ public class GestionTourneeVue extends GestionVue {
 
 		supprimerColonne.setCellFactory(param -> {
 			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
-			cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					int row = cell.getIndex();			
-					System.out.println(controleur.getGestionnaire().listeLivraisonsParOrdreDePassage().size());
-					LivraisonTournee lt = controleur.getGestionnaire().listeLivraisonsParOrdreDePassage().get(row);
-					System.out.println(lt.getLivraison());
-					/*
-					 *	On supprime ici 
-					 * 
-					 */
+					controleur.clicBoutonSupprimer(row);
+					System.out.println("Suppression ligne : " + row);
 				}; 
 			});
 			return cell;
