@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import modeles.Horaire;
@@ -71,6 +72,24 @@ public class GestionTourneeVue extends GestionVue{
 	
 	@FXML
 	private ImageView imageViewPrecedent;
+	
+	@FXML
+	private ImageView imageViewModifier;
+	
+	@FXML
+	private ImageView imageViewUndo;
+	
+	@FXML
+	private ImageView imageViewRedo;
+	
+	@FXML
+	private ImageView imageViewValiderModifications;
+	
+	@FXML
+	private ImageView imageViewAnnulerModifications;
+	
+	@FXML
+	private HBox hBoxBoutons;
 	
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
@@ -135,6 +154,11 @@ public class GestionTourneeVue extends GestionVue{
         
         imageViewAcceuilExited();
         imageViewPrecedentExited();
+        imageViewModifierExited();
+        imageViewUndoExited();
+        imageViewRedoExited();
+        imageViewValiderModificationsExited();
+        imageViewAnnulerModificationsExited();
         
         livraisonTable.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
 			@Override
@@ -226,6 +250,56 @@ public class GestionTourneeVue extends GestionVue{
 	@FXML
 	private void imageViewAcceuilExited() {
 		imageViewAccueil.setImage(new Image(classLoader.getResource("accueil_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewModifierEntered() {
+        imageViewModifier.setImage(new Image(classLoader.getResource("modifier_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewModifierExited() {
+		imageViewModifier.setImage(new Image(classLoader.getResource("modifier_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewUndoEntered() {
+        imageViewUndo.setImage(new Image(classLoader.getResource("undo_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewUndoExited() {
+		imageViewUndo.setImage(new Image(classLoader.getResource("undo_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewRedoEntered() {
+        imageViewRedo.setImage(new Image(classLoader.getResource("redo_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewRedoExited() {
+		imageViewRedo.setImage(new Image(classLoader.getResource("redo_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewValiderModificationsEntered() {
+        imageViewValiderModifications.setImage(new Image(classLoader.getResource("valider_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewValiderModificationsExited() {
+		imageViewValiderModifications.setImage(new Image(classLoader.getResource("valider_noir.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAnnulerModificationsEntered() {
+		imageViewAnnulerModifications.setImage(new Image(classLoader.getResource("annuler_bleu.png").toString()));
+	}
+	
+	@FXML
+	private void imageViewAnnulerModificationsExited() {
+		imageViewAnnulerModifications.setImage(new Image(classLoader.getResource("annuler_noir.png").toString()));
 	}
 	
 	@FXML
