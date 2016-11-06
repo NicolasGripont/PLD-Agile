@@ -94,6 +94,9 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private ImageView imageViewAnnulerModifications;
+	
+	@FXML
+	private ImageView imageViewAjouterLivraison;
 
 	@FXML
 	private HBox hBoxBoutons;
@@ -167,6 +170,7 @@ public class GestionTourneeVue extends GestionVue {
 		imageViewRedoExited();
 		imageViewValiderModificationsExited();
 		imageViewAnnulerModificationsExited();
+		imageViewAjouterLivraisonExited();
 
 		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
@@ -310,6 +314,16 @@ public class GestionTourneeVue extends GestionVue {
 	private void imageViewAnnulerModificationsExited() {
 		imageViewAnnulerModifications.setImage(new Image(classLoader.getResource("annuler_noir.png").toString()));
 	}
+	
+	@FXML
+	private void imageViewAjouterLivraisonEntered() {
+		imageViewAjouterLivraison.setImage(new Image(classLoader.getResource("plus2_bleu.png").toString()));
+	}
+
+	@FXML
+	private void imageViewAjouterLivraisonExited() {
+		imageViewAjouterLivraison.setImage(new Image(classLoader.getResource("plus2_noir.png").toString()));
+	}
 
 	@FXML
 	private void imageViewModifierClicked() {
@@ -348,6 +362,11 @@ public class GestionTourneeVue extends GestionVue {
 	@FXML
 	private void imageViewAnnulerModificationsClicked() {
 		System.out.println("imageViewAnnulerModificationsClicked");
+	}
+	
+	@FXML
+	private void imageViewAjouterLivraisonClicked() {
+		System.out.println("imageViewAjouterLivraison");
 	}
 
 	@FXML
