@@ -6,6 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import modeles.Gestionnaire;
+import modeles.Livraison;
+import modeles.Noeud;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
@@ -16,20 +18,36 @@ import javafx.scene.Scene;
 /**
  * Controleur de l'application
  */
-public class Controleur extends Application{
+public class Controleur extends Application {
 	
 	private Gestionnaire gestionnaire = new Gestionnaire(this);
+	
+	/**
+	 * Définition des vues
+	 */
 	protected ChoixDemandeLivraisonsVue choixDemandeLivraisonsVue;
 	protected ChoixPlanVilleVue choixPlanVilleVue;
 	protected GestionLivraisonsVue gestionLivraisonsVue;
 	protected GestionTourneeVue gestionTourneeVue;
+	
+	/**
+	 * Etat correspondant à l'état durant lequel une action est effectuée
+	 */
 	protected EtatDefaut etatCourant;
-	protected final EtatApplicationDemarree etatApplicationDemarree = new EtatApplicationDemarree();
+	
+	/**
+	 * Définition des différents états de l'application
+	 */
+	protected final EtatApplicationDemarree 	etatApplicationDemarree 	= new EtatApplicationDemarree();
 	protected final EtatFichierLivraisonsChoisi etatFichierLivraisonsChoisi = new EtatFichierLivraisonsChoisi();
-	protected final EtatLivraisonsAffichees etatLivraisonsAffichees = new EtatLivraisonsAffichees();
-	protected final EtatPlanVilleAffiche etatPlanVilleAffiche = new EtatPlanVilleAffiche();
-	protected final EtatPlanVilleChoisie etatPlanVilleChoisie = new EtatPlanVilleChoisie();
-	protected final EtatTourneeAffiche etatTourneeAffiche = new EtatTourneeAffiche();
+	protected final EtatLivraisonsAffichees 	etatLivraisonsAffichees 	= new EtatLivraisonsAffichees();
+	protected final EtatPlanVilleAffiche 		etatPlanVilleAffiche 		= new EtatPlanVilleAffiche();
+	protected final EtatPlanVilleChoisie 		etatPlanVilleChoisie 		= new EtatPlanVilleChoisie();
+	protected final EtatTourneeAffiche 			etatTourneeAffiche 			= new EtatTourneeAffiche();
+	protected final EtatModifierTournee 		etatModifierTournee 		= new EtatModifierTournee();
+	protected final EtatAjouterTourneePlace 	etatAjouterTourneePlace 	= new EtatAjouterTourneePlace();
+	protected final EtatAjouterTourneeOrdre 	etatAjouterTourneeOrdre 	= new EtatAjouterTourneeOrdre();
+	
 	protected Stage stage;
 	
 	public static void main(String[] args) {
@@ -46,6 +64,9 @@ public class Controleur extends Application{
 		return etatCourant;
 	}
 	
+	/**
+	 * Permet de lancer l'application en affichant la vue du choix de plan.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		setEtatCourant(etatApplicationDemarree);
@@ -67,53 +88,164 @@ public class Controleur extends Application{
 		}
 	}
 	
+	/**
+	 * Permet de stopper le calcul d'une tournée.
+	 */
 	@Override
 	public void stop() throws Exception {
 		super.stop();
 		gestionnaire.stopperCalculTournee();
 	}
 	
+	/**
+	 * Permet de faire un glisser déposer pour le fichier à prendre en compte.
+	 * Cette méthode est utilisée pour le fichier du plan et le fichier pour les livraisons.
+	 * 
+	 * @param accepte : indique si le fichier est accepté ou non.
+	 * @param fichier : fichier xml correspondant au fichier que l'on veut traiter
+	 */
 	public void glisserDeposer(boolean accepte,File fichier)
 	{
 		etatCourant.glisserDeposer(this,accepte,fichier);
 		etatCourant.getEtat();
 	}
 	
+	
+	/**
+	 * Permet de choisir le fichier à prendre en compte pour le plan ou les livraisons en cliquant sur le bouton parcourir.
+	 * 
+	 * @param accepte : indique si le fichier est accepté ou non.
+	 * @param fichier : fichier xml correspondant au fichier que l'on veut traiter.
+	 */
 	public void clicBoutonParcourir(boolean accepte,File fichier)
 	{
 		etatCourant.clicBoutonParcourir(this,accepte,fichier);
 		etatCourant.getEtat();
 	}
 
+	
+	/**
+	 * Permet de revenir à la vue précédente.
+	 */
 	public void clicBoutonRetour() {
 		etatCourant.clicBoutonRetour(this, gestionnaire);
 		etatCourant.getEtat();
 	}
 	
+	/**
+	 * Permet de revenir à la vue initiale.
+	 */
 	public void clicBoutonHome() {
 		etatCourant.clicBoutonHome(this, gestionnaire);
 		etatCourant.getEtat();
 	}
 
+	/**
+	 * Permet d'afficher la vue suivante en affichant le plan avec ou sans livraisons correspondant au fichier choisi.
+	 * 
+	 * @param fichierChoisie : Fichier xml pris en compte.
+	 */
 	public void clicBoutonValider(File fichierChoisie) {
 		etatCourant.clicBoutonValider(gestionnaire, this, fichierChoisie);
 		etatCourant.getEtat();
 	}
 
+	/**
+	 * Permet de lancer le calcul d'une tournée.
+	 */
 	public void clicBoutonCalculerTournee() {
 		etatCourant.clicBoutonCalculerTournee(this, gestionnaire);
 		etatCourant.getEtat();
 	}
 	
+	/**
+	 * Permet de sauvegarder la tournée calculée et affichée.
+	 */
+	public void clicBoutonSauvegarder() {
+		etatCourant.clicBoutonSauvegarder(this, gestionnaire);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet d'annuler les modifications apportées à la tournée.
+	 */
+	public void clicBoutonAnnuler() {
+		etatCourant.clicBoutonAnnuler(this, gestionnaire);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de supprimer une livraison de la tournée.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison à supprimer.
+	 */
+	public void clicBoutonSupprimer(int numLigne) {
+		etatCourant.clicBoutonSupprimer(this, gestionnaire, numLigne);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet d'ajouter une livraison dans la tournée. Il faudra ensuite choisir sa position sur le plan.
+	 */
+	public void clicBoutonAjouter() {
+		etatCourant.clicBoutonAjouter(this, gestionnaire);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de modifier une livraison dans le tableau.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage.
+	 * @param debutPlage : Plage horaire de début, peut être nulle.
+	 * @param finPlage : Plage horaire de fin, peut être nulle.
+	 */
+	public void modifierLigne(int numLigne, int nouveauNumLigne, String debutPlage, String finPlage) {
+		etatCourant.modifierLigne(this, gestionnaire, numLigne, nouveauNumLigne, debutPlage, finPlage);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de cliquer sur un noeud du plan.
+	 * 
+	 * @param noeud : Noeud sur lequel on a cliqué.
+	 */
+	public void clicPlanNoeud(Noeud noeud) {
+		etatCourant.clicPlanNoeud(this, gestionnaire, noeud);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de cliquer sur une livraison dans le plan.
+	 * 
+	 * @param livraison : Livraison sur laquelle on a cliqué.
+	 */
+	public void clicPlanLivraison(Livraison livraison) {
+		etatCourant.clicPlanLivraison(this, gestionnaire, livraison);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de générer la feuille de route de la tournée calculée.
+	 * 
+	 * @param link : Chemin du fichier que l'on va créer.
+	 */
 	public void clicBoutonGenererFeuilleDeRoute(String link) {
 		etatCourant.clicBoutonGenererFeuilleDeRoute(this, gestionnaire, link);
 		etatCourant.getEtat();
 	}
 		
+	/**
+	 * Permet de stopper le calcul d'une tournée.
+	 */
 	public void clicBoutonsStopperCalculeTournee() {
 		etatCourant.clicBoutonStopperTournee(this, gestionnaire);
 		etatCourant.getEtat();
 	}
+	
+	/**
+	 * Redessine le plan.
+	 */
 	public void redessinerPlan() {
 		etatCourant.redessinerPlan(this, gestionnaire);
 	}
