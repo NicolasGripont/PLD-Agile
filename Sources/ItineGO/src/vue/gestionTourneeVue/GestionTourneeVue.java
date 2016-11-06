@@ -25,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import modeles.Horaire;
+import modeles.Livraison;
 import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;
@@ -37,6 +38,11 @@ import vue.planVilleVue.PlanVilleVue;
 public class GestionTourneeVue extends GestionVue {
 	private Controleur controleur;
 
+	private Noeud noeudSelectionne;
+	private Noeud noeudLivraisonSelectionne;
+	private boolean attenteNoeudPourNouvelleLivraison = false;
+	private boolean attenteLivraisonPrecedentePourNouvelleLivraison = false;
+	
 	@FXML
 	private TableView<LivraisonTournee> livraisonTable;
 
@@ -107,6 +113,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		supprimerColonne.setVisible(false);
@@ -221,9 +228,15 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	public void selectionneNoeud(Noeud noeud) {
-		for (LivraisonTournee t : livraisonTable.getItems()) {
-			if (t.getLivraison().getNoeud().equals(noeud)) {
-				livraisonTable.getSelectionModel().select(t);
+		if(attenteNoeudPourNouvelleLivraison) {
+			noeudNouvelleLivraisonSelectionne(noeud);
+		} else if(attenteLivraisonPrecedentePourNouvelleLivraison) {
+			livraisonPrecedenteSelectionne(noeud);
+		} else {
+			for (LivraisonTournee t : livraisonTable.getItems()) {
+				if (t.getLivraison().getNoeud().equals(noeud)) {
+					livraisonTable.getSelectionModel().select(t);
+				}
 			}
 		}
 	}
@@ -374,6 +387,7 @@ public class GestionTourneeVue extends GestionVue {
 	@FXML
 	private void imageViewValiderModificationsClicked() {
 		//TODO appeler controleur
+		labelInstruction.setVisible(false);
 		setVisibiliteBoutons(false);
 		supprimerColonne.setVisible(false);
 		System.out.println("imageViewValiderModificationsClicked");
@@ -382,6 +396,7 @@ public class GestionTourneeVue extends GestionVue {
 	@FXML
 	private void imageViewAnnulerModificationsClicked() {
 		//TODO appeler controleur
+		labelInstruction.setVisible(false);
 		setVisibiliteBoutons(false);
 		supprimerColonne.setVisible(false);
 		System.out.println("imageViewAnnulerModificationsClicked");
@@ -390,6 +405,37 @@ public class GestionTourneeVue extends GestionVue {
 	@FXML
 	private void imageViewAjouterLivraisonClicked() {
 		System.out.println("imageViewAjouterLivraison");
+		labelInstruction.setVisible(true);
+		labelInstruction.setText("Sélectionnez un noeud sur le plan");
+		planVilleVue.modeAjouterLivraison(true);
+		attenteNoeudPourNouvelleLivraison = true;
+	}
+	
+	private void noeudNouvelleLivraisonSelectionne(Noeud noeud) {
+		attenteNoeudPourNouvelleLivraison = false;
+		attenteLivraisonPrecedentePourNouvelleLivraison = true;
+		noeudSelectionne = noeud;
+		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
+	}
+	
+	private void livraisonPrecedenteSelectionne(Noeud noeud) {
+		for (LivraisonTournee t : livraisonTable.getItems()) {
+			if (t.getLivraison().getNoeud().equals(noeud)) {
+				noeudLivraisonSelectionne = noeud;
+				ajouterLivraison();
+				return;
+			}
+		}
+	}
+	
+	private void ajouterLivraison() {
+		if(noeudLivraisonSelectionne != null && noeudSelectionne != null) {
+			attenteLivraisonPrecedentePourNouvelleLivraison = false;
+			planVilleVue.modeAjouterLivraison(false);
+			labelInstruction.setText("Vous pouvez maintenant modifer la durée et les plages horaires");
+			//Dégeulasse à changer, il faut passer par le controleur et le modèle
+			livraisonTable.getItems().add(new LivraisonTournee(new Livraison(noeudSelectionne, 0), new Horaire("0:0:0"), new Horaire("0:0:0")));
+		}
 	}
 
 	@FXML
@@ -426,10 +472,4 @@ public class GestionTourneeVue extends GestionVue {
 		}
 		hBoxBoutons.getChildren().add(labelError);
 	}
-	
-	private GestionTourneeVue self() {
-		return this;
-	}
-
-
 }

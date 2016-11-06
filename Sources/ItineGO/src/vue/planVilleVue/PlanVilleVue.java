@@ -32,6 +32,7 @@ public class PlanVilleVue extends Canvas {
 	private Noeud noeudSelectionned = null;
 	private Troncon tronconSelectionned = null;
 	private Plan plan;
+	private boolean modeAjouterLivraison = false;
 	private GestionVue vue;
 	
 	public PlanVilleVue(double width, double height) {
@@ -168,10 +169,12 @@ public class PlanVilleVue extends Canvas {
 								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 									if(l.getKey().equals(n.getValue())) {
 										livraisonIsFocused(l.getValue());
+										vue.selectionneNoeud(l.getValue().getNoeud());
 										return;
 									}
 								}
 								noeudIsFocused(n.getValue());
+								vue.selectionneNoeud(n.getValue());
 							}
 							return;
 						}
@@ -264,9 +267,6 @@ public class PlanVilleVue extends Canvas {
 		//Affichage texte
 		gc.setFill(new Color(1,1,1,1));
 		gc.fillText(String.valueOf(livraison.getNoeud().getId()), x + 15 + 5, y);
-		if(vue != null) {
-			vue.selectionneNoeud(livraison.getNoeud());
-		}
 	}
 	
 	private void entrepotIsClicked(Entrepot entrepot) {
@@ -366,6 +366,10 @@ public class PlanVilleVue extends Canvas {
 		//Affichage du noeud exterieur
 		gc.setFill(new Color(0,0.4921,0.9609,0.7));
 		gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
+	}
+	
+	public void modeAjouterLivraison(boolean mode) {
+		modeAjouterLivraison = mode;
 	}
 	
 	public void dessinerPlan(Plan plan) {
@@ -543,5 +547,9 @@ public class PlanVilleVue extends Canvas {
 
 	public void setVue(GestionVue vue) {
 		this.vue = vue;
+	}
+	
+	public boolean getModeAjouterLivraison() {
+		return modeAjouterLivraison;
 	}
 }
