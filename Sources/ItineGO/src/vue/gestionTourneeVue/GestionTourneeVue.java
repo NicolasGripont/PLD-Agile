@@ -462,8 +462,8 @@ public class GestionTourneeVue extends GestionVue {
 			hBoxBoutons.getChildren().add(imageViewAccueil);
 			hBoxBoutons.getChildren().add(imageViewPrecedent);
 			hBoxBoutons.getChildren().add(imageViewModifier);
-			hBoxBoutons.getChildren().add(imageViewUndo);
-			hBoxBoutons.getChildren().add(imageViewRedo);
+//			hBoxBoutons.getChildren().add(imageViewUndo);
+//			hBoxBoutons.getChildren().add(imageViewRedo);
 		}
 		hBoxBoutons.getChildren().add(labelError);
 	}
