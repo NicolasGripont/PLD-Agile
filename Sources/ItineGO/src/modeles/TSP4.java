@@ -31,7 +31,6 @@ public class TSP4 extends TSP3 {
 	    	
     		coutVus += cout[sommetCrt][0]; // on rajoute le cout pour retourné à l'entrepot
 
-    		coutVus += cout[sommetCrt][0];
 	    	if (coutVus < getCoutMeilleureSolution()){ // on a trouve une solution meilleure que meilleureSolution
 	    		//On sauvgarde la denière meilleur solution trouvé
 	    		vus.toArray(meilleureSolution);
@@ -53,7 +52,7 @@ public class TSP4 extends TSP3 {
 	        		futurCoutVus = plage_horaire[0][prochainSommet];//Si on arrive trop tôt on attend 
 	        	}
 	        	
-	        	//On on arrive trop tard on coupe la branche 
+	        	//Si on arrive trop tard à la prochaine livraison on coupe la branche 
 	        	if(futurCoutVus < plage_horaire[1][prochainSommet]){
 	        	branchAndBound(prochainSommet, nonVus, vus, futurCoutVus + duree[prochainSommet], cout, duree, tpsDebut, tpsLimite, plage_horaire );
 	        	}
