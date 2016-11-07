@@ -6,8 +6,15 @@ import org.junit.Test;
 
 import modeles.Horaire;
 
+/**
+ * Classe test unitaire de la classe Horaire
+ *
+ */
 public class HoraireTest {
 
+	/**
+	 * Test constructeur de la classe Horaire avec 3 entier (Heure,Minute,Seconde)
+	 */
 	@Test
 	public void testHoraireIntIntInt() {
 		Horaire horaire = new Horaire(10,20,29);
@@ -15,6 +22,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test constructeur de la classe Horaire avec une heure impossible
+	 * 
+	 * Resultat: Heure est mise à 0
+	 */
 	@Test
 	public void testHoraireIntIntIntMauvaiseHeure() {
 		Horaire horaire = new Horaire(30,20,29);
@@ -22,6 +34,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test constructeur de la classe Horaire avec une minute impossible
+	 * 
+	 * Resultat: Minute est mise à 0
+	 */
 	@Test
 	public void testHoraireIntIntIntMauvaiseMinute() {
 		Horaire horaire = new Horaire(10,70,29);
@@ -29,6 +46,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test constructeur de la classe Horaire avec une seconde impossible
+	 * 
+	 * Resultat: Seconde est mise à 0
+	 */
 	@Test
 	public void testHoraireIntIntIntMauvaiseSeconde() {
 		Horaire horaire = new Horaire(10,20,129);
@@ -36,6 +58,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 
+	/**
+	 * Test affichage texte de Horaire
+	 * 
+	 * Resultat: L'affiche doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testHoraireString() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -43,6 +70,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test affiche texte mal formé de Horaire
+	 * 
+	 * Resultat: L'affiche doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testHoraireMalForme1() {
 		Horaire horaire = new Horaire("helloworld");
@@ -50,6 +82,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test affiche texte mal formé de Horaire
+	 * 
+	 * Resultat: L'affiche doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testHoraireMalForme2() {
 		Horaire horaire = new Horaire("fskjfqsnfqsjkn:qsfnkqflnkfq:qfsqsfqsfoif");
@@ -57,6 +94,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test affiche texte mal formé de Horaire
+	 * 
+	 * Resultat: L'affiche doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testHoraireMalForme3() {
 		Horaire horaire = new Horaire("-10:29293:02023");
@@ -64,6 +106,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier l'heure de Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testAjouterHeure() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -77,6 +124,11 @@ public class HoraireTest {
 		assertEquals("12:20:29", horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier la minute de Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testAjouterMinute() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -90,6 +142,11 @@ public class HoraireTest {
 		assertEquals("11:38:29", horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier la seconde de Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testAjouterSeconde() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -103,6 +160,11 @@ public class HoraireTest {
 		assertEquals("10:21:29", horaire.toString());
 	}
 	
+	/**
+	 * Test permettant de modifier la seconde de Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testAjouterSeconde2() {
 		Horaire horaire = new Horaire("8:24:3");
@@ -110,6 +172,11 @@ public class HoraireTest {
 		assertEquals("8:39:3", horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier l'heure de l'Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetHeure() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -118,6 +185,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test permettant de modifier l'heure de l'Horaire avec une heure mauvaise
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetHeureMauvais() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -126,6 +198,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier la minute de l'Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetMinute() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -134,6 +211,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test permettant de modifier la minute de l'Horaire avec une minute mauvaise
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetMinuteMauvais() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -142,6 +224,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 
+	/**
+	 * Test permettant de modifier la seconde de l'Horaire
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetSeconde() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -150,6 +237,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 	
+	/**
+	 * Test permettant de modifier la seconde de l'Horaire avec une seconde mauvaise
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testSetSecondeMauvais() {
 		Horaire horaire = new Horaire("10:20:29");
@@ -158,6 +250,11 @@ public class HoraireTest {
 		assertEquals(res1, horaire.toString());
 	}
 
+	/**
+	 * Test permettant de vérifier que 2 objet de type horaire sont égales et différent
+	 * 
+	 * Resultat: Premier est égale, deuxiéme est différent
+	 */
 	@Test
 	public void testEqualsObject() {
 		Horaire horaire1 = new Horaire("10:20:29");
@@ -167,6 +264,11 @@ public class HoraireTest {
 		assertNotEquals(horaire1,horaire3);
 	}
 	
+	/**
+	 * Test permettant d'avoir l'horaire en minute 
+	 * 
+	 * Resultat: L'horaire doit correspondre au résultat attendu
+	 */
 	@Test
 	public void testGetHoraireEnMinute() {
 		Horaire horaire = new Horaire("10:20:29");
