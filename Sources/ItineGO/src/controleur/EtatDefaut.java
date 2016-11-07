@@ -35,7 +35,7 @@ public abstract class EtatDefaut {
 	public void modifierOrdre	   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {}
 	public void modifierPlageDebut (Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageDebut) {}
 	public void modifierPlageFin   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {}
-	public void entrerDuree		   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, int duree) {}
+	public void entrerDuree		   (Controleur controleur, Gestionnaire gestionnaire, int duree) {}
 	
 	public void getEtat()
 	{
