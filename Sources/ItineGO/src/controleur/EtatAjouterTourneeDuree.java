@@ -11,7 +11,7 @@ public class EtatAjouterTourneeDuree extends EtatDefaut {
 		gestionnaire.getLivraisonEnCourCreation().setDuree(duree);
 		gestionnaire.ajouterLivraisonTournee();
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(), 
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
