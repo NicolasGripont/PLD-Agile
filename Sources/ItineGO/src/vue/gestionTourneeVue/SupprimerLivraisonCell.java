@@ -20,8 +20,10 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
+	private TableView table;
 	
-	public SupprimerLivraisonCell() {
+	public SupprimerLivraisonCell(TableView table) {
+		this.table = table;
 		paddedButton.setPadding(new Insets(3));
 		paddedButton.getChildren().add(imageViewMoins);
 
@@ -52,7 +54,7 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 	@Override
 	protected void updateItem(Boolean item, boolean empty) {
 		super.updateItem(item, empty);
-		if (!empty) {
+		if (!empty && ((table.getItems().size() - 1) != this.getIndex())) {
 			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 			setGraphic(paddedButton);
 		} else {

@@ -178,17 +178,30 @@ public class GestionTourneeVue extends GestionVue {
 			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
 		});
 
-		supprimerColonne.setCellFactory(param -> {
-			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
-			cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					int row = cell.getIndex();			
-					controleur.clicBoutonSupprimer(row);
-					System.out.println("Suppression ligne : " + row);
-				}; 
-			});
-			return cell;
-		});
+		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
+		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
+		    	  SupprimerLivraisonCell cell = new SupprimerLivraisonCell(livraisonTable);
+					cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							int row = cell.getIndex();			
+							controleur.clicBoutonSupprimer(row);
+							System.out.println("Suppression ligne : " + row);
+						}; 
+					});
+					return cell;
+		      }
+		    });
+//		supprimerColonne.setCellFactory(param -> {
+//			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
+//			cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//				public void handle(MouseEvent event) {
+//					int row = cell.getIndex();			
+//					controleur.clicBoutonSupprimer(row);
+//					System.out.println("Suppression ligne : " + row);
+//				}; 
+//			});
+//			return cell;
+//		});
 
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);
