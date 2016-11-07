@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -134,7 +135,11 @@ public class GestionTourneeVue extends GestionVue {
 
 		adresseColonne.setCellValueFactory(param -> {
 			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
+			if(livraison.getNoeud().getId() != -1) {
+				return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
+			} else { 
+				return new SimpleStringProperty("?");
+			}
 		});
 
 		plageDebutColonne.setCellValueFactory(param -> {
@@ -189,17 +194,6 @@ public class GestionTourneeVue extends GestionVue {
 					return cell;
 		      }
 		    });
-//		supprimerColonne.setCellFactory(param -> {
-//			SupprimerLivraisonCell cell = new SupprimerLivraisonCell();
-//			cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//				public void handle(MouseEvent event) {
-//					int row = cell.getIndex();			
-//					controleur.clicBoutonSupprimer(row);
-//					System.out.println("Suppression ligne : " + row);
-//				}; 
-//			});
-//			return cell;
-//		});
 
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);
@@ -413,11 +407,21 @@ public class GestionTourneeVue extends GestionVue {
 		labelInstruction.setText("Sélectionnez un noeud sur le plan");
 		planVilleVue.modeAjouterLivraison(true);
 		attenteNoeudPourNouvelleLivraison = true;
+		Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
+		l.setHeureArrive(new Horaire("0:0:0"));
+		l.setHeureDepart(new Horaire("0:0:0"));
+		livraisonTable.getItems().add(l);
+		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
 	
 	private void noeudNouvelleLivraisonSelectionne(Noeud noeud) {
 		attenteNoeudPourNouvelleLivraison = false;
 		attenteLivraisonPrecedentePourNouvelleLivraison = true;
+		/*
+		 * Ajout secu
+		 */
+		livraisonTable.getItems().get(livraisonTable.getItems().size()-1).setNoeud(noeud);
+		livraisonTable.refresh();
 		noeudSelectionne = noeud;
 		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
 	}
@@ -426,23 +430,31 @@ public class GestionTourneeVue extends GestionVue {
 		for (Livraison t : livraisonTable.getItems()) {
 			if (t.getNoeud().equals(noeud)) {
 				noeudLivraisonSelectionne = noeud;
-				ajouterLivraison();
+				choixDureeLivraison();
 				return;
 			}
 		}
 	}
 	
+	private void choixDureeLivraison() {
+		attenteLivraisonPrecedentePourNouvelleLivraison = false;
+		planVilleVue.modeAjouterLivraison(false);
+		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
+		dureeColonne.setOnEditCommit( value -> {
+			    new EventHandler<CellEditEvent<Livraison, String>>() {
+			        @Override
+			        public void handle(CellEditEvent<Livraison, String> t) {
+			            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(Integer.valueOf(t.getNewValue()));
+			            ajouterLivraison();
+			        }
+			    };
+		});
+		livraisonTable.setEditable(true);
+		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
+	}
+	
 	private void ajouterLivraison() {
-		if(noeudLivraisonSelectionne != null && noeudSelectionne != null) {
-			attenteLivraisonPrecedentePourNouvelleLivraison = false;
-			planVilleVue.modeAjouterLivraison(false);
-			labelInstruction.setText("Vous pouvez maintenant modifer la durée et les plages horaires");
-			//Dégeulasse à changer, il faut passer par le controleur et le modèle
-			Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
-			l.setHeureArrive(new Horaire("0:0:0"));
-			l.setHeureDepart(new Horaire("0:0:0"));
-			livraisonTable.getItems().add(l);
-		}
+		planVilleVue.modeAjouterLivraison(false);
 	}
 
 	@FXML
