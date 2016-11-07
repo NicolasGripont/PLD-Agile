@@ -3313,7 +3313,7 @@
 									"containerExtending": false,
 									"left": 726,
 									"top": 429,
-									"width": 55,
+									"width": 55.65625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -3451,7 +3451,7 @@
 									"containerExtending": false,
 									"left": 720,
 									"top": 345,
-									"width": 55,
+									"width": 55.65625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -3589,7 +3589,7 @@
 									"containerExtending": false,
 									"left": 622,
 									"top": 534,
-									"width": 55,
+									"width": 55.65625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -5735,9 +5735,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 691,
+									"left": 690,
 									"top": 727,
-									"width": 51,
+									"width": 53.49169921875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.8501227129828206,
@@ -5873,9 +5873,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 730,
+									"left": 729,
 									"top": 672,
-									"width": 51,
+									"width": 53.49169921875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 3.6665930235378847,
@@ -6011,9 +6011,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 666,
+									"left": 665,
 									"top": 633,
-									"width": 51,
+									"width": 53.49169921875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 4.4457962431546365,
@@ -6149,9 +6149,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 668,
+									"left": 667,
 									"top": 596,
-									"width": 51,
+									"width": 53.49169921875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.5900355130294406,
@@ -7093,7 +7093,7 @@
 									"containerExtending": false,
 									"left": 1021,
 									"top": 757,
-									"width": 55,
+									"width": 55.65625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.6415965947254847,
@@ -50678,9 +50678,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 339,
+									"left": 341,
 									"top": 374,
-									"width": 81,
+									"width": 76.603515625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.756408367612361,
@@ -51081,9 +51081,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 427,
+									"left": 424,
 									"top": 315,
-									"width": 147,
+									"width": 153.1689453125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -51484,9 +51484,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 695,
+									"left": 692,
 									"top": 185,
-									"width": 147,
+									"width": 153.1689453125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -52393,9 +52393,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 138,
+									"left": 140,
 									"top": 404,
-									"width": 81,
+									"width": 76.603515625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.0233292392298252,
@@ -53006,9 +53006,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 307,
+									"left": 309,
 									"top": 560,
-									"width": 81,
+									"width": 76.603515625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 2.2300094555243506,
@@ -55738,7 +55738,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+clicBoutonSauvegarder(controleur: Controleur, gestionnaire: Gestionnaire)",
+											"text": "+clicBoutonSauvegarder(controleur: Controleur)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -55822,7 +55822,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+clicBoutonAjouter(controleur: Controleur, gestionnaire: Gestionnaire)",
+											"text": "+clicBoutonAjouter(controleur: Controleur)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -63750,7 +63750,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+clicBoutonAjouter(controleur: Controleur, gestionnaire: Gestionnaire)",
+											"text": "+clicBoutonAjouter(controleur: Controleur)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -71995,24 +71995,6 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "in"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFYNOgZFXgmHfo=",
-									"_parent": {
-										"$ref": "AAAAAAFYNOdpcHR42bE="
-									},
-									"name": "gestionnaire",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFX2Ni7KkNYDLU="
-									},
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -72162,24 +72144,6 @@
 									"isLeaf": false,
 									"type": {
 										"$ref": "AAAAAAFX2NilkTvjKJA="
-									},
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFYNPT5armvEBM=",
-									"_parent": {
-										"$ref": "AAAAAAFYNPPojbYBTxc="
-									},
-									"name": "gestionnaire",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFX2Ni7KkNYDLU="
 									},
 									"isReadOnly": false,
 									"isOrdered": false,
@@ -74481,24 +74445,6 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "in"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFYNRNBhiSxwto=",
-									"_parent": {
-										"$ref": "AAAAAAFYNRDieiEDyDA="
-									},
-									"name": "gestionnaire",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFX2Ni7KkNYDLU="
-									},
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -76764,7 +76710,11 @@
 											"containerExtending": false,
 											"left": 1637,
 											"top": 479,
+<<<<<<< HEAD
+											"width": 495.35205078125,
+=======
 											"width": 499,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -76833,7 +76783,11 @@
 									"containerExtending": false,
 									"left": 1632,
 									"top": 472,
+<<<<<<< HEAD
+									"width": 505.35205078125,
+=======
 									"width": 509,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -76869,7 +76823,11 @@
 									"containerExtending": false,
 									"left": 1632,
 									"top": 497,
+<<<<<<< HEAD
+									"width": 505.35205078125,
+=======
 									"width": 509,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 10,
 									"autoResize": false
 								},
@@ -76903,11 +76861,46 @@
 											"containerExtending": false,
 											"left": 1637,
 											"top": 512,
+<<<<<<< HEAD
+											"width": 495.35205078125,
+=======
 											"width": 499,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
 											"text": "+Tournee(entrepot: Entrepot, livraisons: Map<noeud Livraison>, trajets: Liste<Trajet>)",
+<<<<<<< HEAD
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFYQIy360cU0Tw=",
+											"_parent": {
+												"$ref": "AAAAAAFX2Ni7KkFIM4g="
+											},
+											"model": {
+												"$ref": "AAAAAAFYQIy3yUcRDY0="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1637,
+											"top": 527,
+											"width": 495.35205078125,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+listeLivraisonsParOrdreDePassage(): Liste<Livraison>",
+=======
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -76923,8 +76916,13 @@
 									"containerExtending": false,
 									"left": 1632,
 									"top": 507,
+<<<<<<< HEAD
+									"width": 505.35205078125,
+									"height": 38,
+=======
 									"width": 509,
 									"height": 23,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"autoResize": false
 								},
 								{
@@ -76963,8 +76961,13 @@
 							"containerExtending": false,
 							"left": 1632,
 							"top": 472,
+<<<<<<< HEAD
+							"width": 505.35205078125,
+							"height": 73,
+=======
 							"width": 509,
 							"height": 58,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"autoResize": false,
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
@@ -81907,9 +81910,15 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1723,
+									"top": 674,
+									"width": 39.72998046875,
+=======
 									"left": 1676,
 									"top": 695,
 									"width": 40,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.6787929025257313,
@@ -81940,7 +81949,11 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1644,
+=======
 									"left": 1643,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"top": 675,
 									"width": 0,
 									"height": 13,
@@ -81972,7 +81985,11 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1673,
+=======
 									"left": 1674,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"top": 709,
 									"width": 0,
 									"height": 13,
@@ -82100,8 +82117,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1812,
+									"top": 545,
+=======
 									"left": 1823.3529411764705,
 									"top": 530,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -82132,8 +82154,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1802,
+									"top": 536,
+=======
 									"left": 1813.3529411764705,
 									"top": 522,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -82164,8 +82191,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 1834,
+									"top": 562,
+=======
 									"left": 1845.3529411764705,
 									"top": 547,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -82243,7 +82275,11 @@
 								"$ref": "AAAAAAFX2Ni7KkF7/ag="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
+							"points": "1626:711;1664:704;1842:545",
+=======
 							"points": "1626.2777777777778:711;1664:704;1853.3529411764705:530",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -83117,8 +83153,13 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 1142,
+<<<<<<< HEAD
+									"top": 462,
+									"width": 48.419921875,
+=======
 									"top": 466,
 									"width": 47,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.1291316675323597,
@@ -83310,7 +83351,11 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 1605,
+<<<<<<< HEAD
+									"top": 470,
+=======
 									"top": 466.3305439330544,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -83374,7 +83419,11 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 1608,
+<<<<<<< HEAD
+									"top": 498,
+=======
 									"top": 494.3305439330544,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -83452,7 +83501,11 @@
 								"$ref": "AAAAAAFX2Ni7KkEyKC4="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
+							"points": "918:492;1408:480;1631:493",
+=======
 							"points": "918.46142578125:491.6556803385417;1408:480;1631:489.3305439330544",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -85333,7 +85386,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 87,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85402,7 +85455,7 @@
 									"containerExtending": false,
 									"left": 592,
 									"top": 80,
-									"width": 385,
+									"width": 405.65576171875,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -85448,7 +85501,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 110,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85476,7 +85529,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 125,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85496,7 +85549,7 @@
 									"containerExtending": false,
 									"left": 592,
 									"top": 105,
-									"width": 385,
+									"width": 405.65576171875,
 									"height": 38,
 									"autoResize": false
 								},
@@ -85530,7 +85583,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 148,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85558,7 +85611,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 163,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85586,7 +85639,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 178,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85614,7 +85667,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 193,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85642,7 +85695,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 208,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85670,7 +85723,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 223,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85698,7 +85751,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 238,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85726,7 +85779,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 253,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85754,7 +85807,7 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 268,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -85782,11 +85835,39 @@
 											"containerExtending": false,
 											"left": 597,
 											"top": 283,
-											"width": 375,
+											"width": 395.65576171875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
 											"text": "+getLivraisonTournee(numLigne: int): Livraison",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFYQHwOgtbWF50=",
+											"_parent": {
+												"$ref": "AAAAAAFX2Ni7KkJi6y8="
+											},
+											"model": {
+												"$ref": "AAAAAAFYQHwOTtamxOM="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 597,
+											"top": 298,
+											"width": 395.65576171875,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+reordonnerLivraisonTournee(numLigne: int, nouveauNumLigne: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -85802,8 +85883,8 @@
 									"containerExtending": false,
 									"left": 592,
 									"top": 143,
-									"width": 385,
-									"height": 158,
+									"width": 405.65576171875,
+									"height": 173,
 									"autoResize": false
 								},
 								{
@@ -85842,7 +85923,7 @@
 							"containerExtending": false,
 							"left": 592,
 							"top": 80,
-							"width": 385,
+							"width": 405.65576171875,
 							"height": 249,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
@@ -85896,9 +85977,15 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 460,
+									"top": 232,
+									"width": 100.4326171875,
+=======
 									"left": 461,
 									"top": 231,
 									"width": 99,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -85930,7 +86017,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 511,
-									"top": 246,
+									"top": 247,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -85962,7 +86049,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 507,
-									"top": 202,
+									"top": 203,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86058,7 +86145,11 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 568,
+<<<<<<< HEAD
+									"top": 201,
+=======
 									"top": 200.7041420118343,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86089,8 +86180,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 454,
+									"top": 237,
+=======
 									"left": 453.2373046875,
 									"top": 236.33226238905326,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86121,8 +86217,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 457,
+									"top": 250,
+=======
 									"left": 457.2373046875,
 									"top": 249.33226238905326,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86232,7 +86333,11 @@
 								"$ref": "AAAAAAFX2Ni7KkJl0UQ="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
+							"points": "591:218;427:230",
+=======
 							"points": "591:217.7041420118343;427.2373046875:229.33226238905326",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -86299,9 +86404,15 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 480,
+									"top": 387,
+									"width": 74.42626953125,
+=======
 									"left": 482,
 									"top": 383,
 									"width": 73,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.7166589202095166,
@@ -86333,7 +86444,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 512,
-									"top": 384,
+									"top": 387,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86365,7 +86476,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 490,
-									"top": 344,
+									"top": 347,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86397,7 +86508,11 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 575,
+<<<<<<< HEAD
+									"top": 335,
+=======
 									"top": 331.1400778210117,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86428,8 +86543,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 579,
+									"top": 348,
+=======
 									"left": 580,
 									"top": 344.1400778210117,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86461,7 +86581,11 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 566,
+<<<<<<< HEAD
+									"top": 309,
+=======
 									"top": 305.1400778210117,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86492,8 +86616,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 434,
+									"top": 412,
+=======
 									"left": 434.0732421875,
 									"top": 410.316938229572,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86524,8 +86653,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 443,
+									"top": 423,
+=======
 									"left": 443.0732421875,
 									"top": 420.316938229572,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86556,8 +86690,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 417,
+									"top": 390,
+=======
 									"left": 417.0732421875,
 									"top": 388.316938229572,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86635,7 +86774,11 @@
 								"$ref": "AAAAAAFX2Ni7KkJl0UQ="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
+							"points": "591:316;405:418",
+=======
 							"points": "591:312.1400778210117;405.0732421875:416.316938229572",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -86702,9 +86845,15 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 799,
+									"top": 339,
+									"width": 28.9072265625,
+=======
 									"left": 794,
 									"top": 338,
 									"width": 28,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.953059771931949,
@@ -86735,8 +86884,8 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 809,
-									"top": 349,
+									"left": 814,
+									"top": 351,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86767,8 +86916,8 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 765,
-									"top": 350,
+									"left": 770,
+									"top": 349,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86799,7 +86948,11 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 800,
+=======
 									"left": 795.4226804123712,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"top": 349,
 									"width": 0,
 									"height": 13,
@@ -86831,8 +86984,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 813,
+									"top": 352,
+=======
 									"left": 808.4226804123712,
 									"top": 351,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86863,8 +87021,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 773,
+									"top": 343,
+=======
 									"left": 768.4226804123712,
 									"top": 344,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86895,7 +87058,11 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 800,
+=======
 									"left": 795.3092783505155,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"top": 351,
 									"width": 0,
 									"height": 13,
@@ -86927,8 +87094,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 813,
+									"top": 350,
+=======
 									"left": 808.3092783505155,
 									"top": 349,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -86959,8 +87131,13 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
+<<<<<<< HEAD
+									"left": 772,
+									"top": 354,
+=======
 									"left": 767.3092783505155,
 									"top": 355,
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -87038,7 +87215,11 @@
 								"$ref": "AAAAAAFX2Ni7KkJl0UQ="
 							},
 							"lineStyle": 1,
+<<<<<<< HEAD
+							"points": "787:329;784:383",
+=======
 							"points": "781.4226804123712:329;780.3092783505155:383",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -88552,6 +88733,835 @@
 							"width": 471,
 							"height": 54,
 							"autoResize": false,
+<<<<<<< HEAD
+							"text": "Annexe 3 - Diagramme de classes du domaine.\n",
+							"wordWrap": true
+						},
+						{
+							"_type": "UMLAssociationView",
+							"_id": "AAAAAAFYQIueBCpj7kY=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkK6l0A="
+							},
+							"model": {
+								"$ref": "AAAAAAFYQIueAypfYrY="
+							},
+							"subViews": [
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBCpkxLA=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypfYrY="
+									},
+									"visible": true,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1303,
+									"top": 863,
+									"width": 58.5126953125,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.029403288821365337,
+									"distance": 476.20583784745855,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"text": "-livraisons",
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBCplmR8=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypfYrY="
+									},
+									"visible": null,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1807,
+									"top": 908,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 1.5707963267948966,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBCpm1JY=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypfYrY="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1808,
+									"top": 863,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBCpnUYc=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypg6zA="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1823,
+									"top": 563,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.5235987755982988,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBCpokG0=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypg6zA="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1836,
+									"top": 566,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.7853981633974483,
+									"distance": 40,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBSppCwg=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypg6zA="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1795,
+									"top": 559,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.5235987755982988,
+									"distance": 25,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBSpqjk0=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAyphiLU="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1179,
+									"top": 892,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.5235987755982988,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBSprSUA=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAyphiLU="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1182,
+									"top": 906,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.7853981633974483,
+									"distance": 40,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIueBSpsqO0=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAyphiLU="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1175,
+									"top": 865,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.5235987755982988,
+									"distance": 25,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "UMLQualifierCompartmentView",
+									"_id": "AAAAAAFYQIueBSpt0Tk=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAypg6zA="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 0,
+									"top": 0,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								},
+								{
+									"_type": "UMLQualifierCompartmentView",
+									"_id": "AAAAAAFYQIueBSpuRLI=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIueBCpj7kY="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIueAyphiLU="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 0,
+									"top": 0,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								}
+							],
+							"visible": true,
+							"enabled": true,
+							"lineColor": "#000000",
+							"fillColor": "#ffffff",
+							"fontColor": "#000000",
+							"font": "Arial;13;0",
+							"showShadow": true,
+							"containerChangeable": false,
+							"containerExtending": false,
+							"head": {
+								"$ref": "AAAAAAFX2Ni7KkFwYJg="
+							},
+							"tail": {
+								"$ref": "AAAAAAFX2Ni7KkFLI+E="
+							},
+							"lineStyle": 0,
+							"points": "1808:544;1808:884;1154:884",
+							"stereotypeDisplay": "label",
+							"showVisibility": true,
+							"showProperty": true,
+							"nameLabel": {
+								"$ref": "AAAAAAFYQIueBCpkxLA="
+							},
+							"stereotypeLabel": {
+								"$ref": "AAAAAAFYQIueBCplmR8="
+							},
+							"propertyLabel": {
+								"$ref": "AAAAAAFYQIueBCpm1JY="
+							},
+							"showMultiplicity": true,
+							"showType": true,
+							"tailRoleNameLabel": {
+								"$ref": "AAAAAAFYQIueBCpnUYc="
+							},
+							"tailPropertyLabel": {
+								"$ref": "AAAAAAFYQIueBCpokG0="
+							},
+							"tailMultiplicityLabel": {
+								"$ref": "AAAAAAFYQIueBSppCwg="
+							},
+							"headRoleNameLabel": {
+								"$ref": "AAAAAAFYQIueBSpqjk0="
+							},
+							"headPropertyLabel": {
+								"$ref": "AAAAAAFYQIueBSprSUA="
+							},
+							"headMultiplicityLabel": {
+								"$ref": "AAAAAAFYQIueBSpsqO0="
+							},
+							"tailQualifiersCompartment": {
+								"$ref": "AAAAAAFYQIueBSpt0Tk="
+							},
+							"headQualifiersCompartment": {
+								"$ref": "AAAAAAFYQIueBSpuRLI="
+							}
+						},
+						{
+							"_type": "UMLAssociationView",
+							"_id": "AAAAAAFYQIvfAyzQPwQ=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkK6l0A="
+							},
+							"model": {
+								"$ref": "AAAAAAFYQIvfAizMuFU="
+							},
+							"subViews": [
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzRHsU=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizMuFU="
+									},
+									"visible": true,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1303,
+									"top": 1024,
+									"width": 52.03173828125,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.012145152042741358,
+									"distance": 494.03643590326413,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"text": "-entrepot",
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzSXTc=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizMuFU="
+									},
+									"visible": null,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1822,
+									"top": 1048,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 1.5707963267948966,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzTm2s=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizMuFU="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1823,
+									"top": 1003,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 1,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzUqog=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizNbuk="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1838,
+									"top": 563,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.5235987755982988,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzVgN0=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizNbuk="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1851,
+									"top": 566,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.7853981633974483,
+									"distance": 40,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzWTkk=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizNbuk="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1810,
+									"top": 559,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.5235987755982988,
+									"distance": 25,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 2,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzXDJc=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizO2K4="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1018,
+									"top": 1032,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.5235987755982988,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzYvAs=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizO2K4="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1021,
+									"top": 1046,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": -0.7853981633974483,
+									"distance": 40,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAFYQIvfAyzZUK0=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizO2K4="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 1014,
+									"top": 1005,
+									"width": 0,
+									"height": 13,
+									"autoResize": false,
+									"alpha": 0.5235987755982988,
+									"distance": 25,
+									"hostEdge": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"edgePosition": 0,
+									"underline": false,
+									"horizontalAlignment": 2,
+									"verticalAlignment": 5
+								},
+								{
+									"_type": "UMLQualifierCompartmentView",
+									"_id": "AAAAAAFYQIvfAyzawPs=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizNbuk="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 0,
+									"top": 0,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								},
+								{
+									"_type": "UMLQualifierCompartmentView",
+									"_id": "AAAAAAFYQIvfBCzb0pk=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIvfAyzQPwQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFYQIvfAizO2K4="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 0,
+									"top": 0,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								}
+							],
+							"visible": true,
+							"enabled": true,
+							"lineColor": "#000000",
+							"fillColor": "#ffffff",
+							"fontColor": "#000000",
+							"font": "Arial;13;0",
+							"showShadow": true,
+							"containerChangeable": false,
+							"containerExtending": false,
+							"head": {
+								"$ref": "AAAAAAFX2Ni7KkFknMs="
+							},
+							"tail": {
+								"$ref": "AAAAAAFX2Ni7KkFLI+E="
+							},
+							"lineStyle": 0,
+							"points": "1823:544;1823:1024;993:1024",
+							"stereotypeDisplay": "label",
+							"showVisibility": true,
+							"showProperty": true,
+							"nameLabel": {
+								"$ref": "AAAAAAFYQIvfAyzRHsU="
+							},
+							"stereotypeLabel": {
+								"$ref": "AAAAAAFYQIvfAyzSXTc="
+							},
+							"propertyLabel": {
+								"$ref": "AAAAAAFYQIvfAyzTm2s="
+							},
+							"showMultiplicity": true,
+							"showType": true,
+							"tailRoleNameLabel": {
+								"$ref": "AAAAAAFYQIvfAyzUqog="
+							},
+							"tailPropertyLabel": {
+								"$ref": "AAAAAAFYQIvfAyzVgN0="
+							},
+							"tailMultiplicityLabel": {
+								"$ref": "AAAAAAFYQIvfAyzWTkk="
+							},
+							"headRoleNameLabel": {
+								"$ref": "AAAAAAFYQIvfAyzXDJc="
+							},
+							"headPropertyLabel": {
+								"$ref": "AAAAAAFYQIvfAyzYvAs="
+							},
+							"headMultiplicityLabel": {
+								"$ref": "AAAAAAFYQIvfAyzZUK0="
+							},
+							"tailQualifiersCompartment": {
+								"$ref": "AAAAAAFYQIvfAyzawPs="
+							},
+							"headQualifiersCompartment": {
+								"$ref": "AAAAAAFYQIvfBCzb0pk="
+=======
 							"text": "Annexe 3 - Diagramme de classes du domaine.\n"
 						},
 						{
@@ -89360,6 +90370,7 @@
 							},
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAFYQHrcF1z+IOU="
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							}
 						}
 					]
@@ -90378,6 +91389,96 @@
 						},
 						{
 							"_type": "UMLAssociation",
+<<<<<<< HEAD
+							"_id": "AAAAAAFYQIueAypfYrY=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkL8nAQ="
+							},
+							"name": "livraisons",
+							"end1": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYQIueAypg6zA=",
+								"_parent": {
+									"$ref": "AAAAAAFYQIueAypfYrY="
+								},
+								"reference": {
+									"$ref": "AAAAAAFX2Ni7KkL8nAQ="
+								},
+								"visibility": "public",
+								"navigable": false,
+								"aggregation": "none",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"end2": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYQIueAyphiLU=",
+								"_parent": {
+									"$ref": "AAAAAAFYQIueAypfYrY="
+								},
+								"reference": {
+									"$ref": "AAAAAAFX2Ni7KkMkj9Q="
+								},
+								"visibility": "public",
+								"navigable": true,
+								"aggregation": "none",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"visibility": "private",
+							"isDerived": false
+						},
+						{
+							"_type": "UMLAssociation",
+							"_id": "AAAAAAFYQIvfAizMuFU=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkL8nAQ="
+							},
+							"name": "entrepot",
+							"end1": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYQIvfAizNbuk=",
+								"_parent": {
+									"$ref": "AAAAAAFYQIvfAizMuFU="
+								},
+								"reference": {
+									"$ref": "AAAAAAFX2Ni7KkL8nAQ="
+								},
+								"visibility": "public",
+								"navigable": false,
+								"aggregation": "none",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"end2": {
+								"_type": "UMLAssociationEnd",
+								"_id": "AAAAAAFYQIvfAizO2K4=",
+								"_parent": {
+									"$ref": "AAAAAAFYQIvfAizMuFU="
+								},
+								"reference": {
+									"$ref": "AAAAAAFX2Ni7KkMR4AU="
+								},
+								"visibility": "public",
+								"navigable": true,
+								"aggregation": "none",
+								"isReadOnly": false,
+								"isOrdered": false,
+								"isUnique": false,
+								"isDerived": false,
+								"isID": false
+							},
+							"visibility": "private",
+=======
 							"_id": "AAAAAAFYQHluDy4t6FM=",
 							"_parent": {
 								"$ref": "AAAAAAFX2Ni7KkL8nAQ="
@@ -90468,6 +91569,7 @@
 								"isID": false
 							},
 							"visibility": "public",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 							"isDerived": false
 						}
 					],
@@ -90504,6 +91606,25 @@
 								},
 								{
 									"_type": "UMLParameter",
+<<<<<<< HEAD
+									"_id": "AAAAAAFYQItF+Rpr6Tc=",
+									"_parent": {
+										"$ref": "AAAAAAFX2Ni7KkL7tW8="
+									},
+									"name": "livraisons",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Map<noeud Livraison>",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFYQItF/BpssqA=",
+=======
 									"_id": "AAAAAAFYQH0FNpOfxqk=",
 									"_parent": {
 										"$ref": "AAAAAAFX2Ni7KkL7tW8="
@@ -90521,6 +91642,7 @@
 								{
 									"_type": "UMLParameter",
 									"_id": "AAAAAAFYQH16v5WyB/8=",
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
 									"_parent": {
 										"$ref": "AAAAAAFX2Ni7KkL7tW8="
 									},
@@ -90533,6 +91655,37 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFYQIy3yUcRDY0=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkL8nAQ="
+							},
+							"name": "listeLivraisonsParOrdreDePassage",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFYQI15B0mtjw8=",
+									"_parent": {
+										"$ref": "AAAAAAFYQIy3yUcRDY0="
+									},
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Liste<Livraison>",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
 								}
 							],
 							"concurrency": "sequential",
@@ -92152,6 +93305,54 @@
 							"concurrency": "sequential",
 							"isQuery": false,
 							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFYQHwOTtamxOM=",
+							"_parent": {
+								"$ref": "AAAAAAFX2Ni7KkNYDLU="
+							},
+							"name": "reordonnerLivraisonTournee",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFYQHz6HNkG0LI=",
+									"_parent": {
+										"$ref": "AAAAAAFYQHwOTtamxOM="
+									},
+									"name": "numLigne",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFYQHz6H9kHtuM=",
+									"_parent": {
+										"$ref": "AAAAAAFYQHwOTtamxOM="
+									},
+									"name": "nouveauNumLigne",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
 						}
 					],
 					"isAbstract": false,
@@ -92684,9 +93885,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 625,
+									"left": 623,
 									"top": 296,
-									"width": 349,
+									"width": 353.208984375,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5239555153048794,
@@ -92822,9 +94023,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 363,
+									"left": 361,
 									"top": 295,
-									"width": 146,
+									"width": 150.2744140625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.4627847041248951,
@@ -93185,9 +94386,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 586,
+									"left": 587,
 									"top": 494,
-									"width": 150,
+									"width": 149.48095703125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5820316708042506,
@@ -93548,9 +94749,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 401,
+									"left": 399,
 									"top": 817,
-									"width": 146,
+									"width": 150.2744140625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.7434780341737919,
@@ -93686,9 +94887,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 627,
+									"left": 625,
 									"top": 804,
-									"width": 349,
+									"width": 353.208984375,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.10022174421833109,
@@ -94049,9 +95250,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 638,
+									"left": 639,
 									"top": 1004,
-									"width": 150,
+									"width": 149.48095703125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.60607547366076,
@@ -94532,9 +95733,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 567,
+									"left": 566,
 									"top": 1384,
-									"width": 261,
+									"width": 262.20263671875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.6197081334506929,
@@ -94670,9 +95871,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 450,
+									"left": 448,
 									"top": 1440,
-									"width": 71,
+									"width": 74.41357421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.684588123194582,
@@ -94808,9 +96009,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 585,
+									"left": 578,
 									"top": 1440,
-									"width": 264,
+									"width": 279.96337890625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -4.518213843902728,
@@ -94946,9 +96147,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 188,
+									"left": 187,
 									"top": 1311,
-									"width": 150,
+									"width": 153.20068359375,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.20820592103937294,
@@ -95084,9 +96285,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 248,
+									"left": 247,
 									"top": 840,
-									"width": 136,
+									"width": 138.0107421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.516789015822301,
@@ -95222,9 +96423,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 214,
+									"left": 213,
 									"top": 679,
-									"width": 136,
+									"width": 138.0107421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.482972493310278,
@@ -95859,9 +97060,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 760,
+									"left": 759,
 									"top": 888,
-									"width": 134,
+									"width": 136.56982421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.7469903631035075,
@@ -95997,9 +97198,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 816,
+									"left": 815,
 									"top": 1296,
-									"width": 134,
+									"width": 136.56982421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.469815575885571,
@@ -96135,9 +97336,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 768,
+									"left": 767,
 									"top": 1516,
-									"width": 134,
+									"width": 136.56982421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.4820575724191363,
@@ -96393,9 +97594,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 590,
+									"left": 586,
 									"top": 668,
-									"width": 158,
+									"width": 166.18798828125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.523477509920319,
@@ -96531,9 +97732,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 211,
+									"left": 201,
 									"top": 583,
-									"width": 333,
+									"width": 353.666015625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -2.1383934487506346,
@@ -96789,9 +97990,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 635,
+									"left": 631,
 									"top": 1196,
-									"width": 158,
+									"width": 166.18798828125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.6865554270085938,
@@ -96927,9 +98128,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": true,
-									"left": 251,
+									"left": 241,
 									"top": 1087,
-									"width": 333,
+									"width": 353.666015625,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -2.009840274907213,
@@ -97065,9 +98266,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 722,
+									"left": 721,
 									"top": 744,
-									"width": 134,
+									"width": 136.56982421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -3.9359031855275735,
@@ -97203,9 +98404,9 @@
 									"parentStyle": false,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 211,
+									"left": 210,
 									"top": 1194,
-									"width": 136,
+									"width": 138.0107421875,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -2.7082324651652763,
