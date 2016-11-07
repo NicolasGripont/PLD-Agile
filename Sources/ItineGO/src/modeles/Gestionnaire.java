@@ -22,6 +22,9 @@ public class Gestionnaire {
 	 */
 	private Controleur controleur;
 	
+	private Livraison livraisonEnCourCreation;
+	private Livraison livraisonSuivante;
+	
 	/**
 	 * Constructeur de la classe
 	 */
@@ -194,5 +197,26 @@ public class Gestionnaire {
 	 */
 	public void genererFeuilleDeRoute(String link) {
 		plan.genererFeuilleDeRoute(link);
+	}
+	
+	public void ajouterLivraisonTournee() {
+		//TODO : UTILISER LES ATTRIBUTS : livraisonEnCoursCreation et livraisonSuivante 
+		// il faudra rajouter la livraison dans la liste des livraisons du plan et dans la tournée at the good position.
+	}
+
+	public Livraison getLivraisonEnCourCreation() {
+		return livraisonEnCourCreation;
+	}
+
+	public void setLivraisonEnCourCreation(Livraison livraisonEnCourCreation) {
+		this.livraisonEnCourCreation = livraisonEnCourCreation;
+	}
+
+	public Livraison getLivraisonSuivante() {
+		return livraisonSuivante;
+	}
+
+	public void setLivraisonSuivante(Livraison livraisonSuivante) {
+		this.livraisonSuivante = livraisonSuivante;
 	}
 }

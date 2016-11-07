@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<demandeDeLivraisons>
+<entrepot adresse="6" heureDepart="8:0:0"/>
+<livraison adresse="23" duree="300"/>
+<livraison adresse="22" debutPlage="14:0:0" duree="900" finPlage="22:0:0"/>
+<livraison adresse="9" duree="300"/>
+<livraison adresse="19" duree="300"/>
+<livraison adresse="3" duree="600"/>
+<livraison adresse="8" duree="900"/>
+<livraison adresse="24" duree="900"/>
+<livraison adresse="17" duree="900"/>
+<livraison adresse="4" duree="900"/>
+</demandeDeLivraisons>
