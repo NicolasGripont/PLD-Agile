@@ -104,10 +104,12 @@ public class PlanVilleVue extends Canvas {
 								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 									if(l.getKey().equals(n.getValue())) {
 										livraisonIsClicked(l.getValue());
+										vue.selectionneNoeud(l.getValue().getNoeud());
 										return;
 									}
 								}
 								noeudIsClicked(n.getValue());
+								vue.selectionneNoeud(n.getValue());
 							}
 							return;
 						}
@@ -169,12 +171,10 @@ public class PlanVilleVue extends Canvas {
 								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 									if(l.getKey().equals(n.getValue())) {
 										livraisonIsFocused(l.getValue());
-										vue.selectionneNoeud(l.getValue().getNoeud());
 										return;
 									}
 								}
 								noeudIsFocused(n.getValue());
-								vue.selectionneNoeud(n.getValue());
 							}
 							return;
 						}
@@ -224,7 +224,7 @@ public class PlanVilleVue extends Canvas {
 		double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
 		double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
 		//Affichage du troncon
-		gc.setStroke(new Color(0,0.4921,0.9609,1));
+		gc.setStroke(new Color(0,0.3984,0,1));
 		gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
 				troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
 		//Affichage zone de texte
@@ -242,7 +242,7 @@ public class PlanVilleVue extends Canvas {
 			double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
 			double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
 			//Affichage du troncon
-			gc.setStroke(new Color(0,0.4921,0.9609,0.7));
+			gc.setStroke(new Color(0,0.5976,0,1));
 			gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
 					troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
 			//Affichage zone de texte
