@@ -68,6 +68,10 @@ public class Livraison {
 		setNoeud(noeud);
 		setDuree(duree);
 	}
+	
+	public boolean sontValidesPlages() {
+		return(heureArrive.getSeconde() >= debutPlage.getSeconde() && heureArrive.getSeconde() < finPlage.getSeconde());
+	}
 
 	@Override
 	public int hashCode() {

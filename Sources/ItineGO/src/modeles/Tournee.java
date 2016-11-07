@@ -3,6 +3,7 @@ package modeles;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Classe modélisant la tournée à effectuer, une fois calculée
@@ -53,6 +54,15 @@ public class Tournee {
 	
 	public void supprimerTrajet(Integer index) {
 		trajets.remove(index);
+	}
+	
+	public boolean sontValidesHeuresLivraisons() {
+		for(Entry<Noeud, Livraison> l: livraisons.entrySet()) {
+			if(!l.getValue().sontValidesPlages()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
