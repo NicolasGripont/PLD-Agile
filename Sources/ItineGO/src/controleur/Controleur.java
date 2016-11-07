@@ -47,6 +47,8 @@ public class Controleur extends Application {
 	protected final EtatModifierTournee 		etatModifierTournee 		= new EtatModifierTournee();
 	protected final EtatAjouterTourneePlace 	etatAjouterTourneePlace 	= new EtatAjouterTourneePlace();
 	protected final EtatAjouterTourneeOrdre 	etatAjouterTourneeOrdre 	= new EtatAjouterTourneeOrdre();
+	protected final EtatAjouterTourneeDuree 	etatAjouterTourneeDuree 	= new EtatAjouterTourneeDuree();
+	
 	
 	protected Stage stage;
 	
@@ -248,11 +250,10 @@ public class Controleur extends Application {
 	/**
 	 * Permet de modifier la durée d'une livraison.
 	 * 
-	 * @param numLigne : Numéro de la ligne du tableau correspondant à la livraison.
 	 * @param duree : Durée que l'on veut modifier.
 	 */
-	public void entrerDuree(int numLigne, int duree) {
-		etatCourant.entrerDuree(this, gestionnaire, numLigne, duree);
+	public void entrerDuree(int duree) {
+		etatCourant.entrerDuree(this, gestionnaire, duree);
 		etatCourant.getEtat();
 	}
 	
