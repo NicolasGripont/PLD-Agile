@@ -163,7 +163,7 @@ public class Plan {
 				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
 				constructionTournee(depart, AllNoires, AllPrevious);
 				if(gestionnaire != null) {
-					Platform.runLater(() -> gestionnaire.tourneeCalculer());
+					Platform.runLater(() -> gestionnaire.tourneeCalculee());
 				}
 			}
 		};
