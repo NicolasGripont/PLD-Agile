@@ -98,6 +98,10 @@ public class Plan {
 		}
 	}
 	
+	/**
+	 * @param id :  id dont on cherche la place dans le table
+	 * @return l'indice dans le tableau des id à laquel on trouve l'id mis en paramètre
+	 */
 	public int numDansTableau(int id)
 	{
 		for(int i = 0 ; i <tableauDesId.length; i++)
@@ -117,50 +121,90 @@ public class Plan {
 		int nbDeLivraison = livraisons.size();
     	
     	
-    	//On utilisera TSP4 qui recup les plages horaires
-    	tableauDesId = new int [noeuds.size()];
+		/**
+		 * On utilisera TSP4 qui recup les plages horaires
+		 */
+		tableauDesId = new int [noeuds.size()];
     	
-    	
-    	//On remplie le tableau des id 
+    	/**
+    	 * On remplie le tableau des id 
+    	 */
     	remplirTableauDesID(tableauDesId);
     	
-    	
-    	Integer depart[]; // numero dans tableau des id des livraisons
+    	/**
+    	 * numero dans tableau des id des livraisons
+    	 */
+    	Integer depart[];
     	depart = new Integer[nbDeLivraison+1]; 
 		
+    	/**
+    	 * duree des livraison
+    	 */
 		int duree[];
 		duree = new int[nbDeLivraison+1];
+		
+		/**
+		 *  plage horaire pour chaque livraison
+		 */
 		int[][] plages_horaire;
 		plages_horaire = new int[2][nbDeLivraison+1];
 		
-		//On place les informations de l'entrepot et des livraisons dans les deux tableaux
+		/**
+		 * On place les informations de l'entrepot et des livraisons dans les deux tableaux
+		*/
 		remplirTableauDepEtDur(depart, duree, plages_horaire);
 		
-		
+		/**
+		 * On créé la matrice qui représent le graphe avec les couts des arcs
+		 */
 		Integer matriceDuGraphe[][];
     	matriceDuGraphe= new Integer[noeuds.size()][noeuds.size()] ; 
     	
-    	//On remplie la matrice qui modelise le graphe
+    	/**
+    	 * On remplie la matrice qui modelise le graphe
+    	 */
     	remplirMatriceDuGraphe(matriceDuGraphe);
     	
+    	/**
+    	 * va contenir les les couts du graphe simplifié qui aura pour sommet les livraisons 
+    	 * et pour cout la somme des couts des tronçons qui seront sur les plus courts chemins entre les livraisons
+    	 * origine - destination - cout
+    	 */
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
-        HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+        
     	
+    	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	
+    	
+    	/**
+    	 * On calcul les plus court chemin entre toute les livraisons
+    	 */
     	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
    
 		
-		//Construction de la matrice de cout pour le TSP
-		
+		/**
+		 * On créé la matrice de cout pour le TSP
+		 */
 		int cout[][]= new int [depart.length][depart.length];
 		
-		//On construit la matrice utilisÃ© par la TSP a partir des calculs de Dijkstra
+		/**
+		 * On remplie la matrice utilisé par la TSP a partir des calculs de Dijkstra
+		 */
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new TSP4();
 
 		threadCalcul = new Thread() {
 			public void run() {
+				
+				/**
+				 * On lance l'algorithme pour rechercher la meilleur tournée
+				 */
 				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
+				
+				/**
+				 * Un fois les calcul réalisé, on créé les objets qui vont être utiliseé par la couche supérieur
+				 */
 				constructionTournee(depart, AllNoires, AllPrevious);
 				if(gestionnaire != null) {
 					Platform.runLater(() -> gestionnaire.tourneeCalculee());
@@ -206,7 +250,7 @@ public class Plan {
 		LinkedList<Integer> ordreTourneID = new LinkedList<Integer>();
 		
 		for(int j = 0 ; j< depart.length ; j++ ) {
-			ordreTourneID.add(depart[tsp.getMeilleureSolution(j)]);
+			ordreTourneID.add(tableauDesId[depart[tsp.getMeilleureSolution(j)]]);
 		}
 		//on ajoute l'entrepot à la fin de la tournee
 		ordreTourneID.add(ordreTourneID.getFirst());
@@ -258,9 +302,12 @@ public class Plan {
 			}
 			this.tournee = new Tournee(trajetsPrevus);
 	}
-    
+	
 	/**
 	 * Construit la matrice des coûts pour le TSP
+	 * @param cout matrice des cout des plus court chemin entre les livraisons
+	 * @param depart vas simuller les noeuds de livraisons 
+	 * @param AllNoires vas contenir les noeud noires du gra
 	 */
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
 			HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
@@ -271,10 +318,9 @@ public class Plan {
 				cout[u][v]=(AllNoires.get(depart[u])).get(depart[v]);
 			}
 		}
-		
 	}
 
-	 private void remplirTableauDesID(int[] tableauDesId2) {
+	private void remplirTableauDesID(int[] tableauDesId2) {
     	Set<Entry<Integer , Noeud>> setnoeuds;
 		Iterator<Entry<Integer , Noeud>> itnoeuds;
 		Entry<Integer , Noeud> enoeuds;
@@ -287,7 +333,6 @@ public class Plan {
 			tableauDesId[itid] = (int)enoeuds.getKey();
 		    itid++;
 		}
-		
 	}
 
 	 private void remplirMatriceDuGraphe(Integer[][] matriceDuGraphe) {
@@ -330,49 +375,28 @@ public class Plan {
 			int idep=1;
 			setlivraisons = livraisons.entrySet();
 			itlivraisons = setlivraisons.iterator();
+			/**
+			 * Si il n'y a pas de plages horaire indiqué, on prends 0 comme début de plage et Integer.MAX_VALUE
+			 */
 			while(itlivraisons.hasNext())
 			{
 				elivraisons = itlivraisons.next();
 			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
 			    duree[idep]=(elivraisons.getValue().getDuree());
-/*
-			    
-			    if(!elivraisons.getValue().getDebutPlage().equals(null)){
-			    	plages_horaire[0][idep]=elivraisons.getValue().getDebutPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
-			    }
-			    else {
-			    	plages_horaire[0][idep]=0;
-			    }
-			    
-			    if(!elivraisons.getValue().getFinPlage().equals(null)){
-			    	plages_horaire[1][idep]=elivraisons.getValue().getFinPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
-			    }
-			    else {
-			    	plages_horaire[1][idep]=Integer.MAX_VALUE;
-			    }
-			    idep++;
-			}
-		}
-*/
 			   
-			    //System.err.println(elivraisons.getValue().getDebutPlage()==null?"null":elivraisons.getValue().getDebutPlage().toString());
 			    if(!elivraisons.getValue().getDebutPlage().equals(new Horaire(0,0,0))){
 			    	plages_horaire[0][idep]=elivraisons.getValue().getDebutPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
-			    	//System.out.println(plages_horaire[0][idep]);
 			    }
 			    else {
 			    	plages_horaire[0][idep]=0;
-			    	//System.out.println(plages_horaire[0][idep]);
 			    }
 			    plages_horaire[0][idep]*=60;
 			    if(!elivraisons.getValue().getFinPlage().equals(new Horaire(0,0,0))){
 			    	plages_horaire[1][idep]=elivraisons.getValue().getFinPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
-			    	//System.out.println("NON NULL");
 			    	plages_horaire[1][idep]*=60;
 			    }
 			    else {
 			    	plages_horaire[1][idep]=Integer.MAX_VALUE;
-			    	//System.out.println(plages_horaire[1][idep]);
 
 			    }
 			    
@@ -380,10 +404,7 @@ public class Plan {
 			    idep++;
 			}
 			
-			/*for(int i =0; i < plages_horaire[0].length; i++)
-			{
-				System.out.println(plages_horaire[0][i]+ " : "+ plages_horaire[1][i]);
-			}*/
+			
 		}
 
 	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
@@ -414,15 +435,12 @@ public class Plan {
 	       
 	        //Initialisationde la map des previous
 			for(Integer i = 0; i<matriceDuGraphe[1].length;i++)
-	        {
-	            
-	            previous.put(i,i);
-	            
+	        {   
+	            previous.put(i,i);   
 	        }
 	        
 			
 	        //Début de l'Algorithme connus
-	        
 	        while( !blancs.isEmpty())
 	        {
 	        
@@ -459,10 +477,7 @@ public class Plan {
 	                e = it.next();
 	                if((e.getValue()> (min + matriceDuGraphe[curentNoeud][e.getKey()]))&& (matriceDuGraphe[curentNoeud][e.getKey()] >0) )
 	                {
-	                	//TODO supprimer appel a remove (inutile) car put remplace la vielle valeur
-	                	blancs.remove(e.getKey());
 	                    blancs.put(e.getKey(), (min + matriceDuGraphe[curentNoeud][e.getKey()]));
-	                    previous.remove(e.getKey());
 	                    previous.put(e.getKey(),curentNoeud);
 	                }
 	            }
