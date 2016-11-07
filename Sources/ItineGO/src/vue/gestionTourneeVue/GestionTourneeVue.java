@@ -13,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -110,6 +111,9 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private HBox hBoxBoutons;
+	
+	@FXML
+	private Button boutonGenerer;
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
@@ -169,6 +173,10 @@ public class GestionTourneeVue extends GestionVue {
 
 		dureeColonne.setCellValueFactory(param -> {
 			final LivraisonTournee livraison = param.getValue();
+			
+			if(livraison.getLivraison().getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
+				return new SimpleStringProperty("-");
+			}
 			return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getDuree()));
 		});
 
@@ -244,7 +252,9 @@ public class GestionTourneeVue extends GestionVue {
 			for (LivraisonTournee l : list) {
 				livraisonTable.getItems().add(l);
 			}
+			livraisonTable.getItems().add(new LivraisonTournee(new Livraison(plan.getEntrepot().getNoeud(), 0), list.get(list.size()-1).getHeureDepart(),horaireFin));
 		}
+		
 	}
 
 	public void dessinePlan(Plan plan) {
@@ -453,6 +463,7 @@ public class GestionTourneeVue extends GestionVue {
 //			hBoxBoutons.getChildren().add(imageViewRedo);
 		}
 		hBoxBoutons.getChildren().add(labelError);
+		boutonGenerer.setVisible(!modeModification);
 	}
 	
 	public void setSupprimerColonneVisible(boolean isVisible) {
