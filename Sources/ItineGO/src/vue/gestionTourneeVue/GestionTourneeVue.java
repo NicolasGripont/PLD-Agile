@@ -5,18 +5,18 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.event.ChangeEvent;
+
 import controleur.Controleur;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +24,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 import modeles.Horaire;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -208,7 +207,6 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				// TODO Auto-generated method stub
 				Livraison livraison = (Livraison) newValue;
 				planVilleVue.livraisonSelected(livraison);
 			}
@@ -374,7 +372,6 @@ public class GestionTourneeVue extends GestionVue {
 	private void imageViewModifierClicked() {
 		controleur.clicBoutonModifier();
 	}
-
 
 	@FXML
 	private void imageViewUndoClicked() {

@@ -9,11 +9,9 @@ import modeles.Troncon;
 import utility.Pair;
 import vue.gestionVue.GestionVue;
 import java.util.Map;
-
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -34,6 +32,7 @@ public class PlanVilleVue extends Canvas {
 	private Plan plan;
 	private boolean modeAjouterLivraison = false;
 	private GestionVue vue;
+	private Livraison livraisonSelectionned = null;
 	
 	public PlanVilleVue(double width, double height) {
 		super(width, height);
@@ -80,6 +79,7 @@ public class PlanVilleVue extends Canvas {
 	public void livraisonSelected(Livraison livraison) {
 		noeudSelectionned = null;
 		tronconSelectionned = null;
+		livraisonSelectionned = livraison;
 		dessinerPlan(plan);
 		livraisonIsClicked(livraison);
 	}
@@ -104,12 +104,14 @@ public class PlanVilleVue extends Canvas {
 								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
 									if(l.getKey().equals(n.getValue())) {
 										livraisonIsClicked(l.getValue());
-										vue.selectionneNoeud(l.getValue().getNoeud());
+										if(vue != null)
+											vue.selectionneNoeud(l.getValue().getNoeud());
 										return;
 									}
 								}
 								noeudIsClicked(n.getValue());
-								vue.selectionneNoeud(n.getValue());
+								if(vue != null)
+									vue.selectionneNoeud(n.getValue());
 							}
 							return;
 						}
@@ -221,8 +223,10 @@ public class PlanVilleVue extends Canvas {
 	private void tronconIsClicked(Troncon troncon) {
 		tronconSelectionned = troncon;
 		GraphicsContext gc = this.getGraphicsContext2D();
-		double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
-		double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+		double x1 = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
+		double y1 = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+		double x2 = troncon.getDestination().getX() * zoom + offsetX - RAYON_NOEUD /2;
+		double y2 = troncon.getDestination().getY() * zoom + offsetY - RAYON_NOEUD /2;
 		//Affichage du troncon
 		gc.setStroke(new Color(0,0.3984,0,1));
 		gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
@@ -230,10 +234,10 @@ public class PlanVilleVue extends Canvas {
 		//Affichage zone de texte
 		int l = troncon.getNomRue().length();
 		gc.setFill(new Color(0,0,0,0.5));
-		gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+		gc.fillRect(Math.min(x2, x1) + Math.abs(x2 - x1)/2,Math.min(y2, y1) + Math.abs(y2 - y1)/2, 10 + l*7, 20);
 		//Affichage texte
 		gc.setFill(new Color(1,1,1,1));
-		gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
+		gc.fillText(troncon.getNomRue(), Math.min(x2, x1) + Math.abs(x2 - x1)/2 + 5, Math.min(y2, y1) + Math.abs(y2 - y1)/2 + 15);
 		//Affichage informations
 		int l2 = troncon.getNomRue().length() + 12 + getNumberDigit(troncon.getLongueur()) + getNumberDigit(troncon.getVitesse());
 		gc.setFill(new Color(0,0,0,0.5));
@@ -316,22 +320,22 @@ public class PlanVilleVue extends Canvas {
 	
 	private void noeudIsClickedEffect(Noeud noeud) {
 		noeudSelectionned = noeud;
-		double x = noeud.getX() * zoom + offsetX - RAYON_NOEUD /2;
-		double y = noeud.getY() * zoom + offsetY - RAYON_NOEUD /2;
+		double x = noeud.getX() * zoom + offsetX - RAYON_LIVRAISON /2;
+		double y = noeud.getY() * zoom + offsetY - RAYON_LIVRAISON /2;
 		GraphicsContext gc = this.getGraphicsContext2D();
 		//Affichage du noeud exterieur
 		gc.setFill(new Color(0.859,0.839,0.808,1));
-		gc.fillOval(x,y,RAYON_NOEUD, RAYON_NOEUD);
+		gc.fillOval(x,y,RAYON_LIVRAISON, RAYON_LIVRAISON);
 		//Affichage du noeud interieur
 		gc.setFill(new Color(0,0.4921,0.9609,1));
-		gc.fillOval(noeud.getX() * zoom + offsetX - (RAYON_NOEUD-4)/2, noeud.getY() * zoom + offsetY - (RAYON_NOEUD - 4) /2
-				, RAYON_NOEUD - 4, RAYON_NOEUD - 4);
+		gc.fillOval(noeud.getX() * zoom + offsetX - (RAYON_LIVRAISON-4)/2, noeud.getY() * zoom + offsetY - (RAYON_LIVRAISON - 4) /2
+				, RAYON_LIVRAISON - 4, RAYON_LIVRAISON - 4);
 	}
 	
 	private void livraisonIsFocused(Livraison livraison) {
 		if(livraison.getNoeud() != noeudSelectionned) {
-			double x = livraison.getNoeud().getX() * zoom + offsetX - RAYON_NOEUD /2;
-			double y = livraison.getNoeud().getY() * zoom + offsetY - RAYON_NOEUD /2;
+			double x = livraison.getNoeud().getX() * zoom + offsetX - RAYON_LIVRAISON /2;
+			double y = livraison.getNoeud().getY() * zoom + offsetY - RAYON_LIVRAISON /2;
 			GraphicsContext gc = this.getGraphicsContext2D();
 			noeudIsFocusedEffect(livraison.getNoeud());
 			//Affichage zone de texte
@@ -416,6 +420,9 @@ public class PlanVilleVue extends Canvas {
 			}
 			if(tronconSelectionned != null) {
 				tronconIsClicked(tronconSelectionned);
+			}
+			if(livraisonSelectionned != null) {
+				livraisonIsClicked(livraisonSelectionned);
 			}
 		} else {
 			System.err.println("plan is null");
@@ -575,8 +582,10 @@ public class PlanVilleVue extends Canvas {
 				if(trajet.getArrive().equals(arrivee)) {
 					for(Troncon troncon : trajet.getTroncons()) {
 						GraphicsContext gc = this.getGraphicsContext2D();
-						double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
-						double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double x1 = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
+						double y1 = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+						double x2 = troncon.getDestination().getX() * zoom + offsetX - RAYON_NOEUD /2;
+						double y2 = troncon.getDestination().getY() * zoom + offsetY - RAYON_NOEUD /2;
 						//Affichage du troncon
 						gc.setStroke(new Color(1,0,0,1));
 						gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
@@ -584,10 +593,10 @@ public class PlanVilleVue extends Canvas {
 						//Affichage zone de texte
 						int l = troncon.getNomRue().length();
 						gc.setFill(new Color(0,0,0,0.5));
-						gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+						gc.fillRect(Math.min(x2, x1) + Math.abs(x2 - x1)/2,Math.min(y2, y1) + Math.abs(y2 - y1)/2, 10 + l*7, 20);
 						//Affichage texte
 						gc.setFill(new Color(1,1,1,1));
-						gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
+						gc.fillText(troncon.getNomRue(), Math.min(x2, x1) + Math.abs(x2 - x1)/2 + 5, Math.min(y2, y1) + Math.abs(y2 - y1)/2 + 15);
 					}
 					return;
 				}
