@@ -53,7 +53,7 @@ public class Entrepot {
 		}
 	}
 
-	/*
+	/**
 	 * Renvoie l'horaire de départ
 	 */
 	public Horaire getHoraireDepart() {

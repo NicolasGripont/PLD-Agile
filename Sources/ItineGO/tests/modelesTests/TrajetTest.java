@@ -10,9 +10,17 @@ import modeles.Noeud;
 import modeles.Trajet;
 import modeles.Troncon;
 
+/**
+ * Classe test unitaire de la classe Trajet
+ *
+ */
 public class TrajetTest {
 
-	
+	/**
+	 * Test du constructeur de la classe Trajet plusieurs noeud formant plusieurs tronçons formant un trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testTrajet() {
 		Noeud nDep = new Noeud(10,10,10);
@@ -43,6 +51,11 @@ public class TrajetTest {
 		assertEquals(res,testTrajet.toString());
 	}
 
+	/**
+	 * Test retournant les différents tronçons du trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetTroncons() {
 		Noeud nDep = new Noeud(10,10,10);
@@ -72,7 +85,12 @@ public class TrajetTest {
 
 		assertEquals(res,testTrajet.getTroncons().toString());
 	}
-
+	
+	/**
+	 * Test retournant le départ du trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetDepart() {
 		Noeud nDep = new Noeud(10,10,10);
@@ -100,6 +118,11 @@ public class TrajetTest {
 		assertEquals(res,testTrajet.getDepart().toString());
 	}
 
+	/**
+	 * Test retournant l'arrivée du trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetArrive() {
 		Noeud nDep = new Noeud(10,10,10);
@@ -127,6 +150,11 @@ public class TrajetTest {
 		assertEquals(res,testTrajet.getArrive().toString());
 	}
 
+	/**
+	 * Test l'affichage texte du trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testToString() {
 		Noeud nDep = new Noeud(10,10,10);
@@ -157,6 +185,11 @@ public class TrajetTest {
 		assertEquals(res,testTrajet.toString());
 	}
 
+	/**
+	 * Test qui vérifie que 2 objets de type Trajet sont égaux et 2 autres sont différents
+	 * 
+	 * Resultat: Premier est égale, deuxiéme est différent
+	 */
 	@Test
 	public void testEqualsObject() {
 		Noeud nDep1 = new Noeud(10,10,10);
@@ -193,6 +226,11 @@ public class TrajetTest {
 		assertNotEquals(testTrajet3.toString(), testTrajet1.toString());
 	}
 
+	/**
+	 * Test retournant la durée du trajet
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetTemps() {
 		Noeud nDep = new Noeud(10,10,10);

@@ -8,8 +8,17 @@ import modeles.ParseurPlan;
 import modeles.Plan;
 import vue.choixPlanVilleVue.*;
 
+/**
+ * Classe test unitaire de la classe ParseurPlan
+ *
+ */
 public class ParseurPlanTest {
 
+	/**
+	 * Test du Parseur sur un fichier Plan correct
+	 * 
+	 * Resultat: Le fichier est parsé 
+	 */
 	@Test
 	public void testParseurPlan()
 	{
@@ -28,50 +37,64 @@ public class ParseurPlanTest {
 		assertEquals(resNbTroncon,planTest.getTroncons().size());
 	}
 	
-	@Test
-	public void testMauvaisFormat()
-	{
-		Plan planTest = new Plan();
-		
-		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
-		String resTest ="";
-		String res1 = "Erreur : Fichier XML mal formé";
-
-		try{
-			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
-		}
-		catch(Exception e)
-		{
-			resTest = e.getMessage();
-			System.err.println(resTest);
-		}
-		
-		assertEquals(res1,resTest);
-	}
-	
-	
+//	/**
+//	 * Test du Parseur sur un fichier Plan au mauvais dormat 
+//	 * 
+//	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+//	 */
 //	@Test
-//	public void test2IdentifiantIdentique() 
+//	public void testMauvaisFormat()
 //	{
 //		Plan planTest = new Plan();
 //		
-//		String nomFichierTest = "./tests/assetsForTests/plan5x5-2ID.xml";
+//		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
 //		String resTest ="";
-//		String res1 = "Erreur : Deux identifiants de noeud identiques";
-//		
+//		String res1 = "Erreur : Fichier XML mal formé";
+//
 //		try{
 //			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 //		}
 //		catch(Exception e)
 //		{
 //			resTest = e.getMessage();
+//			System.err.println(resTest);
 //		}
-//		assertEquals(res1,resTest);
 //		
-//		int res2 = 0;
-//		assertEquals(res2,planTest.getNoeuds().size());
+//		assertEquals(res1,resTest);
 //	}
 	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant deux identifiants identiques
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
+	@Test
+	public void test2IdentifiantIdentique() 
+	{
+		Plan planTest = new Plan();
+		
+		String nomFichierTest = "./tests/assetsForTests/plan5x5-2ID.xml";
+		String resTest ="";
+		String res1 = "Erreur : Deux identifiants de noeud identiques";
+		
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
+		}
+		catch(Exception e)
+		{
+			resTest = e.getMessage();
+		}
+		assertEquals(res1,resTest);
+		
+		int res2 = 0;
+		assertEquals(res2,planTest.getNoeuds().size());
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant un troncon dont l'origine est un noeud non connue
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testOrigineInconnue()
 	{
@@ -97,6 +120,11 @@ public class ParseurPlanTest {
 		assertEquals(res3,planTest.getTroncons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant un troncon dont la destination est un noeud non connue
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testDestinationInconnue()
 	{
@@ -122,6 +150,11 @@ public class ParseurPlanTest {
 		assertEquals(res3,planTest.getTroncons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant un identifiant de noeud ou de tronçon à -1
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testIdentifiantMoinsUn()
 	{
@@ -147,6 +180,11 @@ public class ParseurPlanTest {
 		assertEquals(res3,planTest.getTroncons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant un seul noeud
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testUnNoeud()
 	{
