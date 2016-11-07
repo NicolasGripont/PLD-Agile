@@ -21,6 +21,7 @@ public abstract class EtatDefaut {
 	public void clicBoutonCalculerTournee		(Controleur controleur, Gestionnaire gestionnaire) {}
 	public void clicBoutonGenererFeuilleDeRoute (Controleur controleur, Gestionnaire gestionnaire, String link) {}
 	public void clicBoutonStopperTournee		(Controleur controleur, Gestionnaire gestionnaire) {}
+	public void clicBoutonModifier				(Controleur controleur) 						   {}
 	public void clicBoutonSauvegarder			(Controleur controleur, Gestionnaire gestionnaire) {}
 	public void clicBoutonAnnuler				(Controleur controleur, Gestionnaire gestionnaire) {}
 	public void clicBoutonSupprimer				(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {}
@@ -40,4 +41,5 @@ public abstract class EtatDefaut {
 	{
 		System.out.println("etat defaut");
 	}
+	
 }

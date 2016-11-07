@@ -360,10 +360,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewModifierClicked() {
-		//TODO appeler controleur{
-		setVisibiliteBoutons(true);
-		supprimerColonne.setVisible(true);
-		System.out.println("imageViewModifierClicked");
+		controleur.clicBoutonModifier();
 	}
 
 
@@ -390,11 +387,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewAnnulerModificationsClicked() {
-		//TODO appeler controleur
-		labelInstruction.setVisible(false);
-		setVisibiliteBoutons(false);
-		supprimerColonne.setVisible(false);
-		System.out.println("imageViewAnnulerModificationsClicked");
+		controleur.clicBoutonAnnuler();
 	}
 
 	@FXML
@@ -446,12 +439,6 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
-	public void supprimerLivraison(int indexRow) {
-		controleur.clicBoutonSupprimer(indexRow);
-		System.err.println("Supprimer la ligne " + indexRow);
-		
-	}
-
 	public void setVisibiliteBoutons(Boolean modeModification) {
 		hBoxBoutons.getChildren().clear();		
 		if(modeModification) {
@@ -467,4 +454,13 @@ public class GestionTourneeVue extends GestionVue {
 		}
 		hBoxBoutons.getChildren().add(labelError);
 	}
+	
+	public void setSupprimerColonneVisible(boolean isVisible) {
+		supprimerColonne.setVisible(isVisible);
+	}
+	
+	public void setLabelInstructionVisible(boolean isVisible) {
+		labelInstruction.setVisible(isVisible);
+	}
+	
 }

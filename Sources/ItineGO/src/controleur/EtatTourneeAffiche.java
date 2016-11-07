@@ -87,6 +87,15 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	}
 	
 	/**
+	 * Met à jour la vue pour modifier la tournée.
+	 */
+	public void clicBoutonModifier(Controleur controleur) {
+		controleur.gestionTourneeVue.setVisibiliteBoutons(true);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(true);
+		controleur.setEtatCourant(controleur.etatModifierTournee);
+	}
+	
+	/**
 	 * Permet de redessiner le plan dans la vue correspondante.
 	 * 
 	 * @param controleur : Controleur de l'application.

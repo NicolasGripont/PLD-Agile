@@ -275,6 +275,14 @@ public class Controleur extends Application {
 	}
 	
 	/**
+	 * Met à jour la vue qui amène sur les modifications de la tournée.
+	 */
+	public void clicBoutonModifier() {
+		etatCourant.clicBoutonModifier(this);
+		etatCourant.getEtat();
+	}
+	
+	/**
 	 * Redessine le plan.
 	 */
 	public void redessinerPlan() {
@@ -288,4 +296,6 @@ public class Controleur extends Application {
 	public Gestionnaire getGestionnaire() {
 		return gestionnaire;
 	}
+
+	
 }

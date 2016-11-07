@@ -23,6 +23,10 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
+		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
+		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
 	/**
