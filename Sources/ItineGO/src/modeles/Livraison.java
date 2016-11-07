@@ -1,11 +1,31 @@
 package modeles;
 
+/**
+ * Classe modélisant une livraison de la tournée
+ */
 public class Livraison {
+	/**
+	 * La durée de la livraison
+	 */
 	private int duree;
+	/**
+	 * Noeud représentant la position de la livraison
+	 */
 	private Noeud noeud;
+	/**
+	 * Indique le début de la plage horaire où l'on peut effectuer la livraison
+	 * Si pas de plage, est mis à null
+	 */
 	private Horaire debutPlage;
+	/**
+	 * Indique la fin de la plage horaire où l'on peut effectuer la livraison
+	 * Si pas de plage, est mis à null
+	 */
 	private Horaire finPlage;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Livraison(Noeud noeud, int duree, int heureDebutPlage, int minuteDebutPlage, 
 			int secondeDebutPlage, int heureFinPlage, int minuteFinPlage, int secondeFinPlage) {
 		setNoeud(noeud);
@@ -14,6 +34,9 @@ public class Livraison {
 		setFinPlage(new Horaire(heureFinPlage, minuteFinPlage, secondeFinPlage));
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Livraison(Noeud noeud, int duree, Horaire debutPlage, Horaire finPlage) {
 		setNoeud(noeud);
 		setDuree(duree);
@@ -21,6 +44,9 @@ public class Livraison {
 		setFinPlage(finPlage);
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Livraison(Noeud noeud, int duree, String debutPlage, String finPlage) {
 		setNoeud(noeud);
 		setDuree(duree);
@@ -28,6 +54,9 @@ public class Livraison {
 		setFinPlage(new Horaire(finPlage));
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Livraison(Noeud noeud, int duree) {
 		setNoeud(noeud);
 		setDuree(duree);

@@ -17,6 +17,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 
+/**
+ * Vue du choix du fichier plan
+ * C'est la vue d'entrée de l'application
+ */
 public class ChoixPlanVilleVue implements Initializable{
 	private Controleur controleur;
 	private File fichierChoisie = null;

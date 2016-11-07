@@ -9,9 +9,17 @@ import modeles.Gestionnaire;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionLivraisonsVue.GestionLivraisonsVue;
 
+/**
+ * Etat d'affichage de la tournée, une fois le calcul effectué
+ */
 public class EtatTourneeAffiche extends EtatDefaut {
 
-	
+	/**
+	 * Permet de retourner à l'état initial de l'application.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerTournee();
@@ -24,7 +32,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -36,6 +44,12 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de retourner à la vue précédente où on affiche les livraisons a effectuées et à l'état EtatLivraisonsAffichees.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.effacerTournee();
@@ -45,7 +59,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
 				controleur.gestionLivraisonsVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -60,11 +74,33 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de générer une feuille de route de la tournée calculée.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param link : Chemin du fichier que l'on va créer.
+	 */
 	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link)
 	{
 		gestionnaire.genererFeuilleDeRoute(link);
 	}
 	
+	/**
+	 * Met à jour la vue pour modifier la tournée.
+	 */
+	public void clicBoutonModifier(Controleur controleur) {
+		controleur.gestionTourneeVue.setVisibiliteBoutons(true);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(true);
+		controleur.setEtatCourant(controleur.etatModifierTournee);
+	}
+	
+	/**
+	 * Permet de redessiner le plan dans la vue correspondante.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

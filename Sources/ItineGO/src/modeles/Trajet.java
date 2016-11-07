@@ -2,14 +2,28 @@ package modeles;
 
 import java.util.List;
 
+/**
+ * Classe modélisant un trajet, c'est à dire la suite de tronçons à prendre pour relier deux noeuds
+ */
 public class Trajet {
 	
+	/**
+	 * Liste des troncons
+	 */
 	private List<Troncon> troncons;
 
+	/**
+	 * Noeud de départ
+	 */
 	private Noeud depart;
-	
+	/**
+	 * Noeud d'arrivée
+	 */
 	private Noeud arrive;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Trajet(Noeud depart, Noeud arrive, List<Troncon> troncons) {
 		super();
 		this.depart = depart;

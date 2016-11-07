@@ -1,10 +1,25 @@
 package modeles;
 
+/**
+ * Classe modélisant une position sur la carte
+ */
 public class Noeud {
+	/**
+	 * identifiant unique du noeud
+	 */
 	private int id;
+	/**
+	 * Position horizontale
+	 */
 	private int x;
+	/**
+	 * Position verticake
+	 */
 	private int y;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Noeud(int id, int x, int y) {
 		this.setId(id);
 		this.setX(x);

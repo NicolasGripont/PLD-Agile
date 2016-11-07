@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-
+/**
+ * Quatrième version du TSP, implémente l'utilisation des plages horaires
+ */
 public class TSP4 extends TSP3 {
-
-	static int blabla =0;
 	
 	public void chercheSolution(int tpsLimite, int nbSommets, int[][] cout, int[] duree, int[][] plages_horaire){//@overwrite chercher sol pour int[nbSomet][2] plage
-		System.out.println("TSP4 utilisé");
 		tempsLimiteAtteint=false;
 		coutMeilleureSolution=Integer.MAX_VALUE;
 		meilleureSolution=new Integer[nbSommets];
@@ -32,7 +31,7 @@ public class TSP4 extends TSP3 {
 	    	
     		coutVus += cout[sommetCrt][0]; // on rajoute le cout pour retourné à l'entrepot
 
-	    	
+    		coutVus += cout[sommetCrt][0];
 	    	if (coutVus < getCoutMeilleureSolution()){ // on a trouve une solution meilleure que meilleureSolution
 	    		//On sauvgarde la denière meilleur solution trouvé
 	    		vus.toArray(meilleureSolution);

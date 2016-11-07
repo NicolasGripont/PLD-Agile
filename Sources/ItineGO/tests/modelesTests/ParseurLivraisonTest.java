@@ -9,8 +9,17 @@ import modeles.ParseurPlan;
 import modeles.ParseurLivraison;
 import modeles.Plan;
 
+/**
+ * Classe test unitaire de la classe ParseurLivraison
+ *
+ */
 public class ParseurLivraisonTest {
 
+	/**
+	 * Test du Parseur sur un fichier de Livraison correct
+	 * 
+	 * Resultat: Le fichier est parsé 
+	 */
 	@Test
 	public void testParseurLivraison() {
 		Plan planTest = new Plan();
@@ -30,6 +39,11 @@ public class ParseurLivraisonTest {
 		assertEquals(resId,planTest.getEntrepot().getNoeud().getId());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison au mauvais format
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testMauvaisFormat()
 	{
@@ -37,20 +51,24 @@ public class ParseurLivraisonTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/livraisons5x5-4.txt";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlFile: Erreur : Fichier XML mal formé";
+		String res1 = "Erreur : Fichier plan non valide";
 
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
-//			System.err.println(resTest);
+			resTest = e.getMessage();
 		}
 		
 		assertEquals(res1,resTest);
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison ayant un noeud pour l'entrepot inconnu
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testEntrepotInconnue()
 	{
@@ -74,6 +92,11 @@ public class ParseurLivraisonTest {
 		assertEquals(res2,planTest.getLivraisons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison n'ayant pas de livraison
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testPasDeLivraison()
 	{
@@ -97,6 +120,11 @@ public class ParseurLivraisonTest {
 		assertEquals(res2,planTest.getLivraisons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison ayant un identifiant d'entrepot égale à -1
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testEntrepotMoinsUn()
 	{
@@ -120,6 +148,11 @@ public class ParseurLivraisonTest {
 		assertEquals(res2,planTest.getLivraisons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison ayant un identifiant de livraison égale à -1
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testLivraisonMoinsUn()
 	{
@@ -138,11 +171,15 @@ public class ParseurLivraisonTest {
 		catch(Exception e){
 			resTest = e.getMessage();
 		}
-//		System.out.println(planTest.getLivraisons().size());
 		assertEquals(res1,resTest);
-//		assertEquals(res2,planTest.getLivraisons().size());
+		assertEquals(res2,planTest.getLivraisons().size());
 	}
 	
+	/**
+	 * Test du Parseur sur un fichier de Livraison ayant un noeud de livraison qui n'exite pas 
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testIdNoeudInexistant()
 	{

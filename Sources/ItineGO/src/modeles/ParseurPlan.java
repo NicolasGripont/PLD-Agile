@@ -8,29 +8,22 @@ import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
 import exceptions.BadXmlFile;
+import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
 
 public class ParseurPlan {
 	
-	 public static void main(String[] args)
-	   {
-		 Plan plan = new Plan();
-		 try {
-			 parseurPlanVille("./tests/assetsForTests/plan5x5.xml", plan);
-		 }
-		 catch(Exception e){
-			 System.err.println(e);
-		 }
-//		 System.out.println(plan.getNoeuds().size());
-//		 System.out.println(plan.getTroncons().size());
-//		 System.out.println(plan.getNoeud(1).toString());
-	   }
-	 
 	 /**
+	 * Parse le fichier xml. Cela ajoute au plan passé en paramètre les noeuds et tronçons
 	 * @param nomFichier
+	 * 		Nom du fichier xml à utiliser
+	 * @param plan
+	 * 		Le plan de la tournée
+	 * @throws BadXmlPlan
+	 * 		Si le fichier plan a des incohérences 
 	 * @throws BadXmlFile 
-	 * @throws BadXmlPlan 
+	 * 		Si le fichier est malformé
 	 */
 	public static void parseurPlanVille(String nomFichier, Plan plan) throws BadXmlFile, BadXmlPlan
 	 {

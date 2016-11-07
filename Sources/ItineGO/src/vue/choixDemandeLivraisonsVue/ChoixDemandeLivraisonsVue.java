@@ -23,6 +23,10 @@ import modeles.Plan;
 import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 import vue.planVilleVue.PlanVilleVue;
 
+/**
+ * Vue du choix du fichier de livraison
+ * Le plan de la ville est affiché
+ */
 public class ChoixDemandeLivraisonsVue implements Initializable{
 	private Controleur controleur;
 	private File fichierChoisie = null;
@@ -77,9 +81,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 		});
         
         labelError.setVisible(false);
-        
-        planVillePane.setStyle("-fx-background-color: rgb(240,237,230);-fx-border-color: grey;");
-        
+                
         planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight());
         planVillePane.getChildren().add(planVilleVue);
         

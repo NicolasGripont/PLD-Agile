@@ -1,22 +1,37 @@
 package modeles;
 
+/**
+ * Classe permettant de mieux gérer les horaires à traiter dans l'application
+ */
 public class Horaire {
 	private int heure = 0;
 	private int minute = 0;
 	private int seconde = 0;
 	
+	/**
+	 * Constructeur par recopie de la classe
+	 */
 	public Horaire(Horaire horaire) {
 		this.setHeure(horaire.heure);
 		this.setMinute(horaire.minute);
 		this.setSeconde(horaire.seconde);
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Horaire(int heure, int minute, int seconde) {
 		this.setHeure(heure);
 		this.setMinute(minute);
 		this.setSeconde(seconde);
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 * La string horaire est analysée pour remplir les attributs de la classe
+	 * @param horaire
+	 * 		Doit être sous la forme : heures:minutes:secondes
+	 */
 	public Horaire(String horaire) {
 		String[] hor = horaire.split(":");
 		if(hor.length == 3) {
@@ -39,29 +54,54 @@ public class Horaire {
 		}
 	}
 	
+	/**
+	 * Renvoie l'horaire sous forme d'une durée en secondes depuis 00:00:00
+	 * @return
+	 * 		Equivalent de l'horaire en secondes depuis 00:00:00
+	 */
 	public int getHoraireEnMinutes() {
 		return Math.round((heure * 60) + minute + (seconde / 60));
 	}
 
+	/**
+	 * Ajoute le nombre d'heures spécifiées à l'horaire
+	 */
 	public void ajouterHeure(int heure) {
 		int h = this.heure + heure;
 		this.heure = Math.abs(h % 24);
 	}
 	
+	/**
+	 * Ajoute le nombre de minutes spécifiées à l'horaire
+	 */
 	public void ajouterMinute(int minute) {
 		int m = this.minute + minute;
 		this.minute = Math.abs(m % 60);
 		ajouterHeure(m/60);
 	}
 	
+	/**
+	 * Ajoute le nombre de secondes spécifiées à l'horaire
+	 */
 	public void ajouterSeconde(int seconde) {
 		int s = this.seconde + seconde;
 		this.seconde = Math.abs(s % 60);
 		ajouterMinute(s/60);
 	}
 	
+	/**
+	 * Renvoie l'horaire sous forme de string
+	 */
 	public String getHoraire() {
-		return  heure + ":" + minute;
+		String horaire = "";
+		if(heure < 10)
+			horaire += "0";
+		horaire += heure;
+		horaire += ":";
+		if(minute < 10) 
+			horaire += "0";
+		horaire += minute;
+		return horaire;
 	}
 	
 	@Override

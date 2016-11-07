@@ -8,65 +8,116 @@ import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
+/**
+ * Classe servant de lien entre le modèle et le contrôleur
+ */
 public class Gestionnaire {
 
+	/**
+	 * Plan de l'application
+	 */
 	private Plan plan;
+	/**
+	 * Controleur de l'application
+	 */
 	private Controleur controleur;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Gestionnaire(Controleur controleur)
 	{
 		this.controleur = controleur;
 		plan = new Plan(this);
 	}
 	
+	/**
+	 * Charge le fichier xml plan de la ville et le parse
+	 * @param fichierXML
+	 * @throws BadXmlFile
+	 * @throws BadXmlPlan
+	 */
 	public void chargerPlan(File fichierXML) throws BadXmlFile, BadXmlPlan
 	{
 		ParseurPlan.parseurPlanVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
+	/**
+	 * Charge le fichier xml de livraison et le parse
+	 * @param fichierXML
+	 * @throws BadXmlLivraison
+	 * @throws BadXmlFile
+	 */
 	public void chargerLivraisons(File fichierXML) throws BadXmlLivraison, BadXmlFile
 	{
 		ParseurLivraison.parseurLivraisonVille(fichierXML.getAbsolutePath(), plan);
 	}
 	
+	/**
+	 * Effectue le calcul de la tournée
+	 */
 	public void calculerTournee()
 	{
 		plan.calculerTournee();
 	}
 	
-	public void tourneeCalculer() {
+	/**
+	 * Affiche la tournée calculée
+	 */
+	public void tourneeCalculee() {
 		controleur.getEtatCourant().afficherTournee(controleur, this, plan.estSolutionOptimale());
 	}
 	
+	/**
+	 * Stop le calcul de la tournée
+	 */
 	public void stopperCalculTournee() {
 		plan.stopperCalculTournee();
 	}
 	
+	/**
+	 * Renvoie si une solution a été trouvée ou non
+	 */
 	public boolean solutionTrouvee() {
 		return (plan.getTournee() != null) && (plan.getTournee().getTrajets().size() != 0);
 	}
 	
+	/**
+	 * Efface tous les noeuds et tronçons de existants du plan
+	 */
 	public void effacerNoeudsEtTroncons()
 	{
 		plan.effacerTroncons();
 		plan.effacerNoeuds();
 	}
 	
+	/**
+	 * Efface toutes les livraisons et l'entrepot du plan
+	 */
 	public void effacerLivraisonsEtEntrepot()
 	{
 		plan.effacerEntrepot();
 		plan.effacerLivraisons();
 	}
 	
+	/**
+	 * Efface la tournée calculée
+	 */
 	public void effacerTournee()
 	{
 		plan.effacerTournee();
 	}
 
+	/**
+	 * Renvoie le plan
+	 */
 	public Plan getPlan() {
 		return plan;
 	}
 	
+	/**
+	 * Renvoie le controleur
+	 */
 	public Controleur getControleur() {
 		return controleur;
 	}
@@ -90,21 +141,32 @@ public class Gestionnaire {
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
 
 			Horaire horaireDepart = new Horaire(horaire);
-			if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null) {
-				horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
-				LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
-						horaire, horaireDepart);
-				livraisons.add(l);
-			}
+			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
+					horaire, horaireDepart);
+			livraisons.add(l);
 			horaire = new Horaire(horaireDepart);
 		}
 		return livraisons;
 	}
 	
+	/**
+	 * Renvoie l'horaire du début de la tournée
+	 */
 	public Horaire getHoraireDebutTournee() {
 		return plan.getEntrepot().getHoraireDepart();
 	}
 	
+	/**
+	 * Renvoie le temps maximum de calcul
+	 */
+	public int getTempsMaxDeCalcul() {
+		return plan.getTempsMax();
+	}
+	
+	/**
+	 * Renvoie l'horaire de la fin de la tournée
+	 */
 	public Horaire getHoraireFinTournee() {
 		if(plan.getTournee() == null){
 			return null;
@@ -119,14 +181,17 @@ public class Gestionnaire {
 				//System.out.println(" ARPRES : H1 "+ horaire.getHoraireEnMinutes()+ "-- DP "+ plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes());
 
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
-			
-			if(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()) != null)
-				horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
 		}
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
 		return horaire;
 	}
 	
+	/**
+	 * Génère la feuille de route dans le fichier spécifié
+	 * @param link
+	 * 		Fichier dans lequel écrire la feuille de route
+	 */
 	public void genererFeuilleDeRoute(String link) {
 		plan.genererFeuilleDeRoute(link);
 	}

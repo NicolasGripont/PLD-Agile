@@ -4,6 +4,9 @@ package modeles;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Première version du TSP, sans amélioration
+ */
 public class TSP1 extends TemplateTSP {
 
 	@Override

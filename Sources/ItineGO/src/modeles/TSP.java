@@ -1,6 +1,8 @@
 package modeles;
 
-
+/**
+ * Interface pour les différentes méthodes à implémenter puis améliorer dans les versions suivantes du TSP
+ */
 public interface TSP {
 		
 	/**

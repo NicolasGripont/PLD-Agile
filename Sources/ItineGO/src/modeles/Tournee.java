@@ -2,10 +2,19 @@ package modeles;
 
 import java.util.List;
 
+/**
+ * Classe modélisant la tournée à effectuer, une fois calculée
+ */
 public class Tournee {
 
+	/**
+	 * Liste de trajets à faire
+	 */
 	private List<Trajet> trajets;
 
+	/**
+	 * Constructeur de la classe
+	 */
 	public Tournee(List<Trajet> trajets) {
 		super();
 		this.trajets = trajets;
@@ -15,6 +24,14 @@ public class Tournee {
 		return trajets;
 	}
 
+	public void ajouterTrajet(Integer index, Trajet traj) {
+		trajets.add(index, traj);
+	}
+	
+	public void supprimerTrajet(Integer index) {
+		trajets.remove(index);
+	}
+	
 	@Override
 	public String toString() {
 		return "Tournee [trajets=" + trajets + "]";

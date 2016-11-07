@@ -1,24 +1,46 @@
 package modeles;
 
+/**
+ * Classe modélisant l'entrepot d'une tournée
+ * C'est à la fois le noeud de départ et d'arrivée
+ */
 public class Entrepot {
+	/**
+	 * Noeud représentant la position de l'entrepot
+	 */
 	private Noeud noeud;
+	/**
+	 * Horaire de départ de la tournée
+	 */
 	private Horaire horaireDepart;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Entrepot(Noeud noeud, int heureDepart, int minuteDepart, int secondeDepart) {
 		this.setNoeud(noeud);
 		setHoraireDepart(new Horaire(heureDepart, minuteDepart, secondeDepart));
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Entrepot(Noeud noeud, Horaire horaire) {
 		this.setNoeud(noeud);
 		setHoraireDepart(horaire);
 	}
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Entrepot(Noeud noeud, String horaire) {
 		this.setNoeud(noeud);
 		this.setHoraireDepart(new Horaire(horaire));
 	}
 
+	/**
+	 * Renvoie le noeud, position de l'entrepot
+	 */
 	public Noeud getNoeud() {
 		return noeud;
 	}
@@ -31,6 +53,9 @@ public class Entrepot {
 		}
 	}
 
+	/**
+	 * Renvoie l'horaire de départ
+	 */
 	public Horaire getHoraireDepart() {
 		return horaireDepart;
 	}

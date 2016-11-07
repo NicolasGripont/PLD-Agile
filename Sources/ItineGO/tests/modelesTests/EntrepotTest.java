@@ -6,8 +6,18 @@ import modeles.Entrepot;
 import modeles.Horaire;
 import modeles.Noeud;
 
+/**
+ * Classe test unitaire de la classe Entrepot
+ *
+ */
 public class EntrepotTest {
 
+	
+	/**
+	 * Test du constructeur de la classe Entrepot avec un noeud, une heure, une minute et une seconde
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testEntrepotNoeudIntIntInt() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -16,6 +26,12 @@ public class EntrepotTest {
 		assertEquals(res1,entrepot.toString());
 	}
 	
+	
+	/**
+	 * Test du constructeur avec une horaire impossible (Ex: 25h70min100s)
+	 * 
+	 * Resultat: L'heure de départ de l'entrepot doit être à 0h0m0s
+	 */
 	@Test
 	public void testEntrepotHoraireImpossible() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -24,6 +40,11 @@ public class EntrepotTest {
 		assertEquals(res1,entrepot.toString());
 	}
 
+	/**
+	 * Test du constructeur avec une horaire de type Horaire
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testEntrepotNoeudHoraire() {
 		Horaire horaire = new Horaire(10, 20, 29);
@@ -33,6 +54,11 @@ public class EntrepotTest {
 		assertEquals(res1, entrepot.toString());
 	}
 
+	/**
+	 * Test de l'affichage texte de la classe Entrepot
+	 * 
+	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité 
+	 */
 	@Test
 	public void testEntrepotNoeudString() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -41,6 +67,11 @@ public class EntrepotTest {
 		assertEquals(res1, entrepot.toString());
 	}
 	
+	/**
+	 * Test de l'affichage texte de la classe Entrepot avec un mauvais format pour l'heure
+	 * 
+	 * Resultat: L'heure de départ de l'entrepot doit être à 0h0m0s
+	 */
 	@Test
 	public void testEntrepotNoeudStringMauvaisFormat() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -49,6 +80,11 @@ public class EntrepotTest {
 		assertEquals(res1, entrepot.toString());
 	}
 
+	/**
+	 * Test lorsqu'on met le noeud de l'entrepot à null
+	 * 
+	 * Resultat: L'identifiant du noeud de l'entrepot doit être à -1 avec [0,0] comme coordonnée
+	 */
 	@Test
 	public void testSetNoeudNull() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -58,6 +94,11 @@ public class EntrepotTest {
 		assertEquals(res1, entrepot.toString());
 	}
 
+	/**
+	 * Test pour la modification de l'heure de départ de l'entrepot
+	 * 
+	 * Resultat: L'heure de départ doit être modifié à 0h0m0s
+	 */
 	@Test
 	public void testSetHoraireDepart() {
 		Noeud noeud = new Noeud(12,12,12);
@@ -67,6 +108,11 @@ public class EntrepotTest {
 		assertEquals(res1, entrepot.toString());
 	}
 
+	/**
+	 * Test qui vérifie que 2 objets de type entrepot sont égales et 2 autres sont différents
+	 * 
+	 * Resultat: Premier est égale, deuxiéme est différent
+	 */
 	@Test
 	public void testEqualsObject() {
 		Noeud noeud = new Noeud(12,12,12);

@@ -10,40 +10,62 @@ import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 import vue.gestionTourneeVue.GestionTourneeVue;
 
+/**
+ * Etat d'affichage de l'entrepot et des livraisons à effectuer avant calcul de la tournée
+ */
 public class EtatLivraisonsAffichees extends EtatDefaut {
 
+	/**
+	 * Permet de calculer la tournée a effectué.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.calculerTournee();
 	}
 	
+	/**
+	 * Permet de stopper le calcul de la tournée.
+	 * Si une solution a été trouvée on l'affiche, sinon on affiche un message d'erreur.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		gestionnaire.stopperCalculTournee();
 		if(gestionnaire.solutionTrouvee()) {
-			afficherTournee(controleur, gestionnaire, gestionnaire.getPlan().estSolutionOptimale());
+			afficherTournee(controleur, gestionnaire, false);
 		} else {
 			controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
 		}
 	}
 	
+	/**
+	 * Permet d'afficher la tournée que l'on a calculé. On indique si la solution trouvée est optimale ou non.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param solutionOptimale : Indique si la solution est optimale ou non.
+	 */
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
 			try {
+				gestionnaire.stopperCalculTournee();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
 				controleur.gestionTourneeVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.listeLivraisonsParOrdreDePassage(),
+				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(),
 						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
-				if(solutionOptimale) {
-					controleur.gestionTourneeVue.solutionOptimale();
-				}
+				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -52,8 +74,16 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 
+	
+	/**
+	 * Permet de retourner à l'état initial de l'application.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
@@ -64,7 +94,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				System.out.println("testedibzr");
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
@@ -77,8 +107,15 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de retourner à la vue précédente ChoixDemandeLivraisonsVue et à l'état EtatPlanVilleAffiche.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		gestionnaire.stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {
@@ -87,7 +124,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				Parent root = fxmlLoader.load();
 				controleur.choixDemandeLivraisonsVue = (ChoixDemandeLivraisonsVue) fxmlLoader.getController();
 				controleur.choixDemandeLivraisonsVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getWidth(), controleur.stage.getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -100,6 +137,12 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		}
 	}
 	
+	/**
+	 * Permet de redessiner le plan dans la vue.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());

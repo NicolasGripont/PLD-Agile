@@ -18,16 +18,51 @@ import java.util.Set;
 import javafx.application.Platform;
 import utility.Pair;
 
+/**
+ * Classe modélisant le plan
+ */
 public class Plan {
+	/**
+	 * Map représentant l'ensemble des noeuds du plan
+	 * Le noeud est accessible par son id
+	 */
 	private Map<Integer, Noeud> noeuds;
+	/**
+	 * Map représentant l'ensemble des tronçons du plan
+	 * Le tronc est accessible par son noeud de départ et d'arrivée
+	 */
 	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
+	/**
+	 * Map représentant l'ensemble des livraisons de la tournée à effectuer
+	 * La livraison est accessible par le noeud modélisant sa position
+	 */
 	private Map<Noeud, Livraison> livraisons;
+	/**
+	 * Entrepot de départ de la tournée à effectuer
+	 */
 	private Entrepot entrepot;
 	private int tableauDesId[];
+	/**
+	 * TSP utilisé dans l'application
+	 */
 	private TSP4 tsp;
+	/**
+	 * Modélise la tournée effectuée
+	 */
 	private Tournee tournee;
+	/**
+	 * Thread utilisé pour calculer la tournée
+	 */
 	private Thread threadCalcul;
+	/**
+	 * Thread utilisé pour la répresentation graphique de la solution calculée
+	 */
+	private Thread threadConstructionTournee;
 	private Gestionnaire gestionnaire;
+	/**
+	 * Temps maximum durant lequel l'application va tourner en millisecondes
+	 */
+	private int tempsMax = 20000;
 	
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
@@ -42,14 +77,24 @@ public class Plan {
 		livraisons = new HashMap<Noeud, Livraison>();
 	}
 	
+	/**
+	 * Permet de savoir si la solution trouvée est optimale (toutes les possibilités ont été essayées), ou non (fin du temps)
+	 */
 	public boolean estSolutionOptimale() {
 		return !tsp.getTempsLimiteAtteint();
 	}
 	
+	/**
+	 * Stop le calcul de la tournée et la construction de la solution
+	 */
 	public void stopperCalculTournee() {
 		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
 			threadCalcul.interrupt();
 			System.out.println("Calcul stoppé");
+		}
+		if(threadConstructionTournee != null && threadConstructionTournee.isAlive() && threadConstructionTournee.isInterrupted() == false) {
+			threadConstructionTournee.interrupt();
+			System.out.println("Construction stoppée");
 		}
 	}
 	
@@ -65,9 +110,14 @@ public class Plan {
 		return -1;
 	}
 	
+	/**
+	 * Calcule la tournée
+	 */
 	public void calculerTournee() {
-    	int nbDeLivraison = livraisons.size();
+		int nbDeLivraison = livraisons.size();
     	
+    	
+    	//On utilisera TSP4 qui recup les plages horaires
     	tableauDesId = new int [noeuds.size()];
     	
     	
@@ -80,7 +130,6 @@ public class Plan {
 		
 		int duree[];
 		duree = new int[nbDeLivraison+1];
-		
 		int[][] plages_horaire;
 		plages_horaire = new int[2][nbDeLivraison+1];
 		
@@ -94,8 +143,8 @@ public class Plan {
     	//On remplie la matrice qui modelise le graphe
     	remplirMatriceDuGraphe(matriceDuGraphe);
     	
-    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera également placé en paramètre
-        HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera également placé en paramètre
+    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+        HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	
     	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
    
@@ -104,32 +153,48 @@ public class Plan {
 		
 		int cout[][]= new int [depart.length][depart.length];
 		
-		//On construti la matrice utilisé par la TSP a partir des Calcul de Dijkstra
+		//On construit la matrice utilisÃ© par la TSP a partir des calculs de Dijkstra
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new TSP4();
-		/*
-		 * Le thread va venir ici
-		 */
+
 		threadCalcul = new Thread() {
 			public void run() {
-				tsp.chercheSolution(20000, depart.length , cout, duree, plages_horaire);//le 100000 est le temps max toléré
+				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
 				constructionTournee(depart, AllNoires, AllPrevious);
 				if(gestionnaire != null) {
-					Platform.runLater(() -> gestionnaire.tourneeCalculer());
+					Platform.runLater(() -> gestionnaire.tourneeCalculee());
 				}
 			}
 		};
 		threadCalcul.setDaemon(true);
 		threadCalcul.start();
+		threadConstructionTournee = new Thread() {
+			public void run() {
+				while(threadCalcul.isInterrupted() == false) {
+					try {
+						System.out.println("Construction solution");
+						///ISOLATION !!!
+						Thread.sleep(3000);
+						constructionTournee(depart, AllNoires, AllPrevious);
+					} catch (InterruptedException e) {
+						return;
+					}
+				}
+			}
+		};
+		threadConstructionTournee.setDaemon(true);
+		threadConstructionTournee.start();
     }
 	
+	/**
+	 * Construit l'objet Tournée modélisant la solution pour la tournée à effectuer
+	 */
 	private void constructionTournee(Integer depart[], HashMap< Integer, HashMap<Integer, Integer>> AllNoires, HashMap< Integer, HashMap<Integer, Integer>> AllPrevious) {
-		//Il faut maintenant reupéré le chemin optimal via les get
 		List<Integer> futurTourne = new ArrayList<Integer>();
 		HashMap<Integer, Integer> previous;
 		
-		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travail avec des arbre de couvrance minimum on fait le chemin Ã  l'envers
+		Integer noeudCourant = depart[tsp.getMeilleureSolution(0)]; //Comme on travaille avec des arbres de couvrance minimum on fait le chemin Ã  l'envers
 		for(int i = depart.length-1 ; i >=0 ; i--) {
 			previous = new HashMap<>(AllPrevious.get(depart[tsp.getMeilleureSolution(i)]));
 			while(previous.get(noeudCourant)!=noeudCourant) {
@@ -143,7 +208,7 @@ public class Plan {
 		for(int j = 0 ; j< depart.length ; j++ ) {
 			ordreTourneID.add(depart[tsp.getMeilleureSolution(j)]);
 		}
-		//on ajoute l'entrepot a la fin de la tournee
+		//on ajoute l'entrepot à la fin de la tournee
 		ordreTourneID.add(ordreTourneID.getFirst());
 		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
@@ -164,24 +229,24 @@ public class Plan {
 		      }
 		      lastAdded=myInt;
 	      } 
-	      
-		//Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
-	    //Puis on construit la tournee
+
+	    //Puis retrouver les tronçons en recupérant les id des noeuds dans tableauDesId
+	    //Puis on constrit tournee
 	     
 			// Construction de la Tournee
 	      	Set<Livraison> dejaVisites = new HashSet<>();
 			List<Trajet> trajetsPrevus = new ArrayList<>();
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
+				tronconsTrajet.add(
+						troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
 				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
 						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						&& (livraisons.get(noeuds.get(futurTourne.get(i + 1)))== livraisons.get(noeuds.get(ordreTourneID.getFirst()))) )
+						&& livraisons.get(noeuds.get(futurTourne.get(i + 1))) == livraisons.get(noeuds.get(ordreTourneID.getFirst())) )
 						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2) {
-					tronconsTrajet.add(troncons
-							.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 					ordreTourneID.removeFirst();
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
@@ -189,14 +254,14 @@ public class Plan {
 						tronconsTrajet = new ArrayList<>();
 						dejaVisites.add(livraisons.get(noeuds.get(futurTourne.get(i + 1))));
 					}
-				} else {
-					tronconsTrajet.add(
-							troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
-				}
+				} 
 			}
 			this.tournee = new Tournee(trajetsPrevus);
 	}
     
+	/**
+	 * Construit la matrice des coûts pour le TSP
+	 */
 	 private void constructionMatTsp(int[][] cout, Integer[] depart,
 			HashMap<Integer, HashMap<Integer, Integer>> AllNoires) {
     	for(int u = 0;u<depart.length; u++)
@@ -270,6 +335,25 @@ public class Plan {
 				elivraisons = itlivraisons.next();
 			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
 			    duree[idep]=(elivraisons.getValue().getDuree());
+/*
+			    
+			    if(!elivraisons.getValue().getDebutPlage().equals(null)){
+			    	plages_horaire[0][idep]=elivraisons.getValue().getDebutPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    }
+			    else {
+			    	plages_horaire[0][idep]=0;
+			    }
+			    
+			    if(!elivraisons.getValue().getFinPlage().equals(null)){
+			    	plages_horaire[1][idep]=elivraisons.getValue().getFinPlage().getHoraireEnMinutes()-entrepot.getHoraireDepart().getHoraireEnMinutes();
+			    }
+			    else {
+			    	plages_horaire[1][idep]=Integer.MAX_VALUE;
+			    }
+			    idep++;
+			}
+		}
+*/
 			   
 			    //System.err.println(elivraisons.getValue().getDebutPlage()==null?"null":elivraisons.getValue().getDebutPlage().toString());
 			    if(!elivraisons.getValue().getDebutPlage().equals(new Horaire(0,0,0))){
@@ -296,12 +380,11 @@ public class Plan {
 			    idep++;
 			}
 			
-			for(int i =0; i < plages_horaire[0].length; i++)
+			/*for(int i =0; i < plages_horaire[0].length; i++)
 			{
 				System.out.println(plages_horaire[0][i]+ " : "+ plages_horaire[1][i]);
-			}
+			}*/
 		}
-
 
 	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
@@ -394,24 +477,36 @@ public class Plan {
        }
     }
 	
+	/**
+	 * Ajoute un noeud au plan
+	 */
 	public void ajouterNoeud(Noeud n) {
 		if(n != null) {
 			noeuds.put(n.getId(), n);
 		}
 	}
 	
+	/**
+	 * Ajoute un tronçon au plan
+	 */
 	public void ajouterTroncon(Troncon t) {
 		if(t != null) {
 			troncons.put(Pair.create(t.getOrigine(), t.getDestination()) , t);
 		}
 	}
 	
+	/**
+	 * Ajoute une livraison au plan
+	 */
 	public void ajouterLivraison(Livraison l) {
 		if(l != null) {
 			livraisons.put(l.getNoeud(), l);
 		}
 	}
 	
+	/**
+	 * Ajoute l'entrepot au plan
+	 */
 	public void ajouterEntrepot(Entrepot e) {
 		if(e != null) {
 			entrepot = e;
@@ -497,6 +592,15 @@ public class Plan {
 		else{return false;}
 	}
 	
+	public int getTempsMax() {
+		return tempsMax;
+	}
+	
+	/**
+	 * Génère la feuille de route de la tournée à effectuer
+	 * @param link
+	 * 		Le nom du fichier qui sera écrit
+	 */
 	public void genererFeuilleDeRoute(String link) {
 		FileWriter fw;
 		try {

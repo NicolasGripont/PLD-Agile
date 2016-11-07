@@ -1,12 +1,33 @@
 package modeles;
 
+/**
+ * Classe modélisant un tronçon, c'est un lien orienté qui relie directement deux noeuds
+ */
 public class Troncon {
+	/**
+	 * Nom de la rue, plusieurs tronçons peuvent appartenir à la même rue
+	 */
 	private String nomRue;
+	/**
+	 * Longueur du tronçon
+	 */
 	private int longueur;
+	/**
+	 * Vitesse à laquelle on peut parcourir le tronçon
+	 */
 	private int vitesse;
+	/**
+	 * Noeud d'origine du tronçon
+	 */
 	private Noeud origine;
+	/**
+	 * Noeud de destination du tronçon
+	 */
 	private Noeud destination;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public Troncon(String nomRue, int longueur, int vitesse, Noeud origine, Noeud destination) {
 		this.setNomRue(nomRue);
 		this.setLongueur(longueur);
