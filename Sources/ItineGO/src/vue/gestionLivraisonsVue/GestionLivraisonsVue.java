@@ -27,7 +27,6 @@ import javafx.scene.layout.VBox;
 import vue.gestionVue.GestionVue;
 import vue.planVilleVue.PlanVilleVue;
 import modeles.Livraison;
-import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;
 

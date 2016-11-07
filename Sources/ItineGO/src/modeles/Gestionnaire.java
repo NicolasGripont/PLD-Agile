@@ -123,11 +123,11 @@ public class Gestionnaire {
 	}
 	
 	//Precondition: les trajets de la tournée sont triés par ordre de passage
-	public List<LivraisonTournee> listeLivraisonsParOrdreDePassage() {
+	public List<Livraison> listeLivraisonsParOrdreDePassage() {
 		if(plan.getTournee() == null){
 			return null;
 		}
-		List<LivraisonTournee> livraisons = new ArrayList<>();
+		List<Livraison> livraisons = new ArrayList<>();
 		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
 		//Depart de l'entrepot, on ajoute juste l'arrivé de chaque trajet 
 		//(qui correspond au départ du suivant). Sauf le dernier, car le 
@@ -142,9 +142,9 @@ public class Gestionnaire {
 
 			Horaire horaireDepart = new Horaire(horaire);
 			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
-			LivraisonTournee l = new LivraisonTournee(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()), 
-					horaire, horaireDepart);
-			livraisons.add(l);
+			plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).setHeureDepart(horaireDepart);
+			plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).setHeureArrive(horaire);
+			livraisons.add(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()));
 			horaire = new Horaire(horaireDepart);
 		}
 		return livraisons;

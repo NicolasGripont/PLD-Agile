@@ -27,7 +27,6 @@ import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import modeles.Horaire;
 import modeles.Livraison;
-import modeles.LivraisonTournee;
 import modeles.Noeud;
 import modeles.Plan;
 import vue.gestionVue.GestionVue;
@@ -45,28 +44,28 @@ public class GestionTourneeVue extends GestionVue {
 	private boolean attenteLivraisonPrecedentePourNouvelleLivraison = false;
 	
 	@FXML
-	private TableView<LivraisonTournee> livraisonTable;
+	private TableView<Livraison> livraisonTable;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> adresseColonne;
+	private TableColumn<Livraison, String> adresseColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> plageDebutColonne;
+	private TableColumn<Livraison, String> plageDebutColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> plageFinColonne;
+	private TableColumn<Livraison, String> plageFinColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> arriveeColonne;
+	private TableColumn<Livraison, String> arriveeColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> departColonne;
+	private TableColumn<Livraison, String> departColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, String> dureeColonne;
+	private TableColumn<Livraison, String> dureeColonne;
 
 	@FXML
-	private TableColumn<LivraisonTournee, Boolean> supprimerColonne;
+	private TableColumn<Livraison, Boolean> supprimerColonne;
 
 	@FXML
 	private Label labelEntrepot;
@@ -137,47 +136,47 @@ public class GestionTourneeVue extends GestionVue {
 		planVillePane.heightProperty().addListener(listener);
 
 		adresseColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
-			return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getNoeud().getId()));
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
 		});
 
 		plageDebutColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
-			if (livraison.getLivraison().getDebutPlage() != null
-					&& !livraison.getLivraison().getDebutPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getLivraison().getDebutPlage().getHoraire());
+			final Livraison livraison = param.getValue();
+			if (livraison.getDebutPlage() != null
+					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
 			} else {
 				return new SimpleStringProperty("-");
 			}
 		});
 
 		plageFinColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
-			if (livraison.getLivraison().getFinPlage() != null
-					&& !livraison.getLivraison().getFinPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getLivraison().getFinPlage().getHoraire());
+			final Livraison livraison = param.getValue();
+			if (livraison.getFinPlage() != null
+					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
 			} else {
 				return new SimpleStringProperty("-");
 			}
 		});
 
 		arriveeColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
+			final Livraison livraison = param.getValue();
 			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
 		});
 
 		departColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
+			final Livraison livraison = param.getValue();
 			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
 		});
 
 		dureeColonne.setCellValueFactory(param -> {
-			final LivraisonTournee livraison = param.getValue();
+			final Livraison livraison = param.getValue();
 			
-			if(livraison.getLivraison().getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
+			if(livraison.getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
 				return new SimpleStringProperty("-");
 			}
-			return new SimpleStringProperty(String.valueOf(livraison.getLivraison().getDuree()));
+			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
 		});
 
 		supprimerColonne.setCellFactory(param -> {
@@ -210,8 +209,8 @@ public class GestionTourneeVue extends GestionVue {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
 				// TODO Auto-generated method stub
-				LivraisonTournee livraison = (LivraisonTournee) newValue;
-				planVilleVue.livraisonSelected(livraison.getLivraison());
+				Livraison livraison = (Livraison) newValue;
+				planVilleVue.livraisonSelected(livraison);
 			}
 		});
 
@@ -236,23 +235,26 @@ public class GestionTourneeVue extends GestionVue {
 		} else if(attenteLivraisonPrecedentePourNouvelleLivraison) {
 			livraisonPrecedenteSelectionne(noeud);
 		} else {
-			for (LivraisonTournee t : livraisonTable.getItems()) {
-				if (t.getLivraison().getNoeud().equals(noeud)) {
+			for (Livraison t : livraisonTable.getItems()) {
+				if (t.getNoeud().equals(noeud)) {
 					livraisonTable.getSelectionModel().select(t);
 				}
 			}
 		}
 	}
 
-	public void miseAJourTableau(Plan plan, List<LivraisonTournee> list, Horaire horaireDebut, Horaire horaireFin) {
+	public void miseAJourTableau(Plan plan, List<Livraison> list, Horaire horaireDebut, Horaire horaireFin) {
 		labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
 		labelHorraires.setText("Début de la tournée : " + horaireDebut.getHoraire() + " - Fin de la tournée : "
 				+ horaireFin.getHoraire());
 		if (list != null && list.size() > 0) {
-			for (LivraisonTournee l : list) {
+			for (Livraison l : list) {
 				livraisonTable.getItems().add(l);
 			}
-			livraisonTable.getItems().add(new LivraisonTournee(new Livraison(plan.getEntrepot().getNoeud(), 0), list.get(list.size()-1).getHeureDepart(),horaireFin));
+			Livraison l = new Livraison(plan.getEntrepot().getNoeud(), 0, "0:0:0", "0:0:0");
+			l.setHeureDepart(horaireFin);
+			l.setHeureArrive(list.get(list.size()-1).getHeureDepart());
+			livraisonTable.getItems().add(l);
 		}
 		
 	}
@@ -417,8 +419,8 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	private void livraisonPrecedenteSelectionne(Noeud noeud) {
-		for (LivraisonTournee t : livraisonTable.getItems()) {
-			if (t.getLivraison().getNoeud().equals(noeud)) {
+		for (Livraison t : livraisonTable.getItems()) {
+			if (t.getNoeud().equals(noeud)) {
 				noeudLivraisonSelectionne = noeud;
 				ajouterLivraison();
 				return;
@@ -432,7 +434,10 @@ public class GestionTourneeVue extends GestionVue {
 			planVilleVue.modeAjouterLivraison(false);
 			labelInstruction.setText("Vous pouvez maintenant modifer la durée et les plages horaires");
 			//Dégeulasse à changer, il faut passer par le controleur et le modèle
-			livraisonTable.getItems().add(new LivraisonTournee(new Livraison(noeudSelectionne, 0), new Horaire("0:0:0"), new Horaire("0:0:0")));
+			Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
+			l.setHeureArrive(new Horaire("0:0:0"));
+			l.setHeureDepart(new Horaire("0:0:0"));
+			livraisonTable.getItems().add(l);
 		}
 	}
 

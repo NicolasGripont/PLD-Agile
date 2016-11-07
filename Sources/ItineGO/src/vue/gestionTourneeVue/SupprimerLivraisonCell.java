@@ -9,9 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import modeles.LivraisonTournee;
+import modeles.Livraison;
 
-public class SupprimerLivraisonCell extends TableCell<LivraisonTournee, Boolean> {
+public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 
 	final ImageView imageViewMoins = new ImageView();
 
