@@ -54,7 +54,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage. 
 	 */
-	public void modifierLigne(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
+	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
 	}
 	
 	/**

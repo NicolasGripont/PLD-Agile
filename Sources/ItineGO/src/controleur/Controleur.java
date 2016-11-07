@@ -198,8 +198,8 @@ public class Controleur extends Application {
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage.
 	 */
-	public void modifierLigne(int numLigne, int nouveauNumLigne) {
-		etatCourant.modifierLigne(this, gestionnaire, numLigne, nouveauNumLigne);
+	public void modifierOrdre(int numLigne, int nouveauNumLigne) {
+		etatCourant.modifierOrdre(this, gestionnaire, numLigne, nouveauNumLigne);
 		etatCourant.getEtat();
 	}
 	
