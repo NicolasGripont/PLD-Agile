@@ -125,34 +125,6 @@ public class Gestionnaire {
 		return controleur;
 	}
 	
-	//Precondition: les trajets de la tournée sont triés par ordre de passage
-	public List<Livraison> listeLivraisonsParOrdreDePassage() {
-		if(plan.getTournee() == null){
-			return null;
-		}
-		List<Livraison> livraisons = new ArrayList<>();
-		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
-		//Depart de l'entrepot, on ajoute juste l'arrivé de chaque trajet 
-		//(qui correspond au départ du suivant). Sauf le dernier, car le 
-		//dernier trajet correspond au retour à l'entrepôt ( '< size-1' )
-		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
-			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());
-			if(!plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().equals(new Horaire(0,0,0)) && horaire.getHoraireEnMinutes()<plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes())
-			{
-				horaire= new Horaire(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage());
-
-			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
-
-			Horaire horaireDepart = new Horaire(horaire);
-			horaireDepart.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
-			plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).setHeureDepart(horaireDepart);
-			plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).setHeureArrive(horaire);
-			livraisons.add(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()));
-			horaire = new Horaire(horaireDepart);
-		}
-		return livraisons;
-	}
-	
 	/**
 	 * Renvoie l'horaire du début de la tournée
 	 */

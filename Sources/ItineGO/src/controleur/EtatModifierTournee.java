@@ -32,7 +32,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
 		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
 		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(), 
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
