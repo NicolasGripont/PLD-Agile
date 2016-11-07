@@ -219,4 +219,15 @@ public class Gestionnaire {
 	public void setLivraisonSuivante(Livraison livraisonSuivante) {
 		this.livraisonSuivante = livraisonSuivante;
 	}
+
+	public void supprimerLivraisonTournee(Livraison livraison) {
+		//TODO :
+		// il faudra supprimer la livraison dans la liste des livraisons du plan et dans la tournée.
+		
+	}
+
+	public Livraison getLivraisonTournee(int numLigne) {
+		// TODO récupérer la livraison à supprimer
+		return null;
+	}
 }

@@ -35,6 +35,8 @@ public class Controleur extends Application {
 	 */
 	protected EtatDefaut etatCourant;
 	
+	protected ListeModifications listeModifications = new ListeModifications();
+	
 	/**
 	 * Définition des différents états de l'application
 	 */

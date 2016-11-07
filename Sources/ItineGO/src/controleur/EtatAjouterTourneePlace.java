@@ -15,4 +15,9 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	 */
 	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud, int numLigne) {
 	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat ajouter place");
+	}
 }

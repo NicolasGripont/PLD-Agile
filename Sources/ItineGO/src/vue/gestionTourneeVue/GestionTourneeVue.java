@@ -390,11 +390,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewValiderModificationsClicked() {
-		//TODO appeler controleur
-		labelInstruction.setVisible(false);
-		setVisibiliteBoutons(false);
-		supprimerColonne.setVisible(false);
-		System.out.println("imageViewValiderModificationsClicked");
+		controleur.clicBoutonSauvegarder();
 	}
 
 	@FXML

@@ -15,4 +15,9 @@ public class EtatAjouterTourneeDuree extends EtatDefaut {
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat ajouter duree");
+	}
 }

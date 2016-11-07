@@ -15,8 +15,7 @@ public class SupprimerLivraison extends Commande {
 	
 	@Override
 	public void doCode() {
-		// TODO Auto-generated method stub
-
+		gestionnaire.supprimerLivraisonTournee(livraison);
 	}
 
 	@Override
