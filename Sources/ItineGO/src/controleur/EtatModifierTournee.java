@@ -7,7 +7,6 @@ import modeles.Gestionnaire;
  */
 public class EtatModifierTournee extends EtatDefaut {
 
-	//TODO : définir les états après chaque action
 	/**
 	 * Permet de sauvegarder les modifications apportées.
 	 * 
@@ -44,4 +43,32 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void clicBoutonAjouter (Controleur controleur, Gestionnaire gestionnaire) {
 	}
+	
+	/**
+	 * Permet de modifier l'ordre d'une livraison.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage. 
+	 */
+	public void modifierLigne(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
+	}
+	
+	/**
+	 * Permet de modifier la plage de début d'une livraison dans le tableau.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param debutPlage : Plage horaire de début.
+	 */
+	public void modifierPlageDebut(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageDebut) {
+	}
+	
+	/**
+	 * Permet de modifier la plage de début d'une livraison dans le tableau.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param finPlage : Plage horaire de fin.
+	 */
+	public void modifierPlageFin(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {
+	}
+	
 }

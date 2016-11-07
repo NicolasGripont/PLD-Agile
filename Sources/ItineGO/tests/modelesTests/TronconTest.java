@@ -7,8 +7,18 @@ import org.junit.Test;
 import modeles.Troncon;
 import modeles.Noeud;
 
+
+/**
+ * Classe test unitaire de la classe Troncon
+ *
+ */
 public class TronconTest {
 
+	/**
+	 * Test du constructeur de la classe Troncon avec un nom, une longeur, une vitesse et un noeud de départ et d'arrivé
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testTroncon() {
 		Noeud origine = new Noeud(20,20,20);
@@ -18,6 +28,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test retournant le nom du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetNomRue() {
 		Noeud origine = new Noeud(20,20,20);
@@ -27,6 +42,11 @@ public class TronconTest {
 		assertEquals(res,t1.getNomRue());
 	}
 
+	/**
+	 * Test modifiant le nom du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testSetNomRue() {
 		Noeud origine = new Noeud(20,20,20);
@@ -37,6 +57,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test retournant la longeur du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetLongueur() {
 		Noeud origine = new Noeud(20,20,20);
@@ -46,6 +71,11 @@ public class TronconTest {
 		assertEquals(res,t1.getLongueur());
 	}
 
+	/**
+	 * Test modifiant la longeur du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testSetLongueur() {
 		Noeud origine = new Noeud(20,20,20);
@@ -56,6 +86,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test retournant la vitesse du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetVitesse() {
 		Noeud origine = new Noeud(20,20,20);
@@ -65,6 +100,11 @@ public class TronconTest {
 		assertEquals(res,t1.getVitesse());
 	}
 
+	/**
+	 * Test modifiant la vitesse du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testSetVitesse() {
 		Noeud origine = new Noeud(20,20,20);
@@ -75,6 +115,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test retournant l'origine du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetOrigine() {
 		Noeud origine = new Noeud(20,20,20);
@@ -84,6 +129,11 @@ public class TronconTest {
 		assertEquals(res,t1.getOrigine().toString());
 	}
 
+	/**
+	 * Test modifiant l'origine du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testSetOrigine() {
 		Noeud origine = new Noeud(20,20,20);
@@ -95,6 +145,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test retournant la destination du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testGetDestination() {
 		Noeud origine = new Noeud(20,20,20);
@@ -104,6 +159,11 @@ public class TronconTest {
 		assertEquals(res,t1.getDestination().toString());
 	}
 
+	/**
+	 * Test modifiant la destination du troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité
+	 */
 	@Test
 	public void testSetDestination() {
 		Noeud origine = new Noeud(20,20,20);
@@ -115,6 +175,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());;
 	}
 
+	/**
+	 * Test de l'affichage texte de la classe Troncon
+	 * 
+	 * Resultat: L'affiche du troncon doit correspondre au resultat souhaité 
+	 */
 	@Test
 	public void testToString() {
 		Noeud origine = new Noeud(20,20,20);
@@ -124,6 +189,11 @@ public class TronconTest {
 		assertEquals(res,t1.toString());
 	}
 
+	/**
+	 * Test qui vérifie que 2 objets de type troncon sont égales et 2 autres sont différents
+	 * 
+	 * Resultat: Premier est égale, deuxiéme est différent
+	 */
 	@Test
 	public void testEqualsObject() {
 		Noeud origine1 = new Noeud(20,20,20);

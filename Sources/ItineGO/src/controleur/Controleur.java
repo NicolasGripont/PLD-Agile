@@ -193,15 +193,35 @@ public class Controleur extends Application {
 	}
 	
 	/**
-	 * Permet de modifier une livraison dans le tableau.
+	 * Permet de modifier l'ordre d'une livraison dans le tableau.
 	 * 
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage.
-	 * @param debutPlage : Plage horaire de début, peut être nulle.
-	 * @param finPlage : Plage horaire de fin, peut être nulle.
 	 */
-	public void modifierLigne(int numLigne, int nouveauNumLigne, String debutPlage, String finPlage) {
-		etatCourant.modifierLigne(this, gestionnaire, numLigne, nouveauNumLigne, debutPlage, finPlage);
+	public void modifierLigne(int numLigne, int nouveauNumLigne) {
+		etatCourant.modifierLigne(this, gestionnaire, numLigne, nouveauNumLigne);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de modifier la plage de début d'une livraison dans le tableau.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param debutPlage : Plage horaire de début.
+	 */
+	public void modifierPlageDebut(int numLigne, String debutPlage) {
+		etatCourant.modifierPlageDebut(this, gestionnaire, numLigne, debutPlage);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de modifier la plage de fin d'une livraison dans le tableau.
+	 * 
+	 * @param numLigne : Ligne du tableau de la livraison modifiée.
+	 * @param finPlage : Plage horaire de fin.
+	 */
+	public void modifierPlageFin(int numLigne, String finPlage) {
+		etatCourant.modifierPlageFin(this, gestionnaire, numLigne, finPlage);
 		etatCourant.getEtat();
 	}
 	
@@ -222,6 +242,17 @@ public class Controleur extends Application {
 	 */
 	public void clicPlanLivraison(Livraison livraison) {
 		etatCourant.clicPlanLivraison(this, gestionnaire, livraison);
+		etatCourant.getEtat();
+	}
+	
+	/**
+	 * Permet de modifier la durée d'une livraison.
+	 * 
+	 * @param numLigne : Numéro de la ligne du tableau correspondant à la livraison.
+	 * @param duree : Durée que l'on veut modifier.
+	 */
+	public void entrerDuree(int numLigne, int duree) {
+		etatCourant.entrerDuree(this, gestionnaire, numLigne, duree);
 		etatCourant.getEtat();
 	}
 	
