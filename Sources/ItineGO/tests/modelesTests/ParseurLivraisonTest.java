@@ -37,15 +37,14 @@ public class ParseurLivraisonTest {
 		
 		String nomFichierTest = "./tests/assetsForTests/livraisons5x5-4.txt";
 		String resTest ="";
-		String res1 = "exceptions.BadXmlFile: Erreur : Fichier XML mal formé";
+		String res1 = "Erreur : Fichier plan non valide";
 
 		try{
 			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
 		}
 		catch(Exception e)
 		{
-			resTest = e.toString();
-//			System.err.println(resTest);
+			resTest = e.getMessage();
 		}
 		
 		assertEquals(res1,resTest);
@@ -138,9 +137,8 @@ public class ParseurLivraisonTest {
 		catch(Exception e){
 			resTest = e.getMessage();
 		}
-//		System.out.println(planTest.getLivraisons().size());
 		assertEquals(res1,resTest);
-//		assertEquals(res2,planTest.getLivraisons().size());
+		assertEquals(res2,planTest.getLivraisons().size());
 	}
 	
 	@Test
