@@ -1,6 +1,7 @@
 package controleur;
 
 import modeles.Gestionnaire;
+import modeles.Livraison;
 
 /**
  *	Etat lorsque l'on modifie la tournée. 
@@ -14,6 +15,10 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonSauvegarder (Controleur controleur, Gestionnaire gestionnaire) {
+		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
+		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
 	/** 
@@ -23,9 +28,13 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
+		controleur.listeModifications.annulerModification();
 		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
 		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
 		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
@@ -37,6 +46,12 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param numLigne : Numéro de la ligne de la livraison a supprimé.
 	 */
 	public void clicBoutonSupprimer	(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {
+		Livraison livraisonASuppr = gestionnaire.getLivraisonTournee(numLigne);
+		SupprimerLivraison commandeSuppression = new SupprimerLivraison(gestionnaire,livraisonASuppr);
+		
+		
+		
+		
 	}
 	
 	/** 
@@ -73,6 +88,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param finPlage : Plage horaire de fin.
 	 */
 	public void modifierPlageFin(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {
+	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat modifier tournee");
 	}
 	
 }

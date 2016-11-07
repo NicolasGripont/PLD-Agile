@@ -300,7 +300,7 @@ public class Plan {
 					}
 				} 
 			}
-			this.tournee = new Tournee(trajetsPrevus);
+			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
 	}
 	
 	/**

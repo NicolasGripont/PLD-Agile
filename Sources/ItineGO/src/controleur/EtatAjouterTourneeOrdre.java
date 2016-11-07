@@ -15,4 +15,9 @@ public class EtatAjouterTourneeOrdre extends EtatDefaut {
 	 */
 	public void clicPlanLivraison(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud, int numLigne) {
 	}
+	
+	public void getEtat()
+	{
+		System.out.println("etat ajouter ordre");
+	}
 }

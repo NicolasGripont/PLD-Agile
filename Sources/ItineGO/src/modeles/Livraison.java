@@ -22,7 +22,14 @@ public class Livraison {
 	 * Si pas de plage, est mis à null
 	 */
 	private Horaire finPlage;
-	
+	/**
+	 * Heure effective d'arrivée à la livraison
+	 */
+	private Horaire heureArrive;
+	/**
+	 * Heure effective de départ de la livraison
+	 */
+	private Horaire heureDepart;
 	/**
 	 * Constructeur de la classe
 	 */
@@ -155,4 +162,22 @@ public class Livraison {
 			this.duree = 0;
 		}
 	} 
+	
+	public Horaire getHeureArrive() {
+		return heureArrive;
+	}
+
+	public void setHeureArrive(Horaire heureArrive) {
+		if(heureArrive != null)
+			this.heureArrive = heureArrive;
+	}
+
+	public Horaire getHeureDepart() {
+		return heureDepart;
+	}
+
+	public void setHeureDepart(Horaire heureDepart) {
+		if(heureDepart != null)
+			this.heureDepart = heureDepart;
+	}
 }
