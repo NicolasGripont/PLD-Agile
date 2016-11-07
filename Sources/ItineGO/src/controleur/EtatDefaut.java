@@ -28,10 +28,13 @@ public abstract class EtatDefaut {
 	public void clicPlanNoeud					(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {}
 	public void clicPlanLivraison				(Controleur controleur, Gestionnaire gestionnaire, Livraison livraison) {}
 	
-	public void glisserDeposer	(Controleur controleur, boolean accepte, File fichier) {}
-	public void redessinerPlan	(Controleur controleur, Gestionnaire gestionnaire) {}
-	public void afficherTournee	(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {}
-	public void modifierLigne	(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne, String plageDebut, String plageFin) {}
+	public void glisserDeposer	   (Controleur controleur, boolean accepte, File fichier) {}
+	public void redessinerPlan	   (Controleur controleur, Gestionnaire gestionnaire) {}
+	public void afficherTournee	   (Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {}
+	public void modifierLigne	   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {}
+	public void modifierPlageDebut (Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageDebut) {}
+	public void modifierPlageFin   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {}
+	public void entrerDuree		   (Controleur controleur, Gestionnaire gestionnaire, int numLigne, int duree) {}
 	
 	public void getEtat()
 	{
