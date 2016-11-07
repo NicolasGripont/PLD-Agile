@@ -234,13 +234,21 @@ public class PlanVilleVue extends Canvas {
 		//Affichage texte
 		gc.setFill(new Color(1,1,1,1));
 		gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
+		//Affichage informations
+		int l2 = troncon.getNomRue().length() + 12 + getNumberDigit(troncon.getLongueur()) + getNumberDigit(troncon.getVitesse());
+		gc.setFill(new Color(0,0,0,0.5));
+		gc.fillRect(10, this.getHeight() - 22, 20 + l2*7, 20);
+		gc.setFill(new Color(1,1,1,1));
+		gc.fillText(troncon.getNomRue() + " - " + troncon.getLongueur() + "dm - " + troncon.getVitesse() + "dm/h", 20, this.getHeight() - 6);
 	}
 	
 	private void tronconIsFocused(Troncon troncon) {
 		if(troncon != tronconSelectionned) {
 			GraphicsContext gc = this.getGraphicsContext2D();
-			double x = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
-			double y = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+			double x1 = troncon.getOrigine().getX() * zoom + offsetX - RAYON_NOEUD /2;
+			double y1 = troncon.getOrigine().getY() * zoom + offsetY - RAYON_NOEUD /2;
+			double x2 = troncon.getDestination().getX() * zoom + offsetX - RAYON_NOEUD /2;
+			double y2 = troncon.getDestination().getY() * zoom + offsetY - RAYON_NOEUD /2;
 			//Affichage du troncon
 			gc.setStroke(new Color(0,0.5976,0,1));
 			gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
@@ -248,10 +256,16 @@ public class PlanVilleVue extends Canvas {
 			//Affichage zone de texte
 			int l = troncon.getNomRue().length();
 			gc.setFill(new Color(0,0,0,0.5));
-			gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+			gc.fillRect(Math.min(x2, x1) + Math.abs(x2 - x1)/2,Math.min(y2, y1) + Math.abs(y2 - y1)/2, 10 + l*7, 20);
 			//Affichage texte
 			gc.setFill(new Color(1,1,1,1));
-			gc.fillText(troncon.getNomRue(), x + 15 + 5, y);
+			gc.fillText(troncon.getNomRue(), Math.min(x2, x1) + Math.abs(x2 - x1)/2 + 5, Math.min(y2, y1) + Math.abs(y2 - y1)/2 + 15);
+			//Affichage informations
+			int l2 = troncon.getNomRue().length() + 12 + getNumberDigit(troncon.getLongueur()) + getNumberDigit(troncon.getVitesse());
+			gc.setFill(new Color(0,0,0,0.5));
+			gc.fillRect(10, this.getHeight() - 22, 20 + l2*7, 20);
+			gc.setFill(new Color(1,1,1,1));
+			gc.fillText(troncon.getNomRue() + " - " + troncon.getLongueur() + "dm - " + troncon.getVitesse() + "dm/h", 20, this.getHeight() - 6);
 		}
 	}
 	
@@ -469,7 +483,6 @@ public class PlanVilleVue extends Canvas {
 			gc.fillOval(plan.getEntrepot().getNoeud().getX() * zoom + offsetX - (RAYON_LIVRAISON-4)/2, plan.getEntrepot().getNoeud().getY() * zoom + offsetY - (RAYON_LIVRAISON-4)/2
 					, RAYON_LIVRAISON - 4, RAYON_LIVRAISON - 4);
         	gc.setFill(Color.RED);
-        	//gc.drawImage(img, x, y);
         }
 	}
 	
@@ -580,5 +593,14 @@ public class PlanVilleVue extends Canvas {
 				}
 			}
 		}
+	}
+	
+	private int getNumberDigit(int number) {
+		int t = 0;
+		while(number > 0) {
+			number = number/10;
+			t++;
+		}
+		return t;
 	}
 }
