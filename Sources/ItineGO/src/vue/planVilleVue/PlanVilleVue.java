@@ -161,7 +161,7 @@ public class PlanVilleVue extends Canvas {
 			//Recherche d'un noeud, livraison ou entrepot
 			if(plan.getNoeuds() != null) {
 				for(Map.Entry<Integer, Noeud> n : this.plan.getNoeuds().entrySet()) {
-					if(n != null) {
+					if(n != null && n.getValue().getId() != -1) {
 						double NoeudX = n.getValue().getX() * zoom + offsetX - RAYON_NOEUD /2;
 						double NoeudY = n.getValue().getY() * zoom + offsetY - RAYON_NOEUD /2;
 						double XCenter = x - pointerMargin /2;
@@ -274,19 +274,21 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	private void livraisonIsClicked(Livraison livraison) {
-		GraphicsContext gc = this.getGraphicsContext2D();
-		noeudIsClickedEffect(livraison.getNoeud());
-		double x = livraison.getNoeud().getX() * zoom + offsetX - RAYON_NOEUD /2;
-		double y = livraison.getNoeud().getY() * zoom + offsetY - RAYON_NOEUD /2;
-		//Affichage zone de texte
-		int l = String.valueOf(livraison.getNoeud().getId()).length();
-		gc.setFill(new Color(0,0,0,0.5));
-		gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
-		//Affichage texte
-		gc.setFill(new Color(1,1,1,1));
-		gc.fillText(String.valueOf(livraison.getNoeud().getId()), x + 15 + 5, y);
-		if(plan != null && plan.getTournee() != null) {
-			miseEnEvidenceTrajet(livraison.getNoeud());
+		if(livraison.getNoeud().getId() != -1) {
+			GraphicsContext gc = this.getGraphicsContext2D();
+			noeudIsClickedEffect(livraison.getNoeud());
+			double x = livraison.getNoeud().getX() * zoom + offsetX - RAYON_NOEUD /2;
+			double y = livraison.getNoeud().getY() * zoom + offsetY - RAYON_NOEUD /2;
+			//Affichage zone de texte
+			int l = String.valueOf(livraison.getNoeud().getId()).length();
+			gc.setFill(new Color(0,0,0,0.5));
+			gc.fillRect(x + 15, y - 15, 10 + l*7, 20);
+			//Affichage texte
+			gc.setFill(new Color(1,1,1,1));
+			gc.fillText(String.valueOf(livraison.getNoeud().getId()), x + 15 + 5, y);
+			if(plan != null && plan.getTournee() != null) {
+				miseEnEvidenceTrajet(livraison.getNoeud());
+			}
 		}
 	}
 	
@@ -577,7 +579,7 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	public void miseEnEvidenceTrajet(Noeud arrivee) {
-		if(plan != null) {
+		if(plan != null && !modeAjouterLivraison ) {
 			for(Trajet trajet: plan.getTournee().getTrajets()) {
 				if(trajet.getArrive().equals(arrivee)) {
 					GraphicsContext gc = this.getGraphicsContext2D();
