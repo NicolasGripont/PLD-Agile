@@ -166,7 +166,7 @@ public class Controleur extends Application {
 	 * Permet de sauvegarder la tournée calculée et affichée.
 	 */
 	public void clicBoutonSauvegarder() {
-		etatCourant.clicBoutonSauvegarder(this, gestionnaire);
+		etatCourant.clicBoutonSauvegarder(this);
 		etatCourant.getEtat();
 	}
 	
@@ -192,7 +192,7 @@ public class Controleur extends Application {
 	 * Permet d'ajouter une livraison dans la tournée. Il faudra ensuite choisir sa position sur le plan.
 	 */
 	public void clicBoutonAjouter() {
-		etatCourant.clicBoutonAjouter(this, gestionnaire);
+		etatCourant.clicBoutonAjouter(this);
 		etatCourant.getEtat();
 	}
 	

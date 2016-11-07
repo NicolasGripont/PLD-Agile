@@ -21,11 +21,11 @@ public abstract class EtatDefaut {
 	public void clicBoutonCalculerTournee		(Controleur controleur, Gestionnaire gestionnaire) {}
 	public void clicBoutonGenererFeuilleDeRoute (Controleur controleur, Gestionnaire gestionnaire, String link) {}
 	public void clicBoutonStopperTournee		(Controleur controleur, Gestionnaire gestionnaire) {}
-	public void clicBoutonModifier				(Controleur controleur) 						   {}
-	public void clicBoutonSauvegarder			(Controleur controleur, Gestionnaire gestionnaire) {}
+	public void clicBoutonModifier				(Controleur controleur) {}
+	public void clicBoutonSauvegarder			(Controleur controleur) {}
 	public void clicBoutonAnnuler				(Controleur controleur, Gestionnaire gestionnaire) {}
 	public void clicBoutonSupprimer				(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {}
-	public void clicBoutonAjouter				(Controleur controleur, Gestionnaire gestionnaire) {}
+	public void clicBoutonAjouter				(Controleur controleur) {}
 	public void clicPlanNoeud					(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {}
 	public void clicPlanLivraison				(Controleur controleur, Gestionnaire gestionnaire, Livraison livraison) {}
 	

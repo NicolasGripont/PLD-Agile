@@ -202,4 +202,17 @@ public class Gestionnaire {
 		// TODO récupérer la livraison à supprimer
 		return null;
 	}
+
+	public void reordonnerLivraisonTournee(int positionInitiale, int positionFinale) {
+		// TODO Changer l'ordre de la livraison à la position initiale vers la position finale.
+		
+	}
+
+	public void changerPlageHoraire(int numLigne, String plageDebut) {
+		// TODO numLigne : Livraison à modifier
+		// plageDebut : nouvelle plage de la livraison
+		getLivraisonTournee(numLigne).setDebutPlage(new Horaire(plageDebut));
+		
+		// Checker si ça modifie la tournée au niveau des plages
+	}
 }

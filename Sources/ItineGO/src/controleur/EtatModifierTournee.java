@@ -1,5 +1,7 @@
 package controleur;
 
+import com.sun.corba.se.impl.monitoring.MonitoredObjectFactoryImpl;
+
 import modeles.Gestionnaire;
 import modeles.Livraison;
 
@@ -14,7 +16,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param controleur : Controleur de l'application.
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
-	public void clicBoutonSauvegarder (Controleur controleur, Gestionnaire gestionnaire) {
+	public void clicBoutonSauvegarder (Controleur controleur) {
 		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
 		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
 		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
@@ -46,12 +48,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param numLigne : Numéro de la ligne de la livraison a supprimé.
 	 */
 	public void clicBoutonSupprimer	(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {
-		Livraison livraisonASuppr = gestionnaire.getLivraisonTournee(numLigne);
-		SupprimerLivraison commandeSuppression = new SupprimerLivraison(gestionnaire,livraisonASuppr);
-		
-		
-		
-		
+		SupprimerLivraison commandeSuppression = new SupprimerLivraison(gestionnaire, numLigne);
+		controleur.listeModifications.ajouterCommande(commandeSuppression);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	/** 
@@ -60,7 +61,8 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param controleur : Controleur de l'application.
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
-	public void clicBoutonAjouter (Controleur controleur, Gestionnaire gestionnaire) {
+	public void clicBoutonAjouter (Controleur controleur) {
+		controleur.setEtatCourant(controleur.etatAjouterTourneePlace);
 	}
 	
 	/**
@@ -69,7 +71,13 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage. 
 	 */
-	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
+	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {
+		ModifierOrdre commandeModifier = new ModifierOrdre(gestionnaire, numLigne, nouveauNumLigne);
+		controleur.listeModifications.ajouterCommande(commandeModifier);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+		
 	}
 	
 	/**
@@ -79,6 +87,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param debutPlage : Plage horaire de début.
 	 */
 	public void modifierPlageDebut(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageDebut) {
+		ModifierPlageHoraireDebut modifierPlageHoraireDebut = new ModifierPlageHoraireDebut(gestionnaire, numLigne, plageDebut);
+		controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	/**
