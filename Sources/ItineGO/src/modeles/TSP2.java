@@ -5,12 +5,23 @@ import java.util.ArrayList;
 public class TSP2 extends TSP1 {
 	@Override
 	protected int bound(Integer sommetCourant, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
-		int min = 100000;
-		for(int i = 0; i < nonVus.size(); ++i) {
-			if(cout[sommetCourant][nonVus.get(i)] < min) {
-				min = cout[sommetCourant][nonVus.get(i)];
+		int min=0;
+		for(int i : nonVus) {
+			int mini = Integer.MAX_VALUE;
+			for(int j : nonVus) {
+				if(cout[i][j]<mini && (i!=j) ){
+					mini= cout[i][j];
+				}
+			}
+		min+=mini;
+		}
+		int minj = Integer.MAX_VALUE;
+		for(int j : nonVus) {
+			if(cout[j][0]<minj){
+				minj= cout[j][0];
 			}
 		}
+		min+=minj;
 		return min;
 	}
 }
