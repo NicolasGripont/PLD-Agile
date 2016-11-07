@@ -24,6 +24,14 @@ public class Tournee {
 		return trajets;
 	}
 
+	public void ajouterTrajet(Integer index, Trajet traj) {
+		trajets.add(index, traj);
+	}
+	
+	public void supprimerTrajet(Integer index) {
+		trajets.remove(index);
+	}
+	
 	@Override
 	public String toString() {
 		return "Tournee [trajets=" + trajets + "]";
