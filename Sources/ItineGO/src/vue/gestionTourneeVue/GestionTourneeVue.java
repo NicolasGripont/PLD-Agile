@@ -4,9 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.event.ChangeEvent;
-
 import controleur.Controleur;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -15,8 +12,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +27,7 @@ import modeles.Noeud;
 import modeles.Plan;
 import vue.gestionVue.GestionVue;
 import vue.planVilleVue.PlanVilleVue;
+import javafx.util.Callback;
 
 /**
  * Vue affichant la tournée à effectuer après la fin du calcul
