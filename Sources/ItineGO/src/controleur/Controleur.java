@@ -198,8 +198,8 @@ public class Controleur extends Application {
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage.
 	 */
-	public void modifierLigne(int numLigne, int nouveauNumLigne) {
-		etatCourant.modifierLigne(this, gestionnaire, numLigne, nouveauNumLigne);
+	public void modifierOrdre(int numLigne, int nouveauNumLigne) {
+		etatCourant.modifierOrdre(this, gestionnaire, numLigne, nouveauNumLigne);
 		etatCourant.getEtat();
 	}
 	
@@ -275,6 +275,14 @@ public class Controleur extends Application {
 	}
 	
 	/**
+	 * Met à jour la vue qui amène sur les modifications de la tournée.
+	 */
+	public void clicBoutonModifier() {
+		etatCourant.clicBoutonModifier(this);
+		etatCourant.getEtat();
+	}
+	
+	/**
 	 * Redessine le plan.
 	 */
 	public void redessinerPlan() {
@@ -288,4 +296,6 @@ public class Controleur extends Application {
 	public Gestionnaire getGestionnaire() {
 		return gestionnaire;
 	}
+
+	
 }

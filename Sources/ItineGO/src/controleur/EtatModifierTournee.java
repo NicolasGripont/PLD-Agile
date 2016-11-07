@@ -23,6 +23,10 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
+		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
+		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
 	/**
@@ -50,7 +54,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param numLigne : Ligne du tableau de la livraison modifiée.
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage. 
 	 */
-	public void modifierLigne(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
+	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {		
 	}
 	
 	/**
