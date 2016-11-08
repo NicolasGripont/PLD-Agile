@@ -632,9 +632,9 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
 	  		
-		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getSeconde()){
+		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
 		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive(livraisons.get( trajet.getDepart().getId()).getDebutPlage());
-		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getSeconde() ;
+		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
 		    		} else {
 		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(entrepot.getHoraireDepart()) );
 		    			livraisons.get(trajet.getArrive().getId()).getHeureArrive().ajouterSeconde(coutVus);

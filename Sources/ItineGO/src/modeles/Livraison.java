@@ -79,7 +79,7 @@ public class Livraison {
 	}
 
 	public boolean sontValidesPlages() {
-		if(heureArrive.getSeconde() >= debutPlage.getSeconde() && (heureArrive.getSeconde() < finPlage.getSeconde() || finPlage.getSeconde() == 0)) {
+		if(heureArrive.getHoraireEnSecondes() >= debutPlage.getHoraireEnSecondes() && (heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0)) {
 			return true;
 		}
 		return false;
@@ -204,9 +204,9 @@ public class Livraison {
 	 * Si arrivée dans les temps renvoie 0
 	 */
 	public int getTempsAttente() {
-		if(debutPlage.getSeconde()-heureArrive.getSeconde() < 0) {
+		if(debutPlage == null || debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes() < 0) {
 			return  0;
 		}
-		return debutPlage.getSeconde()-heureArrive.getSeconde();
+		return debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes();
 	}
 }

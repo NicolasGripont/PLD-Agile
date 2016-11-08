@@ -55,12 +55,21 @@ public class Horaire {
 	}
 	
 	/**
+	 * Renvoie l'horaire sous forme d'une durée en minutes depuis 00:00:00
+	 * @return
+	 * 		Equivalent de l'horaire en minutes depuis 00:00:00
+	 */
+	public int getHoraireEnMinutes() {
+		return Math.round((heure * 60) + minute + (seconde / 60));
+	}
+	
+	/**
 	 * Renvoie l'horaire sous forme d'une durée en secondes depuis 00:00:00
 	 * @return
 	 * 		Equivalent de l'horaire en secondes depuis 00:00:00
 	 */
-	public int getHoraireEnMinutes() {
-		return Math.round((heure * 60) + minute + (seconde / 60));
+	public int getHoraireEnSecondes() {
+		return Math.round(heure * 60 + minute * 60 + seconde);
 	}
 
 	/**

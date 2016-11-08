@@ -90,15 +90,15 @@ public class Tournee {
 		Livraison liv = livraisons.get(ordreLivraisons.get(position));
 		liv.setDebutPlage(newHoraire);
 		Horaire horaire = liv.getHeureArrive();
-		if(liv.getHeureArrive().getSeconde() < liv.getDebutPlage().getSeconde()) {
+		if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
 			horaire = liv.getDebutPlage();
 		}
 		for(int i = position+1; i < ordreLivraisons.size(); ++i) {
 			liv = livraisons.get(ordreLivraisons.get(i));
 			Livraison livPrec = livraisons.get(ordreLivraisons.get(i-1));
-			horaire.ajouterSeconde(livPrec.getHeureDepart().getSeconde() + trajets.get(i).getTemps());
+			horaire.ajouterSeconde(livPrec.getHeureDepart().getHoraireEnSecondes() + trajets.get(i).getTemps());
 			liv.setHeureArrive(horaire);
-			if(liv.getHeureArrive().getSeconde() < liv.getDebutPlage().getSeconde()) {
+			if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
 				horaire = liv.getDebutPlage();
 			}
 			horaire.ajouterSeconde(liv.getDuree());
