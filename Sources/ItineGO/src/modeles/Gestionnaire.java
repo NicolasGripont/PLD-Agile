@@ -196,6 +196,9 @@ public class Gestionnaire {
 
 	public void supprimerLivraisonTournee(int position) {
 		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
 	public Noeud getNoeudTournee(int position) {
