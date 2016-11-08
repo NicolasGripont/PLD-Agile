@@ -43,10 +43,11 @@ public class ListeModifications {
 	public void annulerModification() throws NonRespectPlagesHoraires {
 		undoModifications();
 		listeModifications.removeFirst();
+		position = 0;
 	}
 	
 	public void finModification() {
-		if(listeModifications.getFirst().estVide()) {
+		if(listeModifications.getFirst().estVide() && !listeModifications.isEmpty()) {
 			listeModifications.removeFirst();
 		}
 	}
@@ -56,6 +57,16 @@ public class ListeModifications {
 	}
 	
 	public boolean isRedoPossible() {
-		return position-1 >= 0;
+		return position-1 >= 0 && listeModifications.size() >= 1;
+	}
+	
+	public LinkedList<ListeCommandes> getListeModifications() {
+		return listeModifications;
+	}
+
+	public void viderListeModifications() {
+		for (int i = 0; i < listeModifications.size(); i++) {
+			listeModifications.remove();
+		}
 	}
 }

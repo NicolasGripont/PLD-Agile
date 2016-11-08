@@ -253,7 +253,7 @@ public class GestionLivraisonsVue extends GestionVue {
              public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	 if(newValue.endsWith("P")) {
             		 dessinePlan(controleur.getGestionnaire().getPlan());
-            		 newValue = newValue.substring(0, newValue.length()-2);
+            		 newValue = newValue.substring(0, newValue.length()-1);
             	 }
                  labelTempsRestant.setText(newValue);
              }

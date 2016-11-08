@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
@@ -206,6 +207,11 @@ public class GestionTourneeVue extends GestionVue {
 				return new SimpleStringProperty("-");
 			}
 			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
+		});
+		
+		attenteColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(String.valueOf(livraison.getTempsAttente()));
 		});
 
 		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
@@ -510,27 +516,31 @@ public class GestionTourneeVue extends GestionVue {
 				return cell;
 			}
 	    });
-		/*dureeColonne.setOnEditCommit( value -> {
-		    new EventHandler<CellEditEvent<Livraison, String>>() {
-		        @Override
-		        public void handle(CellEditEvent<Livraison, String> t) {
-		        	int duree = 0;
-		        	try {
-		        		duree = Integer.valueOf(t.getNewValue());
-			            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(duree);
-			            controleur.entrerDuree(duree);
-			            planVilleVue.modeAjouterLivraison(false);
-			    		dureeColonne.setOnEditCommit(null);
-		        	} catch(Exception e) {
-		        		e.printStackTrace();
-		        		labelError.setText("Durée : Données invalide");
-		        	}
-		        }
-		    };
-		});*/
-		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
+		dureeColonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Livraison, String>>() {
+	        @Override
+	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
+	        	System.out.println("On perd le focus");
+				int duree = 0;
+				try {
+					duree = Integer.valueOf(t.getNewValue());
+					((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow())).setDuree(duree);
+					controleur.entrerDuree(duree);
+					planVilleVue.modeAjouterLivraison(false);
+		    		dureeColonne.setOnEditCommit(null);
+	        	} catch(Exception e) {
+	        		e.printStackTrace();
+	        		labelError.setText("Durée : Données invalide");
+	        	}
+	        }
+	    });
+		//Permet de synchronize l'IHM et le Thread RunLater
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Platform.runLater(() -> {
-        	livraisonTable.getSelectionModel().clearSelection();
         	livraisonTable.getFocusModel().focus(new TablePosition<>(livraisonTable, livraisonTable.getItems().size()-1, dureeColonne));
         	livraisonTable.edit(livraisonTable.getFocusModel().getFocusedCell().getRow(), dureeColonne);
 		});
@@ -547,7 +557,7 @@ public class GestionTourneeVue extends GestionVue {
 		boutonGenerer.setVisible(true);
 		dureeColonne.setOnEditCommit(null);
 		supprimerColonne.setVisible(false);
-		labelError.setVisible(false);
+		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 	}
 	
