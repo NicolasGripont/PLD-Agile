@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
@@ -529,6 +530,7 @@ public class GestionTourneeVue extends GestionVue {
 		        }
 		    };
 		});
+		//Permet de synchronize l'IHM et le Thread RunLater
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
