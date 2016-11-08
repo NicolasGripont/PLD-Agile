@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 
+import exceptions.NonRespectPlagesHoraires;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,7 +39,6 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				controleur.stage.show();
 				controleur.setEtatCourant(controleur.etatApplicationDemarree);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -68,7 +68,6 @@ public class EtatTourneeAffiche extends EtatDefaut {
 				controleur.gestionLivraisonsVue.miseAJourTableau(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -107,11 +106,19 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	}
 	
 	public void undo(Controleur controleur) {
-		controleur.listeModifications.undoModifications();
+		try {
+			controleur.listeModifications.undoModifications();
+		} catch (NonRespectPlagesHoraires e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void redo(Controleur controleur) {
-		controleur.listeModifications.redoModifications();
+		try {
+			controleur.listeModifications.redoModifications();
+		} catch (NonRespectPlagesHoraires e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void getEtat()

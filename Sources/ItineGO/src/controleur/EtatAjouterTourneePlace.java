@@ -1,5 +1,6 @@
 package controleur;
 
+import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -25,7 +26,11 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	}
 	
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
-		controleur.listeModifications.annulerModification();
+		try {
+			controleur.listeModifications.annulerModification();
+		} catch (NonRespectPlagesHoraires e) {
+			e.printStackTrace();
+		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());

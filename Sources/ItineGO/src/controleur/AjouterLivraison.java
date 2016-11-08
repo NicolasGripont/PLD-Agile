@@ -1,5 +1,6 @@
 package controleur;
 
+import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 import modeles.Livraison;
 
@@ -15,7 +16,7 @@ public class AjouterLivraison extends Commande {
 	
 	
 	@Override
-	public void doCode() {
+	public void doCode() throws NonRespectPlagesHoraires {
 		gestionnaire.ajouterLivraisonTournee();
 	}
 

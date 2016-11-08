@@ -1,5 +1,6 @@
 package controleur;
 
+import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 
 /**
@@ -25,7 +26,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
-		controleur.listeModifications.annulerModification();
+		try {
+			controleur.listeModifications.annulerModification();
+		} catch (NonRespectPlagesHoraires e) {
+			e.printStackTrace();
+		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
@@ -42,7 +47,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void clicBoutonSupprimer	(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {
 		SupprimerLivraison commandeSuppression = new SupprimerLivraison(gestionnaire, numLigne);
-		controleur.listeModifications.ajouterCommande(commandeSuppression);
+		try {
+			controleur.listeModifications.ajouterCommande(commandeSuppression);
+		} catch (NonRespectPlagesHoraires e) {
+			controleur.gestionTourneeVue.afficherErreur("La suppression ne permet pas de respecter les plages horaires");
+		}
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
@@ -67,7 +76,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {
 		ModifierOrdre commandeModifier = new ModifierOrdre(gestionnaire, numLigne, nouveauNumLigne);
-		controleur.listeModifications.ajouterCommande(commandeModifier);
+		try {
+			controleur.listeModifications.ajouterCommande(commandeModifier);
+		} catch (NonRespectPlagesHoraires e) {
+			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
+		}
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
@@ -82,7 +95,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void modifierPlageDebut(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageDebut) {
 		ModifierPlageHoraireDebut modifierPlageHoraireDebut = new ModifierPlageHoraireDebut(gestionnaire, numLigne, plageDebut);
-		controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
+		try {
+			controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
+		} catch (NonRespectPlagesHoraires e) {
+			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
+		}
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
@@ -96,7 +113,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void modifierPlageFin(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {
 		ModifierPlageHoraireFin modifierPlageHoraireFin = new ModifierPlageHoraireFin(gestionnaire, numLigne, plageFin);
-		controleur.listeModifications.ajouterCommande(modifierPlageHoraireFin);
+		try {
+			controleur.listeModifications.ajouterCommande(modifierPlageHoraireFin);
+		} catch (NonRespectPlagesHoraires e) {
+			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
+		}
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

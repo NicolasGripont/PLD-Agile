@@ -44,7 +44,6 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 					//changement d'état
 					controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

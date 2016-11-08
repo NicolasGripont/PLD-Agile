@@ -69,7 +69,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.setEtatCourant(controleur.etatTourneeAffiche);
 				controleur.gestionTourneeVue.majVisualiserTournee();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 		}
@@ -102,7 +102,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.show();
 				controleur.setEtatCourant(controleur.etatApplicationDemarree);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
@@ -132,7 +132,6 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);	
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

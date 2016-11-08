@@ -1,5 +1,6 @@
 package controleur;
 
+import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 import modeles.Livraison;
 import modeles.Noeud;
@@ -17,14 +18,14 @@ public class SupprimerLivraison extends Commande {
 	}
 	
 	@Override
-	public void doCode() {
+	public void doCode() throws NonRespectPlagesHoraires {
 		livraison = gestionnaire.getLivraisonTournee(numLigne);
 		noeudSuivant = gestionnaire.getNoeudTournee(numLigne+1);
 		gestionnaire.supprimerLivraisonTournee(livraison);
 	}
 
 	@Override
-	public void undoCode() {
+	public void undoCode() throws NonRespectPlagesHoraires {
 		gestionnaire.setLivraisonEnCourCreation(livraison);
 		gestionnaire.setNoeudSuivant(noeudSuivant);
 		gestionnaire.ajouterLivraisonTournee();

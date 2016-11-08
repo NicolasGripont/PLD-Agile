@@ -74,7 +74,6 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 				controleur.stage.show();
 				controleur.setEtatCourant(controleur.etatApplicationDemarree);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
