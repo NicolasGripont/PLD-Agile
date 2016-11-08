@@ -513,17 +513,53 @@ public class Plan {
        }
     }
 	
-	public void supressionLivraisonTournee(Livraison aSuprimer){
+	public void supressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){
 		
-		Noeud arrive = null;
-		Noeud depart = null;
+		Noeud arrive = precedent;
+		Noeud depart = suivant;
 		
 		supprimerLivraison(aSuprimer);
-		TrouverNoeudPrecendentEtSuivant(aSuprimer,depart , arrive);
+		
+		tableauDesId = new int [noeuds.size()];
+    	remplirTableauDesID(tableauDesId);
+    	
+    	Integer idLivraison[];
+    	idLivraison = new Integer[2]; 
+    	idLivraison[0]=numDansTableau(depart.getId());
+		idLivraison[1]=numDansTableau(arrive.getId());
+    	
+    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	/**
+    	 * On calcul les plus court chemin entre toute les livraisons
+    	 */
+    	Dijkstra(idLivraison, AllNoires, AllPrevious);
+    	
+    	List<Integer> idTrajetPrevu = ConstructionListdesAdressPourTrajet(idLivraison[0], idLivraison[1], AllPrevious.get(idLivraison[0]));
+    	Trajet trajetPrevu = ConstructionTrajet(idTrajetPrevu);
+    	
+		SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
+
 	}
 	
-	private void TrouverNoeudPrecendentEtSuivant(Livraison aSuprimer, Noeud depart, Noeud arrive) {
-		
+	private void SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(Trajet trajetPrevu) {
+		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
+	      
+		List<Trajet> futurTrajetTournee= new ArrayList<Trajet>();
+		Trajet myTrajet = new Trajet(listTrajetTourneeCopie.get(0).getDepart(), listTrajetTourneeCopie.get(0).getArrive(), listTrajetTourneeCopie.get(0).getTroncons());
+	      while(itListTrajetTourneeCopie.hasNext()){
+	    	  myTrajet = itListTrajetTourneeCopie.next();
+	    	  
+	    	  if((myTrajet.getDepart().equals(trajetPrevu.getDepart())  ) ) {
+		    	  futurTrajetTournee.add(trajetPrevu);
+		      }
+	    	  
+		      if(!( myTrajet.getDepart().equals(trajetPrevu.getDepart()) || myTrajet.getArrive().equals(trajetPrevu.getArrive()) ) ) {
+		    	  futurTrajetTournee.add(myTrajet);
+		      } 
+	      } 
+	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
 		
 	}
 
@@ -534,7 +570,7 @@ public class Plan {
 		
 	}
 
-	public void ajouterLivraisonTournee(Livraison precedent, Livraison aAjouter, Livraison suivant){
+	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
 		
 		ajouterLivraison(aAjouter);
 	
@@ -558,13 +594,13 @@ public class Plan {
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
 		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
 		
-		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee(trajetPrevu1, trajetPrevu2);
+		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
 		
 //    	InsertionLivraisonDansTournee(depart, AllPrevious);
 
 		
 	}
-private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee( Trajet trajet1, Trajet trajet2) {
+private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Trajet trajet1, Trajet trajet2) {
 
 		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
@@ -618,8 +654,8 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee( Tra
 	
 	
 	
-	private void remplirTableauDepartPourAjout(Integer[] depart, Livraison precedent, Livraison aAjouter, Livraison suivant) {
-		depart[0]=numDansTableau(precedent.getNoeud().getId());
+	private void remplirTableauDepartPourAjout(Integer[] depart, Noeud precedent, Livraison aAjouter, Noeud suivant) {
+		depart[0]=numDansTableau(precedent.getId());
 		depart[1]=numDansTableau(aAjouter.getNoeud().getId());
 		depart[2]=numDansTableau(aAjouter.getNoeud().getId());
 	}

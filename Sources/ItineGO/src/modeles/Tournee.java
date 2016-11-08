@@ -1,6 +1,7 @@
 package modeles;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ public class Tournee {
 	/**
 	 * Liste des livraisons ordonées dans l'ordre de passage
 	 */
-	private List<Integer> ordreLivraisons;
+	private LinkedList<Integer> ordreLivraisons;
 	/**
 	 * Liste de trajets à faire
 	 */
@@ -37,6 +38,10 @@ public class Tournee {
 		this.entrepot = entrepot;
 		this.livraisons = livraisons;
 		this.trajets = trajets;
+		this.ordreLivraisons = new LinkedList<>();
+		for(int i = 1; i < trajets.size(); ++i) {
+			this.ordreLivraisons.add(trajets.get(i).getDepart().getId());
+		}
 	}
 
 	public List<Trajet> getTrajets() {
@@ -94,6 +99,20 @@ public class Tournee {
 			horaire.ajouterSeconde(liv.getDuree());
 			liv.setHeureDepart(horaire);
 		}
+	}
+	
+	/**
+	 * Renvoie la livraison de la position demandée de l'ordre des livraisons
+	 */
+	public Noeud getNoeudAtPos(int position) {
+		if(position == ordreLivraisons.size()) {
+			return entrepot.getNoeud();
+		}
+		return livraisons.get(ordreLivraisons.get(position)).getNoeud();
+	}
+	
+	public Livraison getLivraisonAtPos(int position) {
+		return livraisons.get(ordreLivraisons.get(position));
 	}
 	
 	/**

@@ -14,9 +14,8 @@ public class EtatAjouterTourneeOrdre extends EtatDefaut {
 	 * @param noeud
 	 */
 	public void clicPlanLivraison(Controleur controleur, Gestionnaire gestionnaire, Noeud noeudLivraison) {
-		if(gestionnaire.isNoeudLivraison(noeudLivraison)) {
-			Livraison livraisonSuivante = gestionnaire.getPlan().getLivraisons().get(noeudLivraison);
-			gestionnaire.setLivraisonSuivante(livraisonSuivante);
+		if(gestionnaire.isNoeudLivraison(noeudLivraison) || gestionnaire.isNoeudEntrepot(noeudLivraison)) {
+			gestionnaire.setNoeudSuivant(noeudLivraison);
 			controleur.gestionTourneeVue.majAjouterTourneeDuree();
 			controleur.setEtatCourant(controleur.etatAjouterTourneeDuree);
 		} else {

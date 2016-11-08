@@ -5,6 +5,7 @@ import controleur.Controleur;
 import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
+import exceptions.NonRespectPlagesHoraires;
 
 /**
  * Classe servant de lien entre le modèle et le contrôleur
@@ -20,8 +21,9 @@ public class Gestionnaire {
 	 */
 	private Controleur controleur;
 	
-	private Livraison livraisonEnCourCreation;
-	private Livraison livraisonSuivante;
+	private Livraison livraisonEnCoursCreation;
+	private Noeud noeudSuivant;
+	private int positionLivraisonEnCours;
 	
 	/**
 	 * Constructeur de la classe
@@ -169,36 +171,42 @@ public class Gestionnaire {
 		plan.genererFeuilleDeRoute(link);
 	}
 	
-	public void ajouterLivraisonTournee() {
-		//TODO : UTILISER LES ATTRIBUTS : livraisonEnCoursCreation et livraisonSuivante 
-		// il faudra rajouter la livraison dans la liste des livraisons du plan et dans la tournée at the good position.
+	public void ajouterLivraisonTournee() throws NonRespectPlagesHoraires {
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, getNoeudTournee(getPositionLivraisonEnCours()-1), getNoeudTournee(getPositionLivraisonEnCours()));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
-	public Livraison getLivraisonEnCourCreation() {
-		return livraisonEnCourCreation;
+	public Livraison getLivraisonEnCoursCreation() {
+		return livraisonEnCoursCreation;
 	}
 
 	public void setLivraisonEnCourCreation(Livraison livraisonEnCourCreation) {
-		this.livraisonEnCourCreation = livraisonEnCourCreation;
+		this.livraisonEnCoursCreation = livraisonEnCourCreation;
 	}
 
-	public Livraison getLivraisonSuivante() {
-		return livraisonSuivante;
+	public Noeud getNoeudSuivant() {
+		return noeudSuivant;
 	}
 
-	public void setLivraisonSuivante(Livraison livraisonSuivante) {
-		this.livraisonSuivante = livraisonSuivante;
+	public void setNoeudSuivant(Noeud noeudSuivant) {
+		this.noeudSuivant = noeudSuivant;
 	}
 
-	public void supprimerLivraisonTournee(Livraison livraison) {
-		//TODO :
-		// il faudra supprimer la livraison dans la liste des livraisons du plan et dans la tournée.
-		
+	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
+		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
-	public Livraison getLivraisonTournee(int numLigne) {
-		// TODO récupérer la livraison à supprimer
-		return null;
+	public Noeud getNoeudTournee(int position) {
+		return plan.getTournee().getNoeudAtPos(position);
+	}
+	
+	public Livraison getLivraisonTournee(int position) {
+		return plan.getTournee().getLivraisonAtPos(position);
 	}
 
 	public void reordonnerLivraisonTournee(int positionInitiale, int positionFinale) {
@@ -206,12 +214,16 @@ public class Gestionnaire {
 		
 	}
 
-	public void changerPlageHoraireDebut(int position, String plageDebut) {
-		// TODO numLigne : Livraison à modifier
-		// plageDebut : nouvelle plage de la livraison
+	/**
+	 * Change le début de la plage horaire de la livraison choisie
+	 * @throws NonRespectPlagesHoraires
+	 * 		Si les plages horaires ne sont pas respectées
+	 */
+	public void changerPlageHoraireDebut(int position, String plageDebut) throws NonRespectPlagesHoraires {
 		getLivraisonTournee(position).setDebutPlage(new Horaire(plageDebut));
-		
-		// Checker si ça modifie la tournée au niveau des plages
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 	
 	public void changerPlageHoraireFin(int position, String plageFin) {
@@ -219,7 +231,18 @@ public class Gestionnaire {
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
-		// TODO Regarder si ce noeud est dans la liste des livraisons
 		return plan.getLivraisons().containsKey(noeud);
+	}
+
+	public boolean isNoeudEntrepot(Noeud noeud) {
+		return plan.getEntrepot().getNoeud().equals(noeud);
+	}
+
+	public int getPositionLivraisonEnCours() {
+		return positionLivraisonEnCours;
+	}
+
+	public void setPositionLivraisonEnCours(int positionLivraisonEnCours) {
+		this.positionLivraisonEnCours = positionLivraisonEnCours;
 	}
 }

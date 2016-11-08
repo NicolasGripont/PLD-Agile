@@ -3,7 +3,6 @@ package controleur;
 import java.io.File;
 
 import modeles.Gestionnaire;
-import modeles.Livraison;
 import modeles.Noeud;
 
 /**
