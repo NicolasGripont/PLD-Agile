@@ -113,7 +113,6 @@ public class Tournee {
 		if(position == ordreLivraisons.size()) {
 			return entrepot.getNoeud();
 		}
-		//System.err.println(livraisons.get(ordreLivraisons.get(position)));
 		return livraisons.get(ordreLivraisons.get(position)).getNoeud();
 	}
 	

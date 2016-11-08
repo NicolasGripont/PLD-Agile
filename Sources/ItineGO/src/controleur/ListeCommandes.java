@@ -19,7 +19,7 @@ public class ListeCommandes {
 		try {
 			commande.doCode();
 		} catch (NonRespectPlagesHoraires e) {
-			listeCommandes.removeFirst();
+			//listeCommandes.removeFirst();
 			throw e;
 		}
 		for(int i = 0; i < position; i++) {

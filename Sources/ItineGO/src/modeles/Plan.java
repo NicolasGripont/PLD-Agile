@@ -835,7 +835,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 				}
 				
 				//La livraison à faire
-				Livraison l = livraisons.get(trajets.get(i).getArrive());
+				Livraison l = livraisons.get(trajets.get(i).getArrive().getId());
 				if(i == trajets.size()-1) {
 					output.write("\nArrivée à l'entrepot : " + heureCourante.getHoraire());
 				}

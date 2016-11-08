@@ -172,6 +172,7 @@ public class Gestionnaire {
 	}
 	
 	public void ajouterLivraisonTournee() throws NonRespectPlagesHoraires {
+		System.err.println(positionLivraisonEnCours);
 		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, getNoeudTournee(getPositionLivraisonEnCours()-1), getNoeudTournee(getPositionLivraisonEnCours()));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
@@ -195,12 +196,10 @@ public class Gestionnaire {
 	}
 
 	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
-		System.err.println(plan.getTournee().getLivraisons().keySet());
 		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
-		System.err.println(plan.getTournee().getLivraisons().keySet());
 	}
 
 	public Noeud getNoeudTournee(int position) {

@@ -79,7 +79,10 @@ public class Livraison {
 	}
 
 	public boolean sontValidesPlages() {
-		return(heureArrive.getSeconde() >= debutPlage.getSeconde() && heureArrive.getSeconde() < finPlage.getSeconde());
+		if(heureArrive.getSeconde() >= debutPlage.getSeconde() && (heureArrive.getSeconde() < finPlage.getSeconde() || finPlage.getSeconde() == 0)) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
