@@ -304,7 +304,7 @@ public class Plan {
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
 				tronconsTrajet.add(
-						troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+						troncons.get(new Pair<Noeud,Noeud>(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
@@ -571,7 +571,6 @@ public class Plan {
 	}
 
 	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
-		
 		ajouterLivraison(aAjouter);
 	
 		tableauDesId = new int [noeuds.size()];
@@ -589,14 +588,14 @@ public class Plan {
     	Dijkstra(depart, AllNoires, AllPrevious);
 		
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));
-
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));    	
+    	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
 		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
 		
 		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
 		
-//    	InsertionLivraisonDansTournee(depart, AllPrevious);
+    	//InsertionLivraisonDansTournee(depart, AllPrevious);
 
 		
 	}
@@ -643,7 +642,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
-					troncons.get(new Pair(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
+					troncons.get(new Pair<Noeud,Noeud>(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
 			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
 							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
@@ -657,7 +656,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	private void remplirTableauDepartPourAjout(Integer[] depart, Noeud precedent, Livraison aAjouter, Noeud suivant) {
 		depart[0]=numDansTableau(precedent.getId());
 		depart[1]=numDansTableau(aAjouter.getNoeud().getId());
-		depart[2]=numDansTableau(aAjouter.getNoeud().getId());
+		depart[2]=numDansTableau(suivant.getId());
 	}
 
 	
