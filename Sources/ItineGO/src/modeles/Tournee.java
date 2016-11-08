@@ -38,6 +38,10 @@ public class Tournee {
 		this.entrepot = entrepot;
 		this.livraisons = livraisons;
 		this.trajets = trajets;
+		this.ordreLivraisons = new LinkedList<>();
+		for(int i = 1; i < trajets.size(); ++i) {
+			this.ordreLivraisons.add(trajets.get(i).getDepart().getId());
+		}
 	}
 
 	public List<Trajet> getTrajets() {
