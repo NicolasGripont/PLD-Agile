@@ -37,4 +37,15 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	{
 		System.out.println("etat ajouter place");
 	}
+	
+	/**
+	 * Permet de redessiner le plan dans la vue correspondante.
+	 * 
+	 * @param controleur : Controleur de l'application.
+	 * @param gestionnaire : Gestionnaire de l'application.
+	 */
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
+	{
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+	}
 }
