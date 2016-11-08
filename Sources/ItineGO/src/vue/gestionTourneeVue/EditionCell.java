@@ -60,7 +60,7 @@ class EditionCell extends TableCell<Livraison, String> {
 
         textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if( oldValue = true && newValue == false) {
-                commitEdit();
+            	this.commitEdit(textField.getText());
             }
         });
 
@@ -68,17 +68,12 @@ class EditionCell extends TableCell<Livraison, String> {
             if( e.getCode() == KeyCode.ESCAPE) {
                 cancelEdit();
             } else if(e.getCode() == KeyCode.ENTER) {
-            	this.commitEdit();
+            	this.commitEdit(textField.getText());
             }
         });
     }
 
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
-    }
-
-    private boolean commitEdit() {
-        super.commitEdit(textField.getText());
-        return true;
     }
 }
