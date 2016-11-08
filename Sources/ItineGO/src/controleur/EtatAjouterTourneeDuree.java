@@ -8,8 +8,8 @@ public class EtatAjouterTourneeDuree extends EtatDefaut {
 	 * 
 	 */
 	public void entrerDuree	(Controleur controleur, Gestionnaire gestionnaire, int duree) {
-		gestionnaire.getLivraisonEnCourCreation().setDuree(duree);
-		AjouterLivraison ajouterLivraison = new AjouterLivraison(gestionnaire,gestionnaire.getLivraisonEnCourCreation());
+		gestionnaire.getLivraisonEnCoursCreation().setDuree(duree);
+		AjouterLivraison ajouterLivraison = new AjouterLivraison(gestionnaire,gestionnaire.getLivraisonEnCoursCreation());
 		controleur.listeModifications.ajouterCommande(ajouterLivraison);
 		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

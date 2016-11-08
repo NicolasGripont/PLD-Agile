@@ -1,6 +1,7 @@
 package modeles;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ public class Tournee {
 	/**
 	 * Liste des livraisons ordonées dans l'ordre de passage
 	 */
-	private List<Integer> ordreLivraisons;
+	private LinkedList<Integer> ordreLivraisons;
 	/**
 	 * Liste de trajets à faire
 	 */
