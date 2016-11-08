@@ -245,9 +245,6 @@ public class Controleur extends Application {
 	 * @param noeud : Livraison sur laquelle on a cliqué.
 	 */
 	public void clicPlanLivraison(Noeud noeud) {
-		/*
-		 * TODO rechercher la livraison
-		 */
 		etatCourant.clicPlanLivraison(this, gestionnaire, noeud);
 		etatCourant.getEtat();
 	}

@@ -27,7 +27,7 @@ public abstract class EtatDefaut {
 	public void clicBoutonSupprimer				(Controleur controleur, Gestionnaire gestionnaire, int numLigne) {}
 	public void clicBoutonAjouter				(Controleur controleur) {}
 	public void clicPlanNoeud					(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {}
-	public void clicPlanLivraison				(Controleur controleur, Gestionnaire gestionnaire, Livraison livraison) {}
+	public void clicPlanLivraison				(Controleur controleur, Gestionnaire gestionnaire, Noeud noeudLivraison) {}
 	
 	public void glisserDeposer	   (Controleur controleur, boolean accepte, File fichier) {}
 	public void redessinerPlan	   (Controleur controleur, Gestionnaire gestionnaire) {}
