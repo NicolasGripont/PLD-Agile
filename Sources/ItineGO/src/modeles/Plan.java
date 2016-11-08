@@ -121,9 +121,6 @@ public class Plan {
 		int nbDeLivraison = livraisons.size();
     	
     	
-		/**
-		 * On utilisera TSP4 qui recup les plages horaires
-		 */
 		tableauDesId = new int [noeuds.size()];
     	
     	/**
@@ -257,6 +254,10 @@ public class Plan {
 		//on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
 
+		
+		//TODO tableau des idée
+		
+		
 		//LinkedList<Integer> ordreT = new LinkedList<Integer>()
 
 		futurTourne.add(depart[tsp.getMeilleureSolution(0)]);
@@ -269,7 +270,7 @@ public class Plan {
 	      while(itFT.hasNext()){
 	    	  myInt = itFT.next();
 		      if(!lastAdded.equals(myInt)) {
-		      futurTourne.add(myInt);
+		      futurTourne.add(tableauDesId[myInt]);
 		      }
 		      lastAdded=myInt;
 	      } 
@@ -491,6 +492,105 @@ public class Plan {
 			
        }
     }
+	
+	public void ajouterLivraisonTournee(Livraison precedent, Livraison aAjouter, Livraison suivant){
+		
+		ajouterLivraison(aAjouter);
+	
+		tableauDesId = new int [noeuds.size()];
+    	remplirTableauDesID(tableauDesId);
+    	
+    	Integer depart[];
+    	depart = new Integer[3]; 
+		remplirTableauDepartPourAjout(depart, precedent, aAjouter, suivant);
+		
+		
+		Integer matriceDuGraphe[][];
+    	matriceDuGraphe= new Integer[noeuds.size()][noeuds.size()] ; 
+    	remplirMatriceDuGraphe(matriceDuGraphe);
+    	
+    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	/**
+    	 * On calcul les plus court chemin entre toute les livraisons
+    	 */
+    	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
+		
+    	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));
+
+    	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
+		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
+		
+		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee(trajetPrevu1, trajetPrevu2);
+		
+//    	InsertionLivraisonDansTournee(depart, AllPrevious);
+
+		
+	}
+private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee( Trajet trajet1, Trajet trajet2) {
+		
+	
+	
+		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
+	      
+		List<Trajet> futurTrajetTournee= new ArrayList<Trajet>();
+		Trajet myTrajet = new Trajet(listTrajetTourneeCopie.get(0).getDepart(), listTrajetTourneeCopie.get(0).getArrive(), listTrajetTourneeCopie.get(0).getTroncons());
+	      while(itListTrajetTourneeCopie.hasNext()){
+	    	  myTrajet = itListTrajetTourneeCopie.next();
+		      if(!(myTrajet.getDepart().equals(trajet1.getDepart()) || myTrajet.getArrive().equals(trajet2.getArrive()) ) ) {
+		    	  futurTrajetTournee.add(myTrajet);
+		      } else {
+		    	  futurTrajetTournee.add(trajet1);
+		    	  futurTrajetTournee.add(trajet2);
+		      }
+	      } 
+	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
+	}
+
+
+	private List<Integer> ConstructionListdesAdressPourTrajet(Integer depart, Integer arrivee,
+			HashMap<Integer, Integer> previous) {
+		List<Integer> listeIdTrajet = new ArrayList<Integer>();
+		
+		
+		Integer noeudCourant = tableauDesId[arrivee]; //Comme on travaille avec des arbres de couvrance minimum on fait le chemin Ã  l'envers
+			while(previous.get(noeudCourant)!=noeudCourant) {
+				listeIdTrajet.add(tableauDesId[noeudCourant]);
+			    noeudCourant=previous.get(noeudCourant);
+			}
+			
+			listeIdTrajet.add(tableauDesId[depart]);
+			return listeIdTrajet;
+		
+	}
+
+
+	
+
+	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
+		List<Troncon> tronconsTrajet1 = new ArrayList<>();
+		for (Integer i = 0; i < idTrajetPrevu.size() - 2; i++) {
+			tronconsTrajet1.add(
+					troncons.get(new Pair(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
+		}
+			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
+							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
+					
+		return trajetPrevu;
+	}
+
+	
+	
+	
+	private void remplirTableauDepartPourAjout(Integer[] depart, Livraison precedent, Livraison aAjouter, Livraison suivant) {
+		depart[0]=numDansTableau(precedent.getNoeud().getId());
+		depart[1]=numDansTableau(aAjouter.getNoeud().getId());
+		depart[2]=numDansTableau(aAjouter.getNoeud().getId());
+	}
+
+	
 	
 	/**
 	 * Ajoute un noeud au plan
