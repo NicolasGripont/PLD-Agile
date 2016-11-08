@@ -208,19 +208,15 @@ public class Gestionnaire {
 		
 	}
 
-	public void changerPlageHoraireDebut(int numLigne, String plageDebut) {
+	public void changerPlageHoraireDebut(int position, String plageDebut) {
 		// TODO numLigne : Livraison à modifier
 		// plageDebut : nouvelle plage de la livraison
-		getLivraisonTournee(numLigne).setDebutPlage(new Horaire(plageDebut));
+		getLivraisonTournee(position).setDebutPlage(new Horaire(plageDebut));
 		
 		// Checker si ça modifie la tournée au niveau des plages
 	}
 	
-	public void changerPlageHoraireFin(int numLigne, String plageFin) {
-		// TODO numLigne : Livraison à modifier
-		// plageFin : nouvelle plage de la livraison
-		getLivraisonTournee(numLigne).setFinPlage(new Horaire(plageFin));
-		
-		// Checker si ça modifie la tournée au niveau des plages
+	public void changerPlageHoraireFin(int position, String plageFin) {
+		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
 	}
 }

@@ -30,6 +30,7 @@ public class Livraison {
 	 * Heure effective de départ de la livraison
 	 */
 	private Horaire heureDepart;
+
 	/**
 	 * Constructeur de la classe
 	 */
