@@ -5,6 +5,7 @@ import controleur.Controleur;
 import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
+import exceptions.NonRespectPlagesHoraires;
 
 /**
  * Classe servant de lien entre le modèle et le contrôleur
@@ -20,7 +21,7 @@ public class Gestionnaire {
 	 */
 	private Controleur controleur;
 	
-	private Livraison livraisonEnCourCreation;
+	private Livraison livraisonEnCoursCreation;
 	private Livraison livraisonSuivante;
 	
 	/**
@@ -174,12 +175,12 @@ public class Gestionnaire {
 		// il faudra rajouter la livraison dans la liste des livraisons du plan et dans la tournée at the good position.
 	}
 
-	public Livraison getLivraisonEnCourCreation() {
-		return livraisonEnCourCreation;
+	public Livraison getLivraisonEnCoursCreation() {
+		return livraisonEnCoursCreation;
 	}
 
 	public void setLivraisonEnCourCreation(Livraison livraisonEnCourCreation) {
-		this.livraisonEnCourCreation = livraisonEnCourCreation;
+		this.livraisonEnCoursCreation = livraisonEnCourCreation;
 	}
 
 	public Livraison getLivraisonSuivante() {
@@ -196,9 +197,8 @@ public class Gestionnaire {
 		
 	}
 
-	public Livraison getLivraisonTournee(int numLigne) {
-		// TODO récupérer la livraison à supprimer
-		return null;
+	public Livraison getLivraisonTournee(int position) {
+		return plan.getTournee().getLivraisonAtPos(position);
 	}
 
 	public void reordonnerLivraisonTournee(int positionInitiale, int positionFinale) {
@@ -206,12 +206,16 @@ public class Gestionnaire {
 		
 	}
 
-	public void changerPlageHoraireDebut(int position, String plageDebut) {
-		// TODO numLigne : Livraison à modifier
-		// plageDebut : nouvelle plage de la livraison
+	/**
+	 * Change le début de la plage horaire de la livraison choisie
+	 * @throws NonRespectPlagesHoraires
+	 * 		Si les plages horaires ne sont pas respectées
+	 */
+	public void changerPlageHoraireDebut(int position, String plageDebut) throws NonRespectPlagesHoraires {
 		getLivraisonTournee(position).setDebutPlage(new Horaire(plageDebut));
-		
-		// Checker si ça modifie la tournée au niveau des plages
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 	
 	public void changerPlageHoraireFin(int position, String plageFin) {
@@ -219,7 +223,6 @@ public class Gestionnaire {
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
-		// TODO Regarder si ce noeud est dans la liste des livraisons
 		return plan.getLivraisons().containsKey(noeud);
 	}
 }

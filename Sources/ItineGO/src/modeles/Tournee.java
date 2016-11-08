@@ -97,6 +97,13 @@ public class Tournee {
 	}
 	
 	/**
+	 * Renvoie la livraison de la position demandée de l'ordre des livraisons
+	 */
+	public Livraison getLivraisonAtPos(int position) {
+		return livraisons.get(ordreLivraisons.get(position));
+	}
+	
+	/**
 	 * Change la fin de la plage horaire de la livraison choisie
 	 * @param position
 	 * 		Position de la livraison dans la tournée
