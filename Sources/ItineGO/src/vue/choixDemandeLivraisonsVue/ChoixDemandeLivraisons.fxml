@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="800.0" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="580.0" minWidth="900.0" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
@@ -20,9 +20,9 @@
             </Label>
          </top>
          <center>
-            <StackPane fx:id="planVillePane" minHeight="370.0" minWidth="335.0" prefHeight="431.0" prefWidth="335.0" BorderPane.alignment="CENTER">
+            <StackPane fx:id="planVillePane" minHeight="300.0" minWidth="335.0" prefHeight="442.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin></StackPane>
          </center>
          <BorderPane.margin>
@@ -33,9 +33,9 @@
    <left>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <VBox maxWidth="400.0" minWidth="356.0" prefHeight="530.0" prefWidth="356.0" BorderPane.alignment="CENTER">
+            <VBox maxWidth="450.0" minWidth="450.0" prefHeight="530.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox maxWidth="400.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
+                  <HBox maxWidth="450.0" minWidth="450.0" prefHeight="27.0" prefWidth="450.0">
                      <children>
                         <ImageView fx:id="imageViewPrecedent" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#precedent" onMouseEntered="#imageViewPrecedentEntered" onMouseExited="#imageViewPrecedentExited" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="labelError" alignment="CENTER" prefHeight="27.0" prefWidth="373.0" text="Error" textAlignment="CENTER" textFill="RED">
@@ -44,7 +44,7 @@
                            </HBox.margin></Label>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" maxWidth="400.0" minWidth="336.0" prefHeight="23.0" prefWidth="336.0" text="Sélectionner demande de livraisons." textAlignment="CENTER">
+                  <Label alignment="CENTER" maxWidth="450.0" minWidth="450.0" prefHeight="23.0" prefWidth="450.0" text="Sélectionner demande de livraisons." textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
@@ -52,26 +52,26 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <HBox maxHeight="27.0" maxWidth="400.0" minHeight="27.0" minWidth="400.0" prefHeight="27.0" prefWidth="400.0">
+                  <HBox maxHeight="27.0" maxWidth="450.0" minHeight="27.0" minWidth="450.0" prefHeight="27.0" prefWidth="450.0">
                      <children>
-                        <TextField fx:id="textFieldLienFichier" maxHeight="27.0" maxWidth="235.0" minHeight="27.0" minWidth="235.0" prefHeight="27.0" prefWidth="235.0">
+                        <TextField fx:id="textFieldLienFichier" maxHeight="27.0" maxWidth="345.0" minHeight="27.0" minWidth="345.0" prefHeight="27.0" prefWidth="345.0">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="boutonParcourirFichier" maxHeight="27.0" maxWidth="148.0" minHeight="27.0" minWidth="101.0" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefHeight="27.0" prefWidth="101.0" text="Parcourir">
+                        <Button fx:id="boutonParcourirFichier" maxHeight="27.0" maxWidth="100.0" minHeight="27.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#choixFichierAction" prefHeight="27.0" prefWidth="100.0" text="Parcourir">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <AnchorPane fx:id="glisserDeposerFichierPane" prefHeight="372.0" prefWidth="395.0">
+                  <AnchorPane fx:id="glisserDeposerFichierPane" minWidth="450.0" prefHeight="372.0" prefWidth="450.0">
                      <VBox.margin>
                         <Insets bottom="10.0" right="5.0" top="10.0" />
                      </VBox.margin>
                   </AnchorPane>
-                  <Button fx:id="boutonValider" maxHeight="27.0" maxWidth="400.0" minHeight="27.0" minWidth="360.0" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="360.0" text="Valider">
+                  <Button fx:id="boutonValider" maxHeight="27.0" maxWidth="450.0" minHeight="27.0" minWidth="450.0" mnemonicParsing="false" onMouseClicked="#validerAction" prefHeight="27.0" prefWidth="450.0" text="Valider">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></Button>
