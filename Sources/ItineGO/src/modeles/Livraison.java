@@ -204,7 +204,7 @@ public class Livraison {
 	 * Si arrivée dans les temps renvoie 0
 	 */
 	public int getTempsAttente() {
-		if(debutPlage == null || debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes() < 0) {
+		if(debutPlage == new Horaire(0,0,0) || heureArrive == new Horaire(0,0,0) || debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes() < 0) {
 			return  0;
 		}
 		return debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes();

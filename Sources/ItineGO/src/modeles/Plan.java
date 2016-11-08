@@ -627,25 +627,20 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 
 	//TODO a vérifier
 	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
-		int coutVus=0;
+		int coutVus=entrepot.getHoraireDepart().getHoraireEnSecondes();
 		for(Trajet trajet : futurTrajetTournee) {
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
-	  		
-		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
-		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive(livraisons.get( trajet.getDepart().getId()).getDebutPlage());
-		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
-		    		} else {
-		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(entrepot.getHoraireDepart()) );
-		    			livraisons.get(trajet.getArrive().getId()).getHeureArrive().ajouterSeconde(coutVus);
-		    		}
-		    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
-		    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(entrepot.getHoraireDepart()) );
-					livraisons.get(trajet.getArrive().getId()).getHeureDepart().ajouterSeconde(coutVus);
+    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(0,0,coutVus) );
+    			System.err.println(livraisons.get(trajet.getArrive().getId()).getHeureArrive());
+	    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
+	    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
+	    		}
+	    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
+	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(0,0,coutVus) );
 	  		}	
 	  	}
-		entrepot.setHoraireArrive(new Horaire(entrepot.getHoraireDepart()));
-	  	entrepot.getHoraireArrive().ajouterSeconde(coutVus);
+		entrepot.setHoraireArrive(new Horaire(0,0,coutVus));
 	}
 
 
