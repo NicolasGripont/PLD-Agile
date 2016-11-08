@@ -38,7 +38,7 @@ public class Plan {
 	 * Map représentant l'ensemble des livraisons de la tournée à effectuer
 	 * La livraison est accessible par le noeud modélisant sa position
 	 */
-	private Map<Noeud, Livraison> livraisons;
+	private Map<Integer, Livraison> livraisons;
 	
 	/**
 	 * Entrepot de départ de la tournée à effectuer
@@ -85,7 +85,7 @@ public class Plan {
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
-		livraisons = new HashMap<Noeud, Livraison>();
+		livraisons = new HashMap<Integer, Livraison>();
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class Plan {
 		this.gestionnaire = gestionnaire;
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
-		livraisons = new HashMap<Noeud, Livraison>();
+		livraisons = new HashMap<Integer, Livraison>();
 	}
 	
 	/**
@@ -308,16 +308,16 @@ public class Plan {
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
-				if ( (livraisons.get(noeuds.get(futurTourne.get(i + 1))) != null 
-						&& !dejaVisites.contains(livraisons.get(noeuds.get(futurTourne.get(i + 1))))
-						&& livraisons.get(noeuds.get(futurTourne.get(i + 1))) == livraisons.get(noeuds.get(ordreTourneID.getFirst())) )
+				if ( (livraisons.get(futurTourne.get(i + 1)) != null 
+						&& !dejaVisites.contains(livraisons.get(futurTourne.get(i + 1)))
+						&& livraisons.get(futurTourne.get(i + 1)) == livraisons.get(ordreTourneID.getFirst()) )
 						|| (entrepot.getNoeud().equals(noeuds.get(futurTourne.get(i + 1)))) && i==futurTourne.size() - 2) {
 					ordreTourneID.removeFirst();
 					if (!tronconsTrajet.isEmpty()) {
 						trajetsPrevus.add(new Trajet(tronconsTrajet.get(0).getOrigine(),
 								tronconsTrajet.get(tronconsTrajet.size() - 1).getDestination(), tronconsTrajet));
 						tronconsTrajet = new ArrayList<>();
-						dejaVisites.add(livraisons.get(noeuds.get(futurTourne.get(i + 1))));
+						dejaVisites.add(livraisons.get(futurTourne.get(i + 1)));
 					}
 				} 
 			}
@@ -389,9 +389,9 @@ public class Plan {
 			plages_horaire[0][0]=0;
 			plages_horaire[1][0]=Integer.MAX_VALUE;
 			
-			Set<Entry<Noeud, Livraison>> setlivraisons;
-			Iterator<Entry<Noeud, Livraison>> itlivraisons;
-			Entry<Noeud, Livraison> elivraisons;
+			Set<Entry<Integer, Livraison>> setlivraisons;
+			Iterator<Entry<Integer, Livraison>> itlivraisons;
+			Entry<Integer, Livraison> elivraisons;
 			
 			int idep=1;
 			setlivraisons = livraisons.entrySet();
@@ -402,7 +402,7 @@ public class Plan {
 			while(itlivraisons.hasNext())
 			{
 				elivraisons = itlivraisons.next();
-			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey().getId());
+			    depart[idep]=(Integer)numDansTableau(elivraisons.getKey());
 			    duree[idep]=(elivraisons.getValue().getDuree());
 			   
 			    if(!elivraisons.getValue().getDebutPlage().equals(new Horaire(0,0,0))){
@@ -519,7 +519,7 @@ public class Plan {
 		Noeud depart = suivant;
 		
 		supprimerLivraison(aSuprimer);
-		
+
 		tableauDesId = new int [noeuds.size()];
     	remplirTableauDesID(tableauDesId);
     	
@@ -539,7 +539,6 @@ public class Plan {
     	Trajet trajetPrevu = ConstructionTrajet(idTrajetPrevu);
     	
 		SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
-
 	}
 	
 	private void SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(Trajet trajetPrevu) {
@@ -566,6 +565,7 @@ public class Plan {
 	private void supprimerLivraison(Livraison aSuprimer) {
 			if(aSuprimer != null) {
 				livraisons.remove(aSuprimer.getNoeud());
+				tournee.removeLivraisonTournee(aSuprimer.getNoeud().getId());
 			}
 		
 	}
@@ -641,7 +641,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
-		for (Integer i = 0; i < idTrajetPrevu.size() - 2; i++) {
+		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
 					troncons.get(new Pair(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
@@ -685,7 +685,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	 */
 	public void ajouterLivraison(Livraison l) {
 		if(l != null) {
-			livraisons.put(l.getNoeud(), l);
+			livraisons.put(l.getNoeud().getId(), l);
 		}
 	}
 	
@@ -722,16 +722,16 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		this.troncons = troncons;
 	}
 	
-	public Map<Noeud, Livraison> getLivraisons() {
+	public Map<Integer, Livraison> getLivraisons() {
 		return livraisons;
 	}
 
-	public void setLivraisons(Map<Noeud, Livraison> livraisons) {
+	public void setLivraisons(Map<Integer, Livraison> livraisons) {
 		this.livraisons = livraisons;
 	}
 	
 	public void resetLivraisons() {
-		this.livraisons = new HashMap<Noeud, Livraison>();
+		this.livraisons = new HashMap<Integer, Livraison>();
 	}
 	
 	public Entrepot getEntrepot() {
@@ -743,7 +743,6 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	}
 
 	public Tournee getTournee() {
-		// TODO Auto-generated method stub
 		return tournee;
 	}
 	

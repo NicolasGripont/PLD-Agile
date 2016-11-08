@@ -101,8 +101,8 @@ public class PlanVilleVue extends Canvas {
 							if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud().equals(n.getValue())) {
 								entrepotIsClicked(plan.getEntrepot());
 							} else {
-								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
-									if(l.getKey().equals(n.getValue())) {
+								for(Map.Entry<Integer, Livraison> l : this.plan.getLivraisons().entrySet()) {
+									if(l.getKey().equals(n.getValue().getId())) {
 										livraisonIsClicked(l.getValue());
 										if(vue != null)
 											vue.selectionneNoeud(l.getValue().getNoeud());
@@ -170,8 +170,8 @@ public class PlanVilleVue extends Canvas {
 							if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud().equals(n.getValue())) {
 								entrepotIsFocused(plan.getEntrepot());
 							} else {
-								for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
-									if(l.getKey().equals(n.getValue())) {
+								for(Map.Entry<Integer, Livraison> l : this.plan.getLivraisons().entrySet()) {
+									if(l.getKey().equals(n.getValue().getId())) {
 										livraisonIsFocused(l.getValue());
 										return;
 									}
@@ -476,13 +476,13 @@ public class PlanVilleVue extends Canvas {
 	
 	public void dessinerLivraison() {
 		GraphicsContext gc = this.getGraphicsContext2D();
-        for(Map.Entry<Noeud, Livraison> l : this.plan.getLivraisons().entrySet()) {
+        for(Map.Entry<Integer, Livraison> l : this.plan.getLivraisons().entrySet()) {
 			if(l != null && l.getKey() != null) {
 				gc.setFill(new Color(0.250,0.250,0.250,1));
-				gc.fillOval(l.getKey().getX() * zoom + offsetX - RAYON_LIVRAISON/2, l.getKey().getY() * zoom + offsetY - RAYON_LIVRAISON/2
+				gc.fillOval(l.getValue().getNoeud().getX() * zoom + offsetX - RAYON_LIVRAISON/2, l.getValue().getNoeud().getY() * zoom + offsetY - RAYON_LIVRAISON/2
 						, RAYON_LIVRAISON, RAYON_LIVRAISON);
 				gc.setFill(Color.LIGHTGREEN);
-				gc.fillOval(l.getKey().getX() * zoom + offsetX - (RAYON_LIVRAISON-4)/2, l.getKey().getY() * zoom + offsetY - (RAYON_LIVRAISON-4)/2
+				gc.fillOval(l.getValue().getNoeud().getX() * zoom + offsetX - (RAYON_LIVRAISON-4)/2, l.getValue().getNoeud().getY() * zoom + offsetY - (RAYON_LIVRAISON-4)/2
 						, RAYON_LIVRAISON - 4, RAYON_LIVRAISON - 4);
 			}
 		}

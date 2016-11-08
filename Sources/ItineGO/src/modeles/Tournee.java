@@ -20,7 +20,7 @@ public class Tournee {
 	 * Map représentant l'ensemble des livraisons de la tournée à effectuer
 	 * La livraison est accessible par le noeud modélisant sa position
 	 */
-	private Map<Noeud, Livraison> livraisons;
+	private Map<Integer, Livraison> livraisons;
 	/**
 	 * Liste des livraisons ordonées dans l'ordre de passage
 	 */
@@ -33,7 +33,7 @@ public class Tournee {
 	/**
 	 * Constructeur de la classe
 	 */
-	public Tournee(Entrepot entrepot, Map<Noeud, Livraison> livraisons,List<Trajet> trajets) {
+	public Tournee(Entrepot entrepot, Map<Integer, Livraison> livraisons,List<Trajet> trajets) {
 		super();
 		this.entrepot = entrepot;
 		this.livraisons = livraisons;
@@ -52,7 +52,7 @@ public class Tournee {
 		return entrepot;
 	}
 
-	public Map<Noeud, Livraison> getLivraisons() {
+	public Map<Integer, Livraison> getLivraisons() {
 		return livraisons;
 	}
 
@@ -65,12 +65,17 @@ public class Tournee {
 	}
 	
 	public boolean sontValidesHeuresLivraisons() {
-		for(Entry<Noeud, Livraison> l: livraisons.entrySet()) {
+		for(Entry<Integer, Livraison> l: livraisons.entrySet()) {
 			if(!l.getValue().sontValidesPlages()) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	public void removeLivraisonTournee(Integer idLivraison) {
+		livraisons.remove(idLivraison);
+		ordreLivraisons.remove(idLivraison);
 	}
 	
 	/**
@@ -108,6 +113,7 @@ public class Tournee {
 		if(position == ordreLivraisons.size()) {
 			return entrepot.getNoeud();
 		}
+		//System.err.println(livraisons.get(ordreLivraisons.get(position)));
 		return livraisons.get(ordreLivraisons.get(position)).getNoeud();
 	}
 	
@@ -165,17 +171,17 @@ public class Tournee {
 		//dernier trajet correspond au retour à l'entrepôt ( '< size-1' )
 		for(int i = 0; i < trajets.size() - 1; i++){
 			horaire.ajouterSeconde(trajets.get(i).getTemps());
-			if(!livraisons.get(trajets.get(i).getArrive()).getDebutPlage().equals(new Horaire(0,0,0)) && horaire.getHoraireEnMinutes()<livraisons.get(trajets.get(i).getArrive()).getDebutPlage().getHoraireEnMinutes())
+			if(!livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage().equals(new Horaire(0,0,0)) && horaire.getHoraireEnMinutes()<livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage().getHoraireEnMinutes())
 			{
-				horaire= new Horaire(livraisons.get(trajets.get(i).getArrive()).getDebutPlage());
+				horaire= new Horaire(livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage());
 
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
 
 			Horaire horaireDepart = new Horaire(horaire);
-			horaireDepart.ajouterSeconde(livraisons.get(trajets.get(i).getArrive()).getDuree());
-			livraisons.get(trajets.get(i).getArrive()).setHeureDepart(horaireDepart);
-			livraisons.get(trajets.get(i).getArrive()).setHeureArrive(horaire);
-			livraisonsOrdonnees.add(livraisons.get(trajets.get(i).getArrive()));
+			horaireDepart.ajouterSeconde(livraisons.get(trajets.get(i).getArrive().getId()).getDuree());
+			livraisons.get(trajets.get(i).getArrive().getId()).setHeureDepart(horaireDepart);
+			livraisons.get(trajets.get(i).getArrive().getId()).setHeureArrive(horaire);
+			livraisonsOrdonnees.add(livraisons.get(trajets.get(i).getArrive().getId()));
 			horaire = new Horaire(horaireDepart);
 		}
 		return livraisonsOrdonnees;

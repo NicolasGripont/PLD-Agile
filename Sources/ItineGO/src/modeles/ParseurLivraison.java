@@ -89,7 +89,7 @@ public class ParseurLivraison {
 				plan.effacerLivraisons();
 				throw new BadXmlLivraison();
 		 }
-		 for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
+		 for(Map.Entry<Integer, Livraison> l : plan.getLivraisons().entrySet()) {
 				if(l.getValue().getNoeud().getId() == -1) {
 					plan.effacerEntrepot();
 					plan.effacerLivraisons();

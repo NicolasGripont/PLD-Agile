@@ -149,14 +149,14 @@ public class Gestionnaire {
 		Horaire horaire = new Horaire(plan.getEntrepot().getHoraireDepart());
 		for(int i = 0; i < plan.getTournee().getTrajets().size() - 1; i++){
 			horaire.ajouterSeconde(plan.getTournee().getTrajets().get(i).getTemps());//Modifier ici pour si on arrive trop tot
-			if(!plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().equals(null) && horaire.getHoraireEnMinutes()<plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes())
+			if(!plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive().getId()).getDebutPlage().equals(null) && horaire.getHoraireEnMinutes()<plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive().getId()).getDebutPlage().getHoraireEnMinutes())
 			{
 				//System.out.println(" AVANT : H1 "+ horaire.getHoraireEnMinutes()+ "-- DP "+ plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes());
-				horaire= new Horaire(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage());
+				horaire= new Horaire(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive().getId()).getDebutPlage());
 				//System.out.println(" ARPRES : H1 "+ horaire.getHoraireEnMinutes()+ "-- DP "+ plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDebutPlage().getHoraireEnMinutes());
 
 			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
-			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive()).getDuree());
+			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive().getId()).getDuree());
 		}
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());
 		return horaire;
@@ -195,10 +195,12 @@ public class Gestionnaire {
 	}
 
 	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
+		System.err.println(plan.getTournee().getLivraisons().keySet());
 		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
+		System.err.println(plan.getTournee().getLivraisons().keySet());
 	}
 
 	public Noeud getNoeudTournee(int position) {

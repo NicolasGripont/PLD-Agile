@@ -172,7 +172,7 @@ public class GestionLivraisonsVue extends GestionVue {
 			}
 			livraisonTable.getItems().clear();
 			if(plan.getLivraisons() != null) {
-				for(Map.Entry<Noeud, Livraison> l : plan.getLivraisons().entrySet()) {
+				for(Map.Entry<Integer, Livraison> l : plan.getLivraisons().entrySet()) {
 					if(l != null && l.getKey() != null) {
 						livraisonTable.getItems().add(l.getValue());
 					}
