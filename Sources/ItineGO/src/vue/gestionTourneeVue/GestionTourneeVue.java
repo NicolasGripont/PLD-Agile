@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -114,6 +115,22 @@ public class GestionTourneeVue extends GestionVue {
 	private Button boutonGenerer;
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+	private Tooltip tooltipAccueil = new Tooltip("Retour au choix du plan");
+	
+	private Tooltip tooltipPrecedent = new Tooltip("Retour à la visualisation des livraisons");
+	
+	private Tooltip tooltipModifier = new Tooltip("Modifier la tournée");
+	
+	private Tooltip tooltipUndo = new Tooltip("Annuler la dernière modification");
+	
+	private Tooltip tooltipRedo = new Tooltip("Retablir la dernière modification");
+		
+	private Tooltip tooltipValiderModifications = new Tooltip("Valider les modifications");
+	
+	private Tooltip tooltipAnnulerModifications = new Tooltip("Annuler les modifications");
+	
+	private Tooltip tooltipAjouterLivraison = new Tooltip("Ajouter une livraison");
 
 	
 	@Override
@@ -222,6 +239,15 @@ public class GestionTourneeVue extends GestionVue {
 
 		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		planVilleVue.modeAjouterLivraison(false);
+		
+		Tooltip.install(imageViewPrecedent, tooltipPrecedent);
+        Tooltip.install(imageViewAccueil, tooltipAccueil);
+        Tooltip.install(imageViewModifier, tooltipModifier);
+        Tooltip.install(imageViewUndo, tooltipUndo);
+        Tooltip.install(imageViewRedo, tooltipRedo);
+        Tooltip.install(imageViewValiderModifications, tooltipValiderModifications);
+        Tooltip.install(imageViewAnnulerModifications, tooltipAnnulerModifications);
+        Tooltip.install(imageViewAjouterLivraison, tooltipAjouterLivraison);
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -260,8 +286,8 @@ public class GestionTourneeVue extends GestionVue {
 				livraisonTable.getItems().add(l);
 			}
 			Livraison l = new Livraison(plan.getEntrepot().getNoeud(), 0, "0:0:0", "0:0:0");
-			l.setHeureDepart(horaireFin);
-			l.setHeureArrive(list.get(list.size()-1).getHeureDepart());
+			l.setHeureDepart(null);
+			l.setHeureArrive(horaireFin);
 			livraisonTable.getItems().add(l);
 		}
 	}
