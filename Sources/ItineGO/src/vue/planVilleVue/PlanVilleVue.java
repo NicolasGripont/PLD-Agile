@@ -395,6 +395,12 @@ public class PlanVilleVue extends Canvas {
 		modeAjouterLivraison = mode;
 	}
 	
+	public void reinitPlanVille() {
+		tronconSelectionned = null;
+		noeudSelectionned = null;
+		livraisonSelectionned = null;
+	}
+	
 	public void dessinerPlan(Plan plan) {
 		effacer();
 		if(plan != null) {
