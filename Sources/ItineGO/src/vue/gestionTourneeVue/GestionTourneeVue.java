@@ -126,6 +126,7 @@ public class GestionTourneeVue extends GestionVue {
 			}
 
 		};
+		
 		planVillePane.widthProperty().addListener(listener);
 		planVillePane.heightProperty().addListener(listener);
 
@@ -160,12 +161,20 @@ public class GestionTourneeVue extends GestionVue {
 
 		arriveeColonne.setCellValueFactory(param -> {
 			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
+			if(livraison.getHeureArrive() == null) {
+				return new SimpleStringProperty("-");
+			} else {
+				return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
+			}
 		});
 
 		departColonne.setCellValueFactory(param -> {
 			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
+			if(livraison.getHeureDepart() == null) {
+				return new SimpleStringProperty("-");
+			} else {
+				return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
+			}
 		});
 
 		dureeColonne.setCellValueFactory(param -> {
@@ -225,15 +234,9 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	public void selectionneNoeud(Noeud noeud) {
-		if(controleur.getEtatCourant().getClass().isInstance(EtatAjouterTourneePlace.class)) {
-			/*
-			 * TODO
-			 * Selection du nouveau noeud
-			 * Appelle controleur et envoie du noeud
-			 */
-			//noeudNouvelleLivraisonSelectionne(noeud);
+		if(controleur.getEtatCourant().getClass().equals(EtatAjouterTourneePlace.class)) {
 			controleur.clicPlanNoeud(noeud);			
-		} else if(controleur.getEtatCourant().getClass().isInstance(EtatAjouterTourneeOrdre.class)) {
+		} else if(controleur.getEtatCourant().getClass().equals(EtatAjouterTourneeOrdre.class)) {
 			controleur.clicPlanLivraison(noeud);	
 		} else {
 			for (Livraison t : livraisonTable.getItems()) {
@@ -415,20 +418,25 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majAjouterTourneePlace() {
+		hBoxBoutons.getChildren().clear();
+		hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
+		hBoxBoutons.getChildren().add(labelError);
 		labelInstruction.setVisible(true);
 		labelInstruction.setText("Sélectionnez un noeud sur le plan");
 		planVilleVue.modeAjouterLivraison(true);
-		Livraison l = new Livraison(new Noeud(0,0,-1), 0,"0:0:0", "0:0:0");
+		Livraison l = new Livraison(new Noeud(-1,-1,-1), 0,"0:0:0", "0:0:0");
 		l.setHeureArrive(new Horaire("0:0:0"));
 		l.setHeureDepart(new Horaire("0:0:0"));
 		livraisonTable.getItems().add(l);
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 		supprimerColonne.setVisible(false);
+		planVilleVue.modeAjouterLivraison(true);
 	}
 	
 	public void majAjouterTourneeOrdre(Livraison livraison) {
 		livraisonTable.getItems().set(livraisonTable.getItems().size()-1, livraison);
 		livraisonTable.refresh();
+		livraisonTable.getSelectionModel().select(livraison);
 		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
 	}
 	
@@ -472,8 +480,8 @@ public class GestionTourneeVue extends GestionVue {
 		hBoxBoutons.getChildren().add(imageViewAccueil);
 		hBoxBoutons.getChildren().add(imageViewPrecedent);
 		hBoxBoutons.getChildren().add(imageViewModifier);
-//		hBoxBoutons.getChildren().add(imageViewUndo);
-//		hBoxBoutons.getChildren().add(imageViewRedo);
+		hBoxBoutons.getChildren().add(imageViewUndo);
+		hBoxBoutons.getChildren().add(imageViewRedo);
 		hBoxBoutons.getChildren().add(labelError);
 		boutonGenerer.setVisible(true);
 		dureeColonne.setOnEditCommit(null);
