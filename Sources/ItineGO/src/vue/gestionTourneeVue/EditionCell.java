@@ -36,7 +36,6 @@ class EditionCell extends TableCell<Livraison, String> {
     @Override
     public void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
-
         if (empty) {
             setText(null);
             setGraphic(null);
@@ -59,27 +58,19 @@ class EditionCell extends TableCell<Livraison, String> {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
 
-        // commit on focus lost
         textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-
             if( oldValue = true && newValue == false) {
-
-                System.out.println( "Focus lost, current value: " + textField.getText());
-
                 commitEdit();
-
             }
         });
 
-        // cancel edit on ESC
         textField.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
-
             if( e.getCode() == KeyCode.ESCAPE) {
                 cancelEdit();
+            } else if(e.getCode() == KeyCode.ENTER) {
+            	this.commitEdit();
             }
-
         });
-
     }
 
     private String getString() {
@@ -88,6 +79,6 @@ class EditionCell extends TableCell<Livraison, String> {
 
     private boolean commitEdit() {
         super.commitEdit(textField.getText());
-        return true; // TODO: add verifier and check if commit was possible
+        return true;
     }
 }

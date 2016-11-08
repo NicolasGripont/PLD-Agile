@@ -511,10 +511,11 @@ public class GestionTourneeVue extends GestionVue {
 				return cell;
 			}
 	    });
-		/*dureeColonne.setOnEditCommit( value -> {
+		dureeColonne.setOnEditCommit( value -> {
 		    new EventHandler<CellEditEvent<Livraison, String>>() {
 		        @Override
 		        public void handle(CellEditEvent<Livraison, String> t) {
+		        	System.out.println("On perd le focus");
 		        	int duree = 0;
 		        	try {
 		        		duree = Integer.valueOf(t.getNewValue());
@@ -528,10 +529,14 @@ public class GestionTourneeVue extends GestionVue {
 		        	}
 		        }
 		    };
-		});*/
-		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
+		});
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Platform.runLater(() -> {
-        	livraisonTable.getSelectionModel().clearSelection();
         	livraisonTable.getFocusModel().focus(new TablePosition<>(livraisonTable, livraisonTable.getItems().size()-1, dureeColonne));
         	livraisonTable.edit(livraisonTable.getFocusModel().getFocusedCell().getRow(), dureeColonne);
 		});
