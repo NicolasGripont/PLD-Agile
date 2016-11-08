@@ -63,11 +63,11 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-				controleur.gestionTourneeVue.majVisualiserTournee();
 				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
 						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
-				controleur.setEtatCourant(controleur.etatTourneeAffiche);	
+				controleur.setEtatCourant(controleur.etatTourneeAffiche);
+				controleur.gestionTourneeVue.majVisualiserTournee();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

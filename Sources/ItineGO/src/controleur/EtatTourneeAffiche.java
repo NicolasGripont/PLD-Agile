@@ -90,8 +90,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	 * Met à jour la vue pour modifier la tournée.
 	 */
 	public void clicBoutonModifier(Controleur controleur) {
-		controleur.gestionTourneeVue.setVisibiliteBoutons(true);
-		controleur.gestionTourneeVue.setSupprimerColonneVisible(true);
+		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.listeModifications.creerModification();
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
