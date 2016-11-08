@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,8 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 
 		imageViewMoins.setFitHeight(20);
 		imageViewMoins.setFitWidth(20);
+		
+		
 
 		imageViewMoins.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
@@ -47,7 +50,8 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 				imageViewMoinsExited();
 			}
 		});
-
+		Tooltip tooltipMoins = new Tooltip("Supprimer la livraison");
+		Tooltip.install(imageViewMoins, tooltipMoins);
 		imageViewMoinsExited();
 	}
 	

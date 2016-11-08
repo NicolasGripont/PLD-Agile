@@ -304,7 +304,7 @@ public class Plan {
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
 				tronconsTrajet.add(
-						troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+						troncons.get(new Pair<Noeud,Noeud>(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
@@ -643,7 +643,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
-					troncons.get(new Pair(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
+					troncons.get(new Pair<Noeud,Noeud>(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
 			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
 							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
@@ -782,13 +782,13 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	
 	/**
 	 * Génère la feuille de route de la tournée à effectuer
-	 * @param link
+	 * @param nomFichier
 	 * 		Le nom du fichier qui sera écrit
 	 */
-	public void genererFeuilleDeRoute(String link) {
+	public void genererFeuilleDeRoute(String nomFichier) {
 		FileWriter fw;
 		try {
-			fw = new FileWriter(link, false);
+			fw = new FileWriter(nomFichier, false);
 			BufferedWriter output = new BufferedWriter(fw);
 			output.write("FEUILLE DE ROUTE\n");
 			
@@ -803,18 +803,22 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 				else {
 					output.write("\n\nDepart "+ heureCourante.getHoraire() +" du noeud " + trajets.get(i).getDepart().getId());
 				}
-				
+			
 				//On parcourt les tronçons
 				List<Troncon> troncons = trajets.get(i).getTroncons();
 				int longueurRue = 0;
+				Horaire tempsParcours = new Horaire(0,0,0);
 				int j = 0;
+				
 				while(j < troncons.size()) {
 					Troncon tron = troncons.get(j);
 					output.write("\n\tPrendre : " + tron.getNomRue() + " pendant ");
 					longueurRue += tron.getLongueur();
+					tempsParcours.ajouterSeconde(tron.getLongueur()/tron.getVitesse());
 					heureCourante.ajouterSeconde(tron.getLongueur()/tron.getVitesse());
 					while(j < troncons.size()-1 && tron.getNomRue().equals(troncons.get(j+1).getNomRue())) {
 						longueurRue += troncons.get(j+1).getLongueur();
+						tempsParcours.ajouterSeconde(troncons.get(j+1).getLongueur()/troncons.get(j+1).getVitesse());
 						heureCourante.ajouterSeconde(troncons.get(j+1).getLongueur()/troncons.get(j+1).getVitesse());
 						++j;
 						continue;
@@ -822,15 +826,16 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 					
 					//Affichage pour la longueur du tronçon
 					String longueurStr;
-					if(longueurRue > 999){
-						longueurStr = longueurRue/1000 + "km";
-					}
-					else {
-						longueurStr = longueurRue + "m";
-					}
-					output.write(longueurStr);
+					String tempsParcourStr;
+					longueurStr = longueurRue/10 + "m";
+					if(tempsParcours.getHoraireEnMinutes() > 1)
+						tempsParcourStr = "  (" + tempsParcours.getHoraireEnMinutes() + "min)"; 
+					else
+						tempsParcourStr = "  (>1min)";
+					output.write(longueurStr + tempsParcourStr);
 
 					longueurRue = 0;
+					tempsParcours = new Horaire (0,0,0);
 					++j;
 				}
 				
@@ -840,6 +845,11 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 					output.write("\nArrivée à l'entrepot : " + heureCourante.getHoraire());
 				}
 				else {
+					if(l.getDebutPlage().getHoraireEnMinutes() > heureCourante.getHoraireEnMinutes())
+					{
+						output.write("\n\tAttente de " + (l.getDebutPlage().getHoraireEnMinutes() - heureCourante.getHoraireEnMinutes()) + "min avant livraison");
+						heureCourante = new Horaire(l.getDebutPlage());
+					}
 					output.write("\nArrivée "+ heureCourante.getHoraire() +" au noeud " + l.getNoeud().getId());
 					//Affichage pour la durée estimée de la livraison
 					Horaire horaireTemp = new Horaire(0,0,0);

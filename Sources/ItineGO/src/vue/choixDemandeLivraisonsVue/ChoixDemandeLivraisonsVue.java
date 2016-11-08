@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -56,6 +57,8 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	private GlisserDeposerFichierVue glisserDeposerFichierVue;
 	
+	private Tooltip tooltipPrecedent = new Tooltip("Retour au choix du plan");
+	
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	
 	@Override
@@ -98,6 +101,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
         planVillePane.heightProperty().addListener(listener);
         
         imageViewPrecedentExited();
+        Tooltip.install(imageViewPrecedent, tooltipPrecedent);
 	}
 
 	public void dessinePlan(Plan plan) {

@@ -19,6 +19,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -90,6 +91,10 @@ public class GestionLivraisonsVue extends GestionVue {
 	
 	private Task<Void> taskCalcul;
 	
+	private Tooltip tooltipAccueil = new Tooltip("Retour au choix du plan");
+	
+	private Tooltip tooltipPrecedent = new Tooltip("Retour au choix de livraisons");
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		boxStopperCalcule.setVisible(false);
@@ -153,6 +158,8 @@ public class GestionLivraisonsVue extends GestionVue {
         
         livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        Tooltip.install(imageViewPrecedent, tooltipPrecedent);
+        Tooltip.install(imageViewAccueil, tooltipAccueil);
 	}
 	
 	public void selectionneNoeud(Noeud noeud) {
