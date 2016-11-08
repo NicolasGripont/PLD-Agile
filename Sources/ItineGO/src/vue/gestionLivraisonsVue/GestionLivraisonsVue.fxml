@@ -97,6 +97,9 @@
                         </Label>
                         <Button fx:id="boutonStopCalculer" mnemonicParsing="false" onMouseClicked="#stopperCalculLivraisonAction" prefHeight="27.0" prefWidth="60.0" text="Stop" />
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
                <BorderPane.margin>
