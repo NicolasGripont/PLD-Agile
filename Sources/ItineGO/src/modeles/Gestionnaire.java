@@ -21,7 +21,8 @@ public class Gestionnaire {
 	private Controleur controleur;
 	
 	private Livraison livraisonEnCourCreation;
-	private Livraison livraisonSuivante;
+	private Noeud noeudSuivant;
+	private int positionLivraisonEnCours;
 	
 	/**
 	 * Constructeur de la classe
@@ -182,12 +183,12 @@ public class Gestionnaire {
 		this.livraisonEnCourCreation = livraisonEnCourCreation;
 	}
 
-	public Livraison getLivraisonSuivante() {
-		return livraisonSuivante;
+	public Noeud getNoeudSuivant() {
+		return noeudSuivant;
 	}
 
-	public void setLivraisonSuivante(Livraison livraisonSuivante) {
-		this.livraisonSuivante = livraisonSuivante;
+	public void setNoeudSuivant(Noeud noeudSuivant) {
+		this.noeudSuivant = noeudSuivant;
 	}
 
 	public void supprimerLivraisonTournee(Livraison livraison) {
@@ -219,7 +220,18 @@ public class Gestionnaire {
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
-		// TODO Regarder si ce noeud est dans la liste des livraisons
 		return plan.getLivraisons().containsKey(noeud);
+	}
+
+	public boolean isNoeudEntrepot(Noeud noeud) {
+		return plan.getEntrepot().getNoeud().equals(noeud);
+	}
+
+	public int getPositionLivraisonEnCours() {
+		return positionLivraisonEnCours;
+	}
+
+	public void setPositionLivraisonEnCours(int positionLivraisonEnCours) {
+		this.positionLivraisonEnCours = positionLivraisonEnCours;
 	}
 }

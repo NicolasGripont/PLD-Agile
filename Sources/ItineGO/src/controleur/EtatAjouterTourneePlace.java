@@ -14,7 +14,7 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	 * @param noeud
 	 */
 	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {
-		if(gestionnaire.isNoeudLivraison(noeud)) {
+		if(gestionnaire.isNoeudLivraison(noeud) || gestionnaire.isNoeudEntrepot(noeud)) {
 			controleur.gestionTourneeVue.afficherErreur("Ce noeud ne peut être sélectionné");
 		} else {
 			Livraison livraison = new Livraison(noeud);
