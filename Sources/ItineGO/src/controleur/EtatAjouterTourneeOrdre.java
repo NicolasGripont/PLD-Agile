@@ -1,6 +1,7 @@
 package controleur;
 
 import modeles.Gestionnaire;
+import modeles.Livraison;
 import modeles.Noeud;
 
 public class EtatAjouterTourneeOrdre extends EtatDefaut {
@@ -11,9 +12,16 @@ public class EtatAjouterTourneeOrdre extends EtatDefaut {
 	 * @param controleur
 	 * @param gestionnaire
 	 * @param noeud
-	 * @param numLigne
 	 */
-	public void clicPlanLivraison(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud, int numLigne) {
+	public void clicPlanLivraison(Controleur controleur, Gestionnaire gestionnaire, Noeud noeudLivraison) {
+		if(gestionnaire.isNoeudLivraison(noeudLivraison)) {
+			Livraison livraisonSuivante = gestionnaire.getPlan().getLivraisons().get(noeudLivraison);
+			gestionnaire.setLivraisonSuivante(livraisonSuivante);
+			
+			controleur.setEtatCourant(controleur.etatAjouterTourneeDuree);
+		} else {
+			controleur.gestionTourneeVue.afficherErreur("Veuillez sélectionner une livraison");
+		}
 	}
 	
 	public void getEtat()

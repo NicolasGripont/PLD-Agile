@@ -15,12 +15,11 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	 */
 	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {
 		if(gestionnaire.isNoeudLivraison(noeud)) {
-			controleur.gestionTourneeVue;
-			//appel fonction vue
+			controleur.gestionTourneeVue.afficherErreur("Ce noeud ne peut être sélectionné");
 		} else {
 			Livraison livraison = new Livraison(noeud);
 			gestionnaire.setLivraisonEnCourCreation(livraison);
-			//appel fonction vue
+			controleur.gestionTourneeVue.majAjouterTourneeOrdre(livraison);
 			controleur.setEtatCourant(controleur.etatAjouterTourneeOrdre);
 		}
 	}
