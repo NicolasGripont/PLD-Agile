@@ -2,11 +2,13 @@ package modelesTests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import modeles.ParseurPlan;
 import modeles.Plan;
-import vue.choixPlanVilleVue.*;
+import vue.glisserDeposerFichierVue.*;
 
 /**
  * Classe test unitaire de la classe ParseurPlan
@@ -42,26 +44,17 @@ public class ParseurPlanTest {
 //	 * 
 //	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
 //	 */
-//	@Test
-//	public void testMauvaisFormat()
-//	{
-//		Plan planTest = new Plan();
-//		
-//		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
-//		String resTest ="";
-//		String res1 = "Erreur : Fichier XML mal formé";
-//
-//		try{
-//			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
-//		}
-//		catch(Exception e)
-//		{
-//			resTest = e.getMessage();
-//			System.err.println(resTest);
-//		}
-//		
-//		assertEquals(res1,resTest);
-//	}
+	@Test
+	public void testMauvaisFormat()
+	{
+		Plan planTest = new Plan();
+		
+		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
+		File xmlFile = new File(nomFichierTest);
+		GlisserDeposerFichierVue testVue = new GlisserDeposerFichierVue();
+		testVue.addExtensionAcceptee(".xml");
+		assertEquals(false,testVue.estFichierAccepte(xmlFile));
+	}
 	
 	/**
 	 * Test du Parseur sur un fichier Plan ayant deux identifiants identiques

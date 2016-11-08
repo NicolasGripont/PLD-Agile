@@ -8,6 +8,7 @@ import org.junit.Test;
 import modeles.ParseurPlan;
 import modeles.ParseurLivraison;
 import modeles.Plan;
+import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 
 /**
  * Classe test unitaire de la classe ParseurLivraison
@@ -48,20 +49,16 @@ public class ParseurLivraisonTest {
 	public void testMauvaisFormat()
 	{
 		Plan planTest = new Plan();
-		
+
 		String nomFichierTest = "./tests/assetsForTests/livraisons5x5-4.txt";
 		String resTest ="";
 		String res1 = "Erreur : Fichier plan non valide";
 
-		try{
-			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
-		}
-		catch(Exception e)
-		{
-			resTest = e.getMessage();
-		}
+		File xmlFile = new File(nomFichierTest);
+		GlisserDeposerFichierVue testVue = new GlisserDeposerFichierVue();
+		testVue.addExtensionAcceptee(".xml");
 		
-		assertEquals(res1,resTest);
+		assertEquals(false,testVue.estFichierAccepte(xmlFile));
 	}
 	
 	/**
