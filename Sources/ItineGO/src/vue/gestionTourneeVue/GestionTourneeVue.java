@@ -557,7 +557,7 @@ public class GestionTourneeVue extends GestionVue {
 		boutonGenerer.setVisible(true);
 		dureeColonne.setOnEditCommit(null);
 		supprimerColonne.setVisible(false);
-		labelError.setVisible(false);
+		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 	}
 	
