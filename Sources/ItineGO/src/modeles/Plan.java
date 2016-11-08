@@ -639,6 +639,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	
 
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
+		System.err.println(idTrajetPrevu);
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
