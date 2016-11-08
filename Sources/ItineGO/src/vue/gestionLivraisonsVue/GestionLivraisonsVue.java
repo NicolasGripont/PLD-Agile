@@ -242,8 +242,7 @@ public class GestionLivraisonsVue extends GestionVue {
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							return null;
 						}
 					}
 	             return null;
@@ -269,6 +268,7 @@ public class GestionLivraisonsVue extends GestionVue {
 	private void stopperCalculLivraisonAction() {
 		boutonCalculer.setVisible(true);
 		boxStopperCalcule.setVisible(false);
+		taskCalcul.cancel();
 		controleur.clicBoutonsStopperCalculeTournee();
 	}
 	
