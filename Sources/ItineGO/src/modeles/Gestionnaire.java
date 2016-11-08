@@ -194,7 +194,7 @@ public class Gestionnaire {
 		this.noeudSuivant = noeudSuivant;
 	}
 
-	public void supprimerLivraisonTournee(int position) {
+	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
 		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
