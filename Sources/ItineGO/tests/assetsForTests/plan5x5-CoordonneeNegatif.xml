@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<reseau>
+<noeud id="0" x="-134" y="-193"/>
+<noeud id="1" x="-195" y="-291"/>
+<noeud id="2" x="-140" y="-420"/>
+<noeud id="3" x="-132" y="-470"/>
+<noeud id="4" x="-128" y="-660"/>
+<noeud id="5" x="-263" y="-81"/>
+<noeud id="6" x="244" y="277"/>
+<noeud id="7" x="244" y="345"/>
+<noeud id="8" x="300" y="506"/>
+<noeud id="9" x="205" y="629"/>
+<noeud id="10" x="382" y="165"/>
+<noeud id="11" x="378" y="209"/>
+<noeud id="12" x="433" y="455"/>
+<noeud id="13" x="376" y="591"/>
+<noeud id="14" x="424" y="655"/>
+<noeud id="15" x="522" y="136"/>
+<noeud id="16" x="488" y="320"/>
+<noeud id="17" x="470" y="435"/>
+<noeud id="18" x="546" y="583"/>
+<noeud id="19" x="572" y="604"/>
+<noeud id="20" x="636" y="184"/>
+<noeud id="21" x="651" y="255"/>
+<noeud id="22" x="619" y="355"/>
+<noeud id="23" x="705" y="536"/>
+<noeud id="24" x="652" y="684"/>
+<troncon destination="1" longueur="9234" nomRue="v0" origine="0" vitesse="41"/>
+<troncon destination="5" longueur="13666" nomRue="h0" origine="0" vitesse="47"/>
+<troncon destination="0" longueur="9234" nomRue="v0" origine="1" vitesse="46"/>
+<troncon destination="2" longueur="11218" nomRue="v0" origine="1" vitesse="39"/>
+<troncon destination="6" longueur="4076" nomRue="h1" origine="1" vitesse="40"/>
+<troncon destination="1" longueur="11218" nomRue="v0" origine="2" vitesse="38"/>
+<troncon destination="3" longueur="4050" nomRue="v0" origine="2" vitesse="40"/>
+<troncon destination="7" longueur="10257" nomRue="h2" origine="2" vitesse="38"/>
+<troncon destination="2" longueur="4050" nomRue="v0" origine="3" vitesse="40"/>
+<troncon destination="4" longueur="15203" nomRue="v0" origine="3" vitesse="46"/>
+<troncon destination="3" longueur="15203" nomRue="v0" origine="4" vitesse="44"/>
+<troncon destination="9" longueur="6640" nomRue="h4" origine="4" vitesse="41"/>
+<troncon destination="0" longueur="13666" nomRue="h0" origine="5" vitesse="43"/>
+<troncon destination="10" longueur="11652" nomRue="h0" origine="5" vitesse="46"/>
+<troncon destination="1" longueur="4076" nomRue="h1" origine="6" vitesse="44"/>
+<troncon destination="7" longueur="5440" nomRue="v1" origine="6" vitesse="43"/>
+<troncon destination="6" longueur="5440" nomRue="v1" origine="7" vitesse="46"/>
+<troncon destination="2" longueur="10257" nomRue="h2" origine="7" vitesse="38"/>
+<troncon destination="8" longueur="13636" nomRue="v1" origine="7" vitesse="39"/>
+<troncon destination="12" longueur="17494" nomRue="h2" origine="7" vitesse="43"/>
+<troncon destination="7" longueur="13636" nomRue="v1" origine="8" vitesse="44"/>
+<troncon destination="13" longueur="9121" nomRue="h3" origine="8" vitesse="43"/>
+<troncon destination="4" longueur="6640" nomRue="h4" origine="9" vitesse="45"/>
+<troncon destination="5" longueur="11652" nomRue="h0" origine="10" vitesse="38"/>
+<troncon destination="11" longueur="3534" nomRue="v2" origine="10" vitesse="46"/>
+<troncon destination="15" longueur="11437" nomRue="h0" origine="10" vitesse="39"/>
+<troncon destination="10" longueur="3534" nomRue="v2" origine="11" vitesse="44"/>
+<troncon destination="12" longueur="20165" nomRue="v2" origine="11" vitesse="38"/>
+<troncon destination="16" longueur="12501" nomRue="h1" origine="11" vitesse="47"/>
+<troncon destination="11" longueur="20165" nomRue="v2" origine="12" vitesse="45"/>
+<troncon destination="7" longueur="17494" nomRue="h2" origine="12" vitesse="42"/>
+<troncon destination="13" longueur="11796" nomRue="v2" origine="12" vitesse="39"/>
+<troncon destination="12" longueur="11796" nomRue="v2" origine="13" vitesse="47"/>
+<troncon destination="8" longueur="9121" nomRue="h3" origine="13" vitesse="45"/>
+<troncon destination="14" longueur="6400" nomRue="v2" origine="13" vitesse="46"/>
+<troncon destination="13" longueur="6400" nomRue="v2" origine="14" vitesse="47"/>
+<troncon destination="10" longueur="11437" nomRue="h0" origine="15" vitesse="40"/>
+<troncon destination="20" longueur="9895" nomRue="h0" origine="15" vitesse="43"/>
+<troncon destination="11" longueur="12501" nomRue="h1" origine="16" vitesse="45"/>
+<troncon destination="17" longueur="9312" nomRue="v3" origine="16" vitesse="38"/>
+<troncon destination="21" longueur="14038" nomRue="h1" origine="16" vitesse="41"/>
+<troncon destination="16" longueur="9312" nomRue="v3" origine="17" vitesse="45"/>
+<troncon destination="18" longueur="13309" nomRue="v3" origine="17" vitesse="40"/>
+<troncon destination="17" longueur="13309" nomRue="v3" origine="18" vitesse="47"/>
+<troncon destination="19" longueur="2673" nomRue="v3" origine="18" vitesse="39"/>
+<troncon destination="18" longueur="2673" nomRue="v3" origine="19" vitesse="41"/>
+<troncon destination="24" longueur="9050" nomRue="h4" origine="19" vitesse="42"/>
+<troncon destination="15" longueur="9895" nomRue="h0" origine="20" vitesse="42"/>
+<troncon destination="16" longueur="14038" nomRue="h1" origine="21" vitesse="42"/>
+<troncon destination="22" longueur="8399" nomRue="v4" origine="21" vitesse="41"/>
+<troncon destination="21" longueur="8399" nomRue="v4" origine="22" vitesse="38"/>
+<troncon destination="23" longueur="16031" nomRue="v4" origine="22" vitesse="39"/>
+<troncon destination="22" longueur="16031" nomRue="v4" origine="23" vitesse="44"/>
+<troncon destination="24" longueur="12576" nomRue="v4" origine="23" vitesse="43"/>
+<troncon destination="23" longueur="12576" nomRue="v4" origine="24" vitesse="45"/>
+<troncon destination="19" longueur="9050" nomRue="h4" origine="24" vitesse="45"/>
+</reseau>

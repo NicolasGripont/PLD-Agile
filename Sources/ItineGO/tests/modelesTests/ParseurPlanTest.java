@@ -147,7 +147,7 @@ public class ParseurPlanTest {
 	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
 	 */
 	@Test
-	public void testIdentifiantMoinsUn()
+	public void testIdentifiantNegatif()
 	{
 		Plan planTest = new Plan();
 		
@@ -193,4 +193,74 @@ public class ParseurPlanTest {
 		}
 		assertEquals(res1,resTest);
 	}
+	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant des tronçons avec une vitesse négative
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
+	@Test
+	public void testVitesseNegative()
+	{
+		Plan planTest = new Plan();
+		
+		String nomFichierTest = "./tests/assetsForTests/plan5x5-VitesseNegative.xml";
+		String resTest ="";
+		String res1 = "Erreur : Fichier plan non valide";
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
+		}
+		catch(Exception e)
+		{
+			resTest = e.getMessage();
+		}
+		assertEquals(res1,resTest);
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant des tronçons avec une longeur négative
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
+	@Test
+	public void testLongeurNegative()
+	{
+		Plan planTest = new Plan();
+		
+		String nomFichierTest = "./tests/assetsForTests/plan5x5-LongeurNegative.xml";
+		String resTest ="";
+		String res1 = "Erreur : Fichier plan non valide";
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
+		}
+		catch(Exception e)
+		{
+			resTest = e.getMessage();
+		}
+		assertEquals(res1,resTest);
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier Plan ayant des tronçons avec des coordonées négatif
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
+	@Test
+	public void testCoordonneeNegatif()
+	{
+		Plan planTest = new Plan();
+		
+		String nomFichierTest = "./tests/assetsForTests/plan5x5-CoordonneeNegatif.xml";
+		String resTest ="";
+		String res1 = "Erreur : Fichier plan non valide";
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierTest, planTest);
+		}
+		catch(Exception e)
+		{
+			resTest = e.getMessage();
+		}
+		assertEquals(res1,resTest);
+	}
+	
 }
