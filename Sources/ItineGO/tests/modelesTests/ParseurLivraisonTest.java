@@ -48,11 +48,7 @@ public class ParseurLivraisonTest {
 	@Test
 	public void testMauvaisFormat()
 	{
-		Plan planTest = new Plan();
-
 		String nomFichierTest = "./tests/assetsForTests/livraisons5x5-4.txt";
-		String resTest ="";
-		String res1 = "Erreur : Fichier plan non valide";
 
 		File xmlFile = new File(nomFichierTest);
 		GlisserDeposerFichierVue testVue = new GlisserDeposerFichierVue();

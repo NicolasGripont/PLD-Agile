@@ -47,8 +47,6 @@ public class ParseurPlanTest {
 	@Test
 	public void testMauvaisFormat()
 	{
-		Plan planTest = new Plan();
-		
 		String nomFichierTest = "./tests/assetsForTests/plan5x5-BadFormat.txt";
 		File xmlFile = new File(nomFichierTest);
 		GlisserDeposerFichierVue testVue = new GlisserDeposerFichierVue();
