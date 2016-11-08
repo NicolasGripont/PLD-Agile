@@ -321,6 +321,7 @@ public class Plan {
 					}
 				} 
 			}
+			MiseAJourHeureDePassageLivraison(trajetsPrevus);
 			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
 	}
 	
@@ -558,6 +559,7 @@ public class Plan {
 		    	  futurTrajetTournee.add(myTrajet);
 		      } 
 	      } 
+	      MiseAJourHeureDePassageLivraison(futurTrajetTournee);
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
 		
 	}
@@ -615,7 +617,32 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		    	  futurTrajetTournee.add(trajet2);
 		      }
 	      } 
+	      MiseAJourHeureDePassageLivraison(futurTrajetTournee);
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
+	}
+
+	//TODO a vérifier
+	private void MiseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
+		int coutVus=0;
+		for(Trajet trajet : futurTrajetTournee) {
+	  		coutVus+=trajet.getTemps();
+	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
+	  		
+		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnMinutes()*60 ){
+		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive(livraisons.get( trajet.getDepart().getId()).getDebutPlage());
+		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnMinutes()*60 ;
+		    		} else {
+		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( entrepot.getHoraireDepart());
+		    			livraisons.get(trajet.getArrive().getId()).getHeureArrive().ajouterSeconde(coutVus);
+		    		}
+		    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
+		    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( entrepot.getHoraireDepart());
+					livraisons.get(trajet.getArrive().getId()).getHeureDepart().ajouterSeconde(coutVus);
+	  		}	
+	  	}
+	  	entrepot.setHoraireArrive(entrepot.getHoraireDepart());
+	  	entrepot.getHoraireArrive().ajouterSeconde(coutVus);
+		
 	}
 
 

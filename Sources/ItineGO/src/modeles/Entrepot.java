@@ -9,10 +9,16 @@ public class Entrepot {
 	 * Noeud représentant la position de l'entrepot
 	 */
 	private Noeud noeud;
+	
 	/**
 	 * Horaire de départ de la tournée
 	 */
 	private Horaire horaireDepart;
+	
+	/**
+	 * Horraire de fin de tournée
+	 */
+	private Horaire horaireArrive;
 	
 	/**
 	 * Constructeur de la classe
@@ -102,5 +108,13 @@ public class Entrepot {
 		} else if (!noeud.equals(other.noeud))
 			return false;
 		return true;
+	}
+	
+	public Horaire getHoraireArrive() {
+		return horaireArrive;
+	}
+
+	public void setHoraireArrive(Horaire horaireArrive) {
+		this.horaireArrive = horaireArrive;
 	}
 }
