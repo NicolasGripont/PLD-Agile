@@ -222,7 +222,9 @@ public class Plan {
 				/**
 				 * Un fois les calcul réalisé, on créé les objets qui vont être utiliseé par la couche supérieur
 				 */
-				constructionTournee(depart, AllNoires, AllPrevious);
+				if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+					constructionTournee(depart, AllNoires, AllPrevious);
+				}
 				if(gestionnaire != null) {
 					Platform.runLater(() -> gestionnaire.tourneeCalculee());
 				}
@@ -237,7 +239,9 @@ public class Plan {
 						System.out.println("Construction solution");
 						///ISOLATION !!!
 						Thread.sleep(3000);
-						constructionTournee(depart, AllNoires, AllPrevious);
+						if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+							constructionTournee(depart, AllNoires, AllPrevious);
+						}
 					} catch (InterruptedException e) {
 						return;
 					}

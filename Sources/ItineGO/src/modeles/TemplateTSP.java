@@ -11,7 +11,7 @@ import java.util.Iterator;
 public abstract class TemplateTSP implements TSP {
 	
 	protected Integer[] meilleureSolution;
-	protected int coutMeilleureSolution = 0;
+	protected int coutMeilleureSolution = Integer.MAX_VALUE;
 	protected Boolean tempsLimiteAtteint;
 	
 	public Boolean getTempsLimiteAtteint(){
