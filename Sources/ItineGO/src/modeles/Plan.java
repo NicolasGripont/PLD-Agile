@@ -671,6 +671,10 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 			tronconsTrajet1.add(
 					troncons.get(new Pair<Noeud,Noeud>(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
+		System.out.println("idTrajetPrevu : " + idTrajetPrevu.size() + " - tronconsTrajet1 : " + tronconsTrajet1.size());
+		System.out.println(tronconsTrajet1.get(0).getOrigine());
+		System.out.println(tronconsTrajet1.get(tronconsTrajet1.size() - 1));
+		System.out.println(tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination());
 			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
 							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
 					
