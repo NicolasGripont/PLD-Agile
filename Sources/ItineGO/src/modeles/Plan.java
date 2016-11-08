@@ -304,7 +304,7 @@ public class Plan {
 			List<Troncon> tronconsTrajet = new ArrayList<>();
 			for (Integer i = 0; i < futurTourne.size() - 1; i++) {
 				tronconsTrajet.add(
-						troncons.get(new Pair(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
+						troncons.get(new Pair<Noeud,Noeud>(noeuds.get(futurTourne.get(i)), noeuds.get(futurTourne.get(i + 1)))));
 				//(Si le neoud suivant est une livraison ET si la livraison n'a pas deja etait ajoutée ET si le noeud correspond à la future livraison à faire)  
 				//OU
 				//(si le noeud suivant est l'entrepot ET que c'est le dernier noeud a visiter)
@@ -642,7 +642,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
-					troncons.get(new Pair(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
+					troncons.get(new Pair<Noeud,Noeud>(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
 			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
 							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
