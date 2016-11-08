@@ -593,7 +593,7 @@ public class PlanVilleVue extends Canvas {
 					gc.fillText("D : " + String.valueOf(trajet.getDepart().getId()), x + 15 + 5, y);
 					Noeud n = null;
 					for(Troncon troncon : trajet.getTroncons()) {
-						gc.setStroke(new Color(1,0,0,1));
+						gc.setStroke(new Color(0,0,1,1));
 						gc.strokeLine(troncon.getOrigine().getX() * zoom + offsetX, troncon.getOrigine().getY() * zoom + offsetY,
 								troncon.getDestination().getX() * zoom + offsetX, troncon.getDestination().getY() * zoom + offsetY);
 						n = troncon.getDestination();
