@@ -2,16 +2,15 @@ package controleur;
 
 import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
-import modeles.Livraison;
 
 public class AjouterLivraison extends Commande {
 
-	private Livraison livraison;
 	private Gestionnaire gestionnaire;
+	private int numLigne;
 	
-	public AjouterLivraison(Gestionnaire gestionnaire, Livraison livraison) {
-		this.livraison = livraison;
+	public AjouterLivraison(Gestionnaire gestionnaire, int numLigne) {
 		this.gestionnaire = gestionnaire;
+		this.numLigne = numLigne;
 	}
 	
 	
@@ -21,8 +20,8 @@ public class AjouterLivraison extends Commande {
 	}
 
 	@Override
-	public void undoCode() {
-		gestionnaire.supprimerLivraisonTournee(livraison);
+	public void undoCode() throws NonRespectPlagesHoraires {
+		gestionnaire.supprimerLivraisonTournee(numLigne);
 	}
 
 }

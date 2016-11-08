@@ -10,7 +10,7 @@ public class EtatAjouterTourneeDuree extends EtatDefaut {
 	 */
 	public void entrerDuree	(Controleur controleur, Gestionnaire gestionnaire, int duree) {
 		gestionnaire.getLivraisonEnCoursCreation().setDuree(duree);
-		AjouterLivraison ajouterLivraison = new AjouterLivraison(gestionnaire,gestionnaire.getLivraisonEnCoursCreation());
+		AjouterLivraison ajouterLivraison = new AjouterLivraison(gestionnaire,gestionnaire.getPositionLivraisonEnCours());
 		try {
 			controleur.listeModifications.ajouterCommande(ajouterLivraison);
 		} catch (NonRespectPlagesHoraires e) {

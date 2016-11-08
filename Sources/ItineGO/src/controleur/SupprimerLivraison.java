@@ -21,7 +21,7 @@ public class SupprimerLivraison extends Commande {
 	public void doCode() throws NonRespectPlagesHoraires {
 		livraison = gestionnaire.getLivraisonTournee(numLigne);
 		noeudSuivant = gestionnaire.getNoeudTournee(numLigne+1);
-		gestionnaire.supprimerLivraisonTournee(livraison);
+		gestionnaire.supprimerLivraisonTournee(numLigne);
 	}
 
 	@Override
