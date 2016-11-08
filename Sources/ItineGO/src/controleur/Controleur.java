@@ -243,8 +243,8 @@ public class Controleur extends Application {
 	 * 
 	 * @param noeud : Livraison sur laquelle on a cliqué.
 	 */
-	public void clicPlanLivraison(Noeud noeud) {
-		etatCourant.clicPlanLivraison(this, gestionnaire, noeud);
+	public void clicPlanLivraison(Noeud noeud,int numLigne) {
+		etatCourant.clicPlanLivraison(this, gestionnaire, noeud,numLigne);
 		etatCourant.getEtat();
 	}
 	

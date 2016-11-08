@@ -68,6 +68,8 @@ public class Livraison {
 	public Livraison(Noeud noeud, int duree) {
 		setNoeud(noeud);
 		setDuree(duree);
+		setDebutPlage(null);
+		setFinPlage(null);
 	}
 	
 	/**
@@ -76,6 +78,9 @@ public class Livraison {
 	 */
 	public Livraison(Noeud noeud) {
 		setNoeud(noeud);
+		setDuree(0);
+		setDebutPlage(null);
+		setFinPlage(null);
 	}
 
 	public boolean sontValidesPlages() {
