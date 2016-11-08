@@ -43,10 +43,11 @@ public class ListeModifications {
 	public void annulerModification() throws NonRespectPlagesHoraires {
 		undoModifications();
 		listeModifications.removeFirst();
+		position = 0;
 	}
 	
 	public void finModification() {
-		if(listeModifications.getFirst().estVide()) {
+		if(listeModifications.getFirst().estVide() && !listeModifications.isEmpty()) {
 			listeModifications.removeFirst();
 		}
 	}
