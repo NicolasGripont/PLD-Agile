@@ -16,6 +16,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -247,6 +248,7 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	public void miseAJourTableau(Plan plan, List<Livraison> list, Horaire horaireDebut, Horaire horaireFin) {
+		livraisonTable.getItems().clear();
 		labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
 		labelHorraires.setText("Début de la tournée : " + horaireDebut.getHoraire() + " - Fin de la tournée : "
 				+ horaireFin.getHoraire());
@@ -440,6 +442,15 @@ public class GestionTourneeVue extends GestionVue {
 		attenteLivraisonPrecedentePourNouvelleLivraison = false;
 		planVilleVue.modeAjouterLivraison(false);
 		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
+		dureeColonne.setCellFactory(TextFieldTableCell.forTableColumn());
+		/*dureeColonne.setOnEditStart(value -> {
+			    new EventHandler<CellEditEvent<Livraison, String>>() {
+			        @Override
+			        public void handle(CellEditEvent<Livraison, String> t) {
+			            ((Livraison) value.getSource());
+			        }
+			    };
+		});*/
 		dureeColonne.setOnEditCommit( value -> {
 			    new EventHandler<CellEditEvent<Livraison, String>>() {
 			        @Override
@@ -449,6 +460,8 @@ public class GestionTourneeVue extends GestionVue {
 			        }
 			    };
 		});
+
+		//livraisonTable.isCellEditable(row, col)
 		livraisonTable.setEditable(true);
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
