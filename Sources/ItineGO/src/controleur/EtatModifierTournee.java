@@ -15,6 +15,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonSauvegarder (Controleur controleur) {
+		controleur.listeModifications.finModification();
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}

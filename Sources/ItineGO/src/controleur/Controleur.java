@@ -285,12 +285,12 @@ public class Controleur extends Application {
 	}
 	
 	public void undo() {
-		etatCourant.undo(this);
+		etatCourant.undo(this,gestionnaire);
 		etatCourant.getEtat();
 	}
 	
 	public void redo() {
-		etatCourant.redo(this);
+		etatCourant.redo(this,gestionnaire);
 		etatCourant.getEtat();
 	}
 	

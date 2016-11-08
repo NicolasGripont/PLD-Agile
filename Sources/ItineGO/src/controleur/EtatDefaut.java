@@ -10,8 +10,8 @@ import modeles.Noeud;
  */
 public abstract class EtatDefaut {
 	
-	public void undo(Controleur controleur) {}
-	public void redo(Controleur controleur) {}
+	public void undo(Controleur controleur, Gestionnaire gestionnaire) {}
+	public void redo(Controleur controleur, Gestionnaire gestionnaire) {}
 	
 	public void clicBoutonParcourir				(Controleur controleur, boolean accepte, File fichier) {}
 	public void clicBoutonValider				(Gestionnaire gestionnaire, Controleur controleur, File fichierXML) {}

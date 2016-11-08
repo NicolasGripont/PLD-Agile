@@ -105,20 +105,28 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
-	public void undo(Controleur controleur) {
+	public void undo(Controleur controleur,Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.undoModifications();
 		} catch (NonRespectPlagesHoraires e) {
 			e.printStackTrace();
 		}
+		controleur.gestionTourneeVue.majVisualiserTournee();
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
-	public void redo(Controleur controleur) {
+	public void redo(Controleur controleur,Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.redoModifications();
 		} catch (NonRespectPlagesHoraires e) {
 			e.printStackTrace();
 		}
+		controleur.gestionTourneeVue.majVisualiserTournee();
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

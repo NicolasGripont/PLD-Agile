@@ -33,11 +33,21 @@ public class ListeModifications {
 	}
 	
 	public void creerModification() {
+		for(int i = 0; i < position; i++) {
+			listeModifications.removeFirst();
+		}
 		listeModifications.addFirst(new ListeCommandes());
+		position = 0;
 	}
 	
 	public void annulerModification() throws NonRespectPlagesHoraires {
 		undoModifications();
 		listeModifications.removeFirst();
+	}
+	
+	public void finModification() {
+		if(listeModifications.getFirst().estVide()) {
+			listeModifications.removeFirst();
+		}
 	}
 }

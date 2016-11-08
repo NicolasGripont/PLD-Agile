@@ -15,15 +15,15 @@ public class ListeCommandes {
 	}
 	
 	public void ajouterCommande(Commande commande) throws NonRespectPlagesHoraires {
+		for(int i = 0; i < position; i++) {
+			listeCommandes.removeFirst();
+		}
 		listeCommandes.addFirst(commande);
 		try {
 			commande.doCode();
 		} catch (NonRespectPlagesHoraires e) {
 			//listeCommandes.removeFirst();
 			throw e;
-		}
-		for(int i = 0; i < position; i++) {
-			listeCommandes.removeFirst();
 		}
 		position = 0;
 	}
@@ -52,5 +52,9 @@ public class ListeCommandes {
 			position--;
 			listeCommandes.get(position).doCode();
 		}
+	}
+	
+	public boolean estVide() {
+		return listeCommandes.isEmpty();
 	}
 }
