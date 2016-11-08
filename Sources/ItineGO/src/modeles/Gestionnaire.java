@@ -171,9 +171,11 @@ public class Gestionnaire {
 		plan.genererFeuilleDeRoute(link);
 	}
 	
-	public void ajouterLivraisonTournee() {
-		//TODO : UTILISER LES ATTRIBUTS : livraisonEnCoursCreation et livraisonSuivante 
-		// il faudra rajouter la livraison dans la liste des livraisons du plan et dans la tournée at the good position.
+	public void ajouterLivraisonTournee() throws NonRespectPlagesHoraires {
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, getNoeudTournee(getPositionLivraisonEnCours()-1), getNoeudTournee(getPositionLivraisonEnCours()));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
 	public Livraison getLivraisonEnCoursCreation() {

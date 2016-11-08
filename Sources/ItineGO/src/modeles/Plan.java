@@ -588,7 +588,7 @@ public class Plan {
 		
 	}
 
-	public void ajouterLivraisonTournee(Livraison precedent, Livraison aAjouter, Livraison suivant){
+	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
 		
 		ajouterLivraison(aAjouter);
 	
@@ -672,8 +672,8 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	
 	
 	
-	private void remplirTableauDepartPourAjout(Integer[] depart, Livraison precedent, Livraison aAjouter, Livraison suivant) {
-		depart[0]=numDansTableau(precedent.getNoeud().getId());
+	private void remplirTableauDepartPourAjout(Integer[] depart, Noeud precedent, Livraison aAjouter, Noeud suivant) {
+		depart[0]=numDansTableau(precedent.getId());
 		depart[1]=numDansTableau(aAjouter.getNoeud().getId());
 		depart[2]=numDansTableau(aAjouter.getNoeud().getId());
 	}
