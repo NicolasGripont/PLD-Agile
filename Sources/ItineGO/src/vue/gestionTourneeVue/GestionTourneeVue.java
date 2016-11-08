@@ -8,6 +8,7 @@ import controleur.Controleur;
 import controleur.EtatAjouterTourneeDuree;
 import controleur.EtatAjouterTourneeOrdre;
 import controleur.EtatAjouterTourneePlace;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -25,6 +26,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -248,6 +251,32 @@ public class GestionTourneeVue extends GestionVue {
         Tooltip.install(imageViewValiderModifications, tooltipValiderModifications);
         Tooltip.install(imageViewAnnulerModifications, tooltipAnnulerModifications);
         Tooltip.install(imageViewAjouterLivraison, tooltipAjouterLivraison);
+		livraisonTable.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+	            @Override
+	            public void handle(KeyEvent e) {
+
+	                if( e.getCode() == KeyCode.TAB) { // commit should be performed implicitly via focusedProperty, but isn't
+	                	livraisonTable.getSelectionModel().selectNext();
+	                    e.consume();
+	                    return;
+	                }
+	                else if( e.getCode() == KeyCode.ENTER) { // commit should be performed implicitly via focusedProperty, but isn't
+	                	livraisonTable.getSelectionModel().selectBelowCell();
+	                    e.consume();
+	                    return;
+	                }
+
+	                // switch to edit mode on keypress, but only if we aren't already in edit mode
+	                if( livraisonTable.getEditingCell() == null) {
+	                    if( e.getCode().isLetterKey() || e.getCode().isDigitKey()) {  
+
+	                        TablePosition focusedCellPosition = livraisonTable.getFocusModel().getFocusedCell();
+	                        livraisonTable.edit(focusedCellPosition.getRow(), focusedCellPosition.getTableColumn());
+	                    
+	                    }
+	                }
+	            }
+		});
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -472,47 +501,39 @@ public class GestionTourneeVue extends GestionVue {
 	public void majAjouterTourneeDuree() {
 		planVilleVue.modeAjouterLivraison(false);
 		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
-		dureeColonne.setCellFactory(TextFieldTableCell.forTableColumn());
+		livraisonTable.setEditable(true);		
+		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
 		dureeColonne.setCellFactory(new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
 			@Override
 			public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonBooleanTableColumn) {
-				EditionCell cell = new EditionCell(livraisonTable);
+				EditionCell cell = new EditionCell();
 				return cell;
 			}
 	    });
-		
-		livraisonTable.setEditable(true);
-		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);	
-		livraisonTable.getFocusModel().focus(new TablePosition<>(livraisonTable, livraisonTable.getItems().size()-1, dureeColonne));
-		livraisonTable.edit(livraisonTable.getFocusModel().getFocusedCell().getRow(), dureeColonne);
-		//livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
-		/*dureeColonne.setOnEditStart(value -> {
-			    new EventHandler<CellEditEvent<Livraison, String>>() {
-			        @Override
-			        public void handle(CellEditEvent<Livraison, String> t) {
-			            ((Livraison) value.getSource());
-			        }
-			    };
+		/*dureeColonne.setOnEditCommit( value -> {
+		    new EventHandler<CellEditEvent<Livraison, String>>() {
+		        @Override
+		        public void handle(CellEditEvent<Livraison, String> t) {
+		        	int duree = 0;
+		        	try {
+		        		duree = Integer.valueOf(t.getNewValue());
+			            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(duree);
+			            controleur.entrerDuree(duree);
+			            planVilleVue.modeAjouterLivraison(false);
+			    		dureeColonne.setOnEditCommit(null);
+		        	} catch(Exception e) {
+		        		e.printStackTrace();
+		        		labelError.setText("Durée : Données invalide");
+		        	}
+		        }
+		    };
 		});*/
-		dureeColonne.setOnEditCommit( value -> {
-			    new EventHandler<CellEditEvent<Livraison, String>>() {
-			        @Override
-			        public void handle(CellEditEvent<Livraison, String> t) {
-			        	int duree = 0;
-			        	try {
-			        		duree = Integer.valueOf(t.getNewValue());
-				            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(duree);
-				            controleur.entrerDuree(duree);
-				            planVilleVue.modeAjouterLivraison(false);
-				    		dureeColonne.setOnEditCommit(null);
-			        	} catch(Exception e) {
-			        		labelError.setText("Durée : Données invalide");
-			        	}
-			        }
-			    };
+		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
+        Platform.runLater(() -> {
+        	livraisonTable.getSelectionModel().clearSelection();
+        	livraisonTable.getFocusModel().focus(new TablePosition<>(livraisonTable, livraisonTable.getItems().size()-1, dureeColonne));
+        	livraisonTable.edit(livraisonTable.getFocusModel().getFocusedCell().getRow(), dureeColonne);
 		});
-		
-		//livraisonTable.isCellEditable(row, col)
 	}
 	
 	public void majVisualiserTournee() {
