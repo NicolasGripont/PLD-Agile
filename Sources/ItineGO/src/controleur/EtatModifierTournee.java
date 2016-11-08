@@ -1,9 +1,6 @@
 package controleur;
 
-import com.sun.corba.se.impl.monitoring.MonitoredObjectFactoryImpl;
-
 import modeles.Gestionnaire;
-import modeles.Livraison;
 
 /**
  *	Etat lorsque l'on modifie la tournée. 
@@ -101,6 +98,11 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param finPlage : Plage horaire de fin.
 	 */
 	public void modifierPlageFin(Controleur controleur, Gestionnaire gestionnaire, int numLigne, String plageFin) {
+		ModifierPlageHoraireFin modifierPlageHoraireFin = new ModifierPlageHoraireFin(gestionnaire, numLigne, plageFin);
+		controleur.listeModifications.ajouterCommande(modifierPlageHoraireFin);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 	
 	public void getEtat()

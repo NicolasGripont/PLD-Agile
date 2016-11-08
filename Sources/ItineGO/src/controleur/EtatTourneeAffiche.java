@@ -92,6 +92,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	public void clicBoutonModifier(Controleur controleur) {
 		controleur.gestionTourneeVue.setVisibiliteBoutons(true);
 		controleur.gestionTourneeVue.setSupprimerColonneVisible(true);
+		controleur.listeModifications.creerModification();
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
 	
@@ -104,6 +105,14 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
 	{
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+	}
+	
+	public void undo(Controleur controleur) {
+		controleur.listeModifications.undoModifications();
+	}
+	
+	public void redo(Controleur controleur) {
+		controleur.listeModifications.redoModifications();
 	}
 	
 	public void getEtat()

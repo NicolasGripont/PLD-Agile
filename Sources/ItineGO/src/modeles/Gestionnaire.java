@@ -223,4 +223,9 @@ public class Gestionnaire {
 		
 		// Checker si ça modifie la tournée au niveau des plages
 	}
+
+	public boolean isNoeudLivraison(Noeud noeud) {
+		// TODO Regarder si ce noeud est dans la liste des livraisons
+		return plan.getLivraisons().containsKey(noeud);
+	}
 }
