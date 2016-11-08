@@ -139,8 +139,8 @@ public class Plan {
 	 * Calcule la tournée
 	 */
 	public void calculerTournee() {
+		
 		int nbDeLivraison = livraisons.size();
-    	
     	
 		tableauDesId = new int [noeuds.size()];
     	
@@ -636,15 +636,15 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive(livraisons.get( trajet.getDepart().getId()).getDebutPlage());
 		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getSeconde() ;
 		    		} else {
-		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( entrepot.getHoraireDepart());
+		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(entrepot.getHoraireDepart()) );
 		    			livraisons.get(trajet.getArrive().getId()).getHeureArrive().ajouterSeconde(coutVus);
 		    		}
 		    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
-		    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( entrepot.getHoraireDepart());
+		    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(entrepot.getHoraireDepart()) );
 					livraisons.get(trajet.getArrive().getId()).getHeureDepart().ajouterSeconde(coutVus);
 	  		}	
 	  	}
-	  	entrepot.setHoraireArrive(entrepot.getHoraireDepart());
+		entrepot.setHoraireArrive(new Horaire(entrepot.getHoraireDepart()));
 	  	entrepot.getHoraireArrive().ajouterSeconde(coutVus);
 	}
 
