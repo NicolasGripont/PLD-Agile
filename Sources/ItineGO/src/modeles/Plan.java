@@ -513,13 +513,12 @@ public class Plan {
        }
     }
 	
-	public void supressionLivraisonTournee(Livraison aSuprimer){
+	public void supressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){
 		
-		Noeud arrive = null;
-		Noeud depart = null;
+		Noeud arrive = precedent;
+		Noeud depart = suivant;
 		
 		supprimerLivraison(aSuprimer);
-		TrouverNoeudPrecendentEtSuivant(aSuprimer,depart , arrive);
 		
 		tableauDesId = new int [noeuds.size()];
     	remplirTableauDesID(tableauDesId);
@@ -561,23 +560,6 @@ public class Plan {
 		      } 
 	      } 
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
-		
-	}
-
-	private void TrouverNoeudPrecendentEtSuivant(Livraison aSuprimer, Noeud depart, Noeud arrive) {
-		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
-		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
-	      
-		Trajet myTrajet = new Trajet(listTrajetTourneeCopie.get(0).getDepart(), listTrajetTourneeCopie.get(0).getArrive(), listTrajetTourneeCopie.get(0).getTroncons());
-	      while(itListTrajetTourneeCopie.hasNext()){
-	    	  myTrajet = itListTrajetTourneeCopie.next();
-		      if(myTrajet.getDepart().equals( aSuprimer.getNoeud())){
-		    	  arrive = myTrajet.getArrive();
-		      } 
-		      if(myTrajet.getArrive().equals( aSuprimer.getNoeud()))   {
-		    	  depart = myTrajet.getDepart();
-		      }
-	      } 
 		
 	}
 
