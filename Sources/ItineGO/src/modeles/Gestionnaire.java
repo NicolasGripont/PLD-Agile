@@ -194,10 +194,11 @@ public class Gestionnaire {
 		this.noeudSuivant = noeudSuivant;
 	}
 
-	public void supprimerLivraisonTournee(Livraison livraison) {
-		//TODO :
-		// il faudra supprimer la livraison dans la liste des livraisons du plan et dans la tournée.
-		
+	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
+		plan.supressionLivraisonTournee(getLivraisonTournee(position), getNoeudTournee(position-1), getNoeudTournee(position+1));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
 	public Noeud getNoeudTournee(int position) {
