@@ -28,6 +28,13 @@ public class Horaire {
 	
 	/**
 	 * Constructeur de la classe
+	 */
+	public Horaire(int seconde) {
+		this.ajouterSeconde(seconde);
+	}
+	
+	/**
+	 * Constructeur de la classe
 	 * La string horaire est analysée pour remplir les attributs de la classe
 	 * @param horaire
 	 * 		Doit être sous la forme : heures:minutes:secondes

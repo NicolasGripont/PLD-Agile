@@ -631,16 +631,16 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 		for(Trajet trajet : futurTrajetTournee) {
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
-    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(0,0,coutVus) );
+    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(coutVus) );
     			System.err.println(livraisons.get(trajet.getArrive().getId()).getHeureArrive());
 	    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
 	    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
 	    		}
 	    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
-	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(0,0,coutVus) );
+	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(coutVus) );
 	  		}	
 	  	}
-		entrepot.setHoraireArrive(new Horaire(0,0,coutVus));
+		entrepot.setHoraireArrive(new Horaire(coutVus));
 	}
 
 
