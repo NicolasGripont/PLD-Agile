@@ -38,9 +38,6 @@ import javafx.util.Callback;
  */
 public class GestionTourneeVue extends GestionVue {
 	private Controleur controleur;
-
-	private boolean attenteNoeudPourNouvelleLivraison = false;
-	private boolean attenteLivraisonPrecedentePourNouvelleLivraison = false;
 	
 	@FXML
 	private TableView<Livraison> livraisonTable;
@@ -317,30 +314,20 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majAjouterTourneePlace() {
-		System.out.println("imageViewAjouterLivraison");
 		labelInstruction.setVisible(true);
 		labelInstruction.setText("Sélectionnez un noeud sur le plan");
 		planVilleVue.modeAjouterLivraison(true);
-		Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
+		Livraison l = new Livraison(new Noeud(0,0,-1), 0,"0:0:0", "0:0:0");
 		l.setHeureArrive(new Horaire("0:0:0"));
 		l.setHeureDepart(new Horaire("0:0:0"));
 		livraisonTable.getItems().add(l);
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
 	
-	public void majAjouterTourneeOrdre(Noeud noeud) {
-		if(noeud == null) {
-			livraisonTable.getItems().get(livraisonTable.getItems().size()-1).setNoeud(noeud);
-			livraisonTable.refresh();
-			noeudSelectionne = noeud;
-			labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
-		} else {
-			labelError.setText("Ce noeud ne peut être sélectionné");
-			/*
-			 * TODO
-			 * Appeler majAjouterTourneePlace dans le controleur juste après
-			 */
-		}
+	public void majAjouterTourneeOrdre(Livraison livraison) {
+		livraisonTable.getItems().set(livraisonTable.getItems().size()-1, livraison);
+		livraisonTable.refresh();
+		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
 	}
 	
 	public void majAjouterTourneeDuree() {
