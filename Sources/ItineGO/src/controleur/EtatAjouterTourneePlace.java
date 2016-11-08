@@ -2,6 +2,7 @@ package controleur;
 
 import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
+import modeles.Horaire;
 import modeles.Livraison;
 import modeles.Noeud;
 
@@ -19,6 +20,8 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 			controleur.gestionTourneeVue.afficherErreur("Ce noeud ne peut être sélectionné");
 		} else {
 			Livraison livraison = new Livraison(noeud);
+			livraison.setDebutPlage(new Horaire("0:0:0"));
+			livraison.setFinPlage(new Horaire("0:0:0"));
 			gestionnaire.setLivraisonEnCourCreation(livraison);
 			controleur.gestionTourneeVue.majAjouterTourneeOrdre(livraison);
 			controleur.setEtatCourant(controleur.etatAjouterTourneeOrdre);

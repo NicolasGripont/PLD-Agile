@@ -236,8 +236,7 @@ public class Plan {
 			public void run() {
 				while(threadCalcul.isInterrupted() == false) {
 					try {
-						System.out.println("Construction solution");
-						///ISOLATION !!!
+						//Permet l'attente du TSP et de la construction d'une premiere solution
 						Thread.sleep(3000);
 						if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
 							constructionTournee(depart, AllNoires, AllPrevious);

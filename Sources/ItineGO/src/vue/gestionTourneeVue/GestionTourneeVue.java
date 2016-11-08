@@ -211,7 +211,10 @@ public class GestionTourneeVue extends GestionVue {
 		
 		attenteColonne.setCellValueFactory(param -> {
 			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(String.valueOf(livraison.getTempsAttente()));
+			if(livraison.getTempsAttente() == 0)
+				return new SimpleStringProperty(String.valueOf("-"));
+			else
+				return new SimpleStringProperty(String.valueOf(livraison.getTempsAttente()));
 		});
 
 		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
