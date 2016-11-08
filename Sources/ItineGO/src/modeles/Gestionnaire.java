@@ -21,7 +21,7 @@ public class Gestionnaire {
 	 */
 	private Controleur controleur;
 	
-	private Livraison livraisonEnCourCreation;
+	private Livraison livraisonEnCoursCreation;
 	private Noeud noeudSuivant;
 	private int positionLivraisonEnCours;
 	
