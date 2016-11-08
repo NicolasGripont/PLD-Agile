@@ -208,6 +208,11 @@ public class GestionTourneeVue extends GestionVue {
 			}
 			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
 		});
+		
+		attenteColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(String.valueOf(livraison.getTempsAttente()));
+		});
 
 		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
 		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
