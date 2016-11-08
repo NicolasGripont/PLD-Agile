@@ -1,6 +1,7 @@
 package controleur;
 
 import modeles.Gestionnaire;
+import modeles.Livraison;
 import modeles.Noeud;
 
 public class EtatAjouterTourneePlace extends EtatDefaut {
@@ -11,9 +12,29 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	 * @param controleur
 	 * @param gestionnaire
 	 * @param noeud
-	 * @param numLigne
 	 */
-	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud, int numLigne) {
+	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {
+		if(gestionnaire.isNoeudLivraison(noeud)) {
+			controleur.gestionTourneeVue;
+			//appel fonction vue
+		} else {
+			Livraison livraison = new Livraison(noeud);
+			gestionnaire.setLivraisonEnCourCreation(livraison);
+			//appel fonction vue
+			controleur.setEtatCourant(controleur.etatAjouterTourneeOrdre);
+		}
+	}
+	
+	@Override
+	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
+		controleur.listeModifications.annulerModification();
+		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
+		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
+		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
 	public void getEtat()

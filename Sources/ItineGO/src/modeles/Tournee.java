@@ -3,6 +3,7 @@ package modeles;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Classe modélisant la tournée à effectuer, une fois calculée
@@ -19,7 +20,10 @@ public class Tournee {
 	 * La livraison est accessible par le noeud modélisant sa position
 	 */
 	private Map<Noeud, Livraison> livraisons;
-		
+	/**
+	 * Liste des livraisons ordonées dans l'ordre de passage
+	 */
+	private List<Integer> ordreLivraisons;
 	/**
 	 * Liste de trajets à faire
 	 */
@@ -53,6 +57,54 @@ public class Tournee {
 	
 	public void supprimerTrajet(Integer index) {
 		trajets.remove(index);
+	}
+	
+	public boolean sontValidesHeuresLivraisons() {
+		for(Entry<Noeud, Livraison> l: livraisons.entrySet()) {
+			if(!l.getValue().sontValidesPlages()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Change le début de la plage horaire de la livraison choisie
+	 * Répercute ensuite les changements éventuels au reste de la tournée
+	 * @param position
+	 * 		Position de la livraison dans la tournée
+	 * @param newHoraire
+	 * 		Nouvel horaire à mettre au début de la plage horaire
+	 */
+	public void setDebutPlage(int position, Horaire newHoraire) {
+		Livraison liv = livraisons.get(ordreLivraisons.get(position));
+		liv.setDebutPlage(newHoraire);
+		Horaire horaire = liv.getHeureArrive();
+		if(liv.getHeureArrive().getSeconde() < liv.getDebutPlage().getSeconde()) {
+			horaire = liv.getDebutPlage();
+		}
+		for(int i = position+1; i < ordreLivraisons.size(); ++i) {
+			liv = livraisons.get(ordreLivraisons.get(i));
+			Livraison livPrec = livraisons.get(ordreLivraisons.get(i-1));
+			horaire.ajouterSeconde(livPrec.getHeureDepart().getSeconde() + trajets.get(i).getTemps());
+			liv.setHeureArrive(horaire);
+			if(liv.getHeureArrive().getSeconde() < liv.getDebutPlage().getSeconde()) {
+				horaire = liv.getDebutPlage();
+			}
+			horaire.ajouterSeconde(liv.getDuree());
+			liv.setHeureDepart(horaire);
+		}
+	}
+	
+	/**
+	 * Change la fin de la plage horaire de la livraison choisie
+	 * @param position
+	 * 		Position de la livraison dans la tournée
+	 * @param newHoraire
+	 * 		Nouvel horaire à mettre à la fin de la plage horaire
+	 */
+	public void setFinPlage(int position, Horaire newHoraire) {
+		livraisons.get(ordreLivraisons.get(position)).setFinPlage(newHoraire);
 	}
 	
 	@Override

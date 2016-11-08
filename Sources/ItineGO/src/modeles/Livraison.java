@@ -30,6 +30,7 @@ public class Livraison {
 	 * Heure effective de départ de la livraison
 	 */
 	private Horaire heureDepart;
+
 	/**
 	 * Constructeur de la classe
 	 */
@@ -67,6 +68,18 @@ public class Livraison {
 	public Livraison(Noeud noeud, int duree) {
 		setNoeud(noeud);
 		setDuree(duree);
+	}
+	
+	/**
+	 * Constructeur avec uniquement le noeud
+	 * @param noeud
+	 */
+	public Livraison(Noeud noeud) {
+		setNoeud(noeud);
+	}
+
+	public boolean sontValidesPlages() {
+		return(heureArrive.getSeconde() >= debutPlage.getSeconde() && heureArrive.getSeconde() < finPlage.getSeconde());
 	}
 
 	@Override

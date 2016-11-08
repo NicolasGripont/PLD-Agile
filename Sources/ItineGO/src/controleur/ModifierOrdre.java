@@ -16,12 +16,12 @@ public class ModifierOrdre extends Commande {
 	
 	@Override
 	public void doCode() {
-
+		gestionnaire.reordonnerLivraisonTournee(positionInitiale, positionFinale);
 	}
 
 	@Override
 	public void undoCode() {
-
+		gestionnaire.reordonnerLivraisonTournee(positionFinale, positionInitiale);
 	}
 
 }

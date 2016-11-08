@@ -1,8 +1,6 @@
 package modeles;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import controleur.Controleur;
 import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
@@ -201,5 +199,27 @@ public class Gestionnaire {
 	public Livraison getLivraisonTournee(int numLigne) {
 		// TODO récupérer la livraison à supprimer
 		return null;
+	}
+
+	public void reordonnerLivraisonTournee(int positionInitiale, int positionFinale) {
+		// TODO Changer l'ordre de la livraison à la position initiale vers la position finale.
+		
+	}
+
+	public void changerPlageHoraireDebut(int position, String plageDebut) {
+		// TODO numLigne : Livraison à modifier
+		// plageDebut : nouvelle plage de la livraison
+		getLivraisonTournee(position).setDebutPlage(new Horaire(plageDebut));
+		
+		// Checker si ça modifie la tournée au niveau des plages
+	}
+	
+	public void changerPlageHoraireFin(int position, String plageFin) {
+		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
+	}
+
+	public boolean isNoeudLivraison(Noeud noeud) {
+		// TODO Regarder si ce noeud est dans la liste des livraisons
+		return plan.getLivraisons().containsKey(noeud);
 	}
 }

@@ -166,7 +166,7 @@ public class Controleur extends Application {
 	 * Permet de sauvegarder la tournée calculée et affichée.
 	 */
 	public void clicBoutonSauvegarder() {
-		etatCourant.clicBoutonSauvegarder(this, gestionnaire);
+		etatCourant.clicBoutonSauvegarder(this);
 		etatCourant.getEtat();
 	}
 	
@@ -192,7 +192,7 @@ public class Controleur extends Application {
 	 * Permet d'ajouter une livraison dans la tournée. Il faudra ensuite choisir sa position sur le plan.
 	 */
 	public void clicBoutonAjouter() {
-		etatCourant.clicBoutonAjouter(this, gestionnaire);
+		etatCourant.clicBoutonAjouter(this);
 		etatCourant.getEtat();
 	}
 	
@@ -242,10 +242,13 @@ public class Controleur extends Application {
 	/**
 	 * Permet de cliquer sur une livraison dans le plan.
 	 * 
-	 * @param livraison : Livraison sur laquelle on a cliqué.
+	 * @param noeud : Livraison sur laquelle on a cliqué.
 	 */
-	public void clicPlanLivraison(Livraison livraison) {
-		etatCourant.clicPlanLivraison(this, gestionnaire, livraison);
+	public void clicPlanLivraison(Noeud noeud) {
+		/*
+		 * TODO rechercher la livraison
+		 */
+		etatCourant.clicPlanLivraison(this, gestionnaire, noeud);
 		etatCourant.getEtat();
 	}
 	
