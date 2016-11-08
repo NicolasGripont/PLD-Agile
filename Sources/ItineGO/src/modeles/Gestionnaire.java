@@ -241,7 +241,7 @@ public class Gestionnaire {
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
-		return plan.getLivraisons().containsKey(noeud);
+		return plan.getLivraisons().containsKey(noeud.getId());
 	}
 
 	public boolean isNoeudEntrepot(Noeud noeud) {
