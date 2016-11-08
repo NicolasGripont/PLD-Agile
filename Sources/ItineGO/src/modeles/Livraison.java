@@ -70,6 +70,14 @@ public class Livraison {
 		setDuree(duree);
 	}
 	
+	/**
+	 * Constructeur avec uniquement le noeud
+	 * @param noeud
+	 */
+	public Livraison(Noeud noeud) {
+		setNoeud(noeud);
+	}
+
 	public boolean sontValidesPlages() {
 		return(heureArrive.getSeconde() >= debutPlage.getSeconde() && heureArrive.getSeconde() < finPlage.getSeconde());
 	}

@@ -1,8 +1,6 @@
 package modeles;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import controleur.Controleur;
 import exceptions.BadXmlFile;
 import exceptions.BadXmlLivraison;
@@ -218,5 +216,10 @@ public class Gestionnaire {
 	
 	public void changerPlageHoraireFin(int position, String plageFin) {
 		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
+	}
+
+	public boolean isNoeudLivraison(Noeud noeud) {
+		// TODO Regarder si ce noeud est dans la liste des livraisons
+		return plan.getLivraisons().containsKey(noeud);
 	}
 }

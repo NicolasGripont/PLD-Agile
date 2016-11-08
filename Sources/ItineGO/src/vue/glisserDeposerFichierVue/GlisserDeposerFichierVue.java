@@ -40,6 +40,8 @@ public class GlisserDeposerFichierVue extends StackPane {
 	
 	private Label label;
 	
+	public GlisserDeposerFichierVue(){}
+	
 	public GlisserDeposerFichierVue(String message) {
 		AnchorPane.setBottomAnchor(this, 0.0);
 		AnchorPane.setTopAnchor(this, 0.0);
