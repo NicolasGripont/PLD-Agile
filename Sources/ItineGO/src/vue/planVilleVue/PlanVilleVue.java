@@ -274,7 +274,7 @@ public class PlanVilleVue extends Canvas {
 	}
 	
 	private void livraisonIsClicked(Livraison livraison) {
-		if(livraison.getNoeud().getId() != -1) {
+		if(livraison != null && livraison.getNoeud().getId() != -1) {
 			GraphicsContext gc = this.getGraphicsContext2D();
 			noeudIsClickedEffect(livraison.getNoeud());
 			double x = livraison.getNoeud().getX() * zoom + offsetX - RAYON_NOEUD /2;

@@ -193,4 +193,15 @@ public class Livraison {
 		if(heureDepart != null)
 			this.heureDepart = heureDepart;
 	}
+	
+	/**
+	 * Renvoie le temps d'attente si l'arrivée à la livraison se fait avant le début de la plage horaire
+	 * Si arrivée dans les temps renvoie 0
+	 */
+	public int getTempsAttente() {
+		if(debutPlage.getSeconde()-heureArrive.getSeconde() < 0) {
+			return  0;
+		}
+		return debutPlage.getSeconde()-heureArrive.getSeconde();
+	}
 }
