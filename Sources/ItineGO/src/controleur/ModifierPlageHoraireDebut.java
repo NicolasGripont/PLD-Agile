@@ -20,12 +20,12 @@ public class ModifierPlageHoraireDebut extends Commande {
 	public void doCode() {
 		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
 		plageDebutInitiale = livraisonTournee.getDebutPlage().toString();
-		gestionnaire.changerPlageHoraire(numLigne, plageDebut);
+		gestionnaire.changerPlageHoraireDebut(numLigne, plageDebut);
 	}
 
 	@Override
 	public void undoCode() {
-		gestionnaire.changerPlageHoraire(numLigne, plageDebutInitiale);
+		gestionnaire.changerPlageHoraireDebut(numLigne, plageDebutInitiale);
 	}
 
 }
