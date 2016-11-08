@@ -277,6 +277,7 @@ public class GestionTourneeVue extends GestionVue {
 	                }
 	            }
 		});
+		
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -564,4 +565,23 @@ public class GestionTourneeVue extends GestionVue {
 			labelError.setText("Feuille de route générée");
 		}
 	}
+	
+	public void desactiverUndo(Boolean value) {
+		imageViewUndo.setDisable(value);
+		if(value) {
+			imageViewUndo.setImage(new Image(classLoader.getResource("undo_gris.png").toString()));
+		} else {
+			imageViewUndo.setImage(new Image(classLoader.getResource("undo_noir.png").toString()));
+		}
+	}
+	
+	public void desactiverRedo(Boolean value) {
+		imageViewRedo.setDisable(value);
+		if(value) {
+			imageViewRedo.setImage(new Image(classLoader.getResource("redo_gris.png").toString()));
+		} else {
+			imageViewRedo.setImage(new Image(classLoader.getResource("redor_noir.png").toString()));
+		}
+	}
+	
 }
