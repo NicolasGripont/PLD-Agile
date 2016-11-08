@@ -26,6 +26,7 @@ public class SupprimerLivraison extends Commande {
 
 	@Override
 	public void undoCode() throws NonRespectPlagesHoraires {
+		System.err.println("CONTROLEUR ");
 		gestionnaire.setLivraisonEnCourCreation(livraison);
 		gestionnaire.setNoeudSuivant(noeudSuivant);
 		gestionnaire.setPositionLivraisonEnCours(numLigne);

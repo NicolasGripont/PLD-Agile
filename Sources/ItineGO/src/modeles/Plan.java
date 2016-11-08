@@ -571,7 +571,6 @@ public class Plan {
 	}
 
 	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
-		
 		ajouterLivraison(aAjouter);
 	
 		tableauDesId = new int [noeuds.size()];
@@ -589,14 +588,14 @@ public class Plan {
     	Dijkstra(depart, AllNoires, AllPrevious);
 		
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));
-
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));    	
+    	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
 		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
 		
 		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
 		
-//    	InsertionLivraisonDansTournee(depart, AllPrevious);
+    	//InsertionLivraisonDansTournee(depart, AllPrevious);
 
 		
 	}
@@ -657,7 +656,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	private void remplirTableauDepartPourAjout(Integer[] depart, Noeud precedent, Livraison aAjouter, Noeud suivant) {
 		depart[0]=numDansTableau(precedent.getId());
 		depart[1]=numDansTableau(aAjouter.getNoeud().getId());
-		depart[2]=numDansTableau(aAjouter.getNoeud().getId());
+		depart[2]=numDansTableau(suivant.getId());
 	}
 
 	
