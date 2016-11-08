@@ -580,7 +580,7 @@ public class GestionTourneeVue extends GestionVue {
 		if(value) {
 			imageViewRedo.setImage(new Image(classLoader.getResource("redo_gris.png").toString()));
 		} else {
-			imageViewRedo.setImage(new Image(classLoader.getResource("redor_noir.png").toString()));
+			imageViewRedo.setImage(new Image(classLoader.getResource("redo_noir.png").toString()));
 		}
 	}
 	

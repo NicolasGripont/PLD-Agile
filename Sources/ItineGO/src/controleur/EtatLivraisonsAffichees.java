@@ -66,8 +66,20 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
 						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
-				controleur.setEtatCourant(controleur.etatTourneeAffiche);
 				controleur.gestionTourneeVue.majVisualiserTournee();
+				if(controleur.listeModifications.isUndoPossible()) {
+					controleur.gestionTourneeVue.desactiverUndo(false);
+				}
+				else {
+					controleur.gestionTourneeVue.desactiverUndo(true);
+				}
+				if(controleur.listeModifications.isRedoPossible()) {
+					controleur.gestionTourneeVue.desactiverRedo(false);
+				}
+				else {
+					controleur.gestionTourneeVue.desactiverRedo(true);
+				}
+				controleur.setEtatCourant(controleur.etatTourneeAffiche);
 			} catch (IOException e) {
 			
 				e.printStackTrace();

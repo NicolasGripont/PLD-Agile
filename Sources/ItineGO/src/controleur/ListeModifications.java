@@ -15,14 +15,14 @@ public class ListeModifications {
 	}
 	
 	public void undoModifications() throws NonRespectPlagesHoraires {
-		if(position < listeModifications.size()) {
+		if(isUndoPossible()) {
 			listeModifications.get(position).undoAll();
 			position++;
 		}
 	}
 	
 	public void redoModifications() throws NonRespectPlagesHoraires {
-		if(position-1 >= 0) {
+		if(isRedoPossible()) {
 			position--;
 			listeModifications.get(position).redoAll();
 		}
@@ -49,5 +49,13 @@ public class ListeModifications {
 		if(listeModifications.getFirst().estVide()) {
 			listeModifications.removeFirst();
 		}
+	}
+	
+	public boolean isUndoPossible() {
+		return position < listeModifications.size(); 
+	}
+	
+	public boolean isRedoPossible() {
+		return position-1 >= 0;
 	}
 }
