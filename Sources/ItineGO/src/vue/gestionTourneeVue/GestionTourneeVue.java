@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import controleur.Controleur;
+import controleur.EtatAjouterTourneeOrdre;
+import controleur.EtatAjouterTourneePlace;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,8 +39,6 @@ import javafx.util.Callback;
 public class GestionTourneeVue extends GestionVue {
 	private Controleur controleur;
 
-	private Noeud noeudSelectionne;
-	private Noeud noeudLivraisonSelectionne;
 	private boolean attenteNoeudPourNouvelleLivraison = false;
 	private boolean attenteLivraisonPrecedentePourNouvelleLivraison = false;
 	
@@ -134,7 +134,7 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	public void selectionneNoeud(Noeud noeud) {
-		if(attenteNoeudPourNouvelleLivraison) {
+		if(controleur.getEtatCourant().getClass().isInstance(EtatAjouterTourneePlace.class)) {
 			/*
 			 * TODO
 			 * Selection du nouveau noeud
@@ -142,8 +142,8 @@ public class GestionTourneeVue extends GestionVue {
 			 */
 			//noeudNouvelleLivraisonSelectionne(noeud);
 			controleur.clicPlanNoeud(noeud);			
-		} else if(attenteLivraisonPrecedentePourNouvelleLivraison) {
-			livraisonPrecedenteSelectionne(noeud);
+		} else if(controleur.getEtatCourant().getClass().isInstance(EtatAjouterTourneeOrdre.class)) {
+			controleur.clicPlanLivraison(noeud);	
 		} else {
 			for (Livraison t : livraisonTable.getItems()) {
 				if (t.getNoeud().equals(noeud)) {
@@ -167,7 +167,6 @@ public class GestionTourneeVue extends GestionVue {
 			l.setHeureArrive(list.get(list.size()-1).getHeureDepart());
 			livraisonTable.getItems().add(l);
 		}
-		
 	}
 
 	public void dessinePlan(Plan plan) {
@@ -313,56 +312,6 @@ public class GestionTourneeVue extends GestionVue {
 		controleur.clicBoutonAjouter();
 	}
 	
-	private void noeudNouvelleLivraisonSelectionne(Noeud noeud) {
-		attenteNoeudPourNouvelleLivraison = false;
-		attenteLivraisonPrecedentePourNouvelleLivraison = true;
-		/*
-		 * Ajout secu
-		 */
-		livraisonTable.getItems().get(livraisonTable.getItems().size()-1).setNoeud(noeud);
-		livraisonTable.refresh();
-		noeudSelectionne = noeud;
-		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
-	}
-	
-	private void livraisonPrecedenteSelectionne(Noeud noeud) {
-		for (Livraison t : livraisonTable.getItems()) {
-			if (t.getNoeud().equals(noeud)) {
-				noeudLivraisonSelectionne = noeud;
-				choixDureeLivraison();
-				return;
-			}
-		}
-	}
-	
-	private void choixDureeLivraison() {
-		attenteLivraisonPrecedentePourNouvelleLivraison = false;
-		planVilleVue.modeAjouterLivraison(false);
-		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
-		dureeColonne.setCellFactory(TextFieldTableCell.forTableColumn());
-		/*dureeColonne.setOnEditStart(value -> {
-			    new EventHandler<CellEditEvent<Livraison, String>>() {
-			        @Override
-			        public void handle(CellEditEvent<Livraison, String> t) {
-			            ((Livraison) value.getSource());
-			        }
-			    };
-		});*/
-		dureeColonne.setOnEditCommit( value -> {
-			    new EventHandler<CellEditEvent<Livraison, String>>() {
-			        @Override
-			        public void handle(CellEditEvent<Livraison, String> t) {
-			            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(Integer.valueOf(t.getNewValue()));
-			            ajouterLivraison();
-			        }
-			    };
-		});
-
-		//livraisonTable.isCellEditable(row, col)
-		livraisonTable.setEditable(true);
-		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
-	}
-	
 	public void majEtatModifierTournee() {
 		
 	}
@@ -372,7 +321,6 @@ public class GestionTourneeVue extends GestionVue {
 		labelInstruction.setVisible(true);
 		labelInstruction.setText("Sélectionnez un noeud sur le plan");
 		planVilleVue.modeAjouterLivraison(true);
-		attenteNoeudPourNouvelleLivraison = true;
 		Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
 		l.setHeureArrive(new Horaire("0:0:0"));
 		l.setHeureDepart(new Horaire("0:0:0"));
@@ -381,8 +329,6 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majAjouterTourneeOrdre(Noeud noeud) {
-		attenteNoeudPourNouvelleLivraison = false;
-		attenteLivraisonPrecedentePourNouvelleLivraison = true;
 		if(noeud == null) {
 			livraisonTable.getItems().get(livraisonTable.getItems().size()-1).setNoeud(noeud);
 			livraisonTable.refresh();
@@ -398,10 +344,43 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majAjouterTourneeDuree() {
-		
+		planVilleVue.modeAjouterLivraison(false);
+		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
+		dureeColonne.setCellFactory(TextFieldTableCell.forTableColumn());
+		/*dureeColonne.setOnEditStart(value -> {
+			    new EventHandler<CellEditEvent<Livraison, String>>() {
+			        @Override
+			        public void handle(CellEditEvent<Livraison, String> t) {
+			            ((Livraison) value.getSource());
+			        }
+			    };
+		});*/
+		dureeColonne.setOnEditCommit( value -> {
+			    new EventHandler<CellEditEvent<Livraison, String>>() {
+			        @Override
+			        public void handle(CellEditEvent<Livraison, String> t) {
+			        	int duree = 0;
+			        	try {
+			        		duree = Integer.valueOf(t.getNewValue());
+				            ((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow()) ).setDuree(duree);
+				            controleur.entrerDuree(duree);
+				            planVilleVue.modeAjouterLivraison(false);
+				    		dureeColonne.setOnEditCommit(null);
+			        	} catch(Exception e) {
+			        		labelError.setText("Durée : Données invalide");
+			        	}
+			        }
+			    };
+		});
+
+		//livraisonTable.isCellEditable(row, col)
+		livraisonTable.setEditable(true);
+		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
 	
 	public void majVisualiserTournee() {
+		planVilleVue.modeAjouterLivraison(false);
+		dureeColonne.setOnEditCommit(null);
 		supprimerColonne.setVisible(false);
 		// TODO Auto-generated method stub
 		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
@@ -505,10 +484,6 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
-	private void ajouterLivraison() {
-		planVilleVue.modeAjouterLivraison(false);
-		dureeColonne.setOnEditCommit(null);
-	}
 
 	@FXML
 	private void genererFeuilleDeRoute() {
