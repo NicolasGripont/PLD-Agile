@@ -2,13 +2,10 @@ package modeles;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
 import org.jdom2.*;
-import org.jdom2.filter.*;
 import org.jdom2.input.*;
 
 import exceptions.BadXmlFile;
-import exceptions.BadXmlLivraison;
 import exceptions.BadXmlPlan;
 
 
@@ -25,6 +22,7 @@ public class ParseurPlan {
 	 * @throws BadXmlFile 
 	 * 		Si le fichier est malformé
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void parseurPlanVille(String nomFichier, Plan plan) throws BadXmlFile, BadXmlPlan
 	 {
 		//Permet de parser le fichier XML

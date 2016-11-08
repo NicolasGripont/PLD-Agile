@@ -118,107 +118,7 @@ public class GestionTourneeVue extends GestionVue {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		supprimerColonne.setVisible(false);
-		// TODO Auto-generated method stub
-		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
-		planVillePane.getChildren().add(planVilleVue);
-
-		final ChangeListener<Number> listener = new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				controleur.redessinerPlan();
-			}
-
-		};
-		planVillePane.widthProperty().addListener(listener);
-		planVillePane.heightProperty().addListener(listener);
-
-		adresseColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if(livraison.getNoeud().getId() != -1) {
-				return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
-			} else { 
-				return new SimpleStringProperty("?");
-			}
-		});
-
-		plageDebutColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getDebutPlage() != null
-					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		plageFinColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getFinPlage() != null
-					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		arriveeColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
-		});
-
-		departColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
-		});
-
-		dureeColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			
-			if(livraison.getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
-				return new SimpleStringProperty("-");
-			}
-			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
-		});
-
-		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
-		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
-		    	  SupprimerLivraisonCell cell = new SupprimerLivraisonCell(livraisonTable,controleur.getGestionnaire().getPlan().getEntrepot());
-					cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent event) {
-							int row = cell.getIndex();			
-							controleur.clicBoutonSupprimer(row);
-							System.out.println("Suppression ligne : " + row);
-						}; 
-					});
-					return cell;
-		      }
-		    });
-
-		labelError.setVisible(false);
-		labelInstruction.setVisible(false);
-
-		imageViewAccueilExited();
-		imageViewPrecedentExited();
-		imageViewModifierExited();
-		imageViewUndoExited();
-		imageViewRedoExited();
-		imageViewValiderModificationsExited();
-		imageViewAnnulerModificationsExited();
-		imageViewAjouterLivraisonExited();
-		
-		setVisibiliteBoutons(false);
-
-		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				Livraison livraison = (Livraison) newValue;
-				planVilleVue.livraisonSelected(livraison);
-			}
-		});
-
-		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		majVisualiserTournee();
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -235,7 +135,13 @@ public class GestionTourneeVue extends GestionVue {
 
 	public void selectionneNoeud(Noeud noeud) {
 		if(attenteNoeudPourNouvelleLivraison) {
-			noeudNouvelleLivraisonSelectionne(noeud);
+			/*
+			 * TODO
+			 * Selection du nouveau noeud
+			 * Appelle controleur et envoie du noeud
+			 */
+			//noeudNouvelleLivraisonSelectionne(noeud);
+			controleur.clicPlanNoeud(noeud);			
 		} else if(attenteLivraisonPrecedentePourNouvelleLivraison) {
 			livraisonPrecedenteSelectionne(noeud);
 		} else {
@@ -404,16 +310,7 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewAjouterLivraisonClicked() {
-		System.out.println("imageViewAjouterLivraison");
-		labelInstruction.setVisible(true);
-		labelInstruction.setText("Sélectionnez un noeud sur le plan");
-		planVilleVue.modeAjouterLivraison(true);
-		attenteNoeudPourNouvelleLivraison = true;
-		Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
-		l.setHeureArrive(new Horaire("0:0:0"));
-		l.setHeureDepart(new Horaire("0:0:0"));
-		livraisonTable.getItems().add(l);
-		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
+		controleur.clicBoutonAjouter();
 	}
 	
 	private void noeudNouvelleLivraisonSelectionne(Noeud noeud) {
@@ -466,8 +363,151 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
 	
+	public void majEtatModifierTournee() {
+		
+	}
+	
+	public void majAjouterTourneePlace() {
+		System.out.println("imageViewAjouterLivraison");
+		labelInstruction.setVisible(true);
+		labelInstruction.setText("Sélectionnez un noeud sur le plan");
+		planVilleVue.modeAjouterLivraison(true);
+		attenteNoeudPourNouvelleLivraison = true;
+		Livraison l = new Livraison(noeudSelectionne, 0,"0:0:0", "0:0:0");
+		l.setHeureArrive(new Horaire("0:0:0"));
+		l.setHeureDepart(new Horaire("0:0:0"));
+		livraisonTable.getItems().add(l);
+		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
+	}
+	
+	public void majAjouterTourneeOrdre(Noeud noeud) {
+		attenteNoeudPourNouvelleLivraison = false;
+		attenteLivraisonPrecedentePourNouvelleLivraison = true;
+		if(noeud == null) {
+			livraisonTable.getItems().get(livraisonTable.getItems().size()-1).setNoeud(noeud);
+			livraisonTable.refresh();
+			noeudSelectionne = noeud;
+			labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
+		} else {
+			labelError.setText("Ce noeud ne peut être sélectionné");
+			/*
+			 * TODO
+			 * Appeler majAjouterTourneePlace dans le controleur juste après
+			 */
+		}
+	}
+	
+	public void majAjouterTourneeDuree() {
+		
+	}
+	
+	public void majVisualiserTournee() {
+		supprimerColonne.setVisible(false);
+		// TODO Auto-generated method stub
+		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
+		planVillePane.getChildren().add(planVilleVue);
+
+		final ChangeListener<Number> listener = new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				// TODO Auto-generated method stub
+				controleur.redessinerPlan();
+			}
+
+		};
+		planVillePane.widthProperty().addListener(listener);
+		planVillePane.heightProperty().addListener(listener);
+
+		adresseColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if(livraison.getNoeud().getId() != -1) {
+				return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
+			} else { 
+				return new SimpleStringProperty("?");
+			}
+		});
+
+		plageDebutColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getDebutPlage() != null
+					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		plageFinColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getFinPlage() != null
+					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		arriveeColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
+		});
+
+		departColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
+		});
+
+		dureeColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			
+			if(livraison.getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
+				return new SimpleStringProperty("-");
+			}
+			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
+		});
+
+		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
+		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
+		    	  SupprimerLivraisonCell cell = new SupprimerLivraisonCell(livraisonTable,controleur.getGestionnaire().getPlan().getEntrepot());
+					cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							int row = cell.getIndex();			
+							controleur.clicBoutonSupprimer(row);
+							System.out.println("Suppression ligne : " + row);
+						}; 
+					});
+					return cell;
+		      }
+		    });
+
+		labelError.setVisible(false);
+		labelInstruction.setVisible(false);
+
+		imageViewAccueilExited();
+		imageViewPrecedentExited();
+		imageViewModifierExited();
+		imageViewUndoExited();
+		imageViewRedoExited();
+		imageViewValiderModificationsExited();
+		imageViewAnnulerModificationsExited();
+		imageViewAjouterLivraisonExited();
+		
+		setVisibiliteBoutons(false);
+
+		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				Livraison livraison = (Livraison) newValue;
+				planVilleVue.livraisonSelected(livraison);
+			}
+		});
+
+		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	}
+	
 	private void ajouterLivraison() {
 		planVilleVue.modeAjouterLivraison(false);
+		dureeColonne.setOnEditCommit(null);
 	}
 
 	@FXML
