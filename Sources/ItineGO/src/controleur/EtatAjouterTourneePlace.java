@@ -24,7 +24,6 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 		}
 	}
 	
-	@Override
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.listeModifications.annulerModification();
 		controleur.gestionTourneeVue.setLabelInstructionVisible(false);

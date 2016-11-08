@@ -59,6 +59,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAjouter (Controleur controleur) {
+		controleur.gestionTourneeVue.majAjouterTourneePlace();
 		controleur.setEtatCourant(controleur.etatAjouterTourneePlace);
 	}
 	
