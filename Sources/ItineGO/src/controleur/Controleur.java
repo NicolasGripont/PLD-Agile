@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import modeles.Gestionnaire;
-import modeles.Livraison;
 import modeles.Noeud;
 import vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue;
 import vue.choixPlanVilleVue.ChoixPlanVilleVue;
@@ -282,6 +281,16 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonModifier() {
 		etatCourant.clicBoutonModifier(this);
+		etatCourant.getEtat();
+	}
+	
+	public void undo() {
+		etatCourant.undo(this);
+		etatCourant.getEtat();
+	}
+	
+	public void redo() {
+		etatCourant.redo(this);
 		etatCourant.getEtat();
 	}
 	

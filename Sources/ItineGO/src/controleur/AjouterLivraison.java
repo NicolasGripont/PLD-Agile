@@ -16,12 +16,12 @@ public class AjouterLivraison extends Commande {
 	
 	@Override
 	public void doCode() {
-
+		gestionnaire.ajouterLivraisonTournee();
 	}
 
 	@Override
 	public void undoCode() {
-
+		gestionnaire.supprimerLivraisonTournee(livraison);
 	}
 
 }

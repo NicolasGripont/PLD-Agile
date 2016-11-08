@@ -378,13 +378,13 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private void imageViewUndoClicked() {
-		//TODO appeler controleur
+		controleur.undo();
 		System.out.println("imageViewUndoClicked");
 	}
 
 	@FXML
 	private void imageViewRedoClicked() {
-		//TODO appeler controleur
+		controleur.redo();
 		System.out.println("imageViewRedoClicked");
 	}
 
