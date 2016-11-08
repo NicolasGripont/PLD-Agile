@@ -112,6 +112,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
+				controleur.listeModifications.viderListeModifications();
 				controleur.setEtatCourant(controleur.etatApplicationDemarree);
 			} catch (IOException e) {
 				
@@ -142,6 +143,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
 				controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
+				controleur.listeModifications.viderListeModifications();
 				controleur.setEtatCourant(controleur.etatPlanVilleAffiche);	
 			} catch (IOException e) {
 				e.printStackTrace();
