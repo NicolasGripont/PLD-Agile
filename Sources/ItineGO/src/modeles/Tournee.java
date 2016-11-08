@@ -100,6 +100,13 @@ public class Tournee {
 	/**
 	 * Renvoie la livraison de la position demandée de l'ordre des livraisons
 	 */
+	public Noeud getNoeudAtPos(int position) {
+		if(position == ordreLivraisons.size()) {
+			return entrepot.getNoeud();
+		}
+		return livraisons.get(ordreLivraisons.get(position)).getNoeud();
+	}
+	
 	public Livraison getLivraisonAtPos(int position) {
 		return livraisons.get(ordreLivraisons.get(position));
 	}

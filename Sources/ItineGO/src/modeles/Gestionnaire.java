@@ -197,6 +197,10 @@ public class Gestionnaire {
 		
 	}
 
+	public Noeud getNoeudTournee(int position) {
+		return plan.getTournee().getNoeudAtPos(position);
+	}
+	
 	public Livraison getLivraisonTournee(int position) {
 		return plan.getTournee().getLivraisonAtPos(position);
 	}
