@@ -5,12 +5,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import controleur.Controleur;
-import controleur.EtatAjouterTourneeDuree;
 import controleur.EtatAjouterTourneeOrdre;
 import controleur.EtatAjouterTourneePlace;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -19,11 +17,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -66,6 +62,9 @@ public class GestionTourneeVue extends GestionVue {
 
 	@FXML
 	private TableColumn<Livraison, String> dureeColonne;
+	
+	@FXML
+	private TableColumn<Livraison, String> attenteColonne;
 
 	@FXML
 	private TableColumn<Livraison, Boolean> supprimerColonne;

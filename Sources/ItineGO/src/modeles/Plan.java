@@ -632,9 +632,9 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
 	  		
-		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnMinutes()*60 ){
+		    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getSeconde()){
 		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive(livraisons.get( trajet.getDepart().getId()).getDebutPlage());
-		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnMinutes()*60 ;
+		    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getSeconde() ;
 		    		} else {
 		    			livraisons.get(trajet.getArrive().getId()).setHeureArrive( entrepot.getHoraireDepart());
 		    			livraisons.get(trajet.getArrive().getId()).getHeureArrive().ajouterSeconde(coutVus);
@@ -646,7 +646,6 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	  	}
 	  	entrepot.setHoraireArrive(entrepot.getHoraireDepart());
 	  	entrepot.getHoraireArrive().ajouterSeconde(coutVus);
-		
 	}
 
 
@@ -671,6 +670,7 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	
 
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
+		System.err.println(idTrajetPrevu);
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
