@@ -172,14 +172,20 @@ public class Gestionnaire {
 	}
 	
 	public void ajouterLivraisonTournee() throws NonRespectPlagesHoraires {
-		System.err.println(positionLivraisonEnCours);
-		System.err.println(livraisonEnCoursCreation);
-		System.err.println((positionLivraisonEnCours-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(positionLivraisonEnCours-1)));
-		System.err.println(getNoeudTournee(getPositionLivraisonEnCours()));
+		System.err.println("AVANT " + plan.getTournee().getLivraisons().keySet());
+		for(Trajet t : plan.getTournee().getTrajets()) {
+			System.err.print(t.getDepart().getId() + "-");
+		}
+		System.err.println();
 		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, (positionLivraisonEnCours-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(positionLivraisonEnCours-1)), getNoeudTournee(getPositionLivraisonEnCours()));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
+		System.err.println("APRES " + plan.getTournee().getLivraisons().keySet());
+		for(Trajet t : plan.getTournee().getTrajets()) {
+			System.err.print(t.getDepart().getId() + "-");
+		}
+		System.err.println();
 	}
 
 	public Livraison getLivraisonEnCoursCreation() {

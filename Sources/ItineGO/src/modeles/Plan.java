@@ -321,7 +321,7 @@ public class Plan {
 					}
 				} 
 			}
-			MiseAJourHeureDePassageLivraison(trajetsPrevus);
+			miseAJourHeureDePassageLivraison(trajetsPrevus);
 			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
 	}
 	
@@ -559,7 +559,7 @@ public class Plan {
 		    	  futurTrajetTournee.add(myTrajet);
 		      } 
 	      } 
-	      MiseAJourHeureDePassageLivraison(futurTrajetTournee);
+	      miseAJourHeureDePassageLivraison(futurTrajetTournee);
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
 		
 	}
@@ -581,6 +581,7 @@ public class Plan {
     	Integer depart[];
     	depart = new Integer[3]; 
 		remplirTableauDepartPourAjout(depart, precedent, aAjouter, suivant);
+		System.err.println(depart[0] +"-"+ depart[1] +"-"+ depart[2]);
     	
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
@@ -589,19 +590,22 @@ public class Plan {
     	 */
     	Dijkstra(depart, AllNoires, AllPrevious);
 		
-    	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));    	
+    	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
+    	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[1], depart[0], AllPrevious.get(depart[1]));
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[2], depart[1], AllPrevious.get(depart[2]));    	
     	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
+    	System.err.println("TRAJET 1 " + trajetPrevu1.getDepart().getId() + " -> " + trajetPrevu1.getArrive().getId());
 		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
+		System.err.println("TRAJET 1 " + trajetPrevu2.getDepart().getId() + " -> " + trajetPrevu2.getArrive().getId());
 		
-		SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
+		suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
 		
     	//InsertionLivraisonDansTournee(depart, AllPrevious);
 
 		
 	}
-private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Trajet trajet1, Trajet trajet2) {
+private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Trajet trajet1, Trajet trajet2) {
 
 		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
@@ -617,12 +621,12 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 		    	  futurTrajetTournee.add(trajet2);
 		      }
 	      } 
-	      MiseAJourHeureDePassageLivraison(futurTrajetTournee);
+	      miseAJourHeureDePassageLivraison(futurTrajetTournee);
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
 	}
 
 	//TODO a vérifier
-	private void MiseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
+	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
 		int coutVus=0;
 		for(Trajet trajet : futurTrajetTournee) {
 	  		coutVus+=trajet.getTemps();
@@ -658,6 +662,7 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 			}
 			
 			listeIdTrajet.add(tableauDesId[depart]);
+			//Collections.reverse(listeIdTrajet);
 			return listeIdTrajet;
 		
 	}
@@ -666,7 +671,6 @@ private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Tr
 	
 
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
-		System.err.println(idTrajetPrevu);
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
 			tronconsTrajet1.add(
