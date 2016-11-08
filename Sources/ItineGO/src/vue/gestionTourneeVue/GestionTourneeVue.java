@@ -5,9 +5,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import controleur.Controleur;
+import controleur.EtatAjouterTourneeDuree;
 import controleur.EtatAjouterTourneeOrdre;
 import controleur.EtatAjouterTourneePlace;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -437,13 +440,26 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.getItems().set(livraisonTable.getItems().size()-1, livraison);
 		livraisonTable.refresh();
 		livraisonTable.getSelectionModel().select(livraison);
-		labelInstruction.setText("Sélectionnez la livraison précedent la nouvelle livraison");
+		labelInstruction.setText("Sélectionnez la livraison qui suit la nouvelle livraison");
 	}
 	
 	public void majAjouterTourneeDuree() {
 		planVilleVue.modeAjouterLivraison(false);
 		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
 		dureeColonne.setCellFactory(TextFieldTableCell.forTableColumn());
+		dureeColonne.setCellFactory(new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
+			@Override
+			public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonBooleanTableColumn) {
+				EditionCell cell = new EditionCell(livraisonTable);
+				return cell;
+			}
+	    });
+		
+		livraisonTable.setEditable(true);
+		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);	
+		livraisonTable.getFocusModel().focus(new TablePosition<>(livraisonTable, livraisonTable.getItems().size()-1, dureeColonne));
+		livraisonTable.edit(livraisonTable.getFocusModel().getFocusedCell().getRow(), dureeColonne);
+		//livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 		/*dureeColonne.setOnEditStart(value -> {
 			    new EventHandler<CellEditEvent<Livraison, String>>() {
 			        @Override
@@ -469,10 +485,8 @@ public class GestionTourneeVue extends GestionVue {
 			        }
 			    };
 		});
-
+		
 		//livraisonTable.isCellEditable(row, col)
-		livraisonTable.setEditable(true);
-		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 	}
 	
 	public void majVisualiserTournee() {
