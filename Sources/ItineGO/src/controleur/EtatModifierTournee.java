@@ -17,6 +17,18 @@ public class EtatModifierTournee extends EtatDefaut {
 	public void clicBoutonSauvegarder (Controleur controleur) {
 		controleur.listeModifications.finModification();
 		controleur.gestionTourneeVue.majVisualiserTournee();
+		if(controleur.listeModifications.isUndoPossible()) {
+			controleur.gestionTourneeVue.desactiverUndo(false);
+		}
+		else {
+			controleur.gestionTourneeVue.desactiverUndo(true);
+		}
+		if(controleur.listeModifications.isRedoPossible()) {
+			controleur.gestionTourneeVue.desactiverRedo(false);
+		}
+		else {
+			controleur.gestionTourneeVue.desactiverRedo(true);
+		}
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
@@ -36,6 +48,18 @@ public class EtatModifierTournee extends EtatDefaut {
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+		if(controleur.listeModifications.isUndoPossible()) {
+			controleur.gestionTourneeVue.desactiverUndo(false);
+		}
+		else {
+			controleur.gestionTourneeVue.desactiverUndo(true);
+		}
+		if(controleur.listeModifications.isRedoPossible()) {
+			controleur.gestionTourneeVue.desactiverRedo(false);
+		}
+		else {
+			controleur.gestionTourneeVue.desactiverRedo(true);
+		}
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
