@@ -53,21 +53,29 @@ public class ParseurPlan {
 			 for (int i=0; i < listNoeudVille.size() ; i++)
 			 {
 				 Element noeud = (Element) listNoeudVille.get(i);
-				 if(plan.idExiste(Integer.parseInt(noeud.getAttributeValue("id")))==false)
-				 {
-					 plan.ajouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
-			 	 }
-				 else
+				 if(plan.idExiste(Integer.parseInt(noeud.getAttributeValue("id")))==true)
 				 {
 					 plan.effacerNoeuds();
 					 throw new BadXmlPlan("Erreur : Deux identifiants de noeud identiques");
+			 	 }
+				 else if(Integer.parseInt(noeud.getAttributeValue("x")) < 0 || Integer.parseInt(noeud.getAttributeValue("y")) < 0)
+				 {
+					 plan.effacerNoeuds();
+					 throw new BadXmlPlan();
+				 }
+				 else
+				 {
+					 plan.ajouterNoeud(new Noeud(Integer.parseInt(noeud.getAttributeValue("id")), Integer.parseInt(noeud.getAttributeValue("x")), Integer.parseInt(noeud.getAttributeValue("y"))));
 				 }
 			 }
 			//Parse les troncons
 			 for (int i=0; i < listTronconVille.size() ; i++)
 			 {
 				 Element troncon = (Element) listTronconVille.get(i);
-				 if(plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("origine"))) != null && plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination"))) != null) {
+				 if(plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("origine"))) != null &&
+						 plan.getNoeud(Integer.parseInt(troncon.getAttributeValue("destination"))) != null &&
+						 Integer.parseInt(troncon.getAttributeValue("longueur")) >= 0 &&
+						 Integer.parseInt(troncon.getAttributeValue("vitesse")) >= 0) {
 					 plan.ajouterTroncon(
 							 new Troncon(
 									 troncon.getAttributeValue("nomRue"),
@@ -86,7 +94,7 @@ public class ParseurPlan {
 			 }
 		 
 		 for(Map.Entry<Integer, Noeud> n : plan.getNoeuds().entrySet()) {
-			if(n.getValue().getId() == -1) {
+			if(n.getValue().getId() < 0) {
 				plan.effacerNoeuds();
 				plan.effacerTroncons();
 				throw new BadXmlPlan();
