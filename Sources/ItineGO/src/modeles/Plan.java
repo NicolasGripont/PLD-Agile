@@ -537,6 +537,7 @@ public class Plan {
     	Dijkstra(idLivraison, AllNoires, AllPrevious);
     	
     	List<Integer> idTrajetPrevu = ConstructionListdesAdressPourTrajet(idLivraison[0], idLivraison[1], AllPrevious.get(idLivraison[0]));
+
     	Trajet trajetPrevu = ConstructionTrajet(idTrajetPrevu);
     	
 		SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
@@ -650,15 +651,14 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 		
 		
 		Integer noeudCourant = tableauDesId[arrivee]; //Comme on travaille avec des arbres de couvrance minimum on fait le chemin Ã  l'envers
-			while(previous.get(noeudCourant)!=noeudCourant) {
-				listeIdTrajet.add(tableauDesId[noeudCourant]);
-			    noeudCourant=previous.get(noeudCourant);
-			}
-			
-			listeIdTrajet.add(tableauDesId[depart]);
-			//Collections.reverse(listeIdTrajet);
-			return listeIdTrajet;
+		while(previous.get(noeudCourant)!=noeudCourant && tableauDesId[depart] != tableauDesId[noeudCourant]) {
+			listeIdTrajet.add(tableauDesId[noeudCourant]);
+		    noeudCourant=previous.get(noeudCourant);
+		}
 		
+		listeIdTrajet.add(tableauDesId[depart]);
+		//Collections.reverse(listeIdTrajet);
+		return listeIdTrajet;
 	}
 
 
@@ -667,17 +667,12 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
 		System.err.println(idTrajetPrevu);
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
-		for (Integer i = 0; i < idTrajetPrevu.size() - 1; i++) {
+		for (Integer i = 0; i < idTrajetPrevu.size()-1; i++) {
 			tronconsTrajet1.add(
 					troncons.get(new Pair<Noeud,Noeud>(noeuds.get(tableauDesId[idTrajetPrevu.get(i)]), noeuds.get(tableauDesId[idTrajetPrevu.get(i + 1)]))));
 		}
-		System.out.println("idTrajetPrevu : " + idTrajetPrevu.size() + " - tronconsTrajet1 : " + tronconsTrajet1.size());
-		System.out.println(tronconsTrajet1.get(0).getOrigine());
-		System.out.println(tronconsTrajet1.get(tronconsTrajet1.size() - 1));
-		System.out.println(tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination());
-			Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
-							tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
-					
+		Trajet trajetPrevu = new Trajet(tronconsTrajet1.get(0).getOrigine(),
+				tronconsTrajet1.get(tronconsTrajet1.size() - 1).getDestination(), tronconsTrajet1);
 		return trajetPrevu;
 	}
 
