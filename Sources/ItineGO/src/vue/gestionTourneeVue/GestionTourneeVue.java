@@ -115,7 +115,101 @@ public class GestionTourneeVue extends GestionVue {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		majVisualiserTournee();
+		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
+		planVillePane.getChildren().add(planVilleVue);
+
+		final ChangeListener<Number> listener = new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				// TODO Auto-generated method stub
+				controleur.redessinerPlan();
+			}
+
+		};
+		planVillePane.widthProperty().addListener(listener);
+		planVillePane.heightProperty().addListener(listener);
+
+		adresseColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if(livraison.getNoeud().getId() != -1) {
+				return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
+			} else { 
+				return new SimpleStringProperty("?");
+			}
+		});
+
+		plageDebutColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getDebutPlage() != null
+					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		plageFinColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getFinPlage() != null
+					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		arriveeColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
+		});
+
+		departColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
+		});
+
+		dureeColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			
+			if(livraison.getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
+				return new SimpleStringProperty("-");
+			}
+			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
+		});
+
+		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
+		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
+		    	  SupprimerLivraisonCell cell = new SupprimerLivraisonCell(livraisonTable,controleur.getGestionnaire().getPlan().getEntrepot());
+					cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							int row = cell.getIndex();			
+							controleur.clicBoutonSupprimer(row);
+							System.out.println("Suppression ligne : " + row);
+						}; 
+					});
+					return cell;
+		      }
+		    });
+		
+		imageViewAccueilExited();
+		imageViewPrecedentExited();
+		imageViewModifierExited();
+		imageViewUndoExited();
+		imageViewRedoExited();
+		imageViewValiderModificationsExited();
+		imageViewAnnulerModificationsExited();
+		imageViewAjouterLivraisonExited();
+		
+		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				Livraison livraison = (Livraison) newValue;
+				planVilleVue.livraisonSelected(livraison);
+			}
+		});
+
+		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		planVilleVue.modeAjouterLivraison(false);
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -310,7 +404,14 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majEtatModifierTournee() {
-		
+		hBoxBoutons.getChildren().clear();
+		hBoxBoutons.getChildren().add(imageViewValiderModifications);
+		hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
+		hBoxBoutons.getChildren().add(imageViewAjouterLivraison);
+		hBoxBoutons.getChildren().add(labelError);
+		boutonGenerer.setVisible(false);
+		supprimerColonne.setVisible(true);
+		labelInstruction.setVisible(false);
 	}
 	
 	public void majAjouterTourneePlace() {
@@ -322,6 +423,7 @@ public class GestionTourneeVue extends GestionVue {
 		l.setHeureDepart(new Horaire("0:0:0"));
 		livraisonTable.getItems().add(l);
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
+		supprimerColonne.setVisible(false);
 	}
 	
 	public void majAjouterTourneeOrdre(Livraison livraison) {
@@ -366,109 +468,18 @@ public class GestionTourneeVue extends GestionVue {
 	}
 	
 	public void majVisualiserTournee() {
-		planVilleVue.modeAjouterLivraison(false);
+		hBoxBoutons.getChildren().clear();
+		hBoxBoutons.getChildren().add(imageViewAccueil);
+		hBoxBoutons.getChildren().add(imageViewPrecedent);
+		hBoxBoutons.getChildren().add(imageViewModifier);
+//		hBoxBoutons.getChildren().add(imageViewUndo);
+//		hBoxBoutons.getChildren().add(imageViewRedo);
+		hBoxBoutons.getChildren().add(labelError);
+		boutonGenerer.setVisible(true);
 		dureeColonne.setOnEditCommit(null);
 		supprimerColonne.setVisible(false);
-		// TODO Auto-generated method stub
-		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
-		planVillePane.getChildren().add(planVilleVue);
-
-		final ChangeListener<Number> listener = new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				controleur.redessinerPlan();
-			}
-
-		};
-		planVillePane.widthProperty().addListener(listener);
-		planVillePane.heightProperty().addListener(listener);
-
-		adresseColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if(livraison.getNoeud().getId() != -1) {
-				return new SimpleStringProperty(String.valueOf(livraison.getNoeud().getId()));
-			} else { 
-				return new SimpleStringProperty("?");
-			}
-		});
-
-		plageDebutColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getDebutPlage() != null
-					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		plageFinColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getFinPlage() != null
-					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		arriveeColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
-		});
-
-		departColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			return new SimpleStringProperty(livraison.getHeureDepart().getHoraire());
-		});
-
-		dureeColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			
-			if(livraison.getNoeud().equals(controleur.getGestionnaire().getPlan().getEntrepot().getNoeud())) {
-				return new SimpleStringProperty("-");
-			}
-			return new SimpleStringProperty(String.valueOf(livraison.getDuree()));
-		});
-
-		supprimerColonne.setCellFactory(new Callback<TableColumn<Livraison, Boolean>, TableCell<Livraison, Boolean>>() {
-		      @Override public TableCell<Livraison, Boolean> call(TableColumn<Livraison, Boolean> livraisonBooleanTableColumn) {
-		    	  SupprimerLivraisonCell cell = new SupprimerLivraisonCell(livraisonTable,controleur.getGestionnaire().getPlan().getEntrepot());
-					cell.getImageViewMoins().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-						public void handle(MouseEvent event) {
-							int row = cell.getIndex();			
-							controleur.clicBoutonSupprimer(row);
-							System.out.println("Suppression ligne : " + row);
-						}; 
-					});
-					return cell;
-		      }
-		    });
-
 		labelError.setVisible(false);
 		labelInstruction.setVisible(false);
-
-		imageViewAccueilExited();
-		imageViewPrecedentExited();
-		imageViewModifierExited();
-		imageViewUndoExited();
-		imageViewRedoExited();
-		imageViewValiderModificationsExited();
-		imageViewAnnulerModificationsExited();
-		imageViewAjouterLivraisonExited();
-		
-		setVisibiliteBoutons(false);
-
-		livraisonTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				Livraison livraison = (Livraison) newValue;
-				planVilleVue.livraisonSelected(livraison);
-			}
-		});
-
-		livraisonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 	
 
@@ -484,30 +495,4 @@ public class GestionTourneeVue extends GestionVue {
 			labelError.setText("Feuille de route générée");
 		}
 	}
-
-	public void setVisibiliteBoutons(Boolean modeModification) {
-		hBoxBoutons.getChildren().clear();		
-		if(modeModification) {
-			hBoxBoutons.getChildren().add(imageViewValiderModifications);
-			hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
-			hBoxBoutons.getChildren().add(imageViewAjouterLivraison);
-		} else {
-			hBoxBoutons.getChildren().add(imageViewAccueil);
-			hBoxBoutons.getChildren().add(imageViewPrecedent);
-			hBoxBoutons.getChildren().add(imageViewModifier);
-//			hBoxBoutons.getChildren().add(imageViewUndo);
-//			hBoxBoutons.getChildren().add(imageViewRedo);
-		}
-		hBoxBoutons.getChildren().add(labelError);
-		boutonGenerer.setVisible(!modeModification);
-	}
-	
-	public void setSupprimerColonneVisible(boolean isVisible) {
-		supprimerColonne.setVisible(isVisible);
-	}
-	
-	public void setLabelInstructionVisible(boolean isVisible) {
-		labelInstruction.setVisible(isVisible);
-	}
-	
 }

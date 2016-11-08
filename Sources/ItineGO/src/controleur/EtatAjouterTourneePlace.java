@@ -24,12 +24,9 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 		}
 	}
 	
-	@Override
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.listeModifications.annulerModification();
-		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
-		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
-		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

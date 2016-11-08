@@ -14,9 +14,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonSauvegarder (Controleur controleur) {
-		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
-		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
-		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.setEtatCourant(controleur.etatTourneeAffiche);
 	}
 	
@@ -28,9 +26,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.listeModifications.annulerModification();
-		controleur.gestionTourneeVue.setLabelInstructionVisible(false);
-		controleur.gestionTourneeVue.setVisibiliteBoutons(false);
-		controleur.gestionTourneeVue.setSupprimerColonneVisible(false);
+		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
@@ -59,6 +55,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param gestionnaire : Gestionnaire de l'application.
 	 */
 	public void clicBoutonAjouter (Controleur controleur) {
+		controleur.gestionTourneeVue.majAjouterTourneePlace();
 		controleur.setEtatCourant(controleur.etatAjouterTourneePlace);
 	}
 	
