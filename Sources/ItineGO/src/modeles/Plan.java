@@ -493,6 +493,27 @@ public class Plan {
        }
     }
 	
+	public void supressionLivraisonTournee(Livraison aSuprimer){
+		
+		Noeud arrive = null;
+		Noeud depart = null;
+		
+		supprimerLivraison(aSuprimer);
+		TrouverNoeudPrecendentEtSuivant(aSuprimer,depart , arrive);
+	}
+	
+	private void TrouverNoeudPrecendentEtSuivant(Livraison aSuprimer, Noeud depart, Noeud arrive) {
+		
+		
+	}
+
+	private void supprimerLivraison(Livraison aSuprimer) {
+			if(aSuprimer != null) {
+				livraisons.remove(aSuprimer.getNoeud());
+			}
+		
+	}
+
 	public void ajouterLivraisonTournee(Livraison precedent, Livraison aAjouter, Livraison suivant){
 		
 		ajouterLivraison(aAjouter);
@@ -529,9 +550,7 @@ public class Plan {
 		
 	}
 private void SuppresionTrajetARemplacerEtInsertionNouveauxTrajetDansTournee( Trajet trajet1, Trajet trajet2) {
-		
-	
-	
+
 		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
 	      
