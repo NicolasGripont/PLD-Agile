@@ -27,49 +27,70 @@ public class Plan {
 	 * Le noeud est accessible par son id
 	 */
 	private Map<Integer, Noeud> noeuds;
+	
 	/**
 	 * Map représentant l'ensemble des tronçons du plan
 	 * Le tronc est accessible par son noeud de départ et d'arrivée
 	 */
 	private Map<Pair<Noeud, Noeud>, Troncon> troncons;
+	
 	/**
 	 * Map représentant l'ensemble des livraisons de la tournée à effectuer
 	 * La livraison est accessible par le noeud modélisant sa position
 	 */
 	private Map<Noeud, Livraison> livraisons;
+	
 	/**
 	 * Entrepot de départ de la tournée à effectuer
 	 */
 	private Entrepot entrepot;
+	
 	private int tableauDesId[];
+	
+	/**
+	 * Matrice du graphe, modélisant le coût du troncon entre chaque noeud, un 0 indique qu'il n'y a pas de lien direct
+	 */
+	static Integer matriceDuGraphe[][];
+	
 	/**
 	 * TSP utilisé dans l'application
 	 */
 	private TSP4 tsp;
+	
 	/**
 	 * Modélise la tournée effectuée
 	 */
 	private Tournee tournee;
+	
 	/**
 	 * Thread utilisé pour calculer la tournée
 	 */
 	private Thread threadCalcul;
+	
 	/**
 	 * Thread utilisé pour la répresentation graphique de la solution calculée
 	 */
 	private Thread threadConstructionTournee;
+	
 	private Gestionnaire gestionnaire;
+	
 	/**
 	 * Temps maximum durant lequel l'application va tourner en millisecondes
 	 */
 	private int tempsMax = 20000;
 	
+	/**
+	 * Constructeur de classe
+	 */
 	public Plan() {
 		noeuds = new HashMap<Integer, Noeud>();
 		troncons = new HashMap<Pair<Noeud, Noeud>, Troncon> ();
 		livraisons = new HashMap<Noeud, Livraison>();
 	}
 	
+	/**
+	 * Constructeur de classe
+	 */
 	public Plan(Gestionnaire gestionnaire) {
 		this.gestionnaire = gestionnaire;
 		noeuds = new HashMap<Integer, Noeud>();
@@ -154,13 +175,12 @@ public class Plan {
 		/**
 		 * On créé la matrice qui représent le graphe avec les couts des arcs
 		 */
-		Integer matriceDuGraphe[][];
     	matriceDuGraphe= new Integer[noeuds.size()][noeuds.size()] ; 
     	
     	/**
     	 * On remplie la matrice qui modelise le graphe
     	 */
-    	remplirMatriceDuGraphe(matriceDuGraphe);
+    	remplirMatriceDuGraphe();
     	
     	/**
     	 * va contenir les les couts du graphe simplifié qui aura pour sommet les livraisons 
@@ -176,7 +196,7 @@ public class Plan {
     	/**
     	 * On calcul les plus court chemin entre toute les livraisons
     	 */
-    	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
+    	Dijkstra(depart, AllNoires, AllPrevious);
    
 		
 		/**
@@ -336,7 +356,7 @@ public class Plan {
 		}
 	}
 
-	 private void remplirMatriceDuGraphe(Integer[][] matriceDuGraphe) {
+	 private void remplirMatriceDuGraphe() {
     	for(Integer i = 0 ; i <matriceDuGraphe.length ;i++)
         {
             for(Integer j = 0 ; j < matriceDuGraphe.length ; j++)
@@ -408,7 +428,7 @@ public class Plan {
 			
 		}
 
-	private static void Dijkstra(Integer depart[], Integer matriceDuGraphe[][] ,HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
+	private static void Dijkstra(Integer depart[],HashMap< Integer, HashMap<Integer, Integer>> AllNoires ,HashMap< Integer, HashMap<Integer, Integer>> AllPrevious)
     {
     	
     	for(int itDepart = 0; itDepart<depart.length ; itDepart++)
@@ -503,18 +523,13 @@ public class Plan {
     	Integer depart[];
     	depart = new Integer[3]; 
 		remplirTableauDepartPourAjout(depart, precedent, aAjouter, suivant);
-		
-		
-		Integer matriceDuGraphe[][];
-    	matriceDuGraphe= new Integer[noeuds.size()][noeuds.size()] ; 
-    	remplirMatriceDuGraphe(matriceDuGraphe);
     	
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	/**
     	 * On calcul les plus court chemin entre toute les livraisons
     	 */
-    	Dijkstra(depart, matriceDuGraphe, AllNoires, AllPrevious);
+    	Dijkstra(depart, AllNoires, AllPrevious);
 		
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
     	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));
