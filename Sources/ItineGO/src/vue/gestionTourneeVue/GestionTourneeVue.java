@@ -173,13 +173,18 @@ public class GestionTourneeVue extends GestionVue {
             });
             
             row.setOnDragOver(event -> {
-                Dragboard db = event.getDragboard();
+            	row.setStyle("");
+                /*Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
                     }
-                }
+                }*/
+            });
+            
+            row.setOnDragExited(event -> {
+            	
             });
             
             row.setOnDragDropped(event -> {
@@ -193,7 +198,7 @@ public class GestionTourneeVue extends GestionVue {
                         dropIndex = row.getIndex();
                     }
                     System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
-                    controleur.modifierOrdre(dropIndex, draggedIndex);
+                    controleur.modifierOrdre(draggedIndex,dropIndex);
                     /*if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
                     	Livraison draggedLivraison = livraisonTable.getItems().get(draggedIndex);
 	                    livraisonTable.getItems().add(dropIndex, draggedLivraison);
