@@ -1,5 +1,6 @@
 package controleur;
 
+import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 import modeles.Livraison;
 
@@ -17,14 +18,14 @@ public class ModifierPlageHoraireFin extends Commande {
 	}
 	
 	@Override
-	public void doCode() {
+	public void doCode() throws NonRespectPlagesHoraires {
 		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
 		plageFinInitiale = livraisonTournee.getFinPlage().toString();
 		gestionnaire.changerPlageHoraireFin(numLigne, plageFin);
 	}
 
 	@Override
-	public void undoCode() {
+	public void undoCode() throws NonRespectPlagesHoraires {
 		gestionnaire.changerPlageHoraireFin(numLigne, plageFinInitiale);
 	}
 

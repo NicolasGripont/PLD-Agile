@@ -250,8 +250,11 @@ public class Gestionnaire {
 		}
 	}
 	
-	public void changerPlageHoraireFin(int position, String plageFin) {
+	public void changerPlageHoraireFin(int position, String plageFin) throws NonRespectPlagesHoraires {
 		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
