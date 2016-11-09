@@ -19,13 +19,13 @@ public class ListeCommandes {
 			listeCommandes.removeFirst();
 		}
 		listeCommandes.addFirst(commande);
+		position = 0;
 		try {
 			commande.doCode();
 		} catch (NonRespectPlagesHoraires e) {
 			//listeCommandes.removeFirst();
 			throw e;
 		}
-		position = 0;
 	}
 	
 	public void undoAll() throws NonRespectPlagesHoraires {
@@ -48,7 +48,7 @@ public class ListeCommandes {
 	}
 	
 	public void redo() throws NonRespectPlagesHoraires {
-		if(position-1 >= 0) {
+		if(position-1 >= 0 && !listeCommandes.isEmpty()) {
 			position--;
 			listeCommandes.get(position).doCode();
 		}

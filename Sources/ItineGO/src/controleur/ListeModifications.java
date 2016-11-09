@@ -57,11 +57,7 @@ public class ListeModifications {
 	}
 	
 	public boolean isRedoPossible() {
-		return position-1 >= 0 && listeModifications.size() >= 1;
-	}
-	
-	public LinkedList<ListeCommandes> getListeModifications() {
-		return listeModifications;
+		return position-1 >= 0 && !listeModifications.isEmpty();
 	}
 
 	public void viderListeModifications() {
