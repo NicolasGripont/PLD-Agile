@@ -49,6 +49,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+		controleur.gestionTourneeVue.solutionOptimale(!controleur.listeModifications.isUndoPossible());
 		if(controleur.listeModifications.isUndoPossible()) {
 			controleur.gestionTourneeVue.desactiverUndo(false);
 		}
@@ -110,7 +111,6 @@ public class EtatModifierTournee extends EtatDefaut {
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-		
 	}
 	
 	/**

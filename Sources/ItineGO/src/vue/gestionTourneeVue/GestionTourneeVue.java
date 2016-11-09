@@ -161,7 +161,7 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.setRowFactory(tv -> {
             TableRow<Livraison> row = new TableRow<>();
             row.setOnDragDetected(event -> {
-                if (! row.isEmpty() && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
+                if (!row.isEmpty() && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     Integer index = row.getIndex();
                     Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
                     db.setDragView(row.snapshot(null, null));
@@ -171,6 +171,7 @@ public class GestionTourneeVue extends GestionVue {
                     event.consume();
                 }
             });
+            
             row.setOnDragOver(event -> {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
@@ -191,15 +192,17 @@ public class GestionTourneeVue extends GestionVue {
                     } else {
                         dropIndex = row.getIndex();
                     }
-                    if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
-                    	Livraison draggedLivraison = livraisonTable.getItems().remove(draggedIndex);
+                    System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
+                    controleur.modifierOrdre(dropIndex, draggedIndex);
+                    /*if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
+                    	Livraison draggedLivraison = livraisonTable.getItems().get(draggedIndex);
 	                    livraisonTable.getItems().add(dropIndex, draggedLivraison);
-	                    
+	                    livraisonTable.getItems().remove(draggedIndex);
 	                    event.setDropCompleted(true);
 	                    livraisonTable.getSelectionModel().select(dropIndex);
 	                    event.consume();
 	                    //controleur.modifierOrdre(dropIndex, draggedIndex);
-                    }
+                    }*/
                 }
             });
             return row ;
@@ -526,6 +529,8 @@ public class GestionTourneeVue extends GestionVue {
 		hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
 		hBoxBoutons.getChildren().add(imageViewAjouterLivraison);
 		hBoxBoutons.getChildren().add(labelError);
+		labelError.setStyle("-fx-text-fill : rgb(0,128,255);");
+		labelError.setText("Modification de la tournéee");
 		boutonGenerer.setVisible(false);
 		supprimerColonne.setVisible(true);
 		labelInstruction.setVisible(false);
@@ -545,6 +550,7 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 		supprimerColonne.setVisible(false);
 		planVilleVue.modeAjouterLivraison(true);
+		labelError.setText("Ajout d'une livraison");
 	}
 	
 	public void majAjouterTourneeOrdre(Livraison livraison) {
@@ -578,8 +584,8 @@ public class GestionTourneeVue extends GestionVue {
 					planVilleVue.modeAjouterLivraison(false);
 		    		dureeColonne.setOnEditCommit(null);
 	        	} catch(Exception e) {
-	        		e.printStackTrace();
-	        		labelError.setText("Durée : Données invalide");
+	        		labelError.setText("Durée : Donnée invalide");
+	        		labelError.setStyle("-fx-text-fill : red;");
 	        	}
 	        }
 	    });
@@ -609,6 +615,7 @@ public class GestionTourneeVue extends GestionVue {
 		supprimerColonne.setVisible(false);
 		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
+		livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
 	}
 	
 

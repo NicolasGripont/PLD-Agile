@@ -221,7 +221,7 @@ public class Gestionnaire {
 
 	public void reordonnerLivraisonTournee(int positionInitiale, int positionFinale) {
 		// TODO Changer l'ordre de la livraison à la position initiale vers la position finale.
-		
+		plan.reordonnerLivraisonTournee(positionInitiale, positionFinale);
 	}
 
 	/**
