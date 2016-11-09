@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import controleur.Controleur;
 import controleur.EtatAjouterTourneeOrdre;
 import controleur.EtatAjouterTourneePlace;
+import controleur.EtatModifierTournee;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -159,9 +160,8 @@ public class GestionTourneeVue extends GestionVue {
 		planVillePane.heightProperty().addListener(listener);
 		livraisonTable.setRowFactory(tv -> {
             TableRow<Livraison> row = new TableRow<>();
-
             row.setOnDragDetected(event -> {
-                if (! row.isEmpty()) {
+                if (! row.isEmpty() && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     Integer index = row.getIndex();
                     Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
                     db.setDragView(row.snapshot(null, null));
@@ -171,39 +171,37 @@ public class GestionTourneeVue extends GestionVue {
                     event.consume();
                 }
             });
-
             row.setOnDragOver(event -> {
                 Dragboard db = event.getDragboard();
-                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
                     }
                 }
             });
-
+            
             row.setOnDragDropped(event -> {
                 Dragboard db = event.getDragboard();
-                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
-                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-                    Livraison draggedPerson = livraisonTable.getItems().remove(draggedIndex);
-
+                if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
+                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE); 
                     int dropIndex ; 
-
                     if (row.isEmpty()) {
                         dropIndex = livraisonTable.getItems().size() ;
                     } else {
                         dropIndex = row.getIndex();
                     }
-
-                    livraisonTable.getItems().add(dropIndex, draggedPerson);
-
-                    event.setDropCompleted(true);
-                    livraisonTable.getSelectionModel().select(dropIndex);
-                    event.consume();
+                    if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
+                    	Livraison draggedLivraison = livraisonTable.getItems().remove(draggedIndex);
+	                    livraisonTable.getItems().add(dropIndex, draggedLivraison);
+	                    
+	                    event.setDropCompleted(true);
+	                    livraisonTable.getSelectionModel().select(dropIndex);
+	                    event.consume();
+	                    //controleur.modifierOrdre(dropIndex, draggedIndex);
+                    }
                 }
             });
-
             return row ;
         });
 		
