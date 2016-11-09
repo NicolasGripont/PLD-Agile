@@ -574,7 +574,8 @@ public class Plan {
 		}
 	}
 	
-	public void suppressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){	
+	public void suppressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){
+		System.out.println("Tournee avant :"+ tournee.listeLivraisonsParOrdreDePassage());
 		Noeud arrive = precedent;
 		Noeud depart = suivant;
 		supprimerLivraison(aSuprimer);
@@ -597,6 +598,7 @@ public class Plan {
     	Trajet trajetPrevu = ConstructionTrajet(idTrajetPrevu);
     	
 		SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
+		System.out.println("Tournee après :"+ tournee.listeLivraisonsParOrdreDePassage());
 	}
 	
 	private void SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(Trajet trajetPrevu) {
@@ -725,9 +727,8 @@ public class Plan {
 			HashMap<Integer, Integer> previous) {
 		List<Integer> listeIdTrajet = new ArrayList<Integer>();
 		
-		
 		Integer noeudCourant = tableauDesId[arrivee]; //Comme on travaille avec des arbres de couvrance minimum on fait le chemin Ã  l'envers
-		while(previous.get(noeudCourant)!=noeudCourant) {
+		while(!previous.get(noeudCourant).equals(noeudCourant)) {
 			System.out.println("Noeud courant : " + noeudCourant);
 			listeIdTrajet.add(tableauDesId[noeudCourant]);
 		    noeudCourant=previous.get(noeudCourant);
