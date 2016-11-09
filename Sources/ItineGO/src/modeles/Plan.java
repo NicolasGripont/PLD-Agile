@@ -584,8 +584,7 @@ public class Plan {
 		System.out.println("Tournee avant :"+ tournee.listeLivraisonsParOrdreDePassage());
 		Noeud arrive = precedent;
 		Noeud depart = suivant;
-		
-		
+	
 		supprimerLivraison(aSuprimer);
 		tableauDesId = new int [noeuds.size()];
     	remplirTableauDesID(tableauDesId);
@@ -594,7 +593,8 @@ public class Plan {
     	idLivraison = new Integer[2]; 
     	idLivraison[1]=numDansTableau(depart.getId());
 		idLivraison[0]=numDansTableau(arrive.getId());
-    	
+		System.out.println("idLivraison[1] : " + idLivraison[1]);
+		System.out.println("idLivraison[0] : " + idLivraison[0]);
     	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>();
     	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>();
     	/**
@@ -603,6 +603,7 @@ public class Plan {
     	Dijkstra(idLivraison, AllNoires, AllPrevious);
     	
     	List<Integer> idTrajetPrevu = ConstructionListdesAdressPourTrajet(idLivraison[0], idLivraison[1], AllPrevious.get(idLivraison[0]));
+    	System.out.println("idTrajetPrevu : " + idTrajetPrevu);
     	Trajet trajetPrevu = ConstructionTrajet(idTrajetPrevu);
     	
 		SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
@@ -652,12 +653,14 @@ public class Plan {
     	 * On calcul les plus court chemin entre toute les livraisons
     	 */
     	Dijkstra(depart, AllNoires, AllPrevious);
-		
+    	System.out.println("depart[0] : " + depart[0]);
+    	System.out.println("depart[1] : " + depart[1]);
+    	System.out.println("depart[2] : " + depart[2]);
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
     	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));    	
-    	//System.out.println("idTrajetPrevu1 : " + idTrajetPrevu1);
-    	//System.out.println("idTrajetPrevu2 : " + idTrajetPrevu2);
+    	System.out.println("idTrajetPrevu1 : " + idTrajetPrevu1);
+    	System.out.println("idTrajetPrevu2 : " + idTrajetPrevu2);
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
 		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);		
 		suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);

@@ -184,7 +184,10 @@ public class Gestionnaire {
 		} else {
 			n = getNoeudTournee(positionLivraisonEnCours-1);
 		}
-		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(getPositionLivraisonEnCours()));
+		System.out.println("livraisonEnCoursCreation : " + livraisonEnCoursCreation);
+		System.out.println("n : " + n);
+		System.out.println("getNoeudTournee(getPositionLivraisonEnCours()) : " + getNoeudTournee(getPositionLivraisonEnCours()));
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(positionLivraisonEnCours));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}

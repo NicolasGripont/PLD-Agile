@@ -160,6 +160,7 @@ public class GestionTourneeVue extends GestionVue {
 		
 		planVillePane.widthProperty().addListener(listener);
 		planVillePane.heightProperty().addListener(listener);
+		TableRow<Livraison> row2 = new TableRow<>();
 		livraisonTable.setRowFactory(tv -> {
             TableRow<Livraison> row = new TableRow<>();
             row.setOnDragDetected(event -> {
@@ -175,7 +176,17 @@ public class GestionTourneeVue extends GestionVue {
             });
             
             row.setOnDragOver(event -> {
-            	row.setStyle("");
+            	Dragboard db = event.getDragboard();
+            	if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
+	            	int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+	            	if(draggedIndex != row.getIndex()) {
+	            		row.setMinWidth(70);
+	            		row.setPrefWidth(70);
+	            		row.setMaxWidth(70);
+	            		row.setStyle("-fx-padding: 0.5em;");
+	            	}
+            	}
+            	
                 /*Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
@@ -186,7 +197,13 @@ public class GestionTourneeVue extends GestionVue {
             });
             
             row.setOnDragExited(event -> {
-            	
+            	Dragboard db = event.getDragboard();
+            	if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
+	            	int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+	            	if(draggedIndex != row.getIndex()) {
+	            		row.setStyle("-fx-padding: 0em;");
+	            	}
+            	}
             });
             
             row.setOnDragDropped(event -> {

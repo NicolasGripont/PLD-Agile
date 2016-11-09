@@ -183,6 +183,7 @@ public class Controleur extends Application {
 	 * @param numLigne : Ligne du tableau de la livraison à supprimer.
 	 */
 	public void clicBoutonSupprimer(int numLigne) {
+		System.out.println("ON SUPPRIME LA LIGNE : " + numLigne);
 		etatCourant.clicBoutonSupprimer(this, gestionnaire, numLigne);
 		etatCourant.getEtat();
 	}
