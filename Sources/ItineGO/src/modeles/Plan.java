@@ -690,7 +690,7 @@ public class Plan {
 		
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[2], depart[1], AllPrevious.get(depart[2]));    	
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[2]));    	
     	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
     	System.err.println("TRAJET 1 " + trajetPrevu1.getDepart().getId() + " -> " + trajetPrevu1.getArrive().getId());
