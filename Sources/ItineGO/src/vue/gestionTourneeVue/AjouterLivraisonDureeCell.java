@@ -7,11 +7,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modeles.Livraison;
 
-public class EditionCell extends TableCell<Livraison, String> {
+class AjouterLivraisonDureeCell extends TableCell<Livraison, String> {
 
     private TextField textField;
-    
-    public EditionCell() {
+
+    public AjouterLivraisonDureeCell() {
     }
 
     @Override
@@ -36,7 +36,6 @@ public class EditionCell extends TableCell<Livraison, String> {
     @Override
     public void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
-
         if (empty) {
             setText(null);
             setGraphic(null);
@@ -77,5 +76,4 @@ public class EditionCell extends TableCell<Livraison, String> {
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
     }
-
 }

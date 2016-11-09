@@ -173,13 +173,18 @@ public class GestionTourneeVue extends GestionVue {
             });
             
             row.setOnDragOver(event -> {
-                Dragboard db = event.getDragboard();
+            	row.setStyle("");
+                /*Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
                     }
-                }
+                }*/
+            });
+            
+            row.setOnDragExited(event -> {
+            	
             });
             
             row.setOnDragDropped(event -> {
@@ -193,7 +198,7 @@ public class GestionTourneeVue extends GestionVue {
                         dropIndex = row.getIndex();
                     }
                     System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
-                    controleur.modifierOrdre(dropIndex, draggedIndex);
+                    controleur.modifierOrdre(draggedIndex,dropIndex);
                     /*if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
                     	Livraison draggedLivraison = livraisonTable.getItems().get(draggedIndex);
 	                    livraisonTable.getItems().add(dropIndex, draggedLivraison);
@@ -535,6 +540,36 @@ public class GestionTourneeVue extends GestionVue {
 		boutonGenerer.setVisible(false);
 		supprimerColonne.setVisible(true);
 		labelInstruction.setVisible(false);
+		
+		Callback callback = new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
+		      @Override public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonStringTableColumn) {
+		    	  EditionCell cell = new EditionCell();
+		    	  return cell;
+		      }
+		    };
+		    
+		plageDebutColonne.setCellFactory(callback);
+		plageDebutColonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Livraison, String>>() {
+	        @Override
+	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
+	        	if(!t.getOldValue().equals(t.getNewValue())) {
+	        		controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue());
+	        	}
+	        }
+	    });
+		
+		plageFinColonne.setCellFactory(callback);
+		plageFinColonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Livraison, String>>() {
+	        @Override
+	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {		
+	        	if(!t.getOldValue().equals(t.getNewValue())) {
+	        		controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue());
+	        	}
+	        }
+	    });
+		
+		livraisonTable.setEditable(true);
+		livraisonTable.refresh();
 	}
 	
 	public void majAjouterTourneePlace() {
@@ -552,6 +587,26 @@ public class GestionTourneeVue extends GestionVue {
 		supprimerColonne.setVisible(false);
 		planVilleVue.modeAjouterLivraison(true);
 		labelError.setText("Ajout d'une livraison");
+		
+		plageDebutColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getDebutPlage() != null
+					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		plageFinColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getFinPlage() != null
+					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
 	}
 	
 	public void majAjouterTourneeOrdre(Livraison livraison) {
@@ -566,10 +621,11 @@ public class GestionTourneeVue extends GestionVue {
 		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
 		livraisonTable.setEditable(true);		
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
+		
 		dureeColonne.setCellFactory(new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
 			@Override
 			public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonBooleanTableColumn) {
-				EditionCell cell = new EditionCell();
+				AjouterLivraisonDureeCell cell = new AjouterLivraisonDureeCell();
 				return cell;
 			}
 	    });
@@ -590,6 +646,7 @@ public class GestionTourneeVue extends GestionVue {
 	        	}
 	        }
 	    });
+		
 		//Permet de synchronize l'IHM et le Thread RunLater
 		try {
 			Thread.sleep(100);
@@ -617,6 +674,26 @@ public class GestionTourneeVue extends GestionVue {
 		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
+		
+		plageDebutColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getDebutPlage() != null
+					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
+
+		plageFinColonne.setCellValueFactory(param -> {
+			final Livraison livraison = param.getValue();
+			if (livraison.getFinPlage() != null
+					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
+				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
+			} else {
+				return new SimpleStringProperty("-");
+			}
+		});
 	}
 	
 
