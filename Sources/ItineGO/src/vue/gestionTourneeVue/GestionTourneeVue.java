@@ -142,6 +142,8 @@ public class GestionTourneeVue extends GestionVue {
 
 	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 	
+	private Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>> defaultStringCellFactory;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		planVilleVue = new PlanVilleVue(planVillePane.getPrefWidth(), planVillePane.getPrefHeight(), this);
@@ -292,6 +294,7 @@ public class GestionTourneeVue extends GestionVue {
 		      }
 		    });
 		
+		defaultStringCellFactory = plageDebutColonne.getCellFactory();
 		imageViewAccueilExited();
 		imageViewPrecedentExited();
 		imageViewModifierExited();
@@ -587,26 +590,8 @@ public class GestionTourneeVue extends GestionVue {
 		supprimerColonne.setVisible(false);
 		planVilleVue.modeAjouterLivraison(true);
 		labelError.setText("Ajout d'une livraison");
-		
-		plageDebutColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getDebutPlage() != null
-					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		plageFinColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getFinPlage() != null
-					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
+		plageDebutColonne.setCellFactory(defaultStringCellFactory);
+		plageFinColonne.setCellFactory(defaultStringCellFactory);
 	}
 	
 	public void majAjouterTourneeOrdre(Livraison livraison) {
@@ -674,26 +659,8 @@ public class GestionTourneeVue extends GestionVue {
 		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
-		
-		plageDebutColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getDebutPlage() != null
-					&& !livraison.getDebutPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getDebutPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
-
-		plageFinColonne.setCellValueFactory(param -> {
-			final Livraison livraison = param.getValue();
-			if (livraison.getFinPlage() != null
-					&& !livraison.getFinPlage().getHoraire().equals("00:00")) {
-				return new SimpleStringProperty(livraison.getFinPlage().getHoraire());
-			} else {
-				return new SimpleStringProperty("-");
-			}
-		});
+		plageDebutColonne.setCellFactory(defaultStringCellFactory);
+		plageFinColonne.setCellFactory(defaultStringCellFactory);
 	}
 	
 
