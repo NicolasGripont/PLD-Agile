@@ -95,7 +95,7 @@ public class Livraison {
 	}
 
 	public boolean sontValidesPlages() {
-		if(heureArrive.getHoraireEnSecondes() >= debutPlage.getHoraireEnSecondes() && (heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0)) {
+		if(heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0) {
 			return true;
 		}
 		return false;
