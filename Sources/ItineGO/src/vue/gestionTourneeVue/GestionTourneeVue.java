@@ -556,7 +556,8 @@ public class GestionTourneeVue extends GestionVue {
 	        @Override
 	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
 	        	if(!t.getOldValue().equals(t.getNewValue())) {
-	        		controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue());
+	        		System.out.println("modifierPlageDebut");
+	        		controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue()+":00");
 	        	}
 	        }
 	    });
@@ -566,7 +567,8 @@ public class GestionTourneeVue extends GestionVue {
 	        @Override
 	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {		
 	        	if(!t.getOldValue().equals(t.getNewValue())) {
-	        		controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue());
+	        		System.out.println("modifierPlageFin");
+	        		controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue()+":00");
 	        	}
 	        }
 	    });
