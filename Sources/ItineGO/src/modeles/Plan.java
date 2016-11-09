@@ -247,6 +247,12 @@ public class Plan {
 						return;
 					}
 				}
+				if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+					constructionTournee(depart, AllNoires, AllPrevious);
+				}
+				if(gestionnaire != null) {
+					Platform.runLater(() -> gestionnaire.tourneeCalculee());
+				}
 			}
 		};
 		threadConstructionTournee.setDaemon(true);
@@ -563,6 +569,45 @@ public class Plan {
 	
 	}
 
+	/**
+	 * 
+	 * @param place1
+	 * @param place2
+	 */
+	public void reordonnerLivraisonTournee(int place1, int place2){		
+		Livraison livraison1 = gestionnaire.getLivraisonTournee(place1);
+		Livraison livraison2 = gestionnaire.getLivraisonTournee(place2);
+		if(livraison1 != null && livraison2 != null) {
+			Noeud suivant1 = null;
+			if(place1 == (livraisons.size()-1)) {
+				suivant1 = entrepot.getNoeud();		
+			} else {
+				suivant1 = gestionnaire.getLivraisonTournee(place1+1).getNoeud();
+			}
+			Noeud suivant2 = null;
+			if(place2 == (livraisons.size()-1)) {
+				suivant2 =  entrepot.getNoeud();
+			} else {
+				suivant2 = gestionnaire.getLivraisonTournee(place2+1).getNoeud();
+			}
+			Noeud precedent1 = entrepot.getNoeud();
+			if(place1 != 0) {
+				precedent1 = gestionnaire.getLivraisonTournee(place1-1).getNoeud();
+			}
+			Noeud precedent2 = entrepot.getNoeud();
+			if(place2 != 0) {
+				precedent2 = gestionnaire.getLivraisonTournee(place2-1).getNoeud();
+			}
+			System.out.println(livraison1 + "=" + precedent1 + "-" + suivant1 + "     " + livraison1 + "=" + "-" + precedent2 + "-" + suivant2);
+			supressionLivraisonTournee(livraison1, precedent1, suivant1);
+			supressionLivraisonTournee(livraison2, precedent2, suivant2);
+			ajouterLivraisonTournee(livraison2, precedent1, suivant1);
+			ajouterLivraisonTournee(livraison1, precedent2, suivant2);
+		}
+	}
+	
+	
+	
 	public void supressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){
 		
 		Noeud arrive = precedent;
@@ -645,7 +690,7 @@ public class Plan {
 		
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[2]));    	
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[2], depart[1], AllPrevious.get(depart[2]));    	
     	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
     	System.err.println("TRAJET 1 " + trajetPrevu1.getDepart().getId() + " -> " + trajetPrevu1.getArrive().getId());

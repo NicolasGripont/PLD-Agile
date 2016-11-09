@@ -43,6 +43,16 @@ public class Livraison {
 	}
 	
 	/**
+	 * Constructeur de copie de la classe
+	 */
+	public Livraison(Livraison livraison) {
+		setNoeud(livraison.noeud);
+		setDuree(livraison.duree);
+		setDebutPlage(livraison.debutPlage);
+		setFinPlage(livraison.finPlage);
+	}
+	
+	/**
 	 * Constructeur de la classe
 	 */
 	public Livraison(Noeud noeud, int duree, Horaire debutPlage, Horaire finPlage) {
@@ -52,16 +62,6 @@ public class Livraison {
 		setFinPlage(finPlage);
 	}
 	
-	
-	/**
-	 * Constructeur de copie
-	 */
-	public Livraison(Livraison myLiv){
-		this.noeud = myLiv.noeud;
-		this.duree = myLiv.duree;
-		this.debutPlage=myLiv.debutPlage;
-		this.finPlage=myLiv.finPlage;
-	}
 	
 	/**
 	 * Constructeur de la classe
