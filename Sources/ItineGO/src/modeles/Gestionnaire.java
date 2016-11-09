@@ -215,14 +215,7 @@ public class Gestionnaire {
 	}
 
 	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
-		Noeud noeud;
-		if(position-1 < 0) {
-			noeud = plan.getEntrepot().getNoeud();
-		}
-		else {
-			noeud = getNoeudTournee(position-1);
-		}
-		plan.suppressionLivraisonTournee(getLivraisonTournee(position), noeud, getNoeudTournee(position+1));
+		plan.suppressionLivraisonTournee(getLivraisonTournee(position), (position-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(position-1)), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
@@ -253,11 +246,8 @@ public class Gestionnaire {
 		}
 	}
 	
-	public void changerPlageHoraireFin(int position, String plageFin) throws NonRespectPlagesHoraires {
+	public void changerPlageHoraireFin(int position, String plageFin) {
 		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
-		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
-			throw new NonRespectPlagesHoraires();
-		}
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
