@@ -178,7 +178,13 @@ public class Gestionnaire {
 			System.err.print(t.getDepart().getId() + "-");
 		}
 		System.err.println();
-		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, (positionLivraisonEnCours-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(positionLivraisonEnCours-1)), getNoeudTournee(getPositionLivraisonEnCours()));
+		Noeud n = null;
+		if(positionLivraisonEnCours-1 < 0) {
+			n = plan.getEntrepot().getNoeud();
+		} else {
+			n = getNoeudTournee(positionLivraisonEnCours-1);
+		}
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(getPositionLivraisonEnCours()));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
@@ -206,7 +212,7 @@ public class Gestionnaire {
 	}
 
 	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
-		plan.supressionLivraisonTournee(getLivraisonTournee(position), (position-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(position-1)), getNoeudTournee(position+1));
+		plan.suppressionLivraisonTournee(getLivraisonTournee(position), (position-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(position-1)), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
