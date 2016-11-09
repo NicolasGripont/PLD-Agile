@@ -164,24 +164,11 @@ public class Tournee {
 	//Precondition: les trajets de la tournée sont triés par ordre de passage
 	public List<Livraison> listeLivraisonsParOrdreDePassage() {
 		List<Livraison> livraisonsOrdonnees = new ArrayList<>();
-		Horaire horaire = new Horaire(entrepot.getHoraireDepart());
 		//Depart de l'entrepot, on ajoute juste l'arrivé de chaque trajet 
 		//(qui correspond au départ du suivant). Sauf le dernier, car le 
 		//dernier trajet correspond au retour à l'entrepôt ( '< size-1' )
 		for(int i = 0; i < trajets.size() - 1; i++){
-			horaire.ajouterSeconde(trajets.get(i).getTemps());
-			if(!livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage().equals(new Horaire(0,0,0)) && horaire.getHoraireEnMinutes()<livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage().getHoraireEnMinutes())
-			{
-				horaire= new Horaire(livraisons.get(trajets.get(i).getArrive().getId()).getDebutPlage());
-
-			}//Ici on modifie si on est arrivé trop tôt par rapport aux plages horaires
-
-			Horaire horaireDepart = new Horaire(horaire);
-			horaireDepart.ajouterSeconde(livraisons.get(trajets.get(i).getArrive().getId()).getDuree());
-			livraisons.get(trajets.get(i).getArrive().getId()).setHeureDepart(horaireDepart);
-			livraisons.get(trajets.get(i).getArrive().getId()).setHeureArrive(horaire);
 			livraisonsOrdonnees.add(livraisons.get(trajets.get(i).getArrive().getId()));
-			horaire = new Horaire(horaireDepart);
 		}
 		return livraisonsOrdonnees;
 	}
