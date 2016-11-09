@@ -17,15 +17,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -135,6 +139,7 @@ public class GestionTourneeVue extends GestionVue {
 	
 	private Tooltip tooltipAjouterLivraison = new Tooltip("Ajouter une livraison");
 
+	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -152,7 +157,56 @@ public class GestionTourneeVue extends GestionVue {
 		
 		planVillePane.widthProperty().addListener(listener);
 		planVillePane.heightProperty().addListener(listener);
+		livraisonTable.setRowFactory(tv -> {
+            TableRow<Livraison> row = new TableRow<>();
 
+            row.setOnDragDetected(event -> {
+                if (! row.isEmpty()) {
+                    Integer index = row.getIndex();
+                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                    db.setDragView(row.snapshot(null, null));
+                    ClipboardContent cc = new ClipboardContent();
+                    cc.put(SERIALIZED_MIME_TYPE, index);
+                    db.setContent(cc);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragOver(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                        event.consume();
+                    }
+                }
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+                    Livraison draggedPerson = livraisonTable.getItems().remove(draggedIndex);
+
+                    int dropIndex ; 
+
+                    if (row.isEmpty()) {
+                        dropIndex = livraisonTable.getItems().size() ;
+                    } else {
+                        dropIndex = row.getIndex();
+                    }
+
+                    livraisonTable.getItems().add(dropIndex, draggedPerson);
+
+                    event.setDropCompleted(true);
+                    livraisonTable.getSelectionModel().select(dropIndex);
+                    event.consume();
+                }
+            });
+
+            return row ;
+        });
+		
 		adresseColonne.setCellValueFactory(param -> {
 			final Livraison livraison = param.getValue();
 			if(livraison.getNoeud().getId() != -1) {
@@ -273,16 +327,6 @@ public class GestionTourneeVue extends GestionVue {
 	                    e.consume();
 	                    return;
 	                }
-
-	                // switch to edit mode on keypress, but only if we aren't already in edit mode
-	                if( livraisonTable.getEditingCell() == null) {
-	                    if( e.getCode().isLetterKey() || e.getCode().isDigitKey()) {  
-
-	                        TablePosition focusedCellPosition = livraisonTable.getFocusModel().getFocusedCell();
-	                        livraisonTable.edit(focusedCellPosition.getRow(), focusedCellPosition.getTableColumn());
-	                    
-	                    }
-	                }
 	            }
 		});
 		
@@ -304,7 +348,11 @@ public class GestionTourneeVue extends GestionVue {
 		if(controleur.getEtatCourant().getClass().equals(EtatAjouterTourneePlace.class)) {
 			controleur.clicPlanNoeud(noeud);			
 		} else if(controleur.getEtatCourant().getClass().equals(EtatAjouterTourneeOrdre.class)) {
-			controleur.clicPlanLivraison(noeud);	
+			for (Livraison t : livraisonTable.getItems()) {
+				if (t.getNoeud().equals(noeud)) {
+					controleur.clicPlanLivraison(noeud, livraisonTable.getItems().lastIndexOf(t));
+				}
+			}
 		} else {
 			for (Livraison t : livraisonTable.getItems()) {
 				if (t.getNoeud().equals(noeud)) {
@@ -339,6 +387,7 @@ public class GestionTourneeVue extends GestionVue {
 	}
 
 	public void afficherErreur(String erreur) {
+		labelError.setStyle("-fx-text-fill : red;");
 		labelError.setVisible(true);
 		labelError.setText(erreur);
 	}
