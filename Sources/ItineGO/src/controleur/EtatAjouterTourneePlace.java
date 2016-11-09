@@ -29,7 +29,7 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	}
 	
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
-		try {
+		/*try {
 			controleur.listeModifications.annulerModification();
 		} catch (NonRespectPlagesHoraires e) {
 			e.printStackTrace();
@@ -49,8 +49,12 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 		}
 		else {
 			controleur.gestionTourneeVue.desactiverRedo(true);
-		}
-		controleur.setEtatCourant(controleur.etatTourneeAffiche);
+		}*/
+		controleur.gestionTourneeVue.majEtatModifierTournee();
+		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
 	
 	public void getEtat()

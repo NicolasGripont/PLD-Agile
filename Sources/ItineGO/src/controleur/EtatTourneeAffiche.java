@@ -109,7 +109,8 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		try {
 			controleur.listeModifications.undoModifications();
 		} catch (NonRespectPlagesHoraires e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			controleur.gestionTourneeVue.afficherErreur("L'undo ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
@@ -133,7 +134,8 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		try {
 			controleur.listeModifications.redoModifications();
 		} catch (NonRespectPlagesHoraires e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			controleur.gestionTourneeVue.afficherErreur("Le redo ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 

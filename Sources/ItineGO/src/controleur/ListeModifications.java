@@ -19,6 +19,7 @@ public class ListeModifications {
 			listeModifications.get(position).undoAll();
 			position++;
 		}
+		System.out.println("UNDO taille liste="+listeModifications.size()+" pos="+position);
 	}
 	
 	public void redoModifications() throws NonRespectPlagesHoraires {
@@ -26,6 +27,7 @@ public class ListeModifications {
 			position--;
 			listeModifications.get(position).redoAll();
 		}
+		System.out.println("REDO taille liste="+listeModifications.size()+" pos="+position);
 	}
 	
 	public void ajouterCommande(Commande commande) throws NonRespectPlagesHoraires {
@@ -38,12 +40,24 @@ public class ListeModifications {
 		}
 		listeModifications.addFirst(new ListeCommandes());
 		position = 0;
+		System.out.println("CREER taille liste="+listeModifications.size()+" pos="+position);
 	}
 	
 	public void annulerModification() throws NonRespectPlagesHoraires {
-		undoModifications();
+		NonRespectPlagesHoraires exec =  null;
+		try {
+			undoModifications();
+		}
+		catch(NonRespectPlagesHoraires e) {
+			exec = e;
+		}
 		listeModifications.removeFirst();
 		position = 0;
+		System.out.println("ANNULER taille liste="+listeModifications.size()+" pos="+position);
+		if(exec != null)
+		{
+			throw exec;
+		}
 	}
 	
 	public void finModification() {
@@ -61,8 +75,6 @@ public class ListeModifications {
 	}
 
 	public void viderListeModifications() {
-		for (int i = 0; i < listeModifications.size(); i++) {
-			listeModifications.remove();
-		}
+		listeModifications.clear();
 	}
 }

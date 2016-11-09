@@ -29,14 +29,32 @@ public class ListeCommandes {
 	}
 	
 	public void undoAll() throws NonRespectPlagesHoraires {
+		NonRespectPlagesHoraires exec = null;
 		for(int i = position; i < listeCommandes.size(); i++) {
-			undo();
+			try {
+				undo();
+			}catch(NonRespectPlagesHoraires e) {
+				exec = e;
+			}
+		}
+		if(exec != null)
+		{
+			throw exec;
 		}
 	}
 	
 	public void redoAll() throws NonRespectPlagesHoraires {
+		NonRespectPlagesHoraires exec = null;
 		for(int i = position; i >=0; i--) {
-			redo();
+			try {
+				redo();
+			}catch(NonRespectPlagesHoraires e) {
+				exec = e;
+			}
+		}
+		if(exec != null)
+		{
+			throw exec;
 		}
 	}
 	

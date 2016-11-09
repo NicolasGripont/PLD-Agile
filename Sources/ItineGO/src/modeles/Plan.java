@@ -245,6 +245,12 @@ public class Plan {
 						return;
 					}
 				}
+				if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+					constructionTournee(depart, AllNoires, AllPrevious);
+				}
+				if(gestionnaire != null) {
+					Platform.runLater(() -> gestionnaire.tourneeCalculee());
+				}
 			}
 		};
 		threadConstructionTournee.setDaemon(true);

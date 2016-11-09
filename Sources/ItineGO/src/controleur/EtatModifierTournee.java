@@ -42,7 +42,8 @@ public class EtatModifierTournee extends EtatDefaut {
 		try {
 			controleur.listeModifications.annulerModification();
 		} catch (NonRespectPlagesHoraires e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			controleur.gestionTourneeVue.afficherErreur("L'annulation ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
