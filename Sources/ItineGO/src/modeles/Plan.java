@@ -325,6 +325,13 @@ public class Plan {
 				} 
 			}
 			miseAJourHeureDePassageLivraison(trajetsPrevus);
+			for(Trajet trajet : trajetsPrevus) {
+		  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
+	    			System.out.println("apres maj Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
+	    			System.out.println("apres maj Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
+
+		  		}	
+		  	}
 			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
 	}
 	
@@ -517,6 +524,18 @@ public class Plan {
        }
     }
 	
+	public void modificationOrdreTournee(int place1, int place2){
+		Livraison livraison1 = retrouverLivraisonDansTournee(place1);
+		Livraison livraison2 = retrouverLivraisonDansTournee(place2);
+	}
+	
+	
+	private Livraison retrouverLivraisonDansTournee(int place1) {
+
+		return livraisons.get(tournee.getTrajets().get((place1+1)).getArrive());
+	
+	}
+
 	public void supressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant){
 		
 		Noeud arrive = precedent;
@@ -564,7 +583,9 @@ public class Plan {
 		      } 
 	      } 
 	      miseAJourHeureDePassageLivraison(futurTrajetTournee);
+	      
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
+	      
 		
 	}
 
@@ -632,16 +653,20 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 	//TODO a vérifier
 	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
 		int coutVus=entrepot.getHoraireDepart().getHoraireEnSecondes();
+		System.err.println(coutVus/3600);
+		System.err.println(entrepot.getHoraireDepart().getHoraireEnSecondes());    			
 		for(Trajet trajet : futurTrajetTournee) {
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
     			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(coutVus) );
-    			System.err.println(livraisons.get(trajet.getArrive().getId()).getHeureArrive());
+    			System.err.println("Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
 	    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
 	    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
 	    		}
 	    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
 	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(coutVus) );
+    			System.err.println("Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
+
 	  		}	
 	  	}
 		entrepot.setHoraireArrive(new Horaire(coutVus));

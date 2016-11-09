@@ -52,6 +52,17 @@ public class Livraison {
 		setFinPlage(finPlage);
 	}
 	
+	
+	/**
+	 * Constructeur de copie
+	 */
+	public Livraison(Livraison myLiv){
+		this.noeud = myLiv.noeud;
+		this.duree = myLiv.duree;
+		this.debutPlage=myLiv.debutPlage;
+		this.finPlage=myLiv.finPlage;
+	}
+	
 	/**
 	 * Constructeur de la classe
 	 */

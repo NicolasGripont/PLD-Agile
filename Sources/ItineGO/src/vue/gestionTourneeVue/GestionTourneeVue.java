@@ -239,6 +239,7 @@ public class GestionTourneeVue extends GestionVue {
 			if(livraison.getHeureArrive() == null) {
 				return new SimpleStringProperty("-");
 			} else {
+				//System.err.println("HA -"+ livraison.getHeureArrive().getHoraire());
 				return new SimpleStringProperty(livraison.getHeureArrive().getHoraire());
 			}
 		});

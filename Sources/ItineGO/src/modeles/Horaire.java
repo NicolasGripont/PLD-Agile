@@ -76,7 +76,7 @@ public class Horaire {
 	 * 		Equivalent de l'horaire en secondes depuis 00:00:00
 	 */
 	public int getHoraireEnSecondes() {
-		return Math.round(heure * 60 + minute * 60 + seconde);
+		return Math.round(heure * 3600 + minute * 60 + seconde);
 	}
 
 	/**
