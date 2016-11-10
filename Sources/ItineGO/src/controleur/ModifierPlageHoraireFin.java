@@ -15,12 +15,12 @@ public class ModifierPlageHoraireFin extends Commande {
 		this.gestionnaire = gestionnaire;
 		this.numLigne = numLigne;
 		this.plageFin = plageFin;
+		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
+		this.plageFinInitiale = livraisonTournee.getFinPlage().toString();
 	}
 	
 	@Override
 	public void doCode() throws NonRespectPlagesHoraires {
-		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
-		plageFinInitiale = livraisonTournee.getFinPlage().toString();
 		gestionnaire.changerPlageHoraireFin(numLigne, plageFin);
 	}
 
