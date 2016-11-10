@@ -180,31 +180,37 @@ public class GestionTourneeVue extends GestionVue {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
+                        int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+    	            	if(draggedIndex != row.getIndex()) {
+    	            		row.setStyle("-fx-cell-size: 55px;-fx-padding: 30 0 0 0;");	            		
+    	            	}
                     }
                 }
+            });
+            
+            row.setOnDragExited(event -> {
+            	Dragboard db = event.getDragboard();
+            	if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
+	            	int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+	            	if(!row.isEmpty() && draggedIndex != row.getIndex()) {
+	            		row.setStyle("-fx-padding: 0em;");
+	            	}
+            	}
             });
             
             row.setOnDragDropped(event -> {
             	Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE); 
-                    int dropIndex ; 
+                    int dropIndex; 
                     if (row.isEmpty()) {
                         dropIndex = livraisonTable.getItems().size() ;
                     } else {
                         dropIndex = row.getIndex();
                     }
                     System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
-                    controleur.modifierOrdre(draggedIndex,dropIndex);
-                    /*if(draggedIndex != livraisonTable.getItems().size()-1 && dropIndex != livraisonTable.getItems().size()-1) {
-                    	Livraison draggedLivraison = livraisonTable.getItems().get(draggedIndex);
-	                    livraisonTable.getItems().add(dropIndex, draggedLivraison);
-	                    livraisonTable.getItems().remove(draggedIndex);
-	                    event.setDropCompleted(true);
-	                    livraisonTable.getSelectionModel().select(dropIndex);
-	                    event.consume();
-	                    //controleur.modifierOrdre(dropIndex, draggedIndex);
-                    }*/
+                    if(dropIndex != draggedIndex)
+                    	controleur.modifierOrdre(draggedIndex,dropIndex);
                 }
             });
             return row ;
