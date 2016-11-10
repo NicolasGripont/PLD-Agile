@@ -20,8 +20,10 @@ public class AjouterLivraison extends Commande {
 	 * Constructeur de la la commande. On va récupérer la livraison que l'on souhaite ajouter, 
 	 * et le noeud suivant cette livraison pour pouvoir insérer cette livraison au bon endroit
 	 * 
-	 * @param gestionnaire : Gestionnaire de l'application pour pouvoir appeler les méthodes modifiant le modèle.
-	 * @param numLigne : numéro de la ligne où l'on souhaite ajouter la livraison
+	 * @param gestionnaire 
+	 *            : Gestionnaire de l'application pour pouvoir appeler les méthodes modifiant le modèle.
+	 * @param numLigne 
+	 *            : numéro de la ligne où l'on souhaite ajouter la livraison
 	 */
 	public AjouterLivraison(Gestionnaire gestionnaire, int numLigne) {
 		this.gestionnaire = gestionnaire;
