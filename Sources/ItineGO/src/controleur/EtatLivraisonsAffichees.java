@@ -53,41 +53,41 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
 			if(gestionnaire.solutionTrouvee()){
-			try {
-				gestionnaire.stopperCalculTournee();
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
-				Parent root = fxmlLoader.load();
-				controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
-				controleur.gestionTourneeVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
-				controleur.stage.setTitle("Itine'GO");
-				controleur.stage.setScene(scene);
-				controleur.stage.show();
-				controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-				controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
-						gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
-				controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
-				controleur.gestionTourneeVue.majVisualiserTournee();
-				if(controleur.listeModifications.isUndoPossible()) {
-					controleur.gestionTourneeVue.desactiverUndo(false);
+				try {
+					gestionnaire.stopperCalculTournee();
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
+					Parent root = fxmlLoader.load();
+					controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
+					controleur.gestionTourneeVue.setControleur(controleur);
+					Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
+					controleur.stage.setTitle("Itine'GO");
+					controleur.stage.setScene(scene);
+					controleur.stage.show();
+					controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
+					controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
+							gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+					controleur.gestionTourneeVue.solutionOptimale(solutionOptimale);
+					controleur.gestionTourneeVue.majVisualiserTournee();
+					if(controleur.listeModifications.isUndoPossible()) {
+						controleur.gestionTourneeVue.desactiverUndo(false);
+					}
+					else {
+						controleur.gestionTourneeVue.desactiverUndo(true);
+					}
+					if(controleur.listeModifications.isRedoPossible()) {
+						controleur.gestionTourneeVue.desactiverRedo(false);
+					}
+					else {
+						controleur.gestionTourneeVue.desactiverRedo(true);
+					}
+					controleur.setEtatCourant(controleur.etatTourneeAffiche);
+				} catch (IOException e) {
+				
+					e.printStackTrace();
 				}
-				else {
-					controleur.gestionTourneeVue.desactiverUndo(true);
-				}
-				if(controleur.listeModifications.isRedoPossible()) {
-					controleur.gestionTourneeVue.desactiverRedo(false);
-				}
-				else {
-					controleur.gestionTourneeVue.desactiverRedo(true);
-				}
-				controleur.setEtatCourant(controleur.etatTourneeAffiche);
-			} catch (IOException e) {
-			
-				e.printStackTrace();
-			}
 			} else {
 				controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
-				controleur.gestionLivraisonsVue.stopperCalculLivraisonAction();
+				controleur.gestionLivraisonsVue.setHboxCalculLivraison(false);
 			}
 		}
 	}

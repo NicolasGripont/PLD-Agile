@@ -218,7 +218,6 @@ public class Plan {
 				 * On lance l'algorithme pour rechercher la meilleur tournée
 				 */
 				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
-				
 				/**
 				 * Un fois les calcul réalisé, on créé les objets qui vont être utiliseé par la couche supérieur
 				 */

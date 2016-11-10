@@ -264,12 +264,21 @@ public class GestionLivraisonsVue extends GestionVue {
 	     th.start();
 	}
 	
+	
+	public void setHboxCalculLivraison(Boolean value) {
+		boutonCalculer.setVisible(value);
+		boxStopperCalcule.setVisible(value);
+	}
+	
 	@FXML
-	public void stopperCalculLivraisonAction() {
-		boutonCalculer.setVisible(false);
-		boxStopperCalcule.setVisible(false);
-		taskCalcul.cancel();
-		controleur.clicBoutonsStopperCalculeTournee();
+	private void stopperCalculLivraisonAction() {
+		System.out.println("J'arrete en cliquant");
+		setHboxCalculLivraison(false);
+		if(taskCalcul != null) {
+			taskCalcul.cancel();
+			controleur.clicBoutonsStopperCalculeTournee();
+		}
+		taskCalcul = null;
 	}
 	
 	@FXML
