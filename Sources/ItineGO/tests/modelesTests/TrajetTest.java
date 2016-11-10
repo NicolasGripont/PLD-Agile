@@ -19,7 +19,7 @@ public class TrajetTest {
 	/**
 	 * Test du constructeur de la classe Trajet plusieurs noeud formant plusieurs tronçons formant un trajet
 	 * 
-	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 * Resultat: La liste du trajet doit correspondre au resultat souhaité
 	 */
 	@Test
 	public void testTrajet() {
@@ -54,7 +54,7 @@ public class TrajetTest {
 	/**
 	 * Test retournant les différents tronçons du trajet
 	 * 
-	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 * Resultat: Les tronçons du trajet doit correspondre au resultat souhaité
 	 */
 	@Test
 	public void testGetTroncons() {
@@ -89,7 +89,7 @@ public class TrajetTest {
 	/**
 	 * Test retournant le départ du trajet
 	 * 
-	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 * Resultat: L'horaire de départ du trajet doit correspondre au resultat souhaité
 	 */
 	@Test
 	public void testGetDepart() {
@@ -121,7 +121,7 @@ public class TrajetTest {
 	/**
 	 * Test retournant l'arrivée du trajet
 	 * 
-	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 * Resultat: L'horaire de départ du trajet doit correspondre au resultat souhaité
 	 */
 	@Test
 	public void testGetArrive() {
@@ -153,7 +153,7 @@ public class TrajetTest {
 	/**
 	 * Test l'affichage texte du trajet
 	 * 
-	 * Resultat: L'affiche de l'entrepot doit correspondre au resultat souhaité
+	 * Resultat: L'affiche de trajet doit correspondre au resultat souhaité
 	 */
 	@Test
 	public void testToString() {

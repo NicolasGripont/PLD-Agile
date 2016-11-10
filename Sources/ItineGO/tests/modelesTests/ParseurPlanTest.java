@@ -39,11 +39,11 @@ public class ParseurPlanTest {
 		assertEquals(resNbTroncon,planTest.getTroncons().size());
 	}
 	
-//	/**
-//	 * Test du Parseur sur un fichier Plan au mauvais dormat 
-//	 * 
-//	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
-//	 */
+	/**
+	 * Test du Parseur sur un fichier Plan au mauvais format 
+	 * 
+	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
+	 */
 	@Test
 	public void testMauvaisFormat()
 	{
