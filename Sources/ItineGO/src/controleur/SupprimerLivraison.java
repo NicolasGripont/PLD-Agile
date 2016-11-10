@@ -29,6 +29,7 @@ public class SupprimerLivraison extends Commande {
 		gestionnaire.setLivraisonEnCourCreation(livraison);
 		gestionnaire.setNoeudSuivant(noeudSuivant);
 		gestionnaire.setPositionLivraisonEnCours(numLigne);
+		System.out.println("ON APPELLE UNDO");
 		gestionnaire.ajouterLivraisonTournee();
 	}
 

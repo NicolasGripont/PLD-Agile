@@ -60,8 +60,17 @@ public class ListeCommandes {
 	
 	public void undo() throws NonRespectPlagesHoraires {
 		if(position < listeCommandes.size()) {
-			listeCommandes.get(position).undoCode();
+			NonRespectPlagesHoraires exec = null;
+			try {
+				listeCommandes.get(position).undoCode();
+			} catch(NonRespectPlagesHoraires e)  {
+				exec = e;
+			}
 			position++;
+			if(exec != null)
+			{
+				throw exec;
+			}
 		}
 	}
 	
