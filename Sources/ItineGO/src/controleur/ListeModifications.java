@@ -15,19 +15,39 @@ public class ListeModifications {
 	}
 	
 	public void undoModifications() throws NonRespectPlagesHoraires {
+		NonRespectPlagesHoraires exec =  null;
 		if(isUndoPossible()) {
-			listeModifications.get(position).undoAll();
+			try {
+				listeModifications.get(position).undoAll();
+			}
+			catch(NonRespectPlagesHoraires e) {
+				exec = e;
+			}
 			position++;
 		}
 		System.out.println("UNDO taille liste="+listeModifications.size()+" pos="+position);
+		if(exec != null)
+		{
+			throw exec;
+		}
 	}
 	
 	public void redoModifications() throws NonRespectPlagesHoraires {
+		NonRespectPlagesHoraires exec =  null;
 		if(isRedoPossible()) {
 			position--;
-			listeModifications.get(position).redoAll();
+			try {
+				listeModifications.get(position).redoAll();
+			}
+			catch(NonRespectPlagesHoraires e) {
+				exec = e;
+			}
 		}
 		System.out.println("REDO taille liste="+listeModifications.size()+" pos="+position);
+		if(exec != null)
+		{
+			throw exec;
+		}
 	}
 	
 	public void ajouterCommande(Commande commande) throws NonRespectPlagesHoraires {

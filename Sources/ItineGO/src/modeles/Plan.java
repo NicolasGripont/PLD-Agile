@@ -28,8 +28,6 @@ public class Plan {
 	 */
 	private Map<Integer, Noeud> noeuds;
 	
-	public List<Livraison> livraisonOrdreTest = new ArrayList<>();
-	
 	/**
 	 * Map représentant l'ensemble des tronçons du plan
 	 * Le tronc est accessible par son noeud de départ et d'arrivée
@@ -337,7 +335,7 @@ public class Plan {
 		  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
 	    			System.out.println("apres maj Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
 	    			System.out.println("apres maj Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
-	    			this.livraisonOrdreTest.add(new Livraison(this.livraisons.get(trajet.getArrive().getId())));
+
 		  		}	
 		  	}
 			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
@@ -532,40 +530,15 @@ public class Plan {
        }
     }
 	
-	/**
-	 * 
-	 * @param place1
-	 * @param place2
-	 */
 	public void modificationOrdreTournee(int place1, int place2){
 		Livraison livraison1 = retrouverLivraisonDansTournee(place1);
 		Livraison livraison2 = retrouverLivraisonDansTournee(place2);
-		Noeud suivant1 = retrouverNoeudSuivantDansTournee(place1);
-		Noeud suivant2 = retrouverNoeudSuivantDansTournee(place2);
-		Noeud precedent1 = retrouverNoeudPrecedentDansTournee(place1);
-		Noeud precedent2 = retrouverNoeudPrecedentDansTournee(place2);
-		supressionLivraisonTournee(livraison1, precedent1, suivant1);
-		supressionLivraisonTournee(livraison2, precedent2, suivant2);
-		ajouterLivraisonTournee(livraison2, precedent1, suivant1);
-		ajouterLivraisonTournee(livraison1, precedent2, suivant2);
 	}
 	
 	
-	private Livraison retrouverLivraisonDansTournee(int place) {
+	private Livraison retrouverLivraisonDansTournee(int place1) {
 
-		return livraisons.get(tournee.getTrajets().get((place-1)).getArrive());
-	
-	}
-	
-	private Noeud retrouverNoeudPrecedentDansTournee(int place) {
-
-		return tournee.getTrajets().get((place-1)).getDepart();
-	
-	}
-	
-	private Noeud retrouverNoeudSuivantDansTournee(int place) {
-
-		return tournee.getTrajets().get((place)).getArrive();
+		return livraisons.get(tournee.getTrajets().get((place1+1)).getArrive());
 	
 	}
 
@@ -670,7 +643,6 @@ public class Plan {
 	}
 
 	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
-		
 		ajouterLivraison(aAjouter);
 	
 		tableauDesId = new int [noeuds.size()];
@@ -688,8 +660,13 @@ public class Plan {
     	 */
     	Dijkstra(depart, AllNoires, AllPrevious);
 		
+<<<<<<< HEAD
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
+=======
+    	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
+    	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
+>>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
     	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[2]));    	
     	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
