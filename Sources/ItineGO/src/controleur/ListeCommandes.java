@@ -48,7 +48,7 @@ public class ListeCommandes {
 		for(int i = position; i >=0; i--) {
 			try {
 				redo();
-			}catch(NonRespectPlagesHoraires e) {
+			} catch(NonRespectPlagesHoraires e) {
 				exec = e;
 			}
 		}

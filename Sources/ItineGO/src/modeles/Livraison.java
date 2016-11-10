@@ -95,7 +95,7 @@ public class Livraison {
 	}
 
 	public boolean sontValidesPlages() {
-		if(heureArrive.getHoraireEnSecondes() >= debutPlage.getHoraireEnSecondes() && (heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0)) {
+		if(heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0) {
 			return true;
 		}
 		return false;
@@ -164,7 +164,7 @@ public class Livraison {
 	}
 
 	public void setDebutPlage(Horaire debutPlage) {
-		if(debutPlage != null) {
+		if(debutPlage != null && ((finPlage == null || (finPlage != null && debutPlage.getHoraireEnMinutes() < finPlage.getHoraireEnMinutes())))) {
 			this.debutPlage = debutPlage;
 		} else {
 			this.debutPlage = new Horaire(0,0,0);
@@ -176,7 +176,8 @@ public class Livraison {
 	}
 
 	public void setFinPlage(Horaire finPlage) {
-		if(finPlage != null) {
+		System.out.println(debutPlage.getHoraireEnMinutes() + duree);
+		if(finPlage != null && (debutPlage != null && finPlage.getHoraireEnMinutes() > debutPlage.getHoraireEnMinutes() + duree/60)) {
 			this.finPlage = finPlage;
 		} else {
 			this.finPlage = new Horaire(0,0,0);

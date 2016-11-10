@@ -62,9 +62,7 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 	@Override
 	protected void updateItem(Boolean item, boolean empty) {
 		super.updateItem(item, empty);
-//		if (!empty && ((table.getItems().size() - 1) != this.getIndex())) {
-		
-		if (!empty && (( table.getItems().get(this.getIndex()).getNoeud().getId()!= entrepot.getNoeud().getId()))) {
+		if (!empty && (( table.getItems().get(this.getIndex()).getNoeud().getId()!= entrepot.getNoeud().getId())) && table.getItems().size() > 2) {
 			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 			setGraphic(paddedButton);
 		} else {

@@ -41,6 +41,30 @@ public class ParseurLivraisonTest {
 	}
 	
 	/**
+	 * Test du Parseur sur un fichier de Livraison correct ayant des plages horaire
+	 * 
+	 * Resultat: Le fichier est parsé 
+	 */
+	@Test
+	public void testParseurLivraisonAvecPlage() {
+		Plan planTest = new Plan();
+		String nomFichierPlanTest= "./tests/assetsForTests/plan5x5.xml";
+		String nomFichierLivraisonTest = "./tests/assetsForTests/livraisons5x5-9-TW.xml";
+
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierPlanTest, planTest);
+			ParseurLivraison.parseurLivraisonVille(nomFichierLivraisonTest, planTest);
+		}
+		catch(Exception e){}
+		
+		int resNbLivraison = 9;
+		assertEquals(resNbLivraison,planTest.getLivraisons().size());
+		
+		int resId = 6;
+		assertEquals(resId,planTest.getEntrepot().getNoeud().getId());
+	}
+	
+	/**
 	 * Test du Parseur sur un fichier de Livraison au mauvais format
 	 * 
 	 * Resultat: Le fichier n'est pas parsé et renvoie une exception
@@ -194,6 +218,95 @@ public class ParseurLivraisonTest {
 		
 		assertEquals(res1,resTest);
 		assertEquals(res2,planTest.getLivraisons().size());
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier de Livraison correct ayant une plage horaire de début plus tard
+	 * que la plage horaire de fin
+	 * 
+	 * Resultat: Le fichier est parsé sans la plage horaire fausse 
+	 */
+	@Test
+	public void testParseurLivraisonAvecPlageDébutSupPlageFin() {
+		Plan planTest = new Plan();
+		String nomFichierPlanTest= "./tests/assetsForTests/plan5x5.xml";
+		String nomFichierLivraisonTest = "./tests/assetsForTests/livraisons5x5-9-TW-PDAVantPF.xml";
+
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierPlanTest, planTest);
+			ParseurLivraison.parseurLivraisonVille(nomFichierLivraisonTest, planTest);
+		}
+		catch(Exception e){}
+
+		assertEquals("13:0:0",planTest.getLivraisons().get(23).getDebutPlage().toString());
+		assertEquals("0:0:0",planTest.getLivraisons().get(23).getFinPlage().toString());
+
+		
+		int resNbLivraison = 9;
+		assertEquals(resNbLivraison,planTest.getLivraisons().size());
+		
+		int resId = 6;
+		assertEquals(resId,planTest.getEntrepot().getNoeud().getId());
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier de Livraison correct ayant une plage horaire de fin plus tot
+	 * que la plage horaire de début
+	 * 
+	 * Resultat: Le fichier est parsé sans la plage horaire fausse 
+	 */
+	@Test
+	public void testParseurLivraisonAvecPlageFinInfPlageDebut() {
+		Plan planTest = new Plan();
+		String nomFichierPlanTest= "./tests/assetsForTests/plan5x5.xml";
+		String nomFichierLivraisonTest = "./tests/assetsForTests/livraisons5x5-9-TW-PFAvantPD.xml";
+
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierPlanTest, planTest);
+			ParseurLivraison.parseurLivraisonVille(nomFichierLivraisonTest, planTest);
+		}
+		catch(Exception e){}
+
+		assertEquals("12:0:0",planTest.getLivraisons().get(23).getDebutPlage().toString());
+		assertEquals("0:0:0",planTest.getLivraisons().get(23).getFinPlage().toString());
+
+
+		
+		int resNbLivraison = 9;
+		assertEquals(resNbLivraison,planTest.getLivraisons().size());
+		
+		int resId = 6;
+		assertEquals(resId,planTest.getEntrepot().getNoeud().getId());
+	}
+	
+	/**
+	 * Test du Parseur sur un fichier de Livraison correct ayant une plage horaire de début égale
+	 * à la plage horaire de fin
+	 * 
+	 * Resultat: Le fichier est parsé sans la plage horaire fausse
+	 */
+	@Test
+	public void testParseurLivraisonAvecPlageIdentique() {
+		Plan planTest = new Plan();
+		String nomFichierPlanTest= "./tests/assetsForTests/plan5x5.xml";
+		String nomFichierLivraisonTest = "./tests/assetsForTests/livraisons5x5-9-TW-MemeHoraire.xml";
+
+		try{
+			ParseurPlan.parseurPlanVille(nomFichierPlanTest, planTest);
+			ParseurLivraison.parseurLivraisonVille(nomFichierLivraisonTest, planTest);
+		}
+		catch(Exception e){}
+
+		assertEquals("12:0:0",planTest.getLivraisons().get(23).getDebutPlage().toString());
+		assertEquals("0:0:0",planTest.getLivraisons().get(23).getFinPlage().toString());
+
+
+		
+		int resNbLivraison = 9;
+		assertEquals(resNbLivraison,planTest.getLivraisons().size());
+		
+		int resId = 6;
+		assertEquals(resId,planTest.getEntrepot().getNoeud().getId());
 	}
 
 }

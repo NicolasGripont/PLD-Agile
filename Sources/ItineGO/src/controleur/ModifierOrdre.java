@@ -21,7 +21,7 @@ public class ModifierOrdre extends Commande {
 
 	@Override
 	public void undoCode() {
-		gestionnaire.reordonnerLivraisonTournee(positionFinale, positionInitiale);
+		gestionnaire.reordonnerLivraisonTournee(positionFinale-1, positionInitiale);
 	}
 
 }

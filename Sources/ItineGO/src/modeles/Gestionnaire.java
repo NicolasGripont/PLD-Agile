@@ -178,7 +178,16 @@ public class Gestionnaire {
 			System.err.print(t.getDepart().getId() + "-");
 		}
 		System.err.println();
-		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, (positionLivraisonEnCours-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(positionLivraisonEnCours-1)), getNoeudTournee(getPositionLivraisonEnCours()));
+		Noeud n = null;
+		if(positionLivraisonEnCours-1 < 0) {
+			n = plan.getEntrepot().getNoeud();
+		} else {
+			n = getNoeudTournee(positionLivraisonEnCours-1);
+		}
+		System.out.println("livraisonEnCoursCreation : " + livraisonEnCoursCreation);
+		System.out.println("n : " + n);
+		System.out.println("getNoeudTournee(getPositionLivraisonEnCours()) : " + getNoeudTournee(getPositionLivraisonEnCours()));
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(positionLivraisonEnCours));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
@@ -206,7 +215,7 @@ public class Gestionnaire {
 	}
 
 	public void supprimerLivraisonTournee(int position) throws NonRespectPlagesHoraires {
-		plan.supressionLivraisonTournee(getLivraisonTournee(position), (position-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(position-1)), getNoeudTournee(position+1));
+		plan.suppressionLivraisonTournee(getLivraisonTournee(position), (position-1 < 0 ? plan.getEntrepot().getNoeud() : getNoeudTournee(position-1)), getNoeudTournee(position+1));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
@@ -237,8 +246,11 @@ public class Gestionnaire {
 		}
 	}
 	
-	public void changerPlageHoraireFin(int position, String plageFin) {
-		plan.getTournee().setFinPlage(position, new Horaire(plageFin));
+	public void changerPlageHoraireFin(int position, String plageFin) throws NonRespectPlagesHoraires {
+		getLivraisonTournee(position).setFinPlage(new Horaire(plageFin));
+		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
+			throw new NonRespectPlagesHoraires();
+		}
 	}
 
 	public boolean isNoeudLivraison(Noeud noeud) {
