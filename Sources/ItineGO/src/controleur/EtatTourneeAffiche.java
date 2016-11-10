@@ -87,6 +87,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link)
 	{
 		gestionnaire.genererFeuilleDeRoute(link);
+		controleur.gestionTourneeVue.afficherInfo("Feuille de route enregistrée");
 	}
 	
 	/**
@@ -95,6 +96,7 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	public void clicBoutonModifier(Controleur controleur) {
 		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.listeModifications.creerModification();
+		controleur.gestionTourneeVue.afficherInfo("Modification de la tournéee");
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
 	

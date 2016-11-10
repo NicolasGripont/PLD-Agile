@@ -403,6 +403,19 @@ public class GestionTourneeVue extends GestionVue {
 		labelError.setText(erreur);
 	}
 
+	public void afficherInfo(String message) {
+		labelError.setStyle("-fx-text-fill : blue;");
+		labelError.setVisible(true);
+		labelError.setText(message);
+	}
+	
+	public void afficherInfoSucces(String message) {
+		labelError.setStyle("-fx-text-fill : green;");
+		labelError.setVisible(true);
+		labelError.setText(message);
+	}
+	
+	
 	public Controleur getControleur() {
 		return controleur;
 	}
@@ -539,8 +552,8 @@ public class GestionTourneeVue extends GestionVue {
 		hBoxBoutons.getChildren().add(imageViewAnnulerModifications);
 		hBoxBoutons.getChildren().add(imageViewAjouterLivraison);
 		hBoxBoutons.getChildren().add(labelError);
-		labelError.setStyle("-fx-text-fill : rgb(0,128,255);");
-		labelError.setText("Modification de la tournéee");
+//		labelError.setStyle("-fx-text-fill : rgb(0,128,255);");
+//		labelError.setText("Modification de la tournéee");
 		boutonGenerer.setVisible(false);
 		supprimerColonne.setVisible(true);
 		labelInstruction.setVisible(false);
@@ -557,7 +570,6 @@ public class GestionTourneeVue extends GestionVue {
 			@Override
 			public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
 				if (!t.getOldValue().equals(t.getNewValue())) {
-					System.out.println("modifierPlageDebut");
 					controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue() + ":00");
 				}
 			}
@@ -568,7 +580,6 @@ public class GestionTourneeVue extends GestionVue {
 			@Override
 			public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
 				if (!t.getOldValue().equals(t.getNewValue())) {
-					System.out.println("modifierPlageFin");
 					controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue() + ":00");
 				}
 			}
@@ -591,7 +602,7 @@ public class GestionTourneeVue extends GestionVue {
 		livraisonTable.getSelectionModel().select(livraisonTable.getItems().size()-1);
 		supprimerColonne.setVisible(false);
 		planVilleVue.modeAjouterLivraison(true);
-		labelError.setText("Ajout d'une livraison");
+//		labelError.setText("Ajout d'une livraison");
 		plageDebutColonne.setCellFactory(defaultStringCellFactory);
 		plageFinColonne.setCellFactory(defaultStringCellFactory);
 	}
@@ -627,8 +638,7 @@ public class GestionTourneeVue extends GestionVue {
 					planVilleVue.modeAjouterLivraison(false);
 		    		dureeColonne.setOnEditCommit(null);
 	        	} catch(Exception e) {
-	        		labelError.setText("Durée : Donnée invalide");
-	        		labelError.setStyle("-fx-text-fill : red;");
+	        		afficherErreur("Durée : Donnée invalide");
 	        	}
 	        }
 	    });
@@ -656,7 +666,7 @@ public class GestionTourneeVue extends GestionVue {
 		boutonGenerer.setVisible(true);
 		dureeColonne.setOnEditCommit(null);
 		supprimerColonne.setVisible(false);
-		labelError.setVisible(true);
+//		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
 	}
@@ -669,9 +679,9 @@ public class GestionTourneeVue extends GestionVue {
 		File file = fileChooser.showSaveDialog(controleur.getStage());
 		if (file != null) {
 			controleur.clicBoutonGenererFeuilleDeRoute(file.getAbsolutePath());
-			labelError.setVisible(true);
-			labelError.setStyle("-fx-text-fill : green;");
-			labelError.setText("Feuille de route générée");
+//			labelError.setVisible(true);
+//			labelError.setStyle("-fx-text-fill : green;");
+//			labelError.setText("Feuille de route générée");
 		}
 	}
 	
@@ -692,5 +702,8 @@ public class GestionTourneeVue extends GestionVue {
 			imageViewRedo.setImage(new Image(classLoader.getResource("redo_noir.png").toString()));
 		}
 	}
+	
+
+	
 	
 }
