@@ -331,13 +331,6 @@ public class Plan {
 				} 
 			}
 			miseAJourHeureDePassageLivraison(trajetsPrevus);
-			for(Trajet trajet : trajetsPrevus) {
-		  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
-	    			System.out.println("apres maj Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
-	    			System.out.println("apres maj Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
-
-		  		}	
-		  	}
 			this.tournee = new Tournee(entrepot,livraisons,trajetsPrevus);
 	}
 	
@@ -572,7 +565,6 @@ public class Plan {
 			}
 			suppressionLivraisonTournee(livraison1, precedent1, suivant1);
 			if(place2 > livraisons.size()) {
-				System.out.println("on passe la");
 				ajouterLivraisonTournee(livraison1, precedent2, entrepot.getNoeud());
 			} else {
 				ajouterLivraisonTournee(livraison1, precedent2, livraison2.getNoeud());
@@ -688,20 +680,15 @@ public class Plan {
 
 	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
 		int coutVus=entrepot.getHoraireDepart().getHoraireEnSecondes();
-		System.err.println(coutVus/3600);
-		System.err.println(entrepot.getHoraireDepart().getHoraireEnSecondes());    			
 		for(Trajet trajet : futurTrajetTournee) {
-			System.out.println("Trajet :" + trajet);
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
     			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(coutVus) );
-    			System.err.println("Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
 	    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
 	    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
 	    		}
 	    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
 	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(coutVus) );
-    			System.err.println("Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
 
 	  		}	
 	  	}
