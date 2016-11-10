@@ -181,7 +181,7 @@ public class GestionTourneeVue extends GestionVue {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
                         int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-    	            	if(draggedIndex != row.getIndex()) {
+    	            	if(draggedIndex != row.getIndex() && row.getIndex() < livraisonTable.getItems().size()) {
     	            		row.setStyle("-fx-cell-size: 55px;-fx-padding: 30 0 0 0;");	            		
     	            	}
                     }
@@ -208,9 +208,10 @@ public class GestionTourneeVue extends GestionVue {
                     } else {
                         dropIndex = row.getIndex();
                     }
-                    System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
-                    if(dropIndex != draggedIndex)
+                    if(dropIndex != draggedIndex && dropIndex < livraisonTable.getItems().size()) {
+                        System.out.println("On echange la ligne " + draggedIndex + " avec la ligne " + dropIndex);
                     	controleur.modifierOrdre(draggedIndex,dropIndex);
+                    }
                 }
             });
             return row ;
