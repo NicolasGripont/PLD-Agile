@@ -120,8 +120,8 @@
                         <TableColumn fx:id="departColonne" editable="false" prefWidth="63.0" sortable="false" text="Départ" />
                      </columns></TableColumn>
                   <TableColumn fx:id="dureeColonne" prefWidth="56.0" sortable="false" text="Durée" />
-                  <TableColumn fx:id="attenteColonne" prefWidth="58.0" text="Attente" />
-                  <TableColumn fx:id="supprimerColonne" prefWidth="40.0" resizable="false" />
+                  <TableColumn fx:id="attenteColonne" prefWidth="58.0" sortable="false" text="Attente" />
+                  <TableColumn fx:id="supprimerColonne" prefWidth="40.0" resizable="false" sortable="false" />
               </columns>
                <BorderPane.margin>
                   <Insets left="10.0" right="10.0" />

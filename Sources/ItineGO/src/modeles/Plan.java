@@ -639,7 +639,7 @@ public class Plan {
 
 	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent,  Noeud suivant){
 		ajouterLivraison(aAjouter);
-	
+		System.out.println("APPEL AJOUTER LIVRAISON");
 		tableauDesId = new int [noeuds.size()];
     	remplirTableauDesID(tableauDesId);
     	
@@ -657,12 +657,24 @@ public class Plan {
     	System.out.println("depart[1] : " + depart[1]);
     	System.out.println("depart[2] : " + depart[2]);
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
+		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		for(Trajet t : listTrajetTourneeCopie) {
+			System.out.println("Trajet1 == a : " + t.getDepart() + " b : " + t.getArrive());
+		}
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[0]));
-    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1]));    	
+    	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[1])); 
+    	listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		for(Trajet t : listTrajetTourneeCopie) {
+			System.out.println("Trajet2 == a : " + t.getDepart() + " b : " + t.getArrive());
+		}
     	System.out.println("idTrajetPrevu1 : " + idTrajetPrevu1);
     	System.out.println("idTrajetPrevu2 : " + idTrajetPrevu2);
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
-		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);		
+		Trajet trajetPrevu2 = ConstructionTrajet(idTrajetPrevu2);
+		listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		for(Trajet t : listTrajetTourneeCopie) {
+			System.out.println("Trajet3 == a : " + t.getDepart() + " b : " + t.getArrive());
+		}
 		suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
     	//InsertionLivraisonDansTournee(depart, AllPrevious);
 	}
@@ -670,6 +682,9 @@ public class Plan {
 	private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( Trajet trajet1, Trajet trajet2) {
 
 		List<Trajet> listTrajetTourneeCopie= new ArrayList<Trajet>(tournee.getTrajets());
+		for(Trajet t : listTrajetTourneeCopie) {
+			System.out.println("Trajet == a : " + t.getDepart() + " b : " + t.getArrive());
+		}
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
 		List<Trajet> futurTrajetTournee= new ArrayList<Trajet>();
 		Trajet myTrajet = new Trajet(listTrajetTourneeCopie.get(0).getDepart(), listTrajetTourneeCopie.get(0).getArrive(), listTrajetTourneeCopie.get(0).getTroncons());
@@ -679,10 +694,14 @@ public class Plan {
 	    		  futurTrajetTournee.add(trajet1);
 		    	  futurTrajetTournee.add(trajet2);
 	    	  } else {
+	    		  System.out.println("Trajet == a : " + myTrajet.getDepart() + " b : " + myTrajet.getArrive());
 	    		  futurTrajetTournee.add(myTrajet);
 	    	  }
 	      } 
 	      miseAJourHeureDePassageLivraison(futurTrajetTournee);
+	      /*for(Trajet t : futurTrajetTournee) {
+				System.out.println("Trajet == a : " + t.getDepart() + " b : " + t.getArrive());
+			}*/
 	      this.tournee = new Tournee(entrepot,livraisons,futurTrajetTournee);
 	}
 
