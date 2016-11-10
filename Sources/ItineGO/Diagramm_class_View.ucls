@@ -31,7 +31,7 @@
   <class id="4" language="java" name="vue.choixDemandeLivraisonsVue.ChoixDemandeLivraisonsVue" project="ItineGO" 
     file="/ItineGO/src/vue/choixDemandeLivraisonsVue/ChoixDemandeLivraisonsVue.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="551" width="256" x="464" y="436"/>    
+    <position height="-1" width="-1" x="568" y="876"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   </class>  
   <class id="7" language="java" name="vue.gestionVue.GestionVue" project="ItineGO" 
     file="/ItineGO/src/vue/gestionVue/GestionVue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="225" x="1314" y="151"/>    
+    <position height="-1" width="-1" x="1382" y="211"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
   </class>  
   <class id="8" language="java" name="vue.gestionTourneeVue.GestionTourneeVue" project="ItineGO" 
     file="/ItineGO/src/vue/gestionTourneeVue/GestionTourneeVue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1487" width="553" x="1116" y="436"/>    
+    <position height="-1" width="-1" x="1564" y="1173"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +85,7 @@
   </class>  
   <class id="10" language="java" name="vue.planVilleVue.PlanVilleVue" project="ItineGO" 
     file="/ItineGO/src/vue/planVilleVue/PlanVilleVue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="875" width="265" x="1116" y="1963"/>    
+    <position height="-1" width="-1" x="997" y="2388"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -109,9 +109,11 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="17">    
-    <bendpoint x="1699" y="436"/>    
+    <bendpoint x="1268" y="432"/>    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="18" name="vue"/>      
+      <attribute id="18" name="vue">        
+        <position height="19" width="28" x="1289" y="282"/>      
+      </attribute>      
       <multiplicity id="19" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
