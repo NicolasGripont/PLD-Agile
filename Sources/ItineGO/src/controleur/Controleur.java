@@ -102,7 +102,6 @@ public class Controleur extends Application {
 	 */
 	public void glisserDeposer(boolean accepte, File fichier) {
 		this.etatCourant.glisserDeposer(this, accepte, fichier);
-		this.etatCourant.getEtat();
 	}
 
 	/**
@@ -116,7 +115,6 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonParcourir(boolean accepte, File fichier) {
 		this.etatCourant.clicBoutonParcourir(this, accepte, fichier);
-		this.etatCourant.getEtat();
 	}
 
 	/**
@@ -124,7 +122,6 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonRetour() {
 		this.etatCourant.clicBoutonRetour(this, this.gestionnaire);
-		this.etatCourant.getEtat();
 	}
 
 	/**
@@ -132,7 +129,6 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonHome() {
 		this.etatCourant.clicBoutonHome(this, this.gestionnaire);
-		this.etatCourant.getEtat();
 	}
 
 	/**
@@ -144,31 +140,27 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonValider(File fichierChoisie) {
 		this.etatCourant.clicBoutonValider(this.gestionnaire, this, fichierChoisie);
-		this.etatCourant.getEtat();
 	}
 
 	/**
 	 * Permet de lancer le calcul d'une tournée.
 	 */
 	public void clicBoutonCalculerTournee() {
-		this.etatCourant.clicBoutonCalculerTournee(this, this.gestionnaire);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonCalculerTournee(this, this.gestionnaire);	
 	}
 
 	/**
 	 * Permet de sauvegarder la tournée calculée et affichée.
 	 */
 	public void clicBoutonSauvegarder() {
-		this.etatCourant.clicBoutonSauvegarder(this);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonSauvegarder(this);		
 	}
 
 	/**
 	 * Permet d'annuler les modifications apportées à la tournée.
 	 */
 	public void clicBoutonAnnuler() {
-		this.etatCourant.clicBoutonAnnuler(this, this.gestionnaire);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonAnnuler(this, this.gestionnaire);		
 	}
 
 	/**
@@ -178,8 +170,7 @@ public class Controleur extends Application {
 	 *            : Ligne du tableau de la livraison à supprimer.
 	 */
 	public void clicBoutonSupprimer(int numLigne) {
-		this.etatCourant.clicBoutonSupprimer(this, this.gestionnaire, numLigne);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonSupprimer(this, this.gestionnaire, numLigne);		
 	}
 
 	/**
@@ -187,8 +178,7 @@ public class Controleur extends Application {
 	 * sa position sur le plan.
 	 */
 	public void clicBoutonAjouter() {
-		this.etatCourant.clicBoutonAjouter(this);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonAjouter(this);		
 	}
 
 	/**
@@ -201,8 +191,7 @@ public class Controleur extends Application {
 	 *            ordre de passage.
 	 */
 	public void modifierOrdre(int numLigne, int nouveauNumLigne) {
-		this.etatCourant.modifierOrdre(this, this.gestionnaire, numLigne, nouveauNumLigne);
-		this.etatCourant.getEtat();
+		this.etatCourant.modifierOrdre(this, this.gestionnaire, numLigne, nouveauNumLigne);		
 	}
 
 	/**
@@ -214,8 +203,7 @@ public class Controleur extends Application {
 	 *            : Plage horaire de début.
 	 */
 	public void modifierPlageDebut(int numLigne, String debutPlage) {
-		this.etatCourant.modifierPlageDebut(this, this.gestionnaire, numLigne, debutPlage);
-		this.etatCourant.getEtat();
+		this.etatCourant.modifierPlageDebut(this, this.gestionnaire, numLigne, debutPlage);		
 	}
 
 	/**
@@ -227,8 +215,7 @@ public class Controleur extends Application {
 	 *            : Plage horaire de fin.
 	 */
 	public void modifierPlageFin(int numLigne, String finPlage) {
-		this.etatCourant.modifierPlageFin(this, this.gestionnaire, numLigne, finPlage);
-		this.etatCourant.getEtat();
+		this.etatCourant.modifierPlageFin(this, this.gestionnaire, numLigne, finPlage);		
 	}
 
 	/**
@@ -238,8 +225,7 @@ public class Controleur extends Application {
 	 *            : Noeud sur lequel on a cliqué.
 	 */
 	public void clicPlanNoeud(Noeud noeud) {
-		this.etatCourant.clicPlanNoeud(this, this.gestionnaire, noeud);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicPlanNoeud(this, this.gestionnaire, noeud);		
 	}
 
 	/**
@@ -249,8 +235,7 @@ public class Controleur extends Application {
 	 *            : Livraison sur laquelle on a cliqué.
 	 */
 	public void clicPlanLivraison(Noeud noeud, int numLigne) {
-		this.etatCourant.clicPlanLivraison(this, this.gestionnaire, noeud, numLigne);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicPlanLivraison(this, this.gestionnaire, noeud, numLigne);		
 	}
 
 	/**
@@ -260,8 +245,7 @@ public class Controleur extends Application {
 	 *            : Durée que l'on veut modifier.
 	 */
 	public void entrerDuree(int duree) {
-		this.etatCourant.entrerDuree(this, this.gestionnaire, duree);
-		this.etatCourant.getEtat();
+		this.etatCourant.entrerDuree(this, this.gestionnaire, duree);		
 	}
 
 	/**
@@ -271,16 +255,14 @@ public class Controleur extends Application {
 	 *            : Chemin du fichier que l'on va créer.
 	 */
 	public void clicBoutonGenererFeuilleDeRoute(String link) {
-		this.etatCourant.clicBoutonGenererFeuilleDeRoute(this, this.gestionnaire, link);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonGenererFeuilleDeRoute(this, this.gestionnaire, link);		
 	}
 
 	/**
 	 * Permet de stopper le calcul d'une tournée.
 	 */
 	public void clicBoutonsStopperCalculeTournee() {
-		this.etatCourant.clicBoutonStopperTournee(this, this.gestionnaire);
-		this.etatCourant.getEtat();
+		this.etatCourant.clicBoutonStopperTournee(this, this.gestionnaire);		
 	}
 
 	/**
@@ -288,17 +270,14 @@ public class Controleur extends Application {
 	 */
 	public void clicBoutonModifier() {
 		this.etatCourant.clicBoutonModifier(this);
-		this.etatCourant.getEtat();
 	}
 
 	public void undo() {
 		this.etatCourant.undo(this, this.gestionnaire);
-		this.etatCourant.getEtat();
 	}
 
 	public void redo() {
 		this.etatCourant.redo(this, this.gestionnaire);
-		this.etatCourant.getEtat();
 	}
 
 	/**
