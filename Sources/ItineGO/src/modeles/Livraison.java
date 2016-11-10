@@ -176,7 +176,8 @@ public class Livraison {
 	}
 
 	public void setFinPlage(Horaire finPlage) {
-		if(finPlage != null && (debutPlage != null && finPlage.getHoraireEnMinutes() >= debutPlage.getHoraireEnMinutes())) {
+		System.out.println(debutPlage.getHoraireEnMinutes() + duree);
+		if(finPlage != null && (debutPlage != null && finPlage.getHoraireEnMinutes() >= debutPlage.getHoraireEnMinutes() + duree/60)) {
 			this.finPlage = finPlage;
 		} else {
 			this.finPlage = new Horaire(0,0,0);
