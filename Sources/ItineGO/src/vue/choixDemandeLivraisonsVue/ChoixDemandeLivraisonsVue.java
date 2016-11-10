@@ -61,6 +61,15 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
+	/**
+	 * Méthode IHM - Itinialisation de la vue
+	 * 
+	 * @param location
+	 *            : URL de la vue
+	 *            
+	 * @param resources
+	 *            : ressources        
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.textFieldLienFichier.setEditable(false);
@@ -104,6 +113,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 		Tooltip.install(this.imageViewPrecedent, this.tooltipPrecedent);
 	}
 
+	/**
+	 * Permet de redessiner le plan dans la vue
+	 * 
+	 * @param plan
+	 *            : Plan a dessiner
+	 */
 	public void dessinePlan(Plan plan) {
 		if (plan != null) {
 			this.planVilleVue.setWidth(this.planVillePane.getWidth());
@@ -112,12 +127,24 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 		}
 	}
 
+	/**
+	 * Affiche une erreur dans le label error de la vue
+	 * 
+	 * @param erreur
+	 *            : Erreur à afficher
+	 */
 	public void afficherErreur(String erreur) {
 		this.labelError.setStyle("-fx-text-fill : red;");
 		this.labelError.setVisible(true);
 		this.labelError.setText(erreur);
 	}
 
+	/**
+	 * Méthode IHM - Event quand on clique sur Parcourir Fichier
+	 * 
+	 * @param event
+	 *            : Mouse event
+	 */
 	@FXML
 	public void choixFichierAction(MouseEvent event) {
 		FileChooser dialogue = new FileChooser();
@@ -131,6 +158,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 		}
 	}
 
+	/**
+	 * Méthode IHM - Event quand on clique sur Valider
+	 * 
+	 * @param event
+	 *            : Mouse event
+	 */
 	@FXML
 	public void validerAction(MouseEvent event) {
 		if (this.controleur == null) {
@@ -166,6 +199,12 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 		this.controleur.glisserDeposer(false, null);
 	}
 
+	/**
+	 * Afficher un label pour dire que le fichier est accepté
+	 * 
+	 * @param fichier
+	 *            : le fichier donné par l'utilisateur
+	 */
 	public void fichierAccepte(File fichier) {
 		this.labelError.setVisible(false);
 		this.fichierChoisie = fichier;
@@ -175,7 +214,13 @@ public class ChoixDemandeLivraisonsVue implements Initializable {
 		this.labelError.setText("Votre fichier a été pris en compte.");
 		this.glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de livraisons.");
 	}
-
+	
+	/**
+	 * Afficher un label pour dire que le fichier est non valide
+	 * 
+	 * @param fichier
+	 *            : le fichier donné par l'utilisateur
+	 */
 	public void fichierRefuse() {
 		this.labelError.setVisible(false);
 		this.fichierChoisie = null;

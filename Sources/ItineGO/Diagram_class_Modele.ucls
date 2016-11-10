@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="modeles.Horaire" project="ItineGO" file="/ItineGO/src/modeles/Horaire.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="461" width="178" x="2348" y="2653"/>    
+    <position height="-1" width="-1" x="1399" y="2183"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="modeles.Troncon" project="ItineGO" file="/ItineGO/src/modeles/Troncon.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="371" width="223" x="2022" y="2653"/>    
+    <position height="-1" width="-1" x="1049" y="3146"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="modeles.Plan" project="ItineGO" file="/ItineGO/src/modeles/Plan.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1073" width="730" x="2003" y="592"/>    
+    <position height="-1" width="-1" x="1968" y="1476"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="modeles.TSP1" project="ItineGO" file="/ItineGO/src/modeles/TSP1.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="356" x="1036" y="592"/>    
+    <position height="-1" width="-1" x="1010" y="297"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="modeles.TSP2" project="ItineGO" file="/ItineGO/src/modeles/TSP2.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="101" width="276" x="1159" y="1705"/>    
+    <position height="-1" width="-1" x="985" y="459"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="modeles.Trajet" project="ItineGO" file="/ItineGO/src/modeles/Trajet.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="209" width="223" x="2045" y="2116"/>    
+    <position height="-1" width="-1" x="1520" y="2986"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="modeles.TSP3" project="ItineGO" file="/ItineGO/src/modeles/TSP3.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="356" x="1283" y="2116"/>    
+    <position height="-1" width="-1" x="1009" y="667"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="modeles.TSP4" project="ItineGO" file="/ItineGO/src/modeles/TSP4.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="512" x="1407" y="2653"/>    
+    <position height="-1" width="-1" x="1059" y="878"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="modeles.Entrepot" project="ItineGO" file="/ItineGO/src/modeles/Entrepot.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="281" width="195" x="2308" y="2116"/>    
+    <position height="-1" width="-1" x="853" y="1894"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="modeles.Tournee" project="ItineGO" file="/ItineGO/src/modeles/Tournee.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="371" width="325" x="2043" y="1705"/>    
+    <position height="-1" width="-1" x="353" y="1646"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="modeles.Noeud" project="ItineGO" file="/ItineGO/src/modeles/Noeud.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="299" width="154" x="2266" y="3154"/>    
+    <position height="-1" width="-1" x="531" y="2915"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="18" language="java" name="modeles.Gestionnaire" project="ItineGO" 
     file="/ItineGO/src/modeles/Gestionnaire.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="659" width="265" x="2476" y="-107"/>    
+    <position height="-1" width="-1" x="1844" y="556"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -183,7 +183,7 @@
   </class>  
   <interface id="21" language="java" name="modeles.TSP" project="ItineGO" file="/ItineGO/src/modeles/TSP.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="137" width="228" x="1432" y="592"/>    
+    <position height="-1" width="-1" x="1382" y="294"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -201,7 +201,7 @@
   </class>  
   <class id="23" language="java" name="modeles.Livraison" project="ItineGO" file="/ItineGO/src/modeles/Livraison.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="497" width="233" x="2543" y="2116"/>    
+    <position height="-1" width="-1" x="437" y="2390"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -209,23 +209,28 @@
     </display>  
   </class>  
   <association id="24">    
+    <bendpoint x="950" y="2437"/>    
     <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="25" name="finPlage"/>      
+      <attribute id="25" name="finPlage">        
+        <position height="19" width="53" x="1245" y="2269"/>      
+      </attribute>      
       <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="27">    
+    <bendpoint x="945" y="2408"/>    
     <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="28" name="heureArrive"/>      
+      <attribute id="28" name="heureArrive">        
+        <position height="19" width="72" x="1202" y="2228"/>      
+      </attribute>      
       <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="30">    
-    <bendpoint x="2398" y="1705"/>    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="31" name="entrepot"/>      
       <multiplicity id="32" minimum="0" maximum="1"/>    
@@ -238,8 +243,10 @@
     <end type="TARGET" refId="10"/>  
   </generalization>  
   <association id="34">    
-    <bendpoint x="2763" y="592"/>    
-    <bendpoint x="2763" y="1705"/>    
+    <bendpoint x="1476" y="586"/>    
+    <bendpoint x="1384" y="970"/>    
+    <bendpoint x="116" y="1402"/>    
+    <bendpoint x="124" y="1806"/>    
     <end type="SOURCE" refId="18" navigable="false">      
       <attribute id="35" name="livraisonEnCoursCreation"/>      
       <multiplicity id="36" minimum="0" maximum="1"/>    
@@ -256,7 +263,6 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="40">    
-    <bendpoint x="2556" y="2653"/>    
     <end type="SOURCE" refId="23" navigable="false">      
       <attribute id="41" name="noeud"/>      
       <multiplicity id="42" minimum="0" maximum="1"/>    
@@ -278,8 +284,12 @@
   </association>  
   <association id="47">    
     <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="48" name="debutPlage"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
+      <attribute id="48" name="debutPlage">        
+        <position height="19" width="71" x="1201" y="2193"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="17" width="25" x="1275" y="2221"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
@@ -293,27 +303,29 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="53">    
-    <bendpoint x="2275" y="2653"/>    
+    <bendpoint x="1354" y="2934"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="54" name="depart"/>      
+      <attribute id="54" name="depart">        
+        <position height="19" width="43" x="715" y="2924"/>      
+      </attribute>      
       <multiplicity id="55" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="56">    
-    <bendpoint x="1991" y="1705"/>    
     <bendpoint x="1991" y="2116"/>    
-    <bendpoint x="1991" y="2653"/>    
+    <bendpoint x="1318" y="2638"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="57" name="noeuds"/>      
+      <attribute id="57" name="noeuds">        
+        <position height="19" width="49" x="624" y="2846"/>      
+      </attribute>      
       <multiplicity id="58" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="59">    
-    <bendpoint x="2012" y="1705"/>    
     <bendpoint x="2012" y="2116"/>    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="60" name="troncons"/>      
@@ -336,15 +348,19 @@
   </realization>  
   <association id="66">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="67" name="horaireDepart"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
+      <attribute id="67" name="horaireDepart">        
+        <position height="19" width="84" x="1206" y="2083"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="1">        
+        <position height="17" width="25" x="1282" y="2108"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="69">    
-    <bendpoint x="1970" y="1705"/>    
-    <bendpoint x="1970" y="2116"/>    
+    <bendpoint x="1586" y="1450"/>    
+    <bendpoint x="1448" y="1136"/>    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="70" name="tsp"/>      
       <multiplicity id="71" minimum="0" maximum="1"/>    
@@ -354,7 +370,9 @@
   </association>  
   <association id="72">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="73" name="destination"/>      
+      <attribute id="73" name="destination">        
+        <position height="19" width="68" x="653" y="2956"/>      
+      </attribute>      
       <multiplicity id="74" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
@@ -377,10 +395,10 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="81">    
-    <bendpoint x="1949" y="592"/>    
-    <bendpoint x="1949" y="1705"/>    
-    <bendpoint x="1949" y="2116"/>    
-    <bendpoint x="1949" y="2653"/>    
+    <bendpoint x="1468" y="538"/>    
+    <bendpoint x="1340" y="952"/>    
+    <bendpoint x="70" y="1388"/>    
+    <bendpoint x="136" y="2782"/>    
     <end type="SOURCE" refId="18" navigable="false">      
       <attribute id="82" name="noeudSuivant"/>      
       <multiplicity id="83" minimum="0" maximum="1"/>    
@@ -397,16 +415,20 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="87">    
-    <bendpoint x="2296" y="2653"/>    
+    <bendpoint x="1342" y="2910"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="88" name="arrive"/>      
-      <multiplicity id="89" minimum="0" maximum="1"/>    
+      <attribute id="88" name="arrive">        
+        <position height="19" width="39" x="730" y="2889"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="17" width="25" x="661" y="2899"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="90">    
-    <bendpoint x="2317" y="2653"/>    
+    <bendpoint x="750" y="2678"/>    
     <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="91" name="noeud"/>      
       <multiplicity id="92" minimum="0" maximum="1"/>    
@@ -424,22 +446,27 @@
   </generalization>  
   <association id="95">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="96" name="origine"/>      
-      <multiplicity id="97" minimum="0" maximum="1"/>    
+      <attribute id="96" name="origine">        
+        <position height="19" width="46" x="646" y="3001"/>      
+      </attribute>      
+      <multiplicity id="97" minimum="0" maximum="1">        
+        <position height="17" width="25" x="619" y="2980"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="98">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="99" name="horaireArrive"/>      
+      <attribute id="99" name="horaireArrive">        
+        <position height="19" width="79" x="1182" y="2122"/>      
+      </attribute>      
       <multiplicity id="100" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="101">    
-    <bendpoint x="2419" y="1705"/>    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="102" name="livraisons"/>      
       <multiplicity id="103" minimum="0" maximum="2147483647"/>    
@@ -448,6 +475,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="104">    
+    <bendpoint x="911" y="2198"/>    
     <end type="SOURCE" refId="23" navigable="false">      
       <attribute id="105" name="heureDepart"/>      
       <multiplicity id="106" minimum="0" maximum="1"/>    

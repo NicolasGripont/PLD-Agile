@@ -93,6 +93,15 @@ public class GestionLivraisonsVue extends GestionVue {
 
 	private final Tooltip tooltipPrecedent = new Tooltip("Retour au choix de livraisons");
 
+	/**
+	 * Méthode IHM - Itinialisation de la vue
+	 * 
+	 * @param location
+	 *            : URL de la vue
+	 *            
+	 * @param resources
+	 *            : ressources        
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.boxStopperCalcule.setVisible(false);
@@ -178,6 +187,12 @@ public class GestionLivraisonsVue extends GestionVue {
 		Tooltip.install(this.imageViewAccueil, this.tooltipAccueil);
 	}
 
+	/**
+	 * Méthode appellée par PlanVille quand un noeud est selectionné dans le plan
+	 * 
+	 * @param noeud
+	 *            : le noeud selectionné
+	 */
 	@Override
 	public void selectionneNoeud(Noeud noeud) {
 		for (Livraison l : this.livraisonTable.getItems()) {
@@ -187,6 +202,12 @@ public class GestionLivraisonsVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Méthode qui met à jour le tableau contenant les livraisons
+	 * 
+	 * @param plan
+	 *            : plan qui contient les livraisons
+	 */
 	public void miseAJourTableau(Plan plan) {
 		if (plan != null) {
 			if ((plan.getEntrepot() != null) && (plan.getEntrepot().getNoeud() != null)) {
@@ -205,6 +226,12 @@ public class GestionLivraisonsVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Permet de redessiner le plan dans la vue
+	 * 
+	 * @param plan
+	 *            : Plan a dessiner
+	 */
 	public void dessinePlan(Plan plan) {
 		if (plan != null) {
 			this.planVilleVue.setWidth(this.planVillePane.getWidth());
@@ -213,6 +240,12 @@ public class GestionLivraisonsVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Affiche une erreur dans le label error de la vue
+	 * 
+	 * @param erreur
+	 *            : Erreur à afficher
+	 */
 	public void afficherErreur(String erreur) {
 		this.labelError.setVisible(true);
 		this.labelError.setText(erreur);
@@ -226,18 +259,30 @@ public class GestionLivraisonsVue extends GestionVue {
 		this.controleur = controleur;
 	}
 
+	/**
+	 * Méthode appelée quand on clique sur le bouton home
+	 * 
+	 */
 	@FXML
 	public void home() {
 		this.controleur.clicBoutonHome();
 	}
 
+	/**
+	 * Méthode appelée quand on clique sur le bouton precedent
+	 * 
+	 */
 	@FXML
 	public void precedent() {
 		this.controleur.clicBoutonRetour();
 	}
 
+	/**
+	 * Méthode appelée quand on clique sur calculer tournee
+	 * 
+	 */
 	@FXML
-	public void calculerLivraisonAction() {
+	public void calculerTourneeAction() {
 		this.boutonCalculer.setVisible(false);
 		this.boxStopperCalcule.setVisible(true);
 		this.barreChargement.progressProperty().unbind();
@@ -289,8 +334,12 @@ public class GestionLivraisonsVue extends GestionVue {
 		this.boxStopperCalcule.setVisible(value);
 	}
 
+	/**
+	 * Méthode appelée quand on clique sur le bouton stopper le calcul de la tournee
+	 * 
+	 */
 	@FXML
-	private void stopperCalculLivraisonAction() {
+	private void stopperCalculerTourneeAction() {
 		this.setHboxCalculLivraison(false);
 		if (this.taskCalcul != null) {
 			this.taskCalcul.cancel();

@@ -13,6 +13,9 @@ import javafx.scene.layout.StackPane;
 import modeles.Entrepot;
 import modeles.Livraison;
 
+/**
+ * Cellule personnelle pour la classe TableView de JavaFx
+ */
 public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 
 	final ImageView imageViewMoins = new ImageView();
@@ -57,6 +60,12 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 		return this.imageViewMoins;
 	}
 
+	/**
+	 * Méthode appellé quand on dessine la cellule
+	 * 
+	 * @param item : item
+	 * @param empty : boolean pour cellule vide
+	 */
 	@Override
 	protected void updateItem(Boolean item, boolean empty) {
 		super.updateItem(item, empty);

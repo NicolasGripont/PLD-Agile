@@ -86,7 +86,7 @@
          <bottom>
             <VBox alignment="CENTER" maxWidth="450.0" minWidth="450.0" prefHeight="63.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="boutonCalculer" alignment="CENTER" contentDisplay="CENTER" maxHeight="27.0" maxWidth="450.0" minHeight="27.0" minWidth="446.0" mnemonicParsing="false" onMouseClicked="#calculerLivraisonAction" prefHeight="27.0" prefWidth="450.0" text="Calculer tournée" />
+                  <Button fx:id="boutonCalculer" alignment="CENTER" contentDisplay="CENTER" maxHeight="27.0" maxWidth="450.0" minHeight="27.0" minWidth="446.0" mnemonicParsing="false" onMouseClicked="#calculerTourneeAction" prefHeight="27.0" prefWidth="450.0" text="Calculer tournée" />
                   <HBox fx:id="boxStopperCalcule" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ProgressBar fx:id="barreChargement" prefHeight="20.0" prefWidth="200.0" progress="0.0" />
@@ -95,7 +95,7 @@
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
                         </Label>
-                        <Button fx:id="boutonStopCalculer" mnemonicParsing="false" onMouseClicked="#stopperCalculLivraisonAction" prefHeight="27.0" prefWidth="60.0" text="Stop" />
+                        <Button fx:id="boutonStopCalculer" mnemonicParsing="false" onMouseClicked="#stopperCalculerTourneeAction" prefHeight="27.0" prefWidth="60.0" text="Stop" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
