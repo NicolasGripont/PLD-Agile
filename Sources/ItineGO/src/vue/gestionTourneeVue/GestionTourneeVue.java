@@ -160,7 +160,6 @@ public class GestionTourneeVue extends GestionVue {
 		
 		planVillePane.widthProperty().addListener(listener);
 		planVillePane.heightProperty().addListener(listener);
-		TableRow<Livraison> row2 = new TableRow<>();
 		livraisonTable.setRowFactory(tv -> {
             TableRow<Livraison> row = new TableRow<>();
             row.setOnDragDetected(event -> {
@@ -176,38 +175,17 @@ public class GestionTourneeVue extends GestionVue {
             });
             
             row.setOnDragOver(event -> {
-            	Dragboard db = event.getDragboard();
-            	if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
-	            	int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-	            	if(draggedIndex != row.getIndex()) {
-	            		row.setMinWidth(70);
-	            		row.setPrefWidth(70);
-	            		row.setMaxWidth(70);
-	            		row.setStyle("-fx-padding: 0.5em;");
-	            	}
-            	}
-            	
-                /*Dragboard db = event.getDragboard();
+                Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
                         event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                         event.consume();
                     }
-                }*/
-            });
-            
-            row.setOnDragExited(event -> {
-            	Dragboard db = event.getDragboard();
-            	if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
-	            	int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-	            	if(draggedIndex != row.getIndex()) {
-	            		row.setStyle("-fx-padding: 0em;");
-	            	}
-            	}
+                }
             });
             
             row.setOnDragDropped(event -> {
-                Dragboard db = event.getDragboard();
+            	Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE) && controleur.getEtatCourant().getClass().equals(EtatModifierTournee.class)) {
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE); 
                     int dropIndex ; 
@@ -311,7 +289,6 @@ public class GestionTourneeVue extends GestionVue {
 		      }
 		    });
 		
-		defaultStringCellFactory = plageDebutColonne.getCellFactory();
 		imageViewAccueilExited();
 		imageViewPrecedentExited();
 		imageViewModifierExited();
@@ -357,6 +334,7 @@ public class GestionTourneeVue extends GestionVue {
 	            }
 		});
 		
+		defaultStringCellFactory = plageDebutColonne.getCellFactory();
 	}
 
 	public void solutionOptimale(boolean optimale) {
@@ -560,38 +538,37 @@ public class GestionTourneeVue extends GestionVue {
 		boutonGenerer.setVisible(false);
 		supprimerColonne.setVisible(true);
 		labelInstruction.setVisible(false);
-		
 		Callback callback = new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
-		      @Override public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonStringTableColumn) {
-		    	  EditionCell cell = new EditionCell();
-		    	  return cell;
-		      }
-		    };
-		    
+			@Override
+			public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonStringTableColumn) {
+				EditionCell cell = new EditionCell();
+				return cell;
+			}
+		};
+
 		plageDebutColonne.setCellFactory(callback);
 		plageDebutColonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Livraison, String>>() {
-	        @Override
-	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
-	        	if(!t.getOldValue().equals(t.getNewValue())) {
-	        		System.out.println("modifierPlageDebut");
-	        		controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue()+":00");
-	        	}
-	        }
-	    });
-		
+			@Override
+			public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
+				if (!t.getOldValue().equals(t.getNewValue())) {
+					System.out.println("modifierPlageDebut");
+					controleur.modifierPlageDebut(t.getTablePosition().getRow(), t.getNewValue() + ":00");
+				}
+			}
+		});
+
 		plageFinColonne.setCellFactory(callback);
 		plageFinColonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Livraison, String>>() {
-	        @Override
-	        public void handle(TableColumn.CellEditEvent<Livraison, String> t) {		
-	        	if(!t.getOldValue().equals(t.getNewValue())) {
-	        		System.out.println("modifierPlageFin");
-	        		controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue()+":00");
-	        	}
-	        }
-	    });
-		
-		livraisonTable.setEditable(true);
-		livraisonTable.refresh();
+			@Override
+			public void handle(TableColumn.CellEditEvent<Livraison, String> t) {
+				if (!t.getOldValue().equals(t.getNewValue())) {
+					System.out.println("modifierPlageFin");
+					controleur.modifierPlageFin(t.getTablePosition().getRow(), t.getNewValue() + ":00");
+				}
+			}
+		});
+	
+	livraisonTable.setEditable(true);
 	}
 	
 	public void majAjouterTourneePlace() {
@@ -625,11 +602,10 @@ public class GestionTourneeVue extends GestionVue {
 		labelInstruction.setText("Vous pouvez maintenant modifer la durée");
 		livraisonTable.setEditable(true);		
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(true);
-		
 		dureeColonne.setCellFactory(new Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>>() {
 			@Override
 			public TableCell<Livraison, String> call(TableColumn<Livraison, String> livraisonBooleanTableColumn) {
-				AjouterLivraisonDureeCell cell = new AjouterLivraisonDureeCell();
+				EditionCell cell = new EditionCell();
 				return cell;
 			}
 	    });
@@ -650,7 +626,6 @@ public class GestionTourneeVue extends GestionVue {
 	        	}
 	        }
 	    });
-		
 		//Permet de synchronize l'IHM et le Thread RunLater
 		try {
 			Thread.sleep(100);
@@ -678,8 +653,6 @@ public class GestionTourneeVue extends GestionVue {
 		labelError.setVisible(true);
 		labelInstruction.setVisible(false);
 		livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
-		plageDebutColonne.setCellFactory(defaultStringCellFactory);
-		plageFinColonne.setCellFactory(defaultStringCellFactory);
 	}
 	
 

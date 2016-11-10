@@ -547,36 +547,36 @@ public class Plan {
 	 * @param place1
 	 * @param place2
 	 */
-	public void reordonnerLivraisonTournee(int place1, int place2){	
+	public void reordonnerLivraisonTournee(int place1, int place2){
+		System.out.println(place1);
+		System.out.println(place2);
 		if((place1+1) != place2) {
 			Livraison livraison1 = new Livraison(gestionnaire.getLivraisonTournee(place1));
 			Livraison livraison2 = null;
 			if(place2 <= (livraisons.size()-1)) {
 				livraison2 = new Livraison(gestionnaire.getLivraisonTournee(place2));
 			}
-			if(livraison1 != null && livraison2 != null) {
-				Noeud suivant1 = null;
-				if(place1 == (livraisons.size()-1)) {
-					suivant1 = entrepot.getNoeud();		
-				} else {
-					suivant1 = gestionnaire.getLivraisonTournee(place1+1).getNoeud();
-				}
-				Noeud precedent1 = entrepot.getNoeud();
-				if(place1 != 0) {
-					precedent1 = gestionnaire.getLivraisonTournee(place1-1).getNoeud();
-				}
-				Noeud precedent2 = entrepot.getNoeud();
-				if(place2 != 0) {
-					precedent2 = gestionnaire.getLivraisonTournee(place2-1).getNoeud();
-				}
-				suppressionLivraisonTournee(livraison1, precedent1, suivant1);
-				if(place2 == livraisons.size()) {
-					System.out.println("on passe la");
-					ajouterLivraisonTournee(livraison1, precedent2, entrepot.getNoeud());
-				} else {
-					ajouterLivraisonTournee(livraison1, precedent2, livraison2.getNoeud());
-				}
-			}	
+			Noeud suivant1 = null;
+			if(place1 == (livraisons.size()-1)) {
+				suivant1 = entrepot.getNoeud();		
+			} else {
+				suivant1 = gestionnaire.getLivraisonTournee(place1+1).getNoeud();
+			}
+			Noeud precedent1 = entrepot.getNoeud();
+			if(place1 != 0) {
+				precedent1 = gestionnaire.getLivraisonTournee(place1-1).getNoeud();
+			}
+			Noeud precedent2 = entrepot.getNoeud();
+			if(place2 != 0) {
+				precedent2 = gestionnaire.getLivraisonTournee(place2-1).getNoeud();
+			}
+			suppressionLivraisonTournee(livraison1, precedent1, suivant1);
+			if(place2 > livraisons.size()) {
+				System.out.println("on passe la");
+				ajouterLivraisonTournee(livraison1, precedent2, entrepot.getNoeud());
+			} else {
+				ajouterLivraisonTournee(livraison1, precedent2, livraison2.getNoeud());
+			}
 		}
 	}
 	
