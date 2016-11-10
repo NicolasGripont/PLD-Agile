@@ -18,24 +18,28 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	/**
 	 * Permet de retourner à l'état initial de l'application.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.listeModifications.undoAllModifications();
 		controleur.listeModifications.viderListeModifications();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
-		if(controleur.stage != null) {
+		if (controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(
+						this.getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 				Parent root;
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(),
+						controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -45,29 +49,33 @@ public class EtatTourneeAffiche extends EtatDefaut {
 			}
 		}
 	}
-	
+
 	/**
-	 * Permet de retourner à la vue précédente où on affiche les livraisons a effectuées et à l'état EtatLivraisonsAffichees.
+	 * Permet de retourner à la vue précédente où on affiche les livraisons a
+	 * effectuées et à l'état EtatLivraisonsAffichees.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.listeModifications.undoAllModifications();
 		controleur.listeModifications.viderListeModifications();
 		gestionnaire.effacerTournee();
-		if(controleur.stage != null) {
+		if (controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionLivraisonsVue/GestionLivraisonsVue.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(
+						this.getClass().getResource("/vue/gestionLivraisonsVue/GestionLivraisonsVue.fxml"));
 				Parent root = fxmlLoader.load();
 				controleur.gestionLivraisonsVue = (GestionLivraisonsVue) fxmlLoader.getController();
 				controleur.gestionLivraisonsVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(),
+						controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
-				System.out.println(controleur.stage.getHeight());
 				controleur.gestionLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 				controleur.gestionLivraisonsVue.miseAJourTableau(gestionnaire.getPlan());
 				controleur.setEtatCourant(controleur.etatLivraisonsAffichees);
@@ -76,95 +84,100 @@ public class EtatTourneeAffiche extends EtatDefaut {
 			}
 		}
 	}
-	
+
 	/**
 	 * Permet de générer une feuille de route de la tournée calculée.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
-	 * @param link : Chemin du fichier que l'on va créer.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 * @param link
+	 *            : Chemin du fichier que l'on va créer.
 	 */
-	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link)
-	{
+	@Override
+	public void clicBoutonGenererFeuilleDeRoute(Controleur controleur, Gestionnaire gestionnaire, String link) {
 		gestionnaire.genererFeuilleDeRoute(link);
 		controleur.gestionTourneeVue.afficherInfo("Feuille de route enregistrée");
 	}
-	
+
 	/**
 	 * Met à jour la vue pour modifier la tournée.
 	 */
+	@Override
 	public void clicBoutonModifier(Controleur controleur) {
 		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.listeModifications.creerModification();
 		controleur.gestionTourneeVue.afficherInfo("Modification de la tournéee");
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
-	
+
 	/**
 	 * Permet de redessiner le plan dans la vue correspondante.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
-	
-	public void undo(Controleur controleur,Gestionnaire gestionnaire) {
+
+	@Override
+	public void undo(Controleur controleur, Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.undoModifications();
 		} catch (NonRespectPlagesHoraires e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			controleur.gestionTourneeVue.afficherErreur("L'undo ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(),
+				gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 		controleur.gestionTourneeVue.solutionOptimale(!controleur.listeModifications.isUndoPossible());
-		if(controleur.listeModifications.isUndoPossible()) {
+		if (controleur.listeModifications.isUndoPossible()) {
 			controleur.gestionTourneeVue.desactiverUndo(false);
-		}
-		else {
+		} else {
 			controleur.gestionTourneeVue.desactiverUndo(true);
 		}
-		if(controleur.listeModifications.isRedoPossible()) {
+		if (controleur.listeModifications.isRedoPossible()) {
 			controleur.gestionTourneeVue.desactiverRedo(false);
-		}
-		else {
+		} else {
 			controleur.gestionTourneeVue.desactiverRedo(true);
 		}
 	}
-	
-	public void redo(Controleur controleur,Gestionnaire gestionnaire) {
+
+	@Override
+	public void redo(Controleur controleur, Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.redoModifications();
 		} catch (NonRespectPlagesHoraires e) {
-			//e.printStackTrace();
 			controleur.gestionTourneeVue.afficherErreur("Le redo ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(),
+				gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 		controleur.gestionTourneeVue.solutionOptimale(!controleur.listeModifications.isUndoPossible());
-		if(controleur.listeModifications.isUndoPossible()) {
+		if (controleur.listeModifications.isUndoPossible()) {
 			controleur.gestionTourneeVue.desactiverUndo(false);
-		}
-		else {
+		} else {
 			controleur.gestionTourneeVue.desactiverUndo(true);
 		}
-		if(controleur.listeModifications.isRedoPossible()) {
+		if (controleur.listeModifications.isRedoPossible()) {
 			controleur.gestionTourneeVue.desactiverRedo(false);
-		}
-		else {
+		} else {
 			controleur.gestionTourneeVue.desactiverRedo(true);
 		}
 	}
-	
-	public void getEtat()
-	{
+
+	@Override
+	public void getEtat() {
 		System.out.println("etat tournee affiche");
 	}
 }

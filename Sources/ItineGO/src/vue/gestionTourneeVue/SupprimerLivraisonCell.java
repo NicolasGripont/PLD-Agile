@@ -21,60 +21,60 @@ public class SupprimerLivraisonCell extends TableCell<Livraison, Boolean> {
 	final StackPane paddedButton = new StackPane();
 
 	private final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-	
-	private TableView<Livraison> table;
-	
-	private Entrepot entrepot;
-	
+
+	private final TableView<Livraison> table;
+
+	private final Entrepot entrepot;
+
 	public SupprimerLivraisonCell(TableView<Livraison> table, Entrepot entrepot) {
 		this.table = table;
 		this.entrepot = entrepot;
-		paddedButton.setPadding(new Insets(3));
-		paddedButton.getChildren().add(imageViewMoins);
+		this.paddedButton.setPadding(new Insets(3));
+		this.paddedButton.getChildren().add(this.imageViewMoins);
 
-		imageViewMoins.setFitHeight(20);
-		imageViewMoins.setFitWidth(20);
-		
-		
+		this.imageViewMoins.setFitHeight(20);
+		this.imageViewMoins.setFitWidth(20);
 
-		imageViewMoins.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		this.imageViewMoins.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				imageViewMoinsEntered();
+				SupprimerLivraisonCell.this.imageViewMoinsEntered();
 			}
 		});
 
-		imageViewMoins.setOnMouseExited(new EventHandler<MouseEvent>() {
+		this.imageViewMoins.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				imageViewMoinsExited();
+				SupprimerLivraisonCell.this.imageViewMoinsExited();
 			}
 		});
 		Tooltip tooltipMoins = new Tooltip("Supprimer la livraison");
-		Tooltip.install(imageViewMoins, tooltipMoins);
-		imageViewMoinsExited();
+		Tooltip.install(this.imageViewMoins, tooltipMoins);
+		this.imageViewMoinsExited();
 	}
-	
+
 	public ImageView getImageViewMoins() {
-		return imageViewMoins;
+		return this.imageViewMoins;
 	}
 
 	@Override
 	protected void updateItem(Boolean item, boolean empty) {
 		super.updateItem(item, empty);
-		if (!empty && (( table.getItems().get(this.getIndex()).getNoeud().getId()!= entrepot.getNoeud().getId())) && table.getItems().size() > 2) {
-			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			setGraphic(paddedButton);
+		if (!empty
+				&& ((this.table.getItems().get(this.getIndex()).getNoeud().getId() != this.entrepot.getNoeud().getId()))
+				&& (this.table.getItems().size() > 2)) {
+			this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			this.setGraphic(this.paddedButton);
 		} else {
-			setGraphic(null);
+			this.setGraphic(null);
 		}
 	}
 
 	private void imageViewMoinsEntered() {
-		imageViewMoins.setImage(new Image(classLoader.getResource("moins2_bleu.png").toString()));
+		this.imageViewMoins.setImage(new Image(this.classLoader.getResource("moins2_bleu.png").toString()));
 	}
 
 	private void imageViewMoinsExited() {
-		imageViewMoins.setImage(new Image(classLoader.getResource("moins2_noir.png").toString()));
+		this.imageViewMoins.setImage(new Image(this.classLoader.getResource("moins2_noir.png").toString()));
 	}
 }

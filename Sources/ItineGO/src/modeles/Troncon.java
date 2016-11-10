@@ -1,7 +1,8 @@
 package modeles;
 
 /**
- * Classe modélisant un tronçon, c'est un lien orienté qui relie directement deux noeuds
+ * Classe modélisant un tronçon, c'est un lien orienté qui relie directement
+ * deux noeuds
  */
 public class Troncon {
 	/**
@@ -24,7 +25,7 @@ public class Troncon {
 	 * Noeud de destination du tronçon
 	 */
 	private Noeud destination;
-	
+
 	/**
 	 * Constructeur de la classe
 	 */
@@ -37,7 +38,7 @@ public class Troncon {
 	}
 
 	public String getNomRue() {
-		return nomRue;
+		return this.nomRue;
 	}
 
 	public void setNomRue(String nomRue) {
@@ -45,11 +46,11 @@ public class Troncon {
 	}
 
 	public int getLongueur() {
-		return longueur;
+		return this.longueur;
 	}
 
 	public void setLongueur(int longueur) {
-		if(longueur > 0) {
+		if (longueur > 0) {
 			this.longueur = longueur;
 		} else {
 			this.longueur = 0;
@@ -57,11 +58,11 @@ public class Troncon {
 	}
 
 	public int getVitesse() {
-		return vitesse;
+		return this.vitesse;
 	}
 
 	public void setVitesse(int vitesse) {
-		if(vitesse > 0) {
+		if (vitesse > 0) {
 			this.vitesse = vitesse;
 		} else {
 			vitesse = 0;
@@ -69,11 +70,11 @@ public class Troncon {
 	}
 
 	public Noeud getOrigine() {
-		return origine;
+		return this.origine;
 	}
 
 	public void setOrigine(Noeud origine) {
-		if(origine != null) {
+		if (origine != null) {
 			this.origine = origine;
 		} else {
 			this.origine = new Noeud(-1, 0, 0);
@@ -81,63 +82,74 @@ public class Troncon {
 	}
 
 	public Noeud getDestination() {
-		return destination;
+		return this.destination;
 	}
 
 	public void setDestination(Noeud destination) {
-		if(destination != null) {
+		if (destination != null) {
 			this.destination = destination;
 		} else {
-			this.destination = new Noeud(-1,0,0);
+			this.destination = new Noeud(-1, 0, 0);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "Troncon [nomRue=" + nomRue + ", longueur=" + longueur + ", vitesse=" + vitesse + ", origine=" + origine
-				+ ", destination=" + destination + "]";
+		return "Troncon [nomRue=" + this.nomRue + ", longueur=" + this.longueur + ", vitesse=" + this.vitesse
+				+ ", origine=" + this.origine + ", destination=" + this.destination + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((destination == null) ? 0 : destination.hashCode());
-		result = prime * result + longueur;
-		result = prime * result + ((nomRue == null) ? 0 : nomRue.hashCode());
-		result = prime * result + ((origine == null) ? 0 : origine.hashCode());
-		result = prime * result + vitesse;
+		result = (prime * result) + ((this.destination == null) ? 0 : this.destination.hashCode());
+		result = (prime * result) + this.longueur;
+		result = (prime * result) + ((this.nomRue == null) ? 0 : this.nomRue.hashCode());
+		result = (prime * result) + ((this.origine == null) ? 0 : this.origine.hashCode());
+		result = (prime * result) + this.vitesse;
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		Troncon other = (Troncon) obj;
-		if (destination == null) {
-			if (other.destination != null)
+		if (this.destination == null) {
+			if (other.destination != null) {
 				return false;
-		} else if (!destination.equals(other.destination))
+			}
+		} else if (!this.destination.equals(other.destination)) {
 			return false;
-		if (longueur != other.longueur)
+		}
+		if (this.longueur != other.longueur) {
 			return false;
-		if (nomRue == null) {
-			if (other.nomRue != null)
+		}
+		if (this.nomRue == null) {
+			if (other.nomRue != null) {
 				return false;
-		} else if (!nomRue.equals(other.nomRue))
+			}
+		} else if (!this.nomRue.equals(other.nomRue)) {
 			return false;
-		if (origine == null) {
-			if (other.origine != null)
+		}
+		if (this.origine == null) {
+			if (other.origine != null) {
 				return false;
-		} else if (!origine.equals(other.origine))
+			}
+		} else if (!this.origine.equals(other.origine)) {
 			return false;
-		if (vitesse != other.vitesse)
+		}
+		if (this.vitesse != other.vitesse) {
 			return false;
+		}
 		return true;
 	}
 }

@@ -6,11 +6,11 @@ import modeles.Livraison;
 
 public class ModifierPlageHoraireDebut extends Commande {
 
-	private Gestionnaire gestionnaire;
-	private int numLigne;
-	private String plageDebut;
-	private String plageDebutInitiale;
-	
+	private final Gestionnaire gestionnaire;
+	private final int numLigne;
+	private final String plageDebut;
+	private final String plageDebutInitiale;
+
 	public ModifierPlageHoraireDebut(Gestionnaire gestionnaire, int numLigne, String plageDebut) {
 		this.gestionnaire = gestionnaire;
 		this.numLigne = numLigne;
@@ -18,16 +18,15 @@ public class ModifierPlageHoraireDebut extends Commande {
 		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
 		this.plageDebutInitiale = livraisonTournee.getDebutPlage().toString();
 	}
-	
+
 	@Override
 	public void doCode() throws NonRespectPlagesHoraires {
-		System.err.println("DOCODE");
-		gestionnaire.changerPlageHoraireDebut(numLigne, plageDebut);
+		this.gestionnaire.changerPlageHoraireDebut(this.numLigne, this.plageDebut);
 	}
 
 	@Override
 	public void undoCode() throws NonRespectPlagesHoraires {
-		gestionnaire.changerPlageHoraireDebut(numLigne, plageDebutInitiale);
+		this.gestionnaire.changerPlageHoraireDebut(this.numLigne, this.plageDebutInitiale);
 	}
 
 }

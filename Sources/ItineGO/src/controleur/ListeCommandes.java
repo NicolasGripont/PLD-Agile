@@ -6,82 +6,78 @@ import exceptions.NonRespectPlagesHoraires;
 
 public class ListeCommandes {
 
-	private LinkedList<Commande> listeCommandes;
+	private final LinkedList<Commande> listeCommandes;
 	private int position;
-	
+
 	public ListeCommandes() {
-		listeCommandes = new LinkedList<>();
-		position = 0;
+		this.listeCommandes = new LinkedList<>();
+		this.position = 0;
 	}
-	
+
 	public void ajouterCommande(Commande commande) throws NonRespectPlagesHoraires {
-		for(int i = 0; i < position; i++) {
-			listeCommandes.removeFirst();
+		for (int i = 0; i < this.position; i++) {
+			this.listeCommandes.removeFirst();
 		}
-		listeCommandes.addFirst(commande);
-		position = 0;
+		this.listeCommandes.addFirst(commande);
+		this.position = 0;
 		try {
 			commande.doCode();
 		} catch (NonRespectPlagesHoraires e) {
-			//listeCommandes.removeFirst();
 			throw e;
 		}
 	}
-	
+
 	public void undoAll() throws NonRespectPlagesHoraires {
 		NonRespectPlagesHoraires exec = null;
-		for(int i = position; i < listeCommandes.size(); i++) {
+		for (int i = this.position; i < this.listeCommandes.size(); i++) {
 			try {
-				undo();
-			}catch(NonRespectPlagesHoraires e) {
+				this.undo();
+			} catch (NonRespectPlagesHoraires e) {
 				exec = e;
 			}
 		}
-		if(exec != null)
-		{
+		if (exec != null) {
 			throw exec;
 		}
 	}
-	
+
 	public void redoAll() throws NonRespectPlagesHoraires {
 		NonRespectPlagesHoraires exec = null;
-		for(int i = position; i >=0; i--) {
+		for (int i = this.position; i >= 0; i--) {
 			try {
-				redo();
-			} catch(NonRespectPlagesHoraires e) {
+				this.redo();
+			} catch (NonRespectPlagesHoraires e) {
 				exec = e;
 			}
 		}
-		if(exec != null)
-		{
+		if (exec != null) {
 			throw exec;
 		}
 	}
-	
+
 	public void undo() throws NonRespectPlagesHoraires {
-		if(position < listeCommandes.size()) {
+		if (this.position < this.listeCommandes.size()) {
 			NonRespectPlagesHoraires exec = null;
 			try {
-				listeCommandes.get(position).undoCode();
-			} catch(NonRespectPlagesHoraires e)  {
+				this.listeCommandes.get(this.position).undoCode();
+			} catch (NonRespectPlagesHoraires e) {
 				exec = e;
 			}
-			position++;
-			if(exec != null)
-			{
+			this.position++;
+			if (exec != null) {
 				throw exec;
 			}
 		}
 	}
-	
+
 	public void redo() throws NonRespectPlagesHoraires {
-		if(position-1 >= 0 && !listeCommandes.isEmpty()) {
-			position--;
-			listeCommandes.get(position).doCode();
+		if (((this.position - 1) >= 0) && !this.listeCommandes.isEmpty()) {
+			this.position--;
+			this.listeCommandes.get(this.position).doCode();
 		}
 	}
-	
+
 	public boolean estVide() {
-		return listeCommandes.isEmpty();
+		return this.listeCommandes.isEmpty();
 	}
 }

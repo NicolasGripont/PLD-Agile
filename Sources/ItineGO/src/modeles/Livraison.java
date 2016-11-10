@@ -18,8 +18,8 @@ public class Livraison {
 	 */
 	private Horaire debutPlage;
 	/**
-	 * Indique la fin de la plage horaire où l'on peut effectuer la livraison
-	 * Si pas de plage, est mis à null
+	 * Indique la fin de la plage horaire où l'on peut effectuer la livraison Si
+	 * pas de plage, est mis à null
 	 */
 	private Horaire finPlage;
 	/**
@@ -34,68 +34,69 @@ public class Livraison {
 	/**
 	 * Constructeur de la classe
 	 */
-	public Livraison(Noeud noeud, int duree, int heureDebutPlage, int minuteDebutPlage, 
-			int secondeDebutPlage, int heureFinPlage, int minuteFinPlage, int secondeFinPlage) {
-		setNoeud(noeud);
-		setDuree(duree);
-		setDebutPlage(new Horaire(heureDebutPlage, minuteDebutPlage, secondeDebutPlage));
-		setFinPlage(new Horaire(heureFinPlage, minuteFinPlage, secondeFinPlage));
+	public Livraison(Noeud noeud, int duree, int heureDebutPlage, int minuteDebutPlage, int secondeDebutPlage,
+			int heureFinPlage, int minuteFinPlage, int secondeFinPlage) {
+		this.setNoeud(noeud);
+		this.setDuree(duree);
+		this.setDebutPlage(new Horaire(heureDebutPlage, minuteDebutPlage, secondeDebutPlage));
+		this.setFinPlage(new Horaire(heureFinPlage, minuteFinPlage, secondeFinPlage));
 	}
-	
+
 	/**
 	 * Constructeur de copie de la classe
 	 */
 	public Livraison(Livraison livraison) {
-		setNoeud(livraison.noeud);
-		setDuree(livraison.duree);
-		setDebutPlage(livraison.debutPlage);
-		setFinPlage(livraison.finPlage);
+		this.setNoeud(livraison.noeud);
+		this.setDuree(livraison.duree);
+		this.setDebutPlage(livraison.debutPlage);
+		this.setFinPlage(livraison.finPlage);
 	}
-	
+
 	/**
 	 * Constructeur de la classe
 	 */
 	public Livraison(Noeud noeud, int duree, Horaire debutPlage, Horaire finPlage) {
-		setNoeud(noeud);
-		setDuree(duree);
-		setDebutPlage(debutPlage);
-		setFinPlage(finPlage);
+		this.setNoeud(noeud);
+		this.setDuree(duree);
+		this.setDebutPlage(debutPlage);
+		this.setFinPlage(finPlage);
 	}
-	
-	
+
 	/**
 	 * Constructeur de la classe
 	 */
 	public Livraison(Noeud noeud, int duree, String debutPlage, String finPlage) {
-		setNoeud(noeud);
-		setDuree(duree);
-		setDebutPlage(new Horaire(debutPlage));
-		setFinPlage(new Horaire(finPlage));
+		this.setNoeud(noeud);
+		this.setDuree(duree);
+		this.setDebutPlage(new Horaire(debutPlage));
+		this.setFinPlage(new Horaire(finPlage));
 	}
-	
+
 	/**
 	 * Constructeur de la classe
 	 */
 	public Livraison(Noeud noeud, int duree) {
-		setNoeud(noeud);
-		setDuree(duree);
-		setDebutPlage(null);
-		setFinPlage(null);
+		this.setNoeud(noeud);
+		this.setDuree(duree);
+		this.setDebutPlage(null);
+		this.setFinPlage(null);
 	}
-	
+
 	/**
 	 * Constructeur avec uniquement le noeud
+	 * 
 	 * @param noeud
 	 */
 	public Livraison(Noeud noeud) {
-		setNoeud(noeud);
-		setDuree(0);
-		setDebutPlage(null);
-		setFinPlage(null);
+		this.setNoeud(noeud);
+		this.setDuree(0);
+		this.setDebutPlage(null);
+		this.setFinPlage(null);
 	}
 
 	public boolean sontValidesPlages() {
-		if(heureArrive.getHoraireEnSecondes() < finPlage.getHoraireEnSecondes() || finPlage.getHoraireEnSecondes() == 0) {
+		if ((this.heureArrive.getHoraireEnSecondes() < this.finPlage.getHoraireEnSecondes())
+				|| (this.finPlage.getHoraireEnSecondes() == 0)) {
 			return true;
 		}
 		return false;
@@ -105,127 +106,141 @@ public class Livraison {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((debutPlage == null) ? 0 : debutPlage.hashCode());
-		result = prime * result + duree;
-		result = prime * result + ((finPlage == null) ? 0 : finPlage.hashCode());
-		result = prime * result + ((noeud == null) ? 0 : noeud.hashCode());
+		result = (prime * result) + ((this.debutPlage == null) ? 0 : this.debutPlage.hashCode());
+		result = (prime * result) + this.duree;
+		result = (prime * result) + ((this.finPlage == null) ? 0 : this.finPlage.hashCode());
+		result = (prime * result) + ((this.noeud == null) ? 0 : this.noeud.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		Livraison other = (Livraison) obj;
-		if (debutPlage == null) {
-			if (other.debutPlage != null)
+		if (this.debutPlage == null) {
+			if (other.debutPlage != null) {
 				return false;
-		} else if (!debutPlage.equals(other.debutPlage))
+			}
+		} else if (!this.debutPlage.equals(other.debutPlage)) {
 			return false;
-		if (duree != other.duree)
+		}
+		if (this.duree != other.duree) {
 			return false;
-		if (finPlage == null) {
-			if (other.finPlage != null)
+		}
+		if (this.finPlage == null) {
+			if (other.finPlage != null) {
 				return false;
-		} else if (!finPlage.equals(other.finPlage))
+			}
+		} else if (!this.finPlage.equals(other.finPlage)) {
 			return false;
-		if (noeud == null) {
-			if (other.noeud != null)
+		}
+		if (this.noeud == null) {
+			if (other.noeud != null) {
 				return false;
-		} else if (!noeud.equals(other.noeud))
+			}
+		} else if (!this.noeud.equals(other.noeud)) {
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Livraison [noeud=" + noeud + ", duree=" + duree + ", debutPlage=" + debutPlage + ", finPlage="
-				+ finPlage + "]";
+		return "Livraison [noeud=" + this.noeud + ", duree=" + this.duree + ", debutPlage=" + this.debutPlage
+				+ ", finPlage=" + this.finPlage + "]";
 	}
 
 	public Noeud getNoeud() {
-		return noeud;
+		return this.noeud;
 	}
 
 	public void setNoeud(Noeud noeud) {
-		if(noeud == null) {
-			this.noeud = new Noeud(-1,0,0);
+		if (noeud == null) {
+			this.noeud = new Noeud(-1, 0, 0);
 		} else {
 			this.noeud = noeud;
 		}
 	}
 
 	public Horaire getDebutPlage() {
-		return debutPlage;
+		return this.debutPlage;
 	}
 
 	public void setDebutPlage(Horaire debutPlage) {
-		if(debutPlage != null && ((finPlage == null || finPlage.getHoraireEnMinutes() == 0 || (finPlage != null && debutPlage.getHoraireEnMinutes() < finPlage.getHoraireEnMinutes())))) {
+		if ((debutPlage != null)
+				&& (((this.finPlage == null) || (this.finPlage.getHoraireEnMinutes() == 0) || ((this.finPlage != null)
+						&& (debutPlage.getHoraireEnMinutes() < this.finPlage.getHoraireEnMinutes()))))) {
 			this.debutPlage = debutPlage;
 		} else {
-			this.debutPlage = new Horaire(0,0,0);
+			this.debutPlage = new Horaire(0, 0, 0);
 		}
 	}
 
 	public Horaire getFinPlage() {
-		return finPlage;
+		return this.finPlage;
 	}
 
 	public void setFinPlage(Horaire finPlage) {
-		System.out.println(debutPlage.getHoraireEnMinutes() + duree);
-		if(finPlage != null && (debutPlage != null && finPlage.getHoraireEnMinutes() > debutPlage.getHoraireEnMinutes() + duree/60)) {
+		if ((finPlage != null) && ((this.debutPlage != null)
+				&& (finPlage.getHoraireEnMinutes() > (this.debutPlage.getHoraireEnMinutes() + (this.duree / 60))))) {
 			this.finPlage = finPlage;
 		} else {
-			this.finPlage = new Horaire(0,0,0);
+			this.finPlage = new Horaire(0, 0, 0);
 		}
 	}
 
 	public int getDuree() {
-		return duree;
+		return this.duree;
 	}
 
 	public void setDuree(int duree) {
-		if(duree > 0) {
+		if (duree > 0) {
 			this.duree = duree;
 		} else {
 			this.duree = 0;
 		}
-	} 
-	
-	
-	
+	}
+
 	public Horaire getHeureArrive() {
-		return heureArrive;
+		return this.heureArrive;
 	}
 
 	public void setHeureArrive(Horaire heureArrive) {
-		if(heureArrive != null)
+		if (heureArrive != null) {
 			this.heureArrive = heureArrive;
+		}
 	}
 
 	public Horaire getHeureDepart() {
-		return heureDepart;
+		return this.heureDepart;
 	}
 
 	public void setHeureDepart(Horaire heureDepart) {
-		if(heureDepart != null)
+		if (heureDepart != null) {
 			this.heureDepart = heureDepart;
+		}
 	}
-	
+
 	/**
-	 * Renvoie le temps d'attente si l'arrivée à la livraison se fait avant le début de la plage horaire
-	 * Si arrivée dans les temps renvoie 0
+	 * Renvoie le temps d'attente si l'arrivée à la livraison se fait avant le
+	 * début de la plage horaire Si arrivée dans les temps renvoie 0
 	 */
 	public int getTempsAttente() {
-		if(debutPlage == null || heureArrive == null)
+		if ((this.debutPlage == null) || (this.heureArrive == null)) {
 			return 0;
-		if(debutPlage == new Horaire(0,0,0) || heureArrive == new Horaire(0,0,0) || debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes() < 0) {
-			return  0;
 		}
-		return debutPlage.getHoraireEnSecondes()-heureArrive.getHoraireEnSecondes();
+		if ((this.debutPlage == new Horaire(0, 0, 0)) || (this.heureArrive == new Horaire(0, 0, 0))
+				|| ((this.debutPlage.getHoraireEnSecondes() - this.heureArrive.getHoraireEnSecondes()) < 0)) {
+			return 0;
+		}
+		return this.debutPlage.getHoraireEnSecondes() - this.heureArrive.getHoraireEnSecondes();
 	}
 }

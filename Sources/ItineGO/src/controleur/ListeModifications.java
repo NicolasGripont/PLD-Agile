@@ -8,110 +8,102 @@ public class ListeModifications {
 
 	protected LinkedList<ListeCommandes> listeModifications;
 	private int position;
-	
+
 	public ListeModifications() {
-		listeModifications = new LinkedList<>();
-		position = 0;
+		this.listeModifications = new LinkedList<>();
+		this.position = 0;
 	}
-	
+
 	public void undoModifications() throws NonRespectPlagesHoraires {
-		NonRespectPlagesHoraires exec =  null;
-		if(isUndoPossible()) {
+		NonRespectPlagesHoraires exec = null;
+		if (this.isUndoPossible()) {
 			try {
-				listeModifications.get(position).undoAll();
-			}
-			catch(NonRespectPlagesHoraires e) {
+				this.listeModifications.get(this.position).undoAll();
+			} catch (NonRespectPlagesHoraires e) {
 				exec = e;
 			}
-			position++;
+			this.position++;
 		}
-		if(exec != null)
-		{
+		if (exec != null) {
 			throw exec;
 		}
 	}
-	
+
 	public void undoAllModifications() {
-		for(int i = position; i < listeModifications.size(); i++) {
+		for (int i = this.position; i < this.listeModifications.size(); i++) {
 			try {
-				undoModifications();
-			}catch(NonRespectPlagesHoraires e) {
-				//
+				this.undoModifications();
+			} catch (NonRespectPlagesHoraires e) {
 			}
 		}
 	}
-	
+
 	public void redoModifications() throws NonRespectPlagesHoraires {
-		NonRespectPlagesHoraires exec =  null;
-		if(isRedoPossible()) {
-			position--;
+		NonRespectPlagesHoraires exec = null;
+		if (this.isRedoPossible()) {
+			this.position--;
 			try {
-				listeModifications.get(position).redoAll();
-			}
-			catch(NonRespectPlagesHoraires e) {
+				this.listeModifications.get(this.position).redoAll();
+			} catch (NonRespectPlagesHoraires e) {
 				exec = e;
 			}
 		}
-		if(exec != null)
-		{
+		if (exec != null) {
 			throw exec;
 		}
 	}
-	
+
 	public void redoAllModifications() {
-		for(int i = position; i < listeModifications.size(); i++) {
+		for (int i = this.position; i < this.listeModifications.size(); i++) {
 			try {
-				redoModifications();
-			}catch(NonRespectPlagesHoraires e) {
-				//
+				this.redoModifications();
+			} catch (NonRespectPlagesHoraires e) {
 			}
 		}
 	}
-	
+
 	public void ajouterCommande(Commande commande) throws NonRespectPlagesHoraires {
-		listeModifications.getFirst().ajouterCommande(commande);
+		this.listeModifications.getFirst().ajouterCommande(commande);
 	}
-	
+
 	public void creerModification() {
-		for(int i = 0; i < position; i++) {
-			listeModifications.removeFirst();
+		for (int i = 0; i < this.position; i++) {
+			this.listeModifications.removeFirst();
 		}
-		listeModifications.addFirst(new ListeCommandes());
-		position = 0;
+		this.listeModifications.addFirst(new ListeCommandes());
+		this.position = 0;
 	}
-	
+
 	public void annulerModification() throws NonRespectPlagesHoraires {
-		NonRespectPlagesHoraires exec =  null;
+		NonRespectPlagesHoraires exec = null;
 		try {
-			undoModifications();
-		}
-		catch(NonRespectPlagesHoraires e) {
+			this.undoModifications();
+		} catch (NonRespectPlagesHoraires e) {
 			exec = e;
 		}
-		listeModifications.removeFirst();
-		position = 0;
-		if(exec != null)
-		{
+		this.listeModifications.removeFirst();
+		this.position = 0;
+		if (exec != null) {
 			throw exec;
 		}
 	}
-	
+
 	public void finModification() {
-		if(listeModifications.getFirst().estVide() && !listeModifications.isEmpty()) {
-			listeModifications.removeFirst();
+		if (this.listeModifications.getFirst().estVide() && !this.listeModifications.isEmpty()) {
+			this.listeModifications.removeFirst();
 		}
 	}
-	
+
 	public boolean isUndoPossible() {
-		return position < listeModifications.size(); 
+		return this.position < this.listeModifications.size();
 	}
-	
+
 	public boolean isRedoPossible() {
-		return position-1 >= 0 && !listeModifications.isEmpty();
+		return ((this.position - 1) >= 0) && !this.listeModifications.isEmpty();
 	}
 
 	public void viderListeModifications() {
-		listeModifications.clear();
-		position = 0;
+		this.listeModifications.clear();
+		this.position = 0;
 	}
 }

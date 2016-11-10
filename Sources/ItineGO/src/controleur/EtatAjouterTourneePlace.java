@@ -1,6 +1,5 @@
 package controleur;
 
-import exceptions.NonRespectPlagesHoraires;
 import modeles.Gestionnaire;
 import modeles.Horaire;
 import modeles.Livraison;
@@ -15,8 +14,9 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 	 * @param gestionnaire
 	 * @param noeud
 	 */
+	@Override
 	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {
-		if(gestionnaire.isNoeudLivraison(noeud) || gestionnaire.isNoeudEntrepot(noeud)) {
+		if (gestionnaire.isNoeudLivraison(noeud) || gestionnaire.isNoeudEntrepot(noeud)) {
 			controleur.gestionTourneeVue.afficherErreur("Ce noeud ne peut être sélectionné");
 		} else {
 			Livraison livraison = new Livraison(noeud);
@@ -27,50 +27,33 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 			controleur.setEtatCourant(controleur.etatAjouterTourneeOrdre);
 		}
 	}
-	
+
+	@Override
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
-		/*try {
-			controleur.listeModifications.annulerModification();
-		} catch (NonRespectPlagesHoraires e) {
-			e.printStackTrace();
-		}
-		controleur.gestionTourneeVue.majVisualiserTournee();
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
-				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
-		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-		if(controleur.listeModifications.isUndoPossible()) {
-			controleur.gestionTourneeVue.desactiverUndo(false);
-		}
-		else {
-			controleur.gestionTourneeVue.desactiverUndo(true);
-		}
-		if(controleur.listeModifications.isRedoPossible()) {
-			controleur.gestionTourneeVue.desactiverRedo(false);
-		}
-		else {
-			controleur.gestionTourneeVue.desactiverRedo(true);
-		}*/
 		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
+		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(),
+				gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(),
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.afficherInfo("L'ajout de la nouvelle livraison a été annulé");
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
-	
-	public void getEtat()
-	{
+
+	@Override
+	public void getEtat() {
 		System.out.println("etat ajouter place");
 	}
-	
+
 	/**
 	 * Permet de redessiner le plan dans la vue correspondante.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 }

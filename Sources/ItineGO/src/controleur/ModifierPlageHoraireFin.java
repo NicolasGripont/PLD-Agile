@@ -6,11 +6,11 @@ import modeles.Livraison;
 
 public class ModifierPlageHoraireFin extends Commande {
 
-	private Gestionnaire gestionnaire;
-	private int numLigne;
-	private String plageFin;
-	private String plageFinInitiale;
-	
+	private final Gestionnaire gestionnaire;
+	private final int numLigne;
+	private final String plageFin;
+	private final String plageFinInitiale;
+
 	public ModifierPlageHoraireFin(Gestionnaire gestionnaire, int numLigne, String plageFin) {
 		this.gestionnaire = gestionnaire;
 		this.numLigne = numLigne;
@@ -18,15 +18,15 @@ public class ModifierPlageHoraireFin extends Commande {
 		Livraison livraisonTournee = gestionnaire.getLivraisonTournee(numLigne);
 		this.plageFinInitiale = livraisonTournee.getFinPlage().toString();
 	}
-	
+
 	@Override
 	public void doCode() throws NonRespectPlagesHoraires {
-		gestionnaire.changerPlageHoraireFin(numLigne, plageFin);
+		this.gestionnaire.changerPlageHoraireFin(this.numLigne, this.plageFin);
 	}
 
 	@Override
 	public void undoCode() throws NonRespectPlagesHoraires {
-		gestionnaire.changerPlageHoraireFin(numLigne, plageFinInitiale);
+		this.gestionnaire.changerPlageHoraireFin(this.numLigne, this.plageFinInitiale);
 	}
 
 }

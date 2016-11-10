@@ -3,24 +3,25 @@ package modeles;
 import java.util.List;
 
 /**
- * Classe modélisant un trajet, c'est à dire la suite de tronçons à prendre pour relier deux noeuds
+ * Classe modélisant un trajet, c'est à dire la suite de tronçons à prendre pour
+ * relier deux noeuds
  */
 public class Trajet {
-	
+
 	/**
 	 * Liste des troncons
 	 */
-	private List<Troncon> troncons;
+	private final List<Troncon> troncons;
 
 	/**
 	 * Noeud de départ
 	 */
-	private Noeud depart;
+	private final Noeud depart;
 	/**
 	 * Noeud d'arrivée
 	 */
-	private Noeud arrive;
-	
+	private final Noeud arrive;
+
 	/**
 	 * Constructeur de la classe
 	 */
@@ -32,65 +33,74 @@ public class Trajet {
 	}
 
 	public List<Troncon> getTroncons() {
-		return troncons;
+		return this.troncons;
 	}
 
 	public Noeud getDepart() {
-		return depart;
+		return this.depart;
 	}
 
 	public Noeud getArrive() {
-		return arrive;
+		return this.arrive;
 	}
 
 	@Override
 	public String toString() {
-		return "Trajet [troncons=" + troncons + ", depart=" + depart + ", arrive=" + arrive + "]";
+		return "Trajet [troncons=" + this.troncons + ", depart=" + this.depart + ", arrive=" + this.arrive + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((arrive == null) ? 0 : arrive.hashCode());
-		result = prime * result + ((depart == null) ? 0 : depart.hashCode());
-		result = prime * result + ((troncons == null) ? 0 : troncons.hashCode());
+		result = (prime * result) + ((this.arrive == null) ? 0 : this.arrive.hashCode());
+		result = (prime * result) + ((this.depart == null) ? 0 : this.depart.hashCode());
+		result = (prime * result) + ((this.troncons == null) ? 0 : this.troncons.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		Trajet other = (Trajet) obj;
-		if (arrive == null) {
-			if (other.arrive != null)
+		if (this.arrive == null) {
+			if (other.arrive != null) {
 				return false;
-		} else if (!arrive.equals(other.arrive))
+			}
+		} else if (!this.arrive.equals(other.arrive)) {
 			return false;
-		if (depart == null) {
-			if (other.depart != null)
+		}
+		if (this.depart == null) {
+			if (other.depart != null) {
 				return false;
-		} else if (!depart.equals(other.depart))
+			}
+		} else if (!this.depart.equals(other.depart)) {
 			return false;
-		if (troncons == null) {
-			if (other.troncons != null)
+		}
+		if (this.troncons == null) {
+			if (other.troncons != null) {
 				return false;
-		} else if (!troncons.equals(other.troncons))
+			}
+		} else if (!this.troncons.equals(other.troncons)) {
 			return false;
+		}
 		return true;
 	}
-		
+
 	public int getTemps() {
 		int temps = 0;
-		for(Troncon t : troncons) {
-			temps += t.getLongueur()/t.getVitesse();
+		for (Troncon t : this.troncons) {
+			temps += t.getLongueur() / t.getVitesse();
 		}
 		return temps;
 	}
-	
+
 }

@@ -1,6 +1,8 @@
 package vue.gestionTourneeVue;
 
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -9,71 +11,77 @@ import modeles.Livraison;
 
 class AjouterLivraisonDureeCell extends TableCell<Livraison, String> {
 
-    private TextField textField;
+	private TextField textField;
 
-    public AjouterLivraisonDureeCell() {
-    }
+	public AjouterLivraisonDureeCell() {
+	}
 
-    @Override
-    public void startEdit() {
-        if (!isEmpty()) {
-            super.startEdit();
-            createTextField();
-            setText(null);
-            setGraphic(textField);
-            textField.requestFocus();
-            textField.selectAll();
-        } 
-    }
+	@Override
+	public void startEdit() {
+		if (!this.isEmpty()) {
+			super.startEdit();
+			this.createTextField();
+			this.setText(null);
+			this.setGraphic(this.textField);
+			this.textField.requestFocus();
+			this.textField.selectAll();
+		}
+	}
 
-    @Override
-    public void cancelEdit() {
-        super.cancelEdit();
-        setText((String) getItem());
-        setGraphic(null);
-    }
+	@Override
+	public void cancelEdit() {
+		super.cancelEdit();
+		this.setText(this.getItem());
+		this.setGraphic(null);
+	}
 
-    @Override
-    public void updateItem(String item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-            setText(null);
-            setGraphic(null);
-        } else {
-            if (isEditing()) {
-                if (textField != null) {
-                    textField.setText(getString());
-                }
-                setText(null);
-                setGraphic(textField);
-            } else {
-                setText(getString());
-                setGraphic(null);
-            }
-        }
-    }
+	@Override
+	public void updateItem(String item, boolean empty) {
+		super.updateItem(item, empty);
+		if (empty) {
+			this.setText(null);
+			this.setGraphic(null);
+		} else {
+			if (this.isEditing()) {
+				if (this.textField != null) {
+					this.textField.setText(this.getString());
+				}
+				this.setText(null);
+				this.setGraphic(this.textField);
+			} else {
+				this.setText(this.getString());
+				this.setGraphic(null);
+			}
+		}
+	}
 
-    private void createTextField() {
+	private void createTextField() {
 
-        textField = new TextField(getString());
-        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+		this.textField = new TextField(this.getString());
+		this.textField.setMinWidth(this.getWidth() - (this.getGraphicTextGap() * 2));
 
-        textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            if( oldValue = true && newValue == false) {
-            	this.commitEdit(textField.getText());
-            }
-        });
+		this.textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (oldValue = true && (newValue == false)) {
+					AjouterLivraisonDureeCell.this.commitEdit(AjouterLivraisonDureeCell.this.textField.getText());
+				}
+			}
+		});
 
-        textField.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
-            if( e.getCode() == KeyCode.ESCAPE) {
-                cancelEdit();
-            } else if(e.getCode() == KeyCode.ENTER) {
-            	this.commitEdit(textField.getText());
-            }
-        });
-    }
+		this.textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+				if (e.getCode() == KeyCode.ESCAPE) {
+					AjouterLivraisonDureeCell.this.cancelEdit();
+				} else if (e.getCode() == KeyCode.ENTER) {
+					AjouterLivraisonDureeCell.this.commitEdit(AjouterLivraisonDureeCell.this.textField.getText());
+				}
+			}
+		});
+	}
 
-    private String getString() {
-        return getItem() == null ? "" : getItem().toString();
-    }
+	private String getString() {
+		return this.getItem() == null ? "" : this.getItem().toString();
+	}
 }

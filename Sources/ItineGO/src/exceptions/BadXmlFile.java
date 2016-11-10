@@ -10,7 +10,7 @@ public class BadXmlFile extends Exception {
 	public BadXmlFile(String message) {
 		super(message);
 	}
-	
+
 	public BadXmlFile() {
 		super("Erreur : Fichier XML mal formé");
 	}

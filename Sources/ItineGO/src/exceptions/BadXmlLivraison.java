@@ -1,7 +1,8 @@
 package exceptions;
 
 /**
- * Classe modélisant une exception propagée pour un fichier de livraison présentant des incohérences
+ * Classe modélisant une exception propagée pour un fichier de livraison
+ * présentant des incohérences
  */
 public class BadXmlLivraison extends Exception {
 
@@ -10,7 +11,7 @@ public class BadXmlLivraison extends Exception {
 	public BadXmlLivraison(String message) {
 		super(message);
 	}
-	
+
 	public BadXmlLivraison() {
 		super("Erreur : Fichier livraison non valide");
 	}

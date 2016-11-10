@@ -15,60 +15,75 @@ import vue.choixPlanVilleVue.ChoixPlanVilleVue;
 public class EtatPlanVilleAffiche extends EtatDefaut {
 
 	/**
-	 * Permet de faire un glisser deposer d'un fichier, si le fichier est accepté on passe a l'état EtatFichierLivraisonsChoisi sinon on reste en l'état. 
-	 * On va indiquer à la vue si le fichier est accepté ou non et celle-ci affichera un message correspondant.
+	 * Permet de faire un glisser deposer d'un fichier, si le fichier est
+	 * accepté on passe a l'état EtatFichierLivraisonsChoisi sinon on reste en
+	 * l'état. On va indiquer à la vue si le fichier est accepté ou non et
+	 * celle-ci affichera un message correspondant.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param accepte : Indique si le fichier a été accepté ou non.
-	 * @param fichier : Fichier pris en compte.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param accepte
+	 *            : Indique si le fichier a été accepté ou non.
+	 * @param fichier
+	 *            : Fichier pris en compte.
 	 */
-	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier)
-	{
-		if(accepte) {
+	@Override
+	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier) {
+		if (accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'état
+			// changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
 		}
 	}
-	
+
 	/**
-	 * Permet choisir un fichier, si le fichier est accepté on passe a l'état EtatFichierLivraisonsChoisi sinon on reste en l'état. 
-	 * On va indiquer à la vue si le fichier est accepté ou non et celle-ci affichera un message correspondant.
+	 * Permet choisir un fichier, si le fichier est accepté on passe a l'état
+	 * EtatFichierLivraisonsChoisi sinon on reste en l'état. On va indiquer à la
+	 * vue si le fichier est accepté ou non et celle-ci affichera un message
+	 * correspondant.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param accepte : Indique si le fichier a été accepté ou non.
-	 * @param fichier : Fichier pris en compte.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param accepte
+	 *            : Indique si le fichier a été accepté ou non.
+	 * @param fichier
+	 *            : Fichier pris en compte.
 	 */
-	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier)
-	{
-		if(accepte) {
+	@Override
+	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier) {
+		if (accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			//changement d'état
+			// changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
 		}
 	}
-	
+
 	/**
-	 * Permet de retourner à la vue précédente ChoixPlanVilleVue et à l'état EtatApplicationDemarree.
+	 * Permet de retourner à la vue précédente ChoixPlanVilleVue et à l'état
+	 * EtatApplicationDemarree.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire) {
 		gestionnaire.effacerNoeudsEtTroncons();
-		if(controleur.stage != null) {
+		if (controleur.stage != null) {
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(
+						this.getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 				Parent root;
 				root = fxmlLoader.load();
 				controleur.choixPlanVilleVue = (ChoixPlanVilleVue) fxmlLoader.getController();
 				controleur.choixPlanVilleVue.setControleur(controleur);
-				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(), controleur.stage.getScene().getHeight());
+				Scene scene = new Scene(root, controleur.stage.getScene().getWidth(),
+						controleur.stage.getScene().getHeight());
 				controleur.stage.setTitle("Itine'GO");
 				controleur.stage.setScene(scene);
 				controleur.stage.show();
@@ -78,20 +93,22 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 			}
 		}
 	}
-	
-	public void getEtat()
-	{
+
+	@Override
+	public void getEtat() {
 		System.out.println("etat plan ville affiche");
 	}
-	
+
 	/**
 	 * Permet de redessiner le plan dans la vue.
 	 * 
-	 * @param controleur : Controleur de l'application.
-	 * @param gestionnaire : Gestionnaire de l'application.
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 */
-	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire)
-	{
+	@Override
+	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
 	}
 }

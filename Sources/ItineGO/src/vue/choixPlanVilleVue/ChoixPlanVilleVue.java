@@ -18,129 +18,125 @@ import javafx.stage.FileChooser;
 import vue.glisserDeposerFichierVue.GlisserDeposerFichierVue;
 
 /**
- * Vue du choix du fichier plan
- * C'est la vue d'entrée de l'application
+ * Vue du choix du fichier plan C'est la vue d'entrée de l'application
  */
-public class ChoixPlanVilleVue implements Initializable{
+public class ChoixPlanVilleVue implements Initializable {
 	private Controleur controleur;
 	private File fichierChoisie = null;
-	
+
 	@FXML
 	private TextField textFieldLienFichier;
-	
+
 	@FXML
 	private Label labelError;
-	
+
 	@FXML
 	private Button boutonParcourirFichier;
-	
+
 	@FXML
 	private Button boutonValider;
-	
-	@FXML 
+
+	@FXML
 	private AnchorPane glisserDeposerFichierPane;
-	
+
 	private GlisserDeposerFichierVue glisserDeposerFichierVue;
-	
-	
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		textFieldLienFichier.setEditable(false);
-		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de plan.");
-		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
-		glisserDeposerFichierVue.addExtensionAcceptee(".xml");
-		
-		glisserDeposerFichierVue.setFichierAccepteAction(new EventHandler<ActionEvent>() {
+		this.textFieldLienFichier.setEditable(false);
+		this.glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de plan.");
+		this.glisserDeposerFichierPane.getChildren().add(this.glisserDeposerFichierVue);
+		this.glisserDeposerFichierVue.addExtensionAcceptee(".xml");
+
+		this.glisserDeposerFichierVue.setFichierAccepteAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				fichierGlisserDeposerAccepteAction();
+				ChoixPlanVilleVue.this.fichierGlisserDeposerAccepteAction();
 			}
 		});
-		
-		glisserDeposerFichierVue.setFichierRefuseAction(new EventHandler<ActionEvent>() {
+
+		this.glisserDeposerFichierVue.setFichierRefuseAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				fichierGlisserDeposerRefuseAction();
+				ChoixPlanVilleVue.this.fichierGlisserDeposerRefuseAction();
 			}
 		});
-		
-        labelError.setVisible(false);
+
+		this.labelError.setVisible(false);
 	}
-	 
-	
+
 	public Controleur getControleur() {
-		return controleur;
+		return this.controleur;
 	}
-	
+
 	public void setControleur(Controleur controleur) {
 		this.controleur = controleur;
 	}
-	
+
 	public File getFichierChoisi() {
-		return fichierChoisie;
+		return this.fichierChoisie;
 	}
-	
+
 	public void afficherErreur(String erreur) {
-		labelError.setStyle("-fx-text-fill : red;");
-		labelError.setVisible(true);
-		labelError.setText(erreur);
+		this.labelError.setStyle("-fx-text-fill : red;");
+		this.labelError.setVisible(true);
+		this.labelError.setText(erreur);
 	}
-	
+
 	@FXML
 	public void choixFichierAction(MouseEvent event) {
 		FileChooser dialogue = new FileChooser();
-		FileChooser.ExtensionFilter extensionsFilter = new FileChooser.ExtensionFilter("Fichier XML","*.xml");
+		FileChooser.ExtensionFilter extensionsFilter = new FileChooser.ExtensionFilter("Fichier XML", "*.xml");
 		dialogue.setSelectedExtensionFilter(extensionsFilter);
-		File tmp = dialogue.showOpenDialog(controleur.getStage());
-		if(tmp != null && tmp.getName().toLowerCase().endsWith(".xml")) {
-			controleur.clicBoutonParcourir(true, tmp);
-        } else {
-    		controleur.clicBoutonParcourir(false, null);
-        }
-	}
-	
-	@FXML
-	public void validerAction(MouseEvent event) {
-		if(controleur == null) {
-			labelError.setVisible(true);
-			labelError.setStyle("-fx-text-fill : red;");
-			labelError.setText("Erreur : Controler is null, fatal error");
-		} else if(fichierChoisie == null) {
-			labelError.setVisible(true);
-			labelError.setStyle("-fx-text-fill : red;");
-			labelError.setText("Erreur : Aucun fichier choisi");
+		File tmp = dialogue.showOpenDialog(this.controleur.getStage());
+		if ((tmp != null) && tmp.getName().toLowerCase().endsWith(".xml")) {
+			this.controleur.clicBoutonParcourir(true, tmp);
 		} else {
-			controleur.clicBoutonValider(fichierChoisie);
+			this.controleur.clicBoutonParcourir(false, null);
 		}
 	}
-	
+
+	@FXML
+	public void validerAction(MouseEvent event) {
+		if (this.controleur == null) {
+			this.labelError.setVisible(true);
+			this.labelError.setStyle("-fx-text-fill : red;");
+			this.labelError.setText("Erreur : Controler is null, fatal error");
+		} else if (this.fichierChoisie == null) {
+			this.labelError.setVisible(true);
+			this.labelError.setStyle("-fx-text-fill : red;");
+			this.labelError.setText("Erreur : Aucun fichier choisi");
+		} else {
+			this.controleur.clicBoutonValider(this.fichierChoisie);
+		}
+	}
+
 	public void fichierGlisserDeposerAccepteAction() {
-		controleur.glisserDeposer(true, glisserDeposerFichierVue.getFichierChoisie());
+		this.controleur.glisserDeposer(true, this.glisserDeposerFichierVue.getFichierChoisie());
 	}
-	
+
 	public void fichierGlisserDeposerRefuseAction() {
-		controleur.glisserDeposer(false, null);
+		this.controleur.glisserDeposer(false, null);
 	}
-    
+
 	public void fichierAccepte(File fichier) {
-		labelError.setVisible(false);
-		fichierChoisie = fichier;
-		textFieldLienFichier.setText(fichierChoisie.getAbsolutePath());
-		labelError.setVisible(true);
-		labelError.setStyle("-fx-text-fill : green;");
-		labelError.setText("Votre fichier a été pris en compte.");
-		glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de plan.");
+		this.labelError.setVisible(false);
+		this.fichierChoisie = fichier;
+		this.textFieldLienFichier.setText(this.fichierChoisie.getAbsolutePath());
+		this.labelError.setVisible(true);
+		this.labelError.setStyle("-fx-text-fill : green;");
+		this.labelError.setText("Votre fichier a été pris en compte.");
+		this.glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de plan.");
 	}
-	
-	public void fichierRefuse(){
-		labelError.setVisible(false);
-		fichierChoisie = null;
-		textFieldLienFichier.setText("");
-		labelError.setVisible(true);
-		labelError.setStyle("-fx-text-fill : red;");
-		labelError.setText("Erreur : Le fichier choisi est invalide.");
+
+	public void fichierRefuse() {
+		this.labelError.setVisible(false);
+		this.fichierChoisie = null;
+		this.textFieldLienFichier.setText("");
+		this.labelError.setVisible(true);
+		this.labelError.setStyle("-fx-text-fill : red;");
+		this.labelError.setText("Erreur : Le fichier choisi est invalide.");
 	}
 }

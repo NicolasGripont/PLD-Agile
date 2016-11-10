@@ -16,7 +16,7 @@ public class Noeud {
 	 * Position verticake
 	 */
 	private int y;
-	
+
 	/**
 	 * Constructeur de la classe
 	 */
@@ -27,11 +27,11 @@ public class Noeud {
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
-		if(id >= 0) {
+		if (id >= 0) {
 			this.id = id;
 		} else {
 			this.id = -1;
@@ -39,7 +39,7 @@ public class Noeud {
 	}
 
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	public void setX(int x) {
@@ -47,40 +47,49 @@ public class Noeud {
 	}
 
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	@Override
 	public String toString() {
-		return "Noeud [id=" + id + ", x=" + x + ", y=" + y + "]";
+		return "Noeud [id=" + this.id + ", x=" + this.x + ", y=" + this.y + "]";
 	}
 
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
-		result = prime * result + x;
-		result = prime * result + y;
+		result = (prime * result) + this.id;
+		result = (prime * result) + this.x;
+		result = (prime * result) + this.y;
 		return result;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		Noeud other = (Noeud) obj;
-		if (id != other.id)
+		if (this.id != other.id) {
 			return false;
-		if (x != other.x)
+		}
+		if (this.x != other.x) {
 			return false;
-		if (y != other.y)
+		}
+		if (this.y != other.y) {
 			return false;
+		}
 		return true;
 	}
 }
