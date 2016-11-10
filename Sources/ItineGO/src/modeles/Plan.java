@@ -50,7 +50,7 @@ public class Plan {
 	 * Matrice du graphe, modélisant le coût du troncon entre chaque noeud, un 0
 	 * indique qu'il n'y a pas de lien direct
 	 */
-	static Integer matriceDuGraphe[][];
+	private static Integer matriceDuGraphe[][];
 
 	/**
 	 * TSP utilisé dans l'application
@@ -117,7 +117,7 @@ public class Plan {
 	 * @return l'indice dans le tableau des id à laquel on trouve l'id mis en
 	 *         paramètre
 	 */
-	int numDansTableau(int id) {
+	private int numDansTableau(int id) {
 		for (int i = 0; i < this.tableauDesId.length; i++) {
 			if (this.tableauDesId[i] == id) {
 				return i;
