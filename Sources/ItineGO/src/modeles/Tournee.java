@@ -94,17 +94,16 @@ public class Tournee {
 		if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
 			horaire = liv.getDebutPlage();
 		}
-		liv.setHeureDepart(new Horaire(horaire.getHoraireEnSecondes() + liv.getTempsAttente()));
+		liv.setHeureDepart(new Horaire(horaire.getHoraireEnSecondes() + liv.getDuree()));
 		for(int i = position+1; i < ordreLivraisons.size(); ++i) {
 			liv = livraisons.get(ordreLivraisons.get(i));
 			Livraison livPrec = livraisons.get(ordreLivraisons.get(i-1));
 			horaire = new Horaire(livPrec.getHeureDepart().getHoraireEnSecondes() + trajets.get(i).getTemps());
 			liv.setHeureArrive(horaire);
 			if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
-				horaire = liv.getDebutPlage();
+				horaire = new Horaire(liv.getDebutPlage());
 			}
-			horaire.ajouterSeconde(liv.getTempsAttente() + liv.getDuree());
-			liv.setHeureDepart(new Horaire(horaire));
+			liv.setHeureDepart(new Horaire(horaire.getHoraireEnSecondes() + liv.getDuree()));
 		}
 	}
 	
