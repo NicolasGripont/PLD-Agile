@@ -19,11 +19,12 @@ import modeles.Troncon;
 
 public class PLanTest {
 	/**
-	 *Teste si le calcul d'une tourné simple fonctionne 
-	 *résultat:  la tournée doit partir de l'entrepôt,
-	 * aller à la livraison <livraison1>, puis la livraison
-	 *  <livraison 2> et enfin revenir à l'entrepôt en prenant à 
-	 *  chaque fois le chemin directe 
+	 * Teste si le calcul d'une tournée simple fonctionne 
+	 * 
+	 * Résultat :  La tournée doit partir de l'entrepôt,
+	 *  aller à la livraison 1, puis la livraison
+	 *  2 et enfin revenir à l'entrepôt en prenant à 
+	 *  chaque fois le chemin direct. 
 	 */
 	@Test
 	public void testCalculerTournee() {
@@ -83,10 +84,10 @@ public class PLanTest {
 	
 	
 	/**
-	 * Teste si l'ajout d'une livraison à une tourné préalablement calculé fonctionne 
+	 * Teste si l'ajout d'une livraison à une tournée préalablement calculée fonctionne. 
 	 * 
-	 * résultat:  la tournée dans partire de l'entrepôt, aller à la livraison1, puis 
-	 * la livraison 2 et enfin revenir à l'entrepot en prenant à chaque fois le chemin directe 
+	 * Résultat :  La tournée doit partir de l'entrepôt, aller à la livraison1, puis 
+	 * la livraison 2 et enfin revenir à l'entrepôt en prenant à chaque fois le chemin direct. 
 	 */
 	@Test
 	public void testAjoutLivraison() {
@@ -151,11 +152,11 @@ public class PLanTest {
 
 
 	/**
-	 * Teste si la suppression d'une livraison à une tourné préalablement calculé fonctionne 
+	 * Teste si la suppression d'une livraison à une tournée préalablement calculée fonctionne. 
 	 * 
-	 * resultat:  la tournée dans partire de l'entrepot, aller à la livraison2, sans faire  
-	 * la livraison 1 ni passé par son noeud et enfin revenir à l'entrepot en prenant à chaque
-	 *  fois le chemin directe 
+	 * Resultat:  La tournée doit partir de l'entrepot, aller à la livraison2, sans faire  
+	 * la livraison 1 ni passer par son noeud et enfin revenir à l'entrepot en prenant à chaque
+	 *  fois le chemin direct. 
 	 */
 	@Test
 	public void testSuppressionLivraison() {
@@ -210,13 +211,13 @@ public class PLanTest {
 	
 	
 	/**
-	 * Teste si le déplacement de l'ordre de passage d'une livraison à une
-	 *  tournée préalablement calculé fonctionne.
-	 *  On s'intéresse particulièrement à une livraison effectué plus tard
+	 * Teste si le changement de l'ordre de passage d'une livraison à une
+	 *  tournée préalablement calculée fonctionne.
+	 *  On s'intéresse particulièrement à une livraison effectuée plus tard.
 	 * 
-	 * résultat:  la tournée devra partir de l'entrepôt, et passer dans l'ordre
+	 * Résultat:  La tournée devra partir de l'entrepôt, et passer dans l'ordre
 	 *  par les livraisons : 2-3-1-4 et revenir à l'entrepôt. Elle devra toujours 
-	 *  emprunté les tronçons: 1->2, 2->3, 3->4, 4->5, 5->1
+	 *  emprunter les tronçons: 1 vers 2, 2 vers 3, 3 vers 4, 4 vers 5, 5 vers 1
 	 */
 	@Test
 	public void testModifOrdreLivraisonMontant() {
@@ -317,11 +318,11 @@ public class PLanTest {
 	
 	/**
 	 * Teste si la déplacement de l'ordre de passage d'une livraison 
-	 * à une tournée préalablement calculé fonctionne. S'interresse particuliairement 
-	 * à une livraison effectué plus tôt
+	 * à une tournée préalablement calculée fonctionne. S'interresse particulièrement 
+	 * à une livraison effectuée plus tôt
 	 *
-	 * resultat:  la tournée devra partir de l'entrepot, et passé dans l'ordre par les livraison : 3-1-2-4 
-	 * et revenir à l'entrepot et devra toujours emprinté les troncons 1->2, 2->3, 3->4, 4->5, 5->1
+	 * Resultat:  La tournée devra partir de l'entrepot, et passer dans l'ordre par les livraisons : 3-1-2-4 
+	 * et revenir à l'entrepot et devra toujours emprunter les troncons 1->2, 2->3, 3->4, 4->5, 5->1
 	 */
 	@Test
 	public void testModifOrdreLivraisonDescendant() {
