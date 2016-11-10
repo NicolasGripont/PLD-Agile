@@ -106,6 +106,9 @@ public class EtatModifierTournee extends EtatDefaut {
 	 * @param nouveauNumLigne : Nouvelle ligne du tableau de la livraison si on a changé son ordre de passage. 
 	 */
 	public void modifierOrdre(Controleur controleur, Gestionnaire gestionnaire, int numLigne, int nouveauNumLigne) {
+		if(numLigne == nouveauNumLigne -1) {
+			return;
+		}
 		ModifierOrdre commandeModifier = new ModifierOrdre(gestionnaire, numLigne, nouveauNumLigne);
 		try {
 			controleur.listeModifications.ajouterCommande(commandeModifier);

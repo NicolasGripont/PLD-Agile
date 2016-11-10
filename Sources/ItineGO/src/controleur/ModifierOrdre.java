@@ -16,12 +16,29 @@ public class ModifierOrdre extends Commande {
 	
 	@Override
 	public void doCode() {
-		gestionnaire.reordonnerLivraisonTournee(positionInitiale, positionFinale);
+		if(positionInitiale == gestionnaire.getPlan().getLivraisons().size()) {
+			gestionnaire.reordonnerLivraisonTournee(positionInitiale-1, positionFinale);
+		} else {
+			gestionnaire.reordonnerLivraisonTournee(positionInitiale, positionFinale);
+		}
 	}
 
 	@Override
 	public void undoCode() {
-		gestionnaire.reordonnerLivraisonTournee(positionFinale-1, positionInitiale);
+		if(positionInitiale == gestionnaire.getPlan().getLivraisons().size()-1) {
+			if(positionFinale == 0) {
+				gestionnaire.reordonnerLivraisonTournee(0, positionInitiale+1);
+			} else {
+				gestionnaire.reordonnerLivraisonTournee(positionFinale, positionInitiale+1);
+			}
+		}
+		else { 
+			if(positionFinale == 0) {
+				gestionnaire.reordonnerLivraisonTournee(0, positionInitiale+1);
+			} else {
+				gestionnaire.reordonnerLivraisonTournee(positionFinale-1, positionInitiale);
+			}
+		}
 	}
 
 }
