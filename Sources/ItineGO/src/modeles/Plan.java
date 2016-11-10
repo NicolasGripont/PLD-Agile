@@ -660,13 +660,8 @@ public class Plan {
     	 */
     	Dijkstra(depart, AllNoires, AllPrevious);
 		
-<<<<<<< HEAD
     	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
     	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
-=======
-    	//ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
-    	List<Integer> idTrajetPrevu1 = ConstructionListdesAdressPourTrajet(depart[0], depart[1], AllPrevious.get(depart[1]));
->>>>>>> branch 'master' of https://github.com/NicolasGripont/PLD-Agile.git
     	List<Integer> idTrajetPrevu2 = ConstructionListdesAdressPourTrajet(depart[1], depart[2], AllPrevious.get(depart[2]));    	
     	
     	Trajet trajetPrevu1 = ConstructionTrajet(idTrajetPrevu1);
@@ -732,6 +727,7 @@ private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee( T
 		while(previous.get(noeudCourant)!=noeudCourant && tableauDesId[depart] != tableauDesId[noeudCourant]) {
 			listeIdTrajet.add(tableauDesId[noeudCourant]);
 		    noeudCourant=previous.get(noeudCourant);
+		    
 		}
 		
 		listeIdTrajet.add(tableauDesId[depart]);
