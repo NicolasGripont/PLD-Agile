@@ -23,10 +23,11 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
+		controleur.listeModifications.undoAllModifications();
+		controleur.listeModifications.viderListeModifications();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
-		controleur.listeModifications.viderListeModifications();
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
@@ -53,8 +54,9 @@ public class EtatTourneeAffiche extends EtatDefaut {
 	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.effacerTournee();
+		controleur.listeModifications.undoAllModifications();
 		controleur.listeModifications.viderListeModifications();
+		gestionnaire.effacerTournee();
 		if(controleur.stage != null) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionLivraisonsVue/GestionLivraisonsVue.fxml"));

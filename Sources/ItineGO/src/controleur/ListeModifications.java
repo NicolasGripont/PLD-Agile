@@ -32,6 +32,16 @@ public class ListeModifications {
 		}
 	}
 	
+	public void undoAllModifications() {
+		for(int i = position; i < listeModifications.size(); i++) {
+			try {
+				undoModifications();
+			}catch(NonRespectPlagesHoraires e) {
+				//
+			}
+		}
+	}
+	
 	public void redoModifications() throws NonRespectPlagesHoraires {
 		NonRespectPlagesHoraires exec =  null;
 		if(isRedoPossible()) {
@@ -47,6 +57,16 @@ public class ListeModifications {
 		if(exec != null)
 		{
 			throw exec;
+		}
+	}
+	
+	public void redoAllModifications() {
+		for(int i = position; i < listeModifications.size(); i++) {
+			try {
+				redoModifications();
+			}catch(NonRespectPlagesHoraires e) {
+				//
+			}
 		}
 	}
 	
@@ -96,5 +116,6 @@ public class ListeModifications {
 
 	public void viderListeModifications() {
 		listeModifications.clear();
+		position = 0;
 	}
 }
