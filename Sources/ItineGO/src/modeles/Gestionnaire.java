@@ -186,8 +186,8 @@ public class Gestionnaire {
 		}
 		System.out.println("livraisonEnCoursCreation : " + livraisonEnCoursCreation);
 		System.out.println("n : " + n);
-		System.out.println("getNoeudTournee(getPositionLivraisonEnCours()) : " + getNoeudTournee(getPositionLivraisonEnCours()));
-		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(positionLivraisonEnCours));
+		System.out.println("getNoeudTournee(getPositionLivraisonEnCours()) : " + noeudSuivant);
+		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, noeudSuivant);
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}

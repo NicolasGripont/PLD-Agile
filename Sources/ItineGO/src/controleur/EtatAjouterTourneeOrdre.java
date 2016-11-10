@@ -50,6 +50,7 @@ public class EtatAjouterTourneeOrdre extends EtatDefaut {
 	controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 			gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
+	controleur.gestionTourneeVue.afficherInfo("L'ajout de la nouvelle livraison a été annulé");
 	controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
 	

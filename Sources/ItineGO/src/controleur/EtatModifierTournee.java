@@ -42,16 +42,16 @@ public class EtatModifierTournee extends EtatDefaut {
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.annulerModification();
-			controleur.gestionTourneeVue.afficherErreur("");
+			controleur.gestionTourneeVue.afficherErreur("La modification a été annulée");
 		} catch (NonRespectPlagesHoraires e) {
 			//e.printStackTrace();
-			controleur.gestionTourneeVue.afficherErreur("L'annulation ne permet pas de respecter les plages horaires");
+			controleur.gestionTourneeVue.afficherErreur("La modification a été annulée, l'annulation ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
 		controleur.gestionTourneeVue.miseAJourTableau(gestionnaire.getPlan(), gestionnaire.getPlan().getTournee().listeLivraisonsParOrdreDePassage(), 
 				gestionnaire.getHoraireDebutTournee(), gestionnaire.getHoraireFinTournee());
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
-		controleur.gestionTourneeVue.solutionOptimale(!controleur.listeModifications.isUndoPossible());
+//		controleur.gestionTourneeVue.solutionOptimale(!controleur.listeModifications.isUndoPossible());
 		if(controleur.listeModifications.isUndoPossible()) {
 			controleur.gestionTourneeVue.desactiverUndo(false);
 		}
@@ -95,7 +95,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void clicBoutonAjouter (Controleur controleur) {
 		controleur.gestionTourneeVue.majAjouterTourneePlace();
-		controleur.gestionTourneeVue.afficherErreur("");
+		controleur.gestionTourneeVue.afficherInfo("Ajout d'une livraison");
 		controleur.setEtatCourant(controleur.etatAjouterTourneePlace);
 	}
 	
@@ -128,7 +128,6 @@ public class EtatModifierTournee extends EtatDefaut {
 		ModifierPlageHoraireDebut modifierPlageHoraireDebut = new ModifierPlageHoraireDebut(gestionnaire, numLigne, plageDebut);
 		try {
 			controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
-			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
 		}
