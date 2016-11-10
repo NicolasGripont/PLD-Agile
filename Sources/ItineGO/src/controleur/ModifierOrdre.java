@@ -36,7 +36,12 @@ public class ModifierOrdre extends Commande {
 			if(positionFinale == 0) {
 				gestionnaire.reordonnerLivraisonTournee(0, positionInitiale+1);
 			} else {
-				gestionnaire.reordonnerLivraisonTournee(positionFinale-1, positionInitiale);
+				if(positionInitiale>positionFinale) {
+					gestionnaire.reordonnerLivraisonTournee(positionFinale, positionInitiale+1);
+				}
+				else {
+					gestionnaire.reordonnerLivraisonTournee(positionFinale-1, positionInitiale);
+				}
 			}
 		}
 	}
