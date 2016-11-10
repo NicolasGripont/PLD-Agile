@@ -16,15 +16,22 @@ public class TSP2 extends TSP1 {
 					mini= cout[i][j];
 				}
 			}
+			if(cout[i][0]<mini ){
+				mini= cout[i][0];
+			}
 		min+=mini;
 		}
 		int minj = Integer.MAX_VALUE;
 		for(int j : nonVus) {
-			if(cout[j][0]<minj){
-				minj= cout[j][0];
+			if(cout[sommetCourant][j]<minj){
+				minj= cout[sommetCourant][j];
 			}
 		}
+		for(int j : nonVus) {
+			min+=duree[j];
+		}
 		min+=minj;
+		//System.out.println("Je passe ici : min =" + min);
 		return min;
 	}
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class TSP3 extends TSP2 {
 	
-	/*
+	
 	@Override
 	protected Iterator<Integer> iterator(Integer sommetCrt, ArrayList<Integer> nonVus, int[][] cout, int[] duree) {
 		int[] coutNoeudCourent = new int[nonVus.size()];
@@ -56,6 +56,6 @@ public class TSP3 extends TSP2 {
 	    }
 	}
 	
-	*/
+	
 
 }
