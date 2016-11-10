@@ -105,6 +105,7 @@ public class Tournee {
 			}
 			liv.setHeureDepart(new Horaire(horaire.getHoraireEnSecondes() + liv.getDuree()));
 		}
+		entrepot.setHoraireArrive(new Horaire(liv.getHeureDepart().getHoraireEnSecondes() + trajets.get(trajets.size()-1).getTemps()));
 	}
 	
 	/**
