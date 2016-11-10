@@ -265,8 +265,8 @@ public class GestionLivraisonsVue extends GestionVue {
 	}
 	
 	@FXML
-	private void stopperCalculLivraisonAction() {
-		boutonCalculer.setVisible(true);
+	public void stopperCalculLivraisonAction() {
+		boutonCalculer.setVisible(false);
 		boxStopperCalcule.setVisible(false);
 		taskCalcul.cancel();
 		controleur.clicBoutonsStopperCalculeTournee();

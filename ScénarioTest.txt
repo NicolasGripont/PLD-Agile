@@ -1,0 +1,110 @@
+BASE
+Plan 5x5
+	-> Livraison : 9 points
+	-> Retour
+	-> Retour
+	
+Plan 10x10
+	-> Livraison : 9 points
+	-> Montrer les possibilités sur la carte
+		Cliquer sur noeud livraison Plan/Tableau
+		Passer sur un tronçon
+	-> Retour
+	-> Retour
+
+Plan 20x20
+	-> Livraison : 14 points
+	-> Retour
+	-> Retour
+
+Plan 25x25
+	-> Livraison : 19 points
+	-> Retour
+	-> Retour
+	
+Plan 10x10
+	-> Livraison : 9 points
+	-> Calculer Tournée
+	-> Montrer les modifications sur le tableau et le plan
+	-> Montrer les interactions avec le plan et le tableau
+		Cliquer sur un point de livraison
+	-> Générer Fichier
+	-> Montrer le fichier 
+	-> Bouton Home
+	
+Plan 20x20
+	-> Livraison : 14 points
+	-> Calculer Tournée
+	-> Bouton Home
+	
+Plan 25x25
+	-> Livraison : 19 points
+	-> Calculer Tournée
+	-> Bouton Home
+
+
+MODIFICATION	
+Plan 10x10
+	-> Livraison 9 points
+	
+	-> Calculer Tournée
+	-> Modification	
+	-> Supprimer plusieurs livraisons
+	-> Valider la modification
+	-> Montrer la modification des horaires dans le tableau
+	-> Annuler la modification et montrer la modification
+	-> Retablir la modification et montrer la modification
+	-> Annuler de nouveau la modification et montrer la modification
+	-> Retour et montrer la modification
+	
+	-> Calculer Tournée
+	-> Modification
+	-> Ajouter une livraison
+	-> Valider la modification
+	-> Montrer les modifications sur le plan et le tableau
+	-> Annuler la modification et montrer la modification
+	-> Retablir la modification et montrer la modification
+	-> Annuler de nouveau la modification et montrer la modification
+	-> Retour et montrer la modification
+
+	-> Calculer Tournée
+	-> Modification
+	-> Essayer de déplacer l'entrepot, montrer que c'est impossible
+	-> Déplacer une livraison (NE PAS LA METTRE EN 1ER)
+	-> Valider la modification
+	-> Retour
+	
+	(-> Calculer Tournee
+	-> Modification
+	-> Modifier une plage horaire
+	-> Valider la modification
+	-> Bouton Home)
+
+AVEC PLAGE HORAIRE
+Plan 10x10
+	-> Livraison 9 points avec plage horaire
+	-> Calculer une tournee
+	-> Montrer les modifications sur le tableau et le plan
+	-> Générer le fichier
+	-> Montrer la modification dans le fichier (ajout du temps d'attens)
+	-> Bouton Home
+	
+Plan 20x20
+	-> Livraison 19 point avec plage horaire
+	-> Calculer Tournee
+	-> Retour
+	-> Calculer Tourner
+	-> Stopper à l'affichage de la 1ere solution (environ 7s)
+	-> Bouton Home
+	
+GROSSE MODIFICATION
+Plan 10x10
+	-> Livraison 9 points avec plage horaire
+	-> Modifier
+	-> Supprimer toutes les livraisons (doit en rester 1 plus entrepot)
+	-> Valider les modifications
+	-> Montrer les modifications
+	-> Annuler Modification
+	-> Supprimer des livraisons
+	-> Valider les modifications
+	-> Montrer modification
