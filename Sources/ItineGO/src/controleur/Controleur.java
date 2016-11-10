@@ -92,15 +92,6 @@ public class Controleur extends Application {
 	}
 	
 	/**
-	 * Permet de stopper le calcul d'une tournée.
-	 */
-	@Override
-	public void stop() throws Exception {
-		super.stop();
-		gestionnaire.stopperCalculTournee();
-	}
-	
-	/**
 	 * Permet de faire un glisser déposer pour le fichier à prendre en compte.
 	 * Cette méthode est utilisée pour le fichier du plan et le fichier pour les livraisons.
 	 * 

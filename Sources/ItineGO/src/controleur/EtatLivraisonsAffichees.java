@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,7 +15,9 @@ import vue.gestionTourneeVue.GestionTourneeVue;
  * Etat d'affichage de l'entrepot et des livraisons à effectuer avant calcul de la tournée
  */
 public class EtatLivraisonsAffichees extends EtatDefaut {
-
+	private Thread threadCalcul;
+	private Thread threadConstructionTournee;
+	
 	/**
 	 * Permet de calculer la tournée a effectué.
 	 * 
@@ -23,7 +26,33 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	 */
 	public void clicBoutonCalculerTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.calculerTournee();
+		threadCalcul = new Thread() {
+			public void run() {
+				gestionnaire.calculerTournee();
+				Platform.runLater(() -> afficherTournee(controleur, gestionnaire, gestionnaire.estSolutionOptimale()));
+				stopperCalculTournee();
+			}
+		};
+		threadConstructionTournee = new Thread() {
+			public void run() {
+				while(threadCalcul.isInterrupted() == false) {
+					try {
+						Thread.sleep(3000);
+						gestionnaire.getPlan().constructionTourneePendantCalculDeTournee();
+					} catch (InterruptedException e) {
+						return;
+					}
+				}
+				gestionnaire.getPlan().constructionTourneePendantCalculDeTournee();
+				if(gestionnaire != null) {
+					Platform.runLater(() -> gestionnaire.tourneeCalculee());
+				}
+			}
+		};
+		threadConstructionTournee.setDaemon(true);
+		threadConstructionTournee.start();
+		threadCalcul.setDaemon(true);
+		threadCalcul.start();
 	}
 	
 	/**
@@ -35,7 +64,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	 */
 	public void clicBoutonStopperTournee(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.stopperCalculTournee();
+		stopperCalculTournee();
 		if(gestionnaire.solutionTrouvee()) {
 			afficherTournee(controleur, gestionnaire, false);
 		} else {
@@ -54,7 +83,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		if(controleur.stage != null) {
 			if(gestionnaire.solutionTrouvee()){
 				try {
-					gestionnaire.stopperCalculTournee();
+					stopperCalculTournee();
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
 					Parent root = fxmlLoader.load();
 					controleur.gestionTourneeVue = (GestionTourneeVue) fxmlLoader.getController();
@@ -101,7 +130,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	 */
 	public void clicBoutonHome(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.stopperCalculTournee();
+		stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		gestionnaire.effacerNoeudsEtTroncons();
@@ -134,7 +163,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	 */
 	public void clicBoutonRetour(Controleur controleur, Gestionnaire gestionnaire)
 	{
-		gestionnaire.stopperCalculTournee();
+		stopperCalculTournee();
 		gestionnaire.effacerTournee();
 		gestionnaire.effacerLivraisonsEtEntrepot();
 		if(controleur.stage != null) {
@@ -172,5 +201,17 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 		System.out.println("etat livraisons affichées");
 	}
 	
-	
+	/**
+	 * Permet de stopper le thread de calcul tournee
+	 */
+	private void stopperCalculTournee() {
+		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
+			threadCalcul.interrupt();
+			System.out.println("Calcul stoppé");
+		}
+		if(threadConstructionTournee != null && threadConstructionTournee.isAlive() && threadConstructionTournee.isInterrupted() == false) {
+			threadConstructionTournee.interrupt();
+			System.out.println("Construction stoppée");
+		}
+	}
 }

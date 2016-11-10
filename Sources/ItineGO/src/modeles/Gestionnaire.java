@@ -72,10 +72,10 @@ public class Gestionnaire {
 	}
 	
 	/**
-	 * Stop le calcul de la tournée
+	 * Renvoie si une solution est optimale ou non
 	 */
-	public void stopperCalculTournee() {
-		plan.stopperCalculTournee();
+	public boolean estSolutionOptimale() {
+		return plan.estSolutionOptimale();
 	}
 	
 	/**

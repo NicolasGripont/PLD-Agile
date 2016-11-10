@@ -14,8 +14,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import javafx.application.Platform;
 import utility.Pair;
 
 /**
@@ -80,6 +78,21 @@ public class Plan {
 	private int tempsMax = 20000;
 	
 	/**
+	 * 
+	 */
+	private HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>();
+    
+	/**
+	 * 
+	 */
+	private HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>();
+	
+	/**
+	 * 
+	 */
+	private Integer depart[];
+	
+	/**
 	 * Constructeur de classe
 	 */
 	public Plan() {
@@ -103,20 +116,6 @@ public class Plan {
 	 */
 	public boolean estSolutionOptimale() {
 		return !tsp.getTempsLimiteAtteint();
-	}
-	
-	/**
-	 * Stop le calcul de la tournée et la construction de la solution
-	 */
-	public void stopperCalculTournee() {
-		if(threadCalcul != null && threadCalcul.isAlive() && threadCalcul.isInterrupted() == false) {
-			threadCalcul.interrupt();
-			System.out.println("Calcul stoppé");
-		}
-		if(threadConstructionTournee != null && threadConstructionTournee.isAlive() && threadConstructionTournee.isInterrupted() == false) {
-			threadConstructionTournee.interrupt();
-			System.out.println("Construction stoppée");
-		}
 	}
 	
 	/**
@@ -152,7 +151,6 @@ public class Plan {
     	/**
     	 * numero dans tableau des id des livraisons
     	 */
-    	Integer depart[];
     	depart = new Integer[nbDeLivraison+1]; 
 		
     	/**
@@ -187,10 +185,10 @@ public class Plan {
     	 * et pour cout la somme des couts des tronçons qui seront sur les plus courts chemins entre les livraisons
     	 * origine - destination - cout
     	 */
-    	HashMap< Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	AllNoires = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
         
     	
-    	HashMap< Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
+    	AllPrevious = new HashMap<>(); //Sera Ã©galement placÃ© en paramÃ¨tre
     	
     	
     	/**
@@ -210,51 +208,28 @@ public class Plan {
 		constructionMatTsp(cout, depart, AllNoires);
 		
 		tsp = new TSP4();
-
-		threadCalcul = new Thread() {
-			public void run() {
-				
-				/**
-				 * On lance l'algorithme pour rechercher la meilleur tournée
-				 */
-				tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
-				/**
-				 * Un fois les calcul réalisé, on créé les objets qui vont être utiliseé par la couche supérieur
-				 */
-				if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
-					constructionTournee(depart, AllNoires, AllPrevious);
-				}
-				if(gestionnaire != null) {
-					Platform.runLater(() -> gestionnaire.tourneeCalculee());
-				}
-			}
-		};
-		threadCalcul.setDaemon(true);
-		threadCalcul.start();
-		threadConstructionTournee = new Thread() {
-			public void run() {
-				while(threadCalcul.isInterrupted() == false) {
-					try {
-						//Permet l'attente du TSP et de la construction d'une premiere solution
-						Thread.sleep(3000);
-						if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
-							constructionTournee(depart, AllNoires, AllPrevious);
-						}
-					} catch (InterruptedException e) {
-						return;
-					}
-				}
-				if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
-					constructionTournee(depart, AllNoires, AllPrevious);
-				}
-				if(gestionnaire != null) {
-					Platform.runLater(() -> gestionnaire.tourneeCalculee());
-				}
-			}
-		};
-		threadConstructionTournee.setDaemon(true);
-		threadConstructionTournee.start();
+		
+		/**
+		 * On lance l'algorithme pour rechercher la meilleur tournée
+		 */
+		tsp.chercheSolution(tempsMax, depart.length , cout, duree, plages_horaire);
+		
+		/**
+		 * Un fois les calcul réalisé, on créé les objets qui vont être utiliseé par la couche supérieur
+		 */
+		if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+			constructionTournee(depart, AllNoires, AllPrevious);
+		}
     }
+	
+	/**
+	 * Construit la tournée pendant le calcul de la tournee
+	 */
+	public void constructionTourneePendantCalculDeTournee() {
+		if(tsp.getCoutMeilleureSolution()!=Integer.MAX_VALUE) {
+			constructionTournee(depart, AllNoires, AllPrevious);
+		}
+	}
 	
 	/**
 	 * Construit l'objet Tournée modélisant la solution pour la tournée à effectuer
