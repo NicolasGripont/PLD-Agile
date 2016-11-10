@@ -164,7 +164,7 @@ public class Livraison {
 	}
 
 	public void setDebutPlage(Horaire debutPlage) {
-		if(debutPlage != null && (finPlage != null && debutPlage.getHoraireEnMinutes() <= finPlage.getHoraireEnMinutes())) {
+		if(debutPlage != null && ((finPlage == null || (finPlage != null && debutPlage.getHoraireEnMinutes() <= finPlage.getHoraireEnMinutes())))) {
 			this.debutPlage = debutPlage;
 		} else {
 			this.debutPlage = new Horaire(0,0,0);

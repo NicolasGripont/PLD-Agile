@@ -17,6 +17,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	public void clicBoutonSauvegarder (Controleur controleur) {
 		controleur.listeModifications.finModification();
 		controleur.gestionTourneeVue.majVisualiserTournee();
+		controleur.gestionTourneeVue.afficherErreur("");
 		if(controleur.listeModifications.isUndoPossible()) {
 			controleur.gestionTourneeVue.desactiverUndo(false);
 		}
@@ -41,6 +42,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	public void clicBoutonAnnuler (Controleur controleur, Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.annulerModification();
+			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			//e.printStackTrace();
 			controleur.gestionTourneeVue.afficherErreur("L'annulation ne permet pas de respecter les plages horaires");
@@ -76,6 +78,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		SupprimerLivraison commandeSuppression = new SupprimerLivraison(gestionnaire, numLigne);
 		try {
 			controleur.listeModifications.ajouterCommande(commandeSuppression);
+			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La suppression ne permet pas de respecter les plages horaires");
 		}
@@ -92,6 +95,7 @@ public class EtatModifierTournee extends EtatDefaut {
 	 */
 	public void clicBoutonAjouter (Controleur controleur) {
 		controleur.gestionTourneeVue.majAjouterTourneePlace();
+		controleur.gestionTourneeVue.afficherErreur("");
 		controleur.setEtatCourant(controleur.etatAjouterTourneePlace);
 	}
 	
@@ -105,6 +109,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		ModifierOrdre commandeModifier = new ModifierOrdre(gestionnaire, numLigne, nouveauNumLigne);
 		try {
 			controleur.listeModifications.ajouterCommande(commandeModifier);
+			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
 		}
@@ -123,6 +128,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		ModifierPlageHoraireDebut modifierPlageHoraireDebut = new ModifierPlageHoraireDebut(gestionnaire, numLigne, plageDebut);
 		try {
 			controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
+			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
 		}
@@ -141,6 +147,7 @@ public class EtatModifierTournee extends EtatDefaut {
 		ModifierPlageHoraireFin modifierPlageHoraireFin = new ModifierPlageHoraireFin(gestionnaire, numLigne, plageFin);
 		try {
 			controleur.listeModifications.ajouterCommande(modifierPlageHoraireFin);
+			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
 		}
