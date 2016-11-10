@@ -147,6 +147,15 @@ public class GestionTourneeVue extends GestionVue {
 
 	private Callback<TableColumn<Livraison, String>, TableCell<Livraison, String>> defaultStringCellFactory;
 
+	/**
+	 * Méthode IHM - Itinialisation de la vue
+	 * 
+	 * @param location
+	 *            : URL de la vue
+	 *            
+	 * @param resources
+	 *            : ressources        
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.planVilleVue = new PlanVilleVue(this.planVillePane.getPrefWidth(), this.planVillePane.getPrefHeight(),
@@ -390,18 +399,11 @@ public class GestionTourneeVue extends GestionVue {
 			@Override
 			public void handle(KeyEvent e) {
 
-				if (e.getCode() == KeyCode.TAB) { // commit should be performed
-													// implicitly via
-													// focusedProperty, but
-													// isn't
+				if (e.getCode() == KeyCode.TAB) {
 					GestionTourneeVue.this.livraisonTable.getSelectionModel().selectNext();
 					e.consume();
 					return;
-				} else if (e.getCode() == KeyCode.ENTER) { // commit should be
-															// performed
-															// implicitly via
-															// focusedProperty,
-															// but isn't
+				} else if (e.getCode() == KeyCode.ENTER) { 
 					GestionTourneeVue.this.livraisonTable.getSelectionModel().selectBelowCell();
 					e.consume();
 					return;
@@ -412,6 +414,13 @@ public class GestionTourneeVue extends GestionVue {
 		this.defaultStringCellFactory = this.plageDebutColonne.getCellFactory();
 	}
 
+	/**
+	 * Affiche dans le label si la solution est optimale
+	 * 
+	 * @param optimale
+	 *            : boolean pour optimale
+	 *                    
+	 */
 	public void solutionOptimale(boolean optimale) {
 		if (optimale) {
 			this.labelError.setVisible(true);
@@ -424,6 +433,12 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Méthode appellée par PlanVille quand un noeud est selectionné dans le plan
+	 * 
+	 * @param noeud
+	 *            : le noeud selectionné
+	 */
 	@Override
 	public void selectionneNoeud(Noeud noeud) {
 		if (this.controleur.getEtatCourant().getClass().equals(EtatAjouterTourneePlace.class)) {
@@ -443,6 +458,12 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Méthode qui met à jour le tableau contenant les livraisons
+	 * 
+	 * @param plan
+	 *            : plan qui contient les livraisons
+	 */
 	public void miseAJourTableau(Plan plan, List<Livraison> list, Horaire horaireDebut, Horaire horaireFin) {
 		this.livraisonTable.getItems().clear();
 		this.labelEntrepot.setText("Adresse de l'entrepôt : " + String.valueOf(plan.getEntrepot().getNoeud().getId()));
@@ -459,6 +480,12 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Permet de redessiner le plan dans la vue
+	 * 
+	 * @param plan
+	 *            : Plan a dessiner
+	 */
 	public void dessinePlan(Plan plan) {
 		if (plan != null) {
 			this.planVilleVue.setWidth(this.planVillePane.getWidth());
@@ -467,18 +494,36 @@ public class GestionTourneeVue extends GestionVue {
 		}
 	}
 
+	/**
+	 * Affiche une erreur dans le label error de la vue
+	 * 
+	 * @param erreur
+	 *            : Erreur à afficher
+	 */
 	public void afficherErreur(String erreur) {
 		this.labelError.setStyle("-fx-text-fill : red;");
 		this.labelError.setVisible(true);
 		this.labelError.setText(erreur);
 	}
 
+	/**
+	 * Affiche une info dans le label de la vue
+	 * 
+	 * @param message
+	 *      : message à afficher
+	 */
 	public void afficherInfo(String message) {
 		this.labelError.setStyle("-fx-text-fill : blue;");
 		this.labelError.setVisible(true);
 		this.labelError.setText(message);
 	}
 
+	/**
+	 * Affiche une info dans le label de la vue
+	 * 
+	 * @param message
+	 *      : message à afficher  
+	 */
 	public void afficherInfoSucces(String message) {
 		this.labelError.setStyle("-fx-text-fill : green;");
 		this.labelError.setVisible(true);
@@ -617,14 +662,16 @@ public class GestionTourneeVue extends GestionVue {
 		this.controleur.clicBoutonAjouter();
 	}
 
+	/**
+	 * Permet de redessiner l'ihm quand on est dans l'etat modifier tournee
+	 * 
+	 */
 	public void majEtatModifierTournee() {
 		this.hBoxBoutons.getChildren().clear();
 		this.hBoxBoutons.getChildren().add(this.imageViewValiderModifications);
 		this.hBoxBoutons.getChildren().add(this.imageViewAnnulerModifications);
 		this.hBoxBoutons.getChildren().add(this.imageViewAjouterLivraison);
 		this.hBoxBoutons.getChildren().add(this.labelError);
-		// labelError.setStyle("-fx-text-fill : rgb(0,128,255);");
-		// labelError.setText("Modification de la tournéee");
 		this.boutonGenerer.setVisible(false);
 		this.supprimerColonne.setVisible(true);
 		this.labelInstruction.setVisible(false);
@@ -661,6 +708,10 @@ public class GestionTourneeVue extends GestionVue {
 		this.livraisonTable.setEditable(true);
 	}
 
+	/**
+	 * Permet de redessiner l'ihm quand on est dans l'etat ajouter tournee
+	 * 
+	 */
 	public void majAjouterTourneePlace() {
 		this.hBoxBoutons.getChildren().clear();
 		this.hBoxBoutons.getChildren().add(this.imageViewAnnulerModifications);
@@ -680,6 +731,10 @@ public class GestionTourneeVue extends GestionVue {
 		this.plageFinColonne.setCellFactory(this.defaultStringCellFactory);
 	}
 
+	/**
+	 * Permet de redessiner l'ihm quand on est dans l'etat tournee ordre
+	 * 
+	 */
 	public void majAjouterTourneeOrdre(Livraison livraison) {
 		this.livraisonTable.getItems().set(this.livraisonTable.getItems().size() - 1, livraison);
 		this.livraisonTable.refresh();
@@ -687,6 +742,10 @@ public class GestionTourneeVue extends GestionVue {
 		this.labelInstruction.setText("Sélectionnez la livraison qui suit la nouvelle livraison");
 	}
 
+	/**
+	 * Permet de redessiner l'ihm quand on est dans l'etat tournee duree
+	 * 
+	 */
 	public void majAjouterTourneeDuree() {
 		this.planVilleVue.modeAjouterLivraison(false);
 		this.labelInstruction.setText("Vous pouvez maintenant modifer la durée");
@@ -739,6 +798,10 @@ public class GestionTourneeVue extends GestionVue {
 		});
 	}
 
+	/**
+	 * Permet de redessiner l'ihm quand on est dans l'etat visualiser tournee
+	 * 
+	 */
 	public void majVisualiserTournee() {
 		this.hBoxBoutons.getChildren().clear();
 		this.hBoxBoutons.getChildren().add(this.imageViewAccueil);
@@ -755,6 +818,10 @@ public class GestionTourneeVue extends GestionVue {
 		this.livraisonTable.getSelectionModel().setCellSelectionEnabled(false);
 	}
 
+	/**
+	 * méthode appele quand on genere la feuille de route
+	 * 
+	 */
 	@FXML
 	private void genererFeuilleDeRoute() {
 		FileChooser fileChooser = new FileChooser();
@@ -762,9 +829,6 @@ public class GestionTourneeVue extends GestionVue {
 		File file = fileChooser.showSaveDialog(this.controleur.getStage());
 		if (file != null) {
 			this.controleur.clicBoutonGenererFeuilleDeRoute(file.getAbsolutePath());
-			// labelError.setVisible(true);
-			// labelError.setStyle("-fx-text-fill : green;");
-			// labelError.setText("Feuille de route générée");
 		}
 	}
 

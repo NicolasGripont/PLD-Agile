@@ -41,6 +41,15 @@ public class ChoixPlanVilleVue implements Initializable {
 
 	private GlisserDeposerFichierVue glisserDeposerFichierVue;
 
+	/**
+	 * Méthode IHM - Itinialisation de la vue
+	 * 
+	 * @param location
+	 *            : URL de la vue
+	 *            
+	 * @param resources
+	 *            : ressources        
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.textFieldLienFichier.setEditable(false);
@@ -67,6 +76,7 @@ public class ChoixPlanVilleVue implements Initializable {
 		this.labelError.setVisible(false);
 	}
 
+	
 	public Controleur getControleur() {
 		return this.controleur;
 	}
@@ -85,6 +95,12 @@ public class ChoixPlanVilleVue implements Initializable {
 		this.labelError.setText(erreur);
 	}
 
+	/**
+	 * Méthode IHM - Event quand on clique sur Parcourir Fichier
+	 * 
+	 * @param event
+	 *            : Mouse event
+	 */
 	@FXML
 	public void choixFichierAction(MouseEvent event) {
 		FileChooser dialogue = new FileChooser();
@@ -98,6 +114,12 @@ public class ChoixPlanVilleVue implements Initializable {
 		}
 	}
 
+	/**
+	 * Méthode IHM - Event quand on clique sur Valider
+	 * 
+	 * @param event
+	 *            : Mouse event
+	 */
 	@FXML
 	public void validerAction(MouseEvent event) {
 		if (this.controleur == null) {
@@ -121,6 +143,12 @@ public class ChoixPlanVilleVue implements Initializable {
 		this.controleur.glisserDeposer(false, null);
 	}
 
+	/**
+	 * Afficher un label pour dire que le fichier est accepté
+	 * 
+	 * @param fichier
+	 *            : le fichier donné par l'utilisateur
+	 */
 	public void fichierAccepte(File fichier) {
 		this.labelError.setVisible(false);
 		this.fichierChoisie = fichier;
@@ -131,6 +159,12 @@ public class ChoixPlanVilleVue implements Initializable {
 		this.glisserDeposerFichierVue.getLabel().setText("Glisser-Déposer une autre demande de plan.");
 	}
 
+	/**
+	 * Afficher un label pour dire que le fichier est non valide
+	 * 
+	 * @param fichier
+	 *            : le fichier donné par l'utilisateur
+	 */
 	public void fichierRefuse() {
 		this.labelError.setVisible(false);
 		this.fichierChoisie = null;

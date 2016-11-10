@@ -9,6 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import modeles.Livraison;
 
+/**
+ * Cellule personnelle pour la classe TableView de JavaFx
+ */
 class AjouterLivraisonDureeCell extends TableCell<Livraison, String> {
 
 	private TextField textField;
@@ -35,6 +38,12 @@ class AjouterLivraisonDureeCell extends TableCell<Livraison, String> {
 		this.setGraphic(null);
 	}
 
+	/**
+	 * Méthode appellé quand on dessine la cellule
+	 * 
+	 * @param item : item
+	 * @param empty : boolean pour cellule vide
+	 */
 	@Override
 	public void updateItem(String item, boolean empty) {
 		super.updateItem(item, empty);

@@ -117,7 +117,7 @@ public class Plan {
 	 * @return l'indice dans le tableau des id à laquel on trouve l'id mis en
 	 *         paramètre
 	 */
-	public int numDansTableau(int id) {
+	int numDansTableau(int id) {
 		for (int i = 0; i < this.tableauDesId.length; i++) {
 			if (this.tableauDesId[i] == id) {
 				return i;
@@ -186,7 +186,8 @@ public class Plan {
 											// paramÃ¨tre
 
 		/**
-		 * On calcul les plus court chemin entre toute les livraisons
+		 * On calcul les plus court chemin entre toute les livraisons et
+		 * l'entrepot
 		 */
 		Dijkstra(this.depart, this.AllNoires, this.AllPrevious);
 
@@ -229,27 +230,26 @@ public class Plan {
 	/**
 	 * Construit l'objet Tournée modélisant la solution pour la tournée à
 	 * effectuer
+	 * 
+	 * @param depart
+	 *            : contient l'emplacement des id des livraisosns du plan dans
+	 *            le tableau des idee
+	 * @param AllNoires
+	 *            : va contenir les cout du graphe simplifier du TSP
+	 * @param AllPrevious
+	 *            : va contenir les arbre de plus court chemin partant de toute
+	 *            les livraison et de l'entrpot
 	 */
 	private void constructionTournee(Integer depart[], HashMap<Integer, HashMap<Integer, Integer>> AllNoires,
 			HashMap<Integer, HashMap<Integer, Integer>> AllPrevious) {
 		List<Integer> futurTourne = new ArrayList<>();
 		HashMap<Integer, Integer> previous;
 
-		Integer noeudCourant = depart[this.tsp.getMeilleureSolution(0)]; // Comme
-																			// on
-																			// travaille
-																			// avec
-																			// des
-																			// arbres
-																			// de
-																			// couvrance
-																			// minimum
-																			// on
-																			// fait
-																			// le
-																			// chemin
-																			// Ã 
-																			// l'envers
+		/**
+		 * Comme on travaille avec des arbres de couvrance minimum on fait le
+		 * chemin Ã  l'envers
+		 */
+		Integer noeudCourant = depart[this.tsp.getMeilleureSolution(0)];
 		for (int i = depart.length - 1; i >= 0; i--) {
 			previous = new HashMap<>(AllPrevious.get(depart[this.tsp.getMeilleureSolution(i)]));
 			while (previous.get(noeudCourant) != noeudCourant) {
@@ -257,6 +257,8 @@ public class Plan {
 				noeudCourant = previous.get(noeudCourant);
 			}
 		}
+		futurTourne.add(depart[this.tsp.getMeilleureSolution(0)]);
+		Collections.reverse(futurTourne);
 
 		LinkedList<Integer> ordreTourneID = new LinkedList<>();
 
@@ -268,12 +270,6 @@ public class Plan {
 		// on supprime l'entrepot du début de la tournee
 		ordreTourneID.removeFirst();
 
-		// TODO tableau des idée
-
-		// LinkedList<Integer> ordreT = new LinkedList<Integer>()
-
-		futurTourne.add(depart[this.tsp.getMeilleureSolution(0)]);
-		Collections.reverse(futurTourne);
 		List<Integer> FT = new ArrayList<>(futurTourne);
 		futurTourne.clear();
 		ListIterator<Integer> itFT = FT.listIterator();
@@ -291,19 +287,28 @@ public class Plan {
 		// tableauDesId
 		// Puis on constrit tournee
 
-		// Construction de la Tournee
+		List<Trajet> TP = this.ConstructionDeLaListeTrajet(futurTourne, ordreTourneID);
+		this.miseAJourHeureDePassageLivraison(TP);
+		this.tournee = new Tournee(this.entrepot, this.livraisons, TP);
+	}
+
+	/**
+	 * construit la liste des trajets nécéssaire pour faire la tournee
+	 * 
+	 * @param futurTourne
+	 *            liste des id des noeuds pour faire tout les trajets
+	 * @param ordreTourneID
+	 *            Liste des Id des noeud de liraisons dans l'ordre de livraison
+	 * @return liste des trajets nécéssaire pour faire la tournee
+	 */
+	private List<Trajet> ConstructionDeLaListeTrajet(List<Integer> futurTourne, LinkedList<Integer> ordreTourneID) {
+
 		Set<Livraison> dejaVisites = new HashSet<>();
 		List<Trajet> trajetsPrevus = new ArrayList<>();
 		List<Troncon> tronconsTrajet = new ArrayList<>();
 		for (Integer i = 0; i < (futurTourne.size() - 1); i++) {
 			tronconsTrajet.add(this.troncons
 					.get(new Pair<>(this.noeuds.get(futurTourne.get(i)), this.noeuds.get(futurTourne.get(i + 1)))));
-			// (Si le neoud suivant est une livraison ET si la livraison n'a pas
-			// deja etait ajoutée ET si le noeud correspond à la future
-			// livraison à faire)
-			// OU
-			// (si le noeud suivant est l'entrepot ET que c'est le dernier noeud
-			// a visiter)
 			if (((this.livraisons.get(futurTourne.get(i + 1)) != null)
 					&& !dejaVisites.contains(this.livraisons.get(futurTourne.get(i + 1)))
 					&& (this.livraisons.get(futurTourne.get(i + 1)) == this.livraisons.get(ordreTourneID.getFirst())))
@@ -318,8 +323,7 @@ public class Plan {
 				}
 			}
 		}
-		this.miseAJourHeureDePassageLivraison(trajetsPrevus);
-		this.tournee = new Tournee(this.entrepot, this.livraisons, trajetsPrevus);
+		return trajetsPrevus;
 	}
 
 	/**
@@ -341,6 +345,11 @@ public class Plan {
 		}
 	}
 
+	/**
+	 * 
+	 * @param tableauDesId2
+	 *            : tableau a remplir avec les id des noeud du plan
+	 */
 	private void remplirTableauDesID(int[] tableauDesId2) {
 		Set<Entry<Integer, Noeud>> setnoeuds;
 		Iterator<Entry<Integer, Noeud>> itnoeuds;
@@ -350,11 +359,15 @@ public class Plan {
 		itnoeuds = setnoeuds.iterator();
 		while (itnoeuds.hasNext()) {
 			enoeuds = itnoeuds.next();
-			this.tableauDesId[itid] = enoeuds.getKey();
+			tableauDesId2[itid] = enoeuds.getKey();
 			itid++;
 		}
 	}
 
+	/**
+	 * remplie la matrice du graphe représentant le plan avec les couts des
+	 * troncons
+	 */
 	private void remplirMatriceDuGraphe() {
 		for (Integer i = 0; i < matriceDuGraphe.length; i++) {
 			for (Integer j = 0; j < matriceDuGraphe.length; j++) {
@@ -376,6 +389,20 @@ public class Plan {
 		}
 	}
 
+	/**
+	 * remplie les tableau depart, duree, et plage horaire avec les informations
+	 * contenues dans les livraisons du plan
+	 * 
+	 * @param depart
+	 *            : va ontenir la place dans tableauDesId des Ids des noeuds de
+	 *            livraisons du plan
+	 * @param duree
+	 *            : va ontenir les durees des livraisons du plan dans l'orde du
+	 *            tabeau depart
+	 * @param plages_horaire
+	 *            : va contenir le debut et la fin de la plage horaire des
+	 *            livraisons du plan dans l'orde du tabeau depart
+	 */
 	private void remplirTableauDepEtDur(Integer[] depart, int[] duree, int[][] plages_horaire) {
 		depart[0] = (this.numDansTableau(this.entrepot.getNoeud().getId())); // le
 																				// depart
@@ -423,6 +450,19 @@ public class Plan {
 
 	}
 
+	/**
+	 * Calcul les plus cours chemin dans le graphe des cout du plan en prenant
+	 * pour origine toute les livraison represnté par depart
+	 * 
+	 * @param depart
+	 *            : represent les livraison à èpartire desquels on vas faire les
+	 *            calcul de plus corut chemin
+	 * @param AllNoires
+	 *            : va contenir les cout pour aller d'une livraison à une autre
+	 * @param AllPrevious
+	 *            : va contenir les arbre de couvrance minimum pour les plus
+	 *            court chemin en partant de n'importe quel livraison
+	 */
 	private static void Dijkstra(Integer depart[], HashMap<Integer, HashMap<Integer, Integer>> AllNoires,
 			HashMap<Integer, HashMap<Integer, Integer>> AllPrevious) {
 
@@ -495,21 +535,14 @@ public class Plan {
 		}
 	}
 
-	public void modificationOrdreTournee(int place1, int place2) {
-		this.retrouverLivraisonDansTournee(place1);
-		this.retrouverLivraisonDansTournee(place2);
-	}
-
-	private Livraison retrouverLivraisonDansTournee(int place1) {
-
-		return this.livraisons.get(this.tournee.getTrajets().get((place1 + 1)).getArrive());
-
-	}
-
 	/**
 	 * 
 	 * @param place1
+	 *            : place initial de la livraison dans la tournee, 0 pour la
+	 *            première place
 	 * @param place2
+	 *            : place final de la livraison dans la tournee, 0 pour la
+	 *            première place
 	 */
 	public void reordonnerLivraisonTournee(int place1, int place2) {
 		if ((place1 + 1) != place2) {
@@ -541,6 +574,16 @@ public class Plan {
 		}
 	}
 
+	/**
+	 * Permet de suprimer une livraison dans une tournee
+	 * 
+	 * @param aSuprimer
+	 *            : Livraisn à supprimer dans la tourné
+	 * @param precedent
+	 *            : Noeud précendent la livraison dans la tournée
+	 * @param suivant
+	 *            : Noeud suivant la livraison dans la tournée
+	 */
 	public void suppressionLivraisonTournee(Livraison aSuprimer, Noeud precedent, Noeud suivant) {
 		Noeud arrive = precedent;
 		Noeud depart = suivant;
@@ -553,7 +596,6 @@ public class Plan {
 		idLivraison = new Integer[2];
 		idLivraison[1] = this.numDansTableau(depart.getId());
 		idLivraison[0] = this.numDansTableau(arrive.getId());
-
 		HashMap<Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>();
 		HashMap<Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>();
 		/**
@@ -568,6 +610,13 @@ public class Plan {
 		this.SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(trajetPrevu);
 	}
 
+	/**
+	 * met a jour la tournée du plan en suprimant les deux trajet inutile et en
+	 * les remplacant par le nouveau bon trajet
+	 * 
+	 * @param trajetPrevu
+	 *            : nouveau trajet à placer dans la tournée
+	 */
 	private void SuppresionTrajetsARemplacerEtInsertionNouveauTrajetDansTournee(Trajet trajetPrevu) {
 		List<Trajet> listTrajetTourneeCopie = new ArrayList<>(this.tournee.getTrajets());
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
@@ -589,6 +638,13 @@ public class Plan {
 		this.tournee = new Tournee(this.entrepot, this.livraisons, futurTrajetTournee);
 	}
 
+	/**
+	 * Permet de supprimer une livraison de l'attribut de plan coneant une map
+	 * des livraisons
+	 * 
+	 * @param aSuprimer
+	 *            : Livraison à suprimer dans la map de plan
+	 */
 	private void supprimerLivraison(Livraison aSuprimer) {
 		if (aSuprimer != null) {
 			this.livraisons.remove(aSuprimer.getNoeud());
@@ -596,6 +652,18 @@ public class Plan {
 		}
 	}
 
+	/**
+	 * Permet d'ajouter une livraison à la tounée du plan préalablement calculé
+	 * 
+	 * @param aAjouter
+	 *            : Livraison à ajouter
+	 * @param precedent
+	 *            : Noeud précédent la livraison à ajouter dans la liste des
+	 *            trajets
+	 * @param suivant
+	 *            : Noeud suivant la livraison à ajouter dans la liste des
+	 *            trajets
+	 */
 	public void ajouterLivraisonTournee(Livraison aAjouter, Noeud precedent, Noeud suivant) {
 		this.ajouterLivraison(aAjouter);
 		this.tableauDesId = new int[this.noeuds.size()];
@@ -605,26 +673,54 @@ public class Plan {
 		depart = new Integer[3];
 		this.remplirTableauDepartPourAjout(depart, precedent, aAjouter, suivant);
 
-		HashMap<Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>();
-		HashMap<Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>();
+		HashMap<Integer, HashMap<Integer, Integer>> AllNoires = new HashMap<>(); // Sera
+																					// Ã©galement
+																					// placÃ©
+																					// en
+																					// paramÃ¨tre
+		HashMap<Integer, HashMap<Integer, Integer>> AllPrevious = new HashMap<>(); // Sera
+																					// Ã©galement
+																					// placÃ©
+																					// en
+																					// paramÃ¨tre
 		/**
 		 * On calcul les plus court chemin entre toute les livraisons
 		 */
 		Dijkstra(depart, AllNoires, AllPrevious);
 		// ATTENTION IL FAUT PARTIR DE LA FIN CHAQUE FOIS
+		List<Trajet> listTrajetTourneeCopie = new ArrayList<>(this.tournee.getTrajets());
+		for (Trajet t : listTrajetTourneeCopie) {
+		}
 		List<Integer> idTrajetPrevu1 = this.ConstructionListdesAdressPourTrajet(depart[0], depart[1],
 				AllPrevious.get(depart[0]));
 		List<Integer> idTrajetPrevu2 = this.ConstructionListdesAdressPourTrajet(depart[1], depart[2],
 				AllPrevious.get(depart[1]));
-
+		listTrajetTourneeCopie = new ArrayList<>(this.tournee.getTrajets());
+		for (Trajet t : listTrajetTourneeCopie) {
+		}
 		Trajet trajetPrevu1 = this.ConstructionTrajet(idTrajetPrevu1);
 		Trajet trajetPrevu2 = this.ConstructionTrajet(idTrajetPrevu2);
-
+		listTrajetTourneeCopie = new ArrayList<>(this.tournee.getTrajets());
+		for (Trajet t : listTrajetTourneeCopie) {
+		}
 		this.suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(trajetPrevu1, trajetPrevu2);
 	}
 
+	/**
+	 * Permet de suprimer le trajet devenu inutile du fait de l'ajout d'une
+	 * livraison à la tournée et son remplacement par les deux nouveaux trajet
+	 * adéquate
+	 * 
+	 * @param trajet1
+	 *            : trajet dont l'arrivé corespond à la livraison à ajouter
+	 * @param trajet2
+	 *            : trajet dont le début corespond à la livraison à ajouter
+	 */
 	private void suppressionTrajetARemplacerEtInsertionNouveauxTrajetsDansTournee(Trajet trajet1, Trajet trajet2) {
+
 		List<Trajet> listTrajetTourneeCopie = new ArrayList<>(this.tournee.getTrajets());
+		for (Trajet t : listTrajetTourneeCopie) {
+		}
 		ListIterator<Trajet> itListTrajetTourneeCopie = listTrajetTourneeCopie.listIterator();
 		List<Trajet> futurTrajetTournee = new ArrayList<>();
 		Trajet myTrajet = new Trajet(listTrajetTourneeCopie.get(0).getDepart(),
@@ -643,6 +739,13 @@ public class Plan {
 		this.tournee = new Tournee(this.entrepot, this.livraisons, futurTrajetTournee);
 	}
 
+	/**
+	 * Permet de mettre à jours les horaire de passage des livraison contenue
+	 * dans plan en fonction de la tournée calculé
+	 * 
+	 * @param futurTrajetTournee
+	 *            : Liste des trajet qui composent la tournée
+	 */
 	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
 		int coutVus = this.entrepot.getHoraireDepart().getHoraireEnSecondes();
 
@@ -661,6 +764,19 @@ public class Plan {
 		this.entrepot.setHoraireArrive(new Horaire(coutVus));
 	}
 
+	/**
+	 * Permet de contruire la liste des Id des noeud par lesquel le nouveau
+	 * trajet va passé
+	 * 
+	 * @param depart
+	 *            : debut du trajet
+	 * @param arrivee
+	 *            : arrive du trajet
+	 * @param previous
+	 *            : arbre de recouvrement minimum des plus courts chemins
+	 *            partants de <debut>
+	 * @return
+	 */
 	private List<Integer> ConstructionListdesAdressPourTrajet(Integer depart, Integer arrivee,
 			HashMap<Integer, Integer> previous) {
 		List<Integer> listeIdTrajet = new ArrayList<>();
@@ -682,6 +798,14 @@ public class Plan {
 		return listeIdTrajet;
 	}
 
+	/**
+	 * Permet de construire un trajet à partir des adresse des noeuds par
+	 * lesquel il va passé
+	 * 
+	 * @param idTrajetPrevu
+	 *            : Liste des adresse des noeuds par lesquel le trajet va passé
+	 * @return : trajet calculé
+	 */
 	private Trajet ConstructionTrajet(List<Integer> idTrajetPrevu) {
 		List<Troncon> tronconsTrajet1 = new ArrayList<>();
 		for (Integer i = 0; i < (idTrajetPrevu.size() - 1); i++) {
@@ -693,6 +817,15 @@ public class Plan {
 		return trajetPrevu;
 	}
 
+	/**
+	 * Permet de remplir le tableau à trois case contenant l'id des Noeuds
+	 * précedent suivant et sur la livraisons à ajouter dans les trajets
+	 * 
+	 * @param depart
+	 * @param precedent
+	 * @param aAjouter
+	 * @param suivant
+	 */
 	private void remplirTableauDepartPourAjout(Integer[] depart, Noeud precedent, Livraison aAjouter, Noeud suivant) {
 		depart[0] = this.numDansTableau(precedent.getId());
 		depart[1] = this.numDansTableau(aAjouter.getNoeud().getId());
