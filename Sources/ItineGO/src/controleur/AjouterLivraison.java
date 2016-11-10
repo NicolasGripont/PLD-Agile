@@ -16,7 +16,7 @@ public class AjouterLivraison extends Commande {
 		this.gestionnaire = gestionnaire;
 		this.numLigne = numLigne;
 		livraison = gestionnaire.getLivraisonEnCoursCreation();
-		noeudSuivant = gestionnaire.getNoeudTournee(numLigne+1);
+		noeudSuivant = gestionnaire.getNoeudTournee(numLigne);
 	}
 	
 	
@@ -30,7 +30,8 @@ public class AjouterLivraison extends Commande {
 
 	@Override
 	public void undoCode() throws NonRespectPlagesHoraires {
+		livraison = gestionnaire.getLivraisonTournee(numLigne);
+		noeudSuivant = gestionnaire.getNoeudTournee(numLigne+1);
 		gestionnaire.supprimerLivraisonTournee(numLigne);
 	}
-
 }

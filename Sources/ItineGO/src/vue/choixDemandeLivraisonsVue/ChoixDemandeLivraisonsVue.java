@@ -63,6 +63,7 @@ public class ChoixDemandeLivraisonsVue implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		textFieldLienFichier.setEditable(false);
 		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de livraison.");
 		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
 		glisserDeposerFichierVue.addExtensionAcceptee(".xml");

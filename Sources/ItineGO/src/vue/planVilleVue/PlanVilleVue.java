@@ -100,6 +100,8 @@ public class PlanVilleVue extends Canvas {
 						if(Math.abs(NoeudX - XCenter) <= pointerMargin && Math.abs(NoeudY - YCenter) <= pointerMargin) {
 							if(plan.getEntrepot() != null && plan.getEntrepot().getNoeud().equals(n.getValue())) {
 								entrepotIsClicked(plan.getEntrepot());
+								if(vue != null)
+									vue.selectionneNoeud(plan.getEntrepot().getNoeud());
 							} else {
 								for(Map.Entry<Integer, Livraison> l : this.plan.getLivraisons().entrySet()) {
 									if(l.getKey().equals(n.getValue().getId())) {

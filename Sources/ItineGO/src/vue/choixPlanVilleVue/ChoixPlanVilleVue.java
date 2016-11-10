@@ -46,7 +46,7 @@ public class ChoixPlanVilleVue implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		textFieldLienFichier.setEditable(false);
 		glisserDeposerFichierVue = new GlisserDeposerFichierVue("Glisser-Déposer la demande de plan.");
 		glisserDeposerFichierPane.getChildren().add(glisserDeposerFichierVue);
 		glisserDeposerFichierVue.addExtensionAcceptee(".xml");

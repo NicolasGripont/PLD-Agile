@@ -633,12 +633,15 @@ public class GestionTourneeVue extends GestionVue {
 				int duree = 0;
 				try {
 					duree = Integer.valueOf(t.getNewValue());
-					((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow())).setDuree(duree);
+					//((Livraison) livraisonTable.getItems().get(t.getTablePosition().getRow())).setDuree(duree);
 					controleur.entrerDuree(duree);
 					planVilleVue.modeAjouterLivraison(false);
 		    		dureeColonne.setOnEditCommit(null);
 	        	} catch(Exception e) {
 	        		afficherErreur("Durée : Donnée invalide");
+	        		e.printStackTrace();
+	        		labelError.setText("Durée : Donnée invalide");
+	        		labelError.setStyle("-fx-text-fill : red;");
 	        	}
 	        }
 	    });
