@@ -21,6 +21,7 @@ public class ModifierPlageHoraireDebut extends Commande {
 	
 	@Override
 	public void doCode() throws NonRespectPlagesHoraires {
+		System.err.println("DOCODE");
 		gestionnaire.changerPlageHoraireDebut(numLigne, plageDebut);
 	}
 

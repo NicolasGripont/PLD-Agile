@@ -87,22 +87,24 @@ public class Tournee {
 	 * 		Nouvel horaire à mettre au début de la plage horaire
 	 */
 	public void setDebutPlage(int position, Horaire newHoraire) {
+		System.err.println("NEW HORAAIRE " + newHoraire);
 		Livraison liv = livraisons.get(ordreLivraisons.get(position));
 		liv.setDebutPlage(newHoraire);
 		Horaire horaire = liv.getHeureArrive();
 		if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
 			horaire = liv.getDebutPlage();
 		}
+		liv.setHeureDepart(new Horaire(horaire.getHoraireEnSecondes() + liv.getTempsAttente()));
 		for(int i = position+1; i < ordreLivraisons.size(); ++i) {
 			liv = livraisons.get(ordreLivraisons.get(i));
 			Livraison livPrec = livraisons.get(ordreLivraisons.get(i-1));
-			horaire.ajouterSeconde(livPrec.getHeureDepart().getHoraireEnSecondes() + trajets.get(i).getTemps());
+			horaire = new Horaire(livPrec.getHeureDepart().getHoraireEnSecondes() + trajets.get(i).getTemps());
 			liv.setHeureArrive(horaire);
 			if(liv.getHeureArrive().getHoraireEnSecondes() < liv.getDebutPlage().getHoraireEnSecondes()) {
 				horaire = liv.getDebutPlage();
 			}
-			horaire.ajouterSeconde(liv.getDuree());
-			liv.setHeureDepart(horaire);
+			horaire.ajouterSeconde(liv.getTempsAttente() + liv.getDuree());
+			liv.setHeureDepart(new Horaire(horaire));
 		}
 	}
 	

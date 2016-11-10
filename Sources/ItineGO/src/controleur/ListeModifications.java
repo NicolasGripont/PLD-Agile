@@ -25,7 +25,6 @@ public class ListeModifications {
 			}
 			position++;
 		}
-		System.out.println("UNDO taille liste="+listeModifications.size()+" pos="+position);
 		if(exec != null)
 		{
 			throw exec;
@@ -53,7 +52,6 @@ public class ListeModifications {
 				exec = e;
 			}
 		}
-		System.out.println("REDO taille liste="+listeModifications.size()+" pos="+position);
 		if(exec != null)
 		{
 			throw exec;
@@ -80,7 +78,6 @@ public class ListeModifications {
 		}
 		listeModifications.addFirst(new ListeCommandes());
 		position = 0;
-		System.out.println("CREER taille liste="+listeModifications.size()+" pos="+position);
 	}
 	
 	public void annulerModification() throws NonRespectPlagesHoraires {
@@ -93,7 +90,6 @@ public class ListeModifications {
 		}
 		listeModifications.removeFirst();
 		position = 0;
-		System.out.println("ANNULER taille liste="+listeModifications.size()+" pos="+position);
 		if(exec != null)
 		{
 			throw exec;

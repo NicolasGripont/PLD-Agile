@@ -159,7 +159,6 @@ public class Gestionnaire {
 			horaire.ajouterSeconde(plan.getLivraisons().get(plan.getTournee().getTrajets().get(i).getArrive().getId()).getDuree());
 		}
 		horaire.ajouterSeconde(plan.getTournee().getTrajets().get(plan.getTournee().getTrajets().size() - 1).getTemps());*/
-		System.err.println("Horaire " + horaire);
 		return horaire;
 	}
 	
@@ -173,29 +172,17 @@ public class Gestionnaire {
 	}
 	
 	public void ajouterLivraisonTournee() throws NonRespectPlagesHoraires {
-		System.err.println("AVANT " + plan.getTournee().getLivraisons().keySet());
-		for(Trajet t : plan.getTournee().getTrajets()) {
-			System.err.print(t.getDepart().getId() + "-");
-		}
-		System.err.println();
 		Noeud n = null;
 		if(positionLivraisonEnCours-1 < 0) {
 			n = plan.getEntrepot().getNoeud();
 		} else {
 			n = getNoeudTournee(positionLivraisonEnCours-1);
 		}
-		System.out.println("livraisonEnCoursCreation : " + livraisonEnCoursCreation);
-		System.out.println("n : " + n);
-		System.out.println("getNoeudTournee(getPositionLivraisonEnCours()) : " + getNoeudTournee(getPositionLivraisonEnCours()));
+
 		plan.ajouterLivraisonTournee(livraisonEnCoursCreation, n, getNoeudTournee(positionLivraisonEnCours));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}
-		System.err.println("APRES " + plan.getTournee().getLivraisons().keySet());
-		for(Trajet t : plan.getTournee().getTrajets()) {
-			System.err.print(t.getDepart().getId() + "-");
-		}
-		System.err.println();
 	}
 
 	public Livraison getLivraisonEnCoursCreation() {
@@ -240,7 +227,9 @@ public class Gestionnaire {
 	 * 		Si les plages horaires ne sont pas respectées
 	 */
 	public void changerPlageHoraireDebut(int position, String plageDebut) throws NonRespectPlagesHoraires {
-		getLivraisonTournee(position).setDebutPlage(new Horaire(plageDebut));
+		System.err.println("CHANGER PLAGE");
+		System.err.println(position);
+		plan.getTournee().setDebutPlage(position, new Horaire(plageDebut));
 		if(!plan.getTournee().sontValidesHeuresLivraisons()) {
 			throw new NonRespectPlagesHoraires();
 		}

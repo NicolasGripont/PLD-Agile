@@ -688,21 +688,16 @@ public class Plan {
 
 	private void miseAJourHeureDePassageLivraison(List<Trajet> futurTrajetTournee) {
 		int coutVus=entrepot.getHoraireDepart().getHoraireEnSecondes();
-		System.err.println(coutVus/3600);
-		System.err.println(entrepot.getHoraireDepart().getHoraireEnSecondes());    			
+ 			
 		for(Trajet trajet : futurTrajetTournee) {
-			System.out.println("Trajet :" + trajet);
 	  		coutVus+=trajet.getTemps();
 	  		if(!trajet.getArrive().equals(entrepot.getNoeud())){
     			livraisons.get(trajet.getArrive().getId()).setHeureArrive( new Horaire(coutVus) );
-    			System.err.println("Arrive :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureArrive()); 
 	    		if(coutVus < livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes()){
 	    			coutVus=livraisons.get( trajet.getArrive().getId()).getDebutPlage().getHoraireEnSecondes() ;
 	    		}
 	    		coutVus+=livraisons.get(trajet.getArrive().getId()).getDuree();
 	    		livraisons.get(trajet.getArrive().getId()).setHeureDepart( new Horaire(coutVus) );
-    			System.err.println("Depart :" +  this.livraisons.get(trajet.getArrive().getId()).getHeureDepart()); 
-
 	  		}	
 	  	}
 		entrepot.setHoraireArrive(new Horaire(coutVus));
