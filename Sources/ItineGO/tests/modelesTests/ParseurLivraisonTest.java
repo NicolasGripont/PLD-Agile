@@ -227,7 +227,7 @@ public class ParseurLivraisonTest {
 	 * Resultat: Le fichier est parsé sans la plage horaire fausse 
 	 */
 	@Test
-	public void testParseurLivraisonAvecPlageDébutSupPlageFin() {
+	public void testParseurLivraisonAvecPlageDebutSupPlageFin() {
 		Plan planTest = new Plan();
 		String nomFichierPlanTest= "./tests/assetsForTests/plan5x5.xml";
 		String nomFichierLivraisonTest = "./tests/assetsForTests/livraisons5x5-9-TW-PDAVantPF.xml";
