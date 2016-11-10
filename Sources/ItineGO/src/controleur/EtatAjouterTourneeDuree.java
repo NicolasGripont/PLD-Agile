@@ -6,9 +6,17 @@ import modeles.Gestionnaire;
 public class EtatAjouterTourneeDuree extends EtatDefaut {
 
 	/**
+	 * Permet de rentrer la durée de la livraison que l'on est en train de créer. 
+	 * À la suite de cela, on va ajouter la livraison à la tournée et recalculer la tournée.
+	 * Si les plages ne sont pas respectées affiche un message d'erreur.
 	 * 
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 * @param duree
+	 *            : Durée de la livraison souhaitée.
 	 */
-	@Override
 	public void entrerDuree(Controleur controleur, Gestionnaire gestionnaire, int duree) {
 		gestionnaire.getLivraisonEnCoursCreation().setDuree(duree);
 		AjouterLivraison ajouterLivraison = new AjouterLivraison(gestionnaire,
@@ -29,7 +37,14 @@ public class EtatAjouterTourneeDuree extends EtatDefaut {
 		controleur.setEtatCourant(controleur.etatModifierTournee);
 	}
 
-	@Override
+	/**
+	 * Permet d'annuler l'ajout.
+	 * 
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 */
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.gestionTourneeVue.majEtatModifierTournee();
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());

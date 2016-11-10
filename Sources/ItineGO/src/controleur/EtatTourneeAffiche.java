@@ -125,12 +125,20 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		controleur.gestionTourneeVue.dessinePlan(gestionnaire.getPlan());
 	}
 
+	/**
+	 * Permet de faire un undo de la dernières liste de modifications qui viennent d'être faites.
+	 * On va refaire les commandes une à une.
+	 * 
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 */
 	@Override
 	public void undo(Controleur controleur, Gestionnaire gestionnaire) {
 		try {
 			controleur.listeModifications.undoModifications();
 		} catch (NonRespectPlagesHoraires e) {
-			// e.printStackTrace();
 			controleur.gestionTourneeVue.afficherErreur("L'undo ne permet pas de respecter les plages horaires");
 		}
 		controleur.gestionTourneeVue.majVisualiserTournee();
@@ -151,6 +159,15 @@ public class EtatTourneeAffiche extends EtatDefaut {
 		}
 	}
 
+	/**
+	 * Permet de faire un redo de la dernières liste de modifications qui vient d'être undo. 
+	 * On va refaire les commandes une à une.
+	 * 
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 */
 	@Override
 	public void redo(Controleur controleur, Gestionnaire gestionnaire) {
 		try {

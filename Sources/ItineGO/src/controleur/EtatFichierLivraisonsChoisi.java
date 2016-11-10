@@ -80,7 +80,6 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		}
 	}
@@ -104,7 +103,6 @@ public class EtatFichierLivraisonsChoisi extends EtatDefaut {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 		}
 	}

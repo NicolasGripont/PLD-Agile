@@ -30,10 +30,8 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 	 */
 	@Override
 	public void clicBoutonValider(Gestionnaire gestionnaire, Controleur controleur, File fichierXML) {
-		// modification du modèle
 		try {
 			gestionnaire.chargerPlan(fichierXML);
-			// modification des vues
 			if (controleur.stage != null) {
 				try {
 					FXMLLoader fxmlLoader = new FXMLLoader(
@@ -47,7 +45,6 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 					controleur.stage.setScene(scene);
 					controleur.stage.show();
 					controleur.choixDemandeLivraisonsVue.dessinePlan(gestionnaire.getPlan());
-					// changement d'état
 					controleur.setEtatCourant(controleur.etatPlanVilleAffiche);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -81,7 +78,6 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 			controleur.choixPlanVilleVue.fichierAccepte(fichier);
 		} else {
 			controleur.choixPlanVilleVue.fichierRefuse();
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		}
 	}
@@ -105,14 +101,8 @@ public class EtatPlanVilleChoisie extends EtatDefaut {
 			controleur.choixPlanVilleVue.fichierAccepte(fichier);
 		} else {
 			controleur.choixPlanVilleVue.fichierRefuse();
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatApplicationDemarree);
 		}
-	}
-
-	@Override
-	public void redessinerPlan(Controleur controleur, Gestionnaire gestionnaire) {
-
 	}
 
 	@Override

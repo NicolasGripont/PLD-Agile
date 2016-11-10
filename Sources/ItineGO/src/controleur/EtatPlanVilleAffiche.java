@@ -31,7 +31,6 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	public void glisserDeposer(Controleur controleur, boolean accepte, File fichier) {
 		if (accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();
@@ -55,7 +54,6 @@ public class EtatPlanVilleAffiche extends EtatDefaut {
 	public void clicBoutonParcourir(Controleur controleur, boolean accepte, File fichier) {
 		if (accepte) {
 			controleur.choixDemandeLivraisonsVue.fichierAccepte(fichier);
-			// changement d'état
 			controleur.setEtatCourant(controleur.etatFichierLivraisonsChoisi);
 		} else {
 			controleur.choixDemandeLivraisonsVue.fichierRefuse();

@@ -8,11 +8,14 @@ import modeles.Noeud;
 public class EtatAjouterTourneePlace extends EtatDefaut {
 
 	/**
-	 * On répond à l'action d'un clique sur un Noeud.
+	 * Permet de définir le noeud de la livraison qui va suivre la livraison que l'on veut créer.
 	 * 
 	 * @param controleur
+	 *            : Controleur de l'application.
 	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
 	 * @param noeud
+	 *            : Noeud de la livraison que l'on veut créer.
 	 */
 	@Override
 	public void clicPlanNoeud(Controleur controleur, Gestionnaire gestionnaire, Noeud noeud) {
@@ -28,6 +31,14 @@ public class EtatAjouterTourneePlace extends EtatDefaut {
 		}
 	}
 
+	/**
+	 * Permet d'annuler l'ajout.
+	 * 
+	 * @param controleur
+	 *            : Controleur de l'application.
+	 * @param gestionnaire
+	 *            : Gestionnaire de l'application.
+	 */
 	@Override
 	public void clicBoutonAnnuler(Controleur controleur, Gestionnaire gestionnaire) {
 		controleur.gestionTourneeVue.majEtatModifierTournee();
