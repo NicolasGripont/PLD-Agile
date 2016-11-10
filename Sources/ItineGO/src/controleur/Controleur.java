@@ -75,7 +75,7 @@ public class Controleur extends Application {
 		setEtatCourant(etatApplicationDemarree);
 		stage = primaryStage;
 		stage.setMinWidth(900); //	Largeur minimum fixée
-		stage.setMinHeight(600); // Hauteur minimum fixée
+		stage.setMinHeight(620); // Hauteur minimum fixée
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/choixPlanVilleVue/ChoixPlanVille.fxml"));
 			Parent root;
