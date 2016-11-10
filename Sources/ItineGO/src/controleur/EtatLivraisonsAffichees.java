@@ -52,6 +52,7 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 	 */
 	public void afficherTournee(Controleur controleur, Gestionnaire gestionnaire, boolean solutionOptimale) {
 		if(controleur.stage != null) {
+			if(gestionnaire.solutionTrouvee()){
 			try {
 				gestionnaire.stopperCalculTournee();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/gestionTourneeVue/GestionTourneeVue.fxml"));
@@ -83,6 +84,10 @@ public class EtatLivraisonsAffichees extends EtatDefaut {
 			} catch (IOException e) {
 			
 				e.printStackTrace();
+			}
+			} else {
+				controleur.gestionLivraisonsVue.afficherErreur("Aucune solution trouvée");
+				controleur.gestionLivraisonsVue.stopperCalculLivraisonAction();
 			}
 		}
 	}
