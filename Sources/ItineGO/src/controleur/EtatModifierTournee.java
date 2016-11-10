@@ -128,7 +128,6 @@ public class EtatModifierTournee extends EtatDefaut {
 		ModifierPlageHoraireDebut modifierPlageHoraireDebut = new ModifierPlageHoraireDebut(gestionnaire, numLigne, plageDebut);
 		try {
 			controleur.listeModifications.ajouterCommande(modifierPlageHoraireDebut);
-			controleur.gestionTourneeVue.afficherErreur("");
 		} catch (NonRespectPlagesHoraires e) {
 			controleur.gestionTourneeVue.afficherErreur("La modification ne permet pas de respecter les plages horaires");
 		}
