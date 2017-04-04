@@ -12,8 +12,6 @@ Nicolas Gripont
 Pierre Jaglin
 Quentin Vecchio
 
-# Liens
-Google docs : https://docs.google.com/document/d/1enSlnj8N5ueufrKNZGaH0Shf_UxAv8wQkVUw29ypbUQ/edit
 
 # Licence
 The MIT License (MIT)
